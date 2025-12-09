@@ -1,0 +1,59 @@
+[
+    {
+        "name": "Name",
+        "lastname": "Lastname",
+        "age": 16,
+        "position": "Meneger",
+        "activeStatus": false,
+        "email": "example@gmail.com",
+        "password": "123456789",
+        "gender": "Femail",
+        "profileUrl": "example.png",
+        "review": [
+            {
+                "product_name": "comment",
+                "time": "02-02-2020"
+            }
+        ],
+        "history": [
+            {
+                "id": "#123453123",
+                "product": [
+                    {
+                        "productName": "name",
+                        "count": 2
+                    }
+                ],
+                "time": "current_time1"
+            }
+        ],
+        "friend": {
+            "friend_name": {
+                "message": [
+                    {
+                        "text": "Hello",
+                        "user": "she",
+                        "time": "current_time1"
+                    },
+                    {
+                        "text": "Hello",
+                        "user": "she",
+                        "time": "current_time2"
+                    },
+                    {
+                        "text": "Hello",
+                        "user": "she",
+                        "time": "current_time3"
+                    }
+                ]
+            }
+        },
+        "favorite": [
+            "Product_name1",
+            "Product_name2",
+            "Product_name3",
+            "Product_name4",
+            "Product_name5"
+        ]
+    }
+]

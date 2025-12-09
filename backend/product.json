@@ -1,0 +1,19 @@
+[
+    {
+        "product_name": "Khawapuri",
+        "product_image": "example.png",
+        "price": 10,
+        "time": 500,
+        "product_description": "example example example idk",
+        "product_recipe": "example",
+        "type": "food",
+        "review": [
+            {
+                "userName": "name",
+                "comment": "comment", 
+                "time": "time"
+            }
+        ],
+        "star": 5
+    }
+]
