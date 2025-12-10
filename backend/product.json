@@ -1,19 +1,32 @@
 [
     {
         "product_name": "Khawapuri",
-        "product_image": "example.png",
+        "product_image": "https://i.pinimg.com/736x/f0/e0/a3/f0e0a3f0026c52624eed3516e83b6fdf.jpg",
         "price": 10,
-        "time": 500,
-        "product_description": "example example example idk",
-        "product_recipe": "example",
+        "time": 5,
+        "product_description": "It comes in different regional styles — some shaped like a boat with an egg on top, others round and stuffed inside. Warm, rich, and comforting, khachapuri is one of Georgia’s most iconic and beloved foods.",
         "type": "food",
-        "review": [
-            {
-                "userName": "name",
-                "comment": "comment", 
-                "time": "time"
-            }
-        ],
-        "star": 5
+        "review": [],
+        "star": 0
+    },
+    {
+        "product_name": "Lobiani",
+        "product_image": "https://i.pinimg.com/736x/b5/b2/32/b5b23287a249b5d1bc60e343d7ba3a5a.jpg",
+        "price": 15,
+        "time": 6,
+        "product_description": "Lobiani is a traditional Georgian pastry filled with seasoned mashed beans. It is made with soft, leavened dough and a rich filling of spiced kidney beans, often flavored with onion, garlic, and black pepper. Warm, hearty, and satisfying, lobiani is especially popular during Georgian holidays and is loved for its simple but comforting taste.",
+        "type": "food",
+        "review": [],
+        "star": 0
+    },
+    {
+        "product_name": "Mchadi",
+        "product_image": "https://i.pinimg.com/1200x/e5/91/91/e591916795a9d11737c878e0601a7392.jpg",
+        "price": 5,
+        "time": 4,
+        "product_description": "Mchadi is a traditional Georgian cornbread made from coarse cornmeal. It is simple, gluten-free, and usually shaped into small patties or rounds, then fried or baked until golden. Mchadi is often served alongside cheese, beans, or stews, making it a hearty and rustic staple of Georgian cuisine.",
+        "type": "food",
+        "review": [],
+        "star": 0
     }
 ]
