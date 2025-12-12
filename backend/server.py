@@ -109,7 +109,7 @@ def login():
     data = request.get_json()
     
     if not data:
-        return jsonify({'error': 'მონაცემები არ არის გამოგზავნილი'}), 400
+        return jsonify({'error': 'not send information'}), 400
     
     email = data.get("email")
     password = data.get("password")
