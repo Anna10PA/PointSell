@@ -1,42 +1,100 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import json
 import os
 from email.message import EmailMessage
 import ssl
 import smtplib
-import random
 
 app = Flask(__name__)
+CORS(app)
 
-# password resset - send code
+All_user = "users.json"
 my_gmail = 'futureana735@gmail.com'
-my_password = os.environ.get('Gmail_password')
-receiver = 'puturidzeana0210@gmail.com'
+my_password = os.environ.get('Gmail_password')  
 
-subject = "PointSell"
-body ="""
-    Test is working
-"""
+# მეილზე გაგზავნის ფუნქცია
+def send_email(user_email, text):
+    subject = "PointSell"
+    
+    em = EmailMessage()
+    em['From'] = my_gmail
+    em['To'] = user_email
+    em['Subject'] = subject
+    em.set_content(text)
 
-em = EmailMessage()
-em['From'] = my_gmail
-em['To'] = receiver
-em['Subject'] = subject
-em.set_content(body)
+    context = ssl.create_default_context()
 
-context = ssl.create_default_context()
-
-# with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-#     smtp.login(my_gmail, my_password)
-#     smtp.sendmail(my_gmail, receiver, em.as_string())
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+        smtp.login(my_gmail, my_password)
+        smtp.sendmail(my_gmail, user_email, em.as_string())
 
 
-@app.route('/')
+# მომხმარებლების ინფორმაციის წაკითხვა
+def check_users():
+    if not os.path.exists(All_user):
+        return []
+    with open(All_user, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+# ჩაწერა
+def save_users(users):
+    with open(All_user, "w", encoding="utf-8") as file:
+        json.dump(users, file, indent=4, ensure_ascii=False)
+
+
+# რეგისტრაცია
+@app.post("/register")
+def register():
+    
+    # task 001
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data received"}), 400
+
+    email = data.get("email")
+    password = data.get("password")
+    
+    users = check_users()
+
+    # task 002
+    if any(u["email"] == email for u in users):
+        return jsonify({"error": "User already exists"}), 409
+
+    new_user = {
+        "name": None,
+        "lastname": None,
+        "age": None,
+        "position": "Customer" if email != "futureana735@gmail.com" else "Manager",
+        "email": email,
+        "password": password,
+        "gender": None,
+        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+        "review": [],
+        "history": [],
+        "friends": [],
+        "favorite": [],
+        "notification": [],
+        "money": 1000 if email != 'futureana735@gmail.com' else 10000
+    }
+
+    users.append(new_user)
+    save_users(users)
+
+    try:
+        send_email(email, "Registration Successful! Thanks for choosing our restaurant!")
+    except Exception as e:
+        print("Email sending failed:", e)
+
+    return jsonify({"message": "Registration Successful"}), 201
+
+
+@app.get("/")
 def home():
-    return 'You are Home page'
+    return "Flask is working for my Luck (((: "
 
-@app.route('/members')
-def members():
-    return {'members': ['member1', 'member2']}
 
 if __name__ == '__main__':
     app.run(debug=True)

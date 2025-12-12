@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 function Registration() {
+  let [message, setMessage] = useState('')
+
   const {
     register,
     handleSubmit,
@@ -22,9 +25,35 @@ function Registration() {
 
       <h1 className='font-bold text-[30px]'>Registration</h1>
 
-      <form action="/registration" method='POST' className='flex items-start gap-5 flex-col' onSubmit={handleSubmit((data) => {
-        console.log(data)
-      })}>
+      <form className='flex items-start gap-5 flex-col' onSubmit={handleSubmit(
+        async (data) => {
+          console.log(data)
+          try {
+            let result = await fetch(
+              'http://127.0.0.1:5000/register',
+              {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  email: data.email,
+                  password: data.password
+                })
+              }
+            )
+
+            let final = await result.json()
+            console.log(final)
+
+            if (result.ok) {
+              setMessage("Registration successful!")
+            } else {
+              setMessage(final.error || "User Already Exit")
+            }
+          }
+          catch (e) {
+            console.error(e)
+          }
+        })}>
 
         <div className='w-full flex items-start flex-col gap-2'>
           <div className='flex items-center relative w-full'>
@@ -75,7 +104,7 @@ function Registration() {
         <h2 className='font-semibold max-md:text-[15px] leading-5'>By signing below, you agree to the, <span className='text-[#F67F20]'>Team of use</span> and <span className='text-[#F67F20]'>privacy notice</span></h2>
         <button className='bg-[#F67F20] text-white font-bold px-5 rounded w-full py-2.5 cursor-pointer duration-200 hover:bg-orange-500'>Sign Up</button>
       </form>
-      
+      <h2 className={`${message === 'Registration successful!' ? 'bg-[#12991F]': message ? 'bg-[red]' : 'p-0'} text-white font-bold px-7 py-2 rounded tracking-[1px]`}>{message}</h2>
       <h2 className='font-semibold text-center w-full'>Already have an account?
         <Link to='/'>
           <span className='text-[#F67F20] cursor-pointer'> Login</span>

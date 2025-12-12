@@ -16,14 +16,15 @@ function ForgetPassword() {
       <form action="" className='flex items-start gap-5 flex-col w-full' onSubmit={handleSubmit((data) => {
         console.log(data)
       })}>
-        <div className='flex items-center relative w-full'>
-          <i className="fa-solid fa-at text-[#F67F20] absolute left-3 top-3.5"></i>
-          <input type="email" className='border border-gray-300 rounded px-10 py-2 outline-none w-full' placeholder='Email Address'
-            {...register('email', { required: 'Enter email' })
-            } />
+        <div className='w-full flex items-start flex-col gap-2'>
+          <div className='flex items-center relative w-full'>
+            <i className="fa-solid fa-at text-[#F67F20] absolute left-3 top-3.5"></i>
+            <input type="email" className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.email ? 'border-gray-300' : 'border-red-600'}`} placeholder='Email Address'
+              {...register('email', { required: 'Enter email' })
+              } />
+          </div>
+          <p className='text-[red] font-semibold'>{errors.email ? errors.email.message : ''}</p>
         </div>
-        <p>{errors.email ? errors.email.message : ''}</p>
-        
         <button className='bg-[#F67F20] text-white font-bold px-5 rounded w-full py-2.5 cursor-pointer duration-200 hover:bg-orange-500'>Continue</button>
       </form>
     </div>

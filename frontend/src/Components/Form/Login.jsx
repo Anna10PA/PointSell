@@ -17,37 +17,43 @@ function Login() {
       <form action="" className='flex items-start gap-5 flex-col w-full' onSubmit={handleSubmit((data) => {
         console.log(data)
       })}>
-        <div className='flex items-center relative w-full'>
-          <i className="fa-solid fa-at text-[#F67F20] absolute left-3 top-3.5"></i>
-          <input type="email" className='border border-gray-300 rounded px-10 py-2 outline-none w-full' placeholder='Email Address'
-            {...register('email', { required: 'Enter email' })
-            } />
+        <div className='w-full flex items-start flex-col gap-2'>
+
+          <div className='flex items-center relative w-full'>
+            <i className="fa-solid fa-at text-[#F67F20] absolute left-3 top-3.5"></i>
+            <input type="email" className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.email ? 'border-gray-300' : 'border-red-600'}`} placeholder='Email Address'
+              {...register('email', { required: 'Enter email' })
+              } />
+          </div>
+          <p className='text-[red] font-semibold'>{errors.email ? errors.email.message : ''}</p>
         </div>
-        <p>{errors.email ? errors.email.message : ''}</p>
-        <div className='flex items-center relative w-full'>
-          <i className="fa-solid fa-lock text-[#F67F20] absolute left-3 top-3.5"></i>
-          <input type="password" className='border border-gray-300 rounded px-10 py-2 outline-none w-full' placeholder='Password' {...register('password', {
-            required: 'Enter password', minLength: {
-              value: 8,
-              message: 'Min length is 8'
-            }
-          })} />
+        
+        <div className='w-full flex items-start flex-col gap-2'>
+          <div className='flex items-center relative w-full'>
+            <i className="fa-solid fa-lock text-[#F67F20] absolute left-3 top-3.5"></i>
+            <input type="password"  className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.email ? 'border-gray-300' : 'border-red-600'}`} placeholder='Password' {...register('password', {
+              required: 'Enter password', minLength: {
+                value: 8,
+                message: 'Min length is 8'
+              }
+            })} />
+          </div>
+          <p className='text-[red] font-semibold'>{errors.password ? errors.password.message : ''}</p>
         </div>
-        <p>{errors.password ? errors.password.message : ''}</p>
         <Link to='/forgot password' className='font-semibold max-md:text-[15px] leading-5 text-[#F67F20] text-right w-full'>
           <h2 >Forgot password?</h2>
         </Link>
         <button className='bg-[#F67F20] text-white font-bold px-5 rounded w-full py-2.5 cursor-pointer duration-200 hover:bg-orange-500'>Login</button>
       </form>
 
-      <div className='flex items-center justify-between w-full gap-5'>
-        <button className='flex items-center justify-center gap-2.5 border-gray-300 px-10 py-2 rounded border-2 cursor-pointer '>
+      <div className='flex items-center justify-between w-full gap-5 flex-wrap max-md:justify-center max-md:gap-3'>
+        <button className='flex items-center justify-center gap-2.5 border-gray-300 px-10 py-2 rounded border-2 cursor-pointer max-md:w-full'>
           <img src="https://tse3.mm.bing.net/th/id/OIP.FlHYuH8JYbUrdZqBaTQWWQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" className='w-5' />
           <span className='font-bold'>
             Google
           </span>
         </button>
-        <button className='flex items-center justify-center gap-2.5 border-gray-300 px-10 py-2 rounded border-2 cursor-pointer '>
+        <button className='flex items-center justify-center gap-2.5 border-gray-300 px-10 py-2 rounded border-2 cursor-pointer max-md:w-full'>
           <i className="fa-brands fa-facebook-f text-[#3D6AD6]"></i>
           <span className='font-bold '>
             Facebook
