@@ -10,6 +10,8 @@ app = Flask(__name__)
 CORS(app)
 
 All_user = "users.json"
+All_product = "product.json"
+
 my_gmail = 'futureana735@gmail.com'
 my_password = os.environ.get('Gmail_password')  
 
@@ -38,11 +40,20 @@ def check_users():
         return json.load(file)
 
 
-# ჩაწერა
+# მომხმარებლის ჩაწერა / დამატება
 def save_users(users):
     with open(All_user, "w", encoding="utf-8") as file:
         json.dump(users, file, indent=4, ensure_ascii=False)
 
+
+# პროდუცტქების წაკითხვა
+@app.get('/product20list')
+def check_products():
+    if not os.path.exists(All_product):
+        return []
+    with open(All_product, 'r', encoding='utf-8') as file:
+        return json.load(file)
+    
 
 # რეგისტრაცია
 @app.post("/register")
@@ -77,6 +88,7 @@ def register():
         "friends": [],
         "favorite": [],
         "notification": [],
+        "curent_cart": [],
         "money": 1000 if email != 'futureana735@gmail.com' else 10000
     }
 

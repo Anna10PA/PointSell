@@ -8,8 +8,8 @@ import ForgetPassword from "./ForgetPassword"
 function Form() {
 
     return (
-        <BrowserRouter>
-            <main className='flex items-center flex-wrap-reverse gap-10 justify-center px-30 py-20 max-md:px-5 max-md:gap-3 max-md:py-15'>
+        <>
+            <main className='flex items-center flex-wrap-reverse gap-10 justify-center px-30 py-20 max-md:px-5 max-md:gap-3 max-md:py-15 w-full'>
                 <video muted loop autoPlay >
                     <source src="/generated_video.mp4" type="video/mp4" />
                 </video>
@@ -19,7 +19,7 @@ function Form() {
                     <Route path='/forgot password' element={<ForgetPassword />} />
                 </Routes>
             </main>
-        </BrowserRouter>
+        </>
     )
 }
 

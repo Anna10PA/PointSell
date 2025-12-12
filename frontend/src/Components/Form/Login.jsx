@@ -31,7 +31,7 @@ function Login() {
             let final = await result.json()
 
             if (result.ok) {
-              alert('Cool Bro')
+              navigation('/home')
             } else {
               setMessage(final.error || 'Something went wrong')
             }
