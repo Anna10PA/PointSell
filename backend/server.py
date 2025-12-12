@@ -88,9 +88,30 @@ def register():
     except Exception as e:
         print("Email sending failed:", e)
 
-    return jsonify({"message": "Registration Successful"}), 201
+    return jsonify({"message": "Registration Successful"}) , 201
 
 
+# შესვლა
+@app.post('/login')
+def login():
+    data = request.get_json()
+    
+    if not data:
+        return jsonify({'error': 'მონაცემები არ არის გამოგზავნილი'}), 400
+    
+    email = data.get("email")
+    password = data.get("password")
+    
+    users = check_users() 
+    
+    user = next((u for u in users if u['email'] == email and u['password'] == password), None)
+    
+    if user:
+        return jsonify({'message': 'Login successful!'}), 200
+    else:
+        return jsonify({'error': 'Email or password is not correct'}), 401
+    
+    
 @app.get("/")
 def home():
     return "Flask is working for my Luck (((: "

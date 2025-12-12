@@ -1,18 +1,1 @@
-[
-    {
-        "name": null,
-        "lastname": null,
-        "age": null,
-        "position": "Customer",
-        "email": "puturidzeana0210@gmail.com",
-        "password": "puturidzeana0210@gmail.com",
-        "gender": null,
-        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
-        "review": [],
-        "history": [],
-        "friends": [],
-        "favorite": [],
-        "notification": [],
-        "money": 1000
-    }
-]
+[]
