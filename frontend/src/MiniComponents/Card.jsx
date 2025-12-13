@@ -1,4 +1,4 @@
-function Card({ img, title, price, desc, star }) {
+function Card({ img, title, price, desc, star, allInfo }) {
     return (
         <div className='w-full p-5 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between'>
             <div className="w-full overflow-hidden rounded-xl ">
@@ -18,7 +18,7 @@ function Card({ img, title, price, desc, star }) {
                         {star.toFixed(1)}
                     </span>
                 </div>
-                <button className="bg-[#F67F20] text-white font-bold px-4 flex items-center gap-2 justify-center py-2 rounded-xl cursor-pointer duration-100 hover:bg-amber-500">
+                <button className="bg-[#F67F20] text-white font-bold px-4 flex items-center gap-2 justify-center py-2 rounded-xl cursor-pointer duration-100 hover:bg-amber-500" onClick={allInfo}>
                     <i className="fa-solid fa-plus"></i>
                     <span>
                         Add Product
