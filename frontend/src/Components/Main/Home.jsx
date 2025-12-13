@@ -58,7 +58,7 @@ function Home() {
                     <Link>
                         <i className="fa-solid fa-burger hover:text-[#F67F20]"></i>
                     </Link>
-                    <Link>
+                    <Link to='/notification'>
                         <i className="fa-solid fa-bell hover:text-[#F67F20]"></i>
                     </Link>
                     <Link>

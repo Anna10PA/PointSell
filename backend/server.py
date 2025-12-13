@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import json
 import os
@@ -8,7 +8,8 @@ import smtplib
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+app.secret_key = os.environ.get('Gmail_password')  
+CORS(app , supports_credentials=True)
 
 
 All_user = "users.json"
@@ -93,13 +94,13 @@ def register():
         "history": [],
         "friends": [],
         "favorite": [],
-        "notification": {
-            current_time.split()[0] : [
-                {
-                    current_time.split('.')[0].split()[1]: ["Registration is successful! Now you can order food or get a job!"]
-                }
-            ]
-        },
+        "notification": [
+            {
+                "date": current_time.split()[0],
+                "time": current_time.split('.')[0].split()[1],
+                "message": "Registration is successful! Now you can order food or get a job!" if email != 'futureana735@gmail.com' else 'Hello Boss! 🫡😁'
+            }
+        ],
         "curent_cart": [],
         "money": 1000 if email != 'futureana735@gmail.com' else 10000
     }
@@ -131,9 +132,30 @@ def login():
     user = next((u for u in users if u['email'] == email and u['password'] == password), None)
     
     if user:
+        session['email'] = email
+        session['is_login'] = True
         return jsonify({'message': 'Login successful!'}), 200
     else:
         return jsonify({'error': 'Email or password is not correct'}), 401
+    
+    
+# კონკრეტული მომხმარებლის ინფორმაცია
+@app.get('/get_current_user')
+def current_user():
+    
+    if 'email' not in session or not session.get('is_login'):
+        return jsonify({'error': 'User not logged in or session expired'}), 401
+    
+    email = session['email']
+    users = check_users()
+    
+    user = next((user for user in users if user['email'] == email), None)
+    
+    if user:
+        user_result = user.copy()
+        return jsonify(user_result), 200
+    else:
+        return jsonify({'error': 'User information not found in database'}), 404
     
     
 @app.get("/")
