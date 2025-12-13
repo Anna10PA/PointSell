@@ -9,7 +9,7 @@ function Home() {
         fetch('http://127.0.0.1:5000/product20list')
             .then(res => res.json())
             .then(data => setProduct(data))
-            .catch(err => console.error(err));
+            .catch(err => console.error(err))
     }, [])
 
     return (
@@ -46,7 +46,7 @@ function Home() {
                 </div>
             </nav>
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
-                <header className="flex items-center justify-between w-[80%] gap-5 min-h-[10vh]">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">
                         Point<span className="text-[#F67F20]">sell</span>
                     </h1>
@@ -54,9 +54,11 @@ function Home() {
                         <input type="text" placeholder="Search Anything Here" className="w-full outline-0 px-5 py-2" />
                         <i className="fa-solid fa-magnifying-glass absolute right-5 top-3 text-[#bbb]"></i>
                     </div>
-                    <div className="w-12 h-12 bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100">
-                        <i className="fa-solid fa-bell"></i>
-                    </div>
+                    <Link to='/notification'>
+                        <div className="min-w-12 min-h-12 bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100">
+                            <i className="fa-solid fa-bell"></i>
+                        </div>
+                    </Link>
                 </header>
                 <section className="flex flex-col gap-4">
                     <h2 className="font-bold text-xl bg-white w-full">Special Menu For You</h2>
@@ -64,22 +66,20 @@ function Home() {
                         {
                             product.map((e, index) => {
                                 console.log(e)
-                                return <Card 
-                                img={e.product_image}
-                                title={e.product_name} 
-                                price={e.price}
-                                desc={e.product_description}
-                                star={e.star}
-                                key={index} />
+                                return <Card
+                                    img={e.product_image}
+                                    title={e.product_name}
+                                    price={e.price}
+                                    desc={e.product_description}
+                                    star={e.star}
+                                    key={index} />
                             })
                         }
                     </section>
                 </section>
             </main>
-            <aside className="h-full border min-h-screen">
-                <h1>Add Product from special menu</h1>
-
-
+            <aside className="h-full border-l border-gray-300 min-h-screen max-w-[350px] w-full">
+                <h1 className="text-gray-300 font-medium text-center leading-6 text-xl">+ <br />Add Product <br />From special menu</h1>
             </aside>
         </>
     )

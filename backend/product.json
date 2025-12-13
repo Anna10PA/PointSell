@@ -8,7 +8,8 @@
     "product_description": "Baked dough and melted cheese filling.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 2,
@@ -19,7 +20,8 @@
     "product_description": "Baked dough filled with spiced mashed beans.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 3,
@@ -30,7 +32,8 @@
     "product_description": "Cornmeal and water, fried or baked.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 4,
@@ -41,7 +44,8 @@
     "product_description": "Coarse cornmeal and grits cooked in water.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 5,
@@ -52,7 +56,8 @@
     "product_description": "Boiled dough filled with spiced meat and broth.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 6,
@@ -63,7 +68,8 @@
     "product_description": "Fried minced meat patties with onions and spices.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 7,
@@ -74,7 +80,8 @@
     "product_description": "Grilled meat, vegetables, and sauce wrapped in lavash.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 8,
@@ -85,7 +92,8 @@
     "product_description": "Spiced pork and beef sausage links.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 9,
@@ -96,7 +104,8 @@
     "product_description": "Spicy beef stew with tomato and garlic.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 10,
@@ -107,7 +116,8 @@
     "product_description": "Lamb stew with tarragon and green plums.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 11,
@@ -118,7 +128,8 @@
     "product_description": "Crispy chicken in creamy garlic sauce.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 12,
@@ -129,7 +140,8 @@
     "product_description": "Vegetable ragout with eggplant and bell peppers.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 13,
@@ -140,7 +152,8 @@
     "product_description": "Poultry served in a cold walnut sauce.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 14,
@@ -151,7 +164,8 @@
     "product_description": "Cornmeal cooked with large amounts of cheese.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 15,
@@ -162,7 +176,8 @@
     "product_description": "Grilled ground meat wrap with onions.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 16,
@@ -173,7 +188,8 @@
     "product_description": "Fried eggplant rolls with walnut paste.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 17,
@@ -184,7 +200,8 @@
     "product_description": "Minced vegetables with walnuts and herbs.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 18,
@@ -195,7 +212,8 @@
     "product_description": "Double cheese khachapuri with extra cheese on top.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 19,
@@ -206,7 +224,8 @@
     "product_description": "Boat-shaped dough with cheese, butter, and egg.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 20,
@@ -217,7 +236,8 @@
     "product_description": "Roasted meat and potatoes with onions.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 21,
@@ -228,7 +248,8 @@
     "product_description": "Chicken stew with tomatoes and fresh herbs.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 22,
@@ -239,7 +260,8 @@
     "product_description": "Meat and rice wrapped in vine leaves.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 23,
@@ -250,7 +272,8 @@
     "product_description": "Spicy chicken livers with pomegranate seeds.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 24,
@@ -261,7 +284,8 @@
     "product_description": "Lettuce, chicken, croutons, and parmesan sauce.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 25,
@@ -272,7 +296,8 @@
     "product_description": "Crispy fried potato strips with salt.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 26,
@@ -283,7 +308,8 @@
     "product_description": "Creamy soup made with fresh mushrooms.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 27,
@@ -294,7 +320,8 @@
     "product_description": "Georgian chicken soup with egg and vinegar.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 28,
@@ -305,7 +332,8 @@
     "product_description": "Beef patty, cheese, and veggies in a bun.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 29,
@@ -316,7 +344,8 @@
     "product_description": "Cucumber, tomato, olives, and feta cheese.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 30,
@@ -327,171 +356,319 @@
     "product_description": "Grilled pork skewers over grape wood embers.",
     "type": "food",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 31,
     "product_name": "Espresso",
-    "product_image": "https://i.pinimg.com/736x/c1/f2/g3/c1f2g3g4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/4c/28/e2/4c28e2420bf38c50120dba0cbaf42e8d.jpg",
     "price": 4.00,
     "time": 2,
     "product_description": "Strong shot of black coffee.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 32,
     "product_name": "Latte",
-    "product_image": "https://i.pinimg.com/736x/d1/g2/h3/d1g2h3g4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/1200x/f8/56/d2/f856d2d30045e34f7a3d7438d81c5141.jpg",
     "price": 6.50,
     "time": 3,
     "product_description": "Espresso with steamed milk and foam.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 33,
     "product_name": "Coca-Cola (0.5L)",
-    "product_image": "https://i.pinimg.com/736x/e1/h2/i3/e1h2i3e4s5a6d7f8g9h0j1k2l3z4x5c6.jpg",
+    "product_image": "https://i.pinimg.com/736x/d9/90/b4/d990b4e3fafb7073f2ab7241e48aea0b.jpg",
     "price": 3.00,
     "time": 1,
     "product_description": "Chilled carbonated soft drink.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 34,
     "product_name": "Borjomi",
-    "product_image": "https://i.pinimg.com/736x/f1/j2/k3/f1j2k3h4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/96/e2/67/96e2670206f831f60533f19402c43612.jpg",
     "price": 3.50,
     "time": 1,
     "product_description": "Georgian natural mineral water.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 35,
     "product_name": "Fresh Orange Juice",
-    "product_image": "https://i.pinimg.com/736x/g1/i2/j3/g1i2j3e4s5a6d7f8g9h0j1k2l3z4x5c6.jpg",
+    "product_image": "https://i.pinimg.com/736x/f8/56/5b/f8565b7442a9df396adc387c8555d8b4.jpg",
     "price": 8.00,
     "time": 5,
     "product_description": "Freshly squeezed orange juice.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 36,
     "product_name": "Iced Tea (Lemon)",
-    "product_image": "https://i.pinimg.com/736x/h1/k2/l3/h1k2l3g4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/aa/8d/2d/aa8d2de36c7e1cace188932bb0d9a7e4.jpg",
     "price": 5.00,
     "time": 4,
     "product_description": "Chilled black tea with lemon slice.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 37,
     "product_name": "Mojito (Non-Alcoholic)",
-    "product_image": "https://i.pinimg.com/736x/i1/l2/m3/i1l2l3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/32/17/a9/3217a9d3c7b7aec9fbf5bc3c0785c0a4.jpg",
     "price": 9.00,
     "time": 5,
     "product_description": "Lime, mint, sugar, and soda water.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 38,
     "product_name": "Fanta (0.5L)",
-    "product_image": "https://i.pinimg.com/736x/j1/m2/n3/j1m2n3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/1200x/8c/eb/a9/8ceba9b9c6ed3d3c471b8de22b76f57c.jpg",
     "price": 3.00,
     "time": 1,
     "product_description": "Orange flavored carbonated drink.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 39,
     "product_name": "Americano (Iced)",
-    "product_image": "https://i.pinimg.com/736x/k1/n2/o3/k1n2n3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/fd/02/63/fd0263d8b4309379bf141d4043b1fb16.jpg",
     "price": 5.50,
     "time": 3,
     "product_description": "Espresso shots mixed with cold water.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 40,
     "product_name": "Hot Chocolate",
-    "product_image": "https://i.pinimg.com/736x/l1/o2/p3/l1o2p3u4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/c6/bd/8e/c6bd8edbc37f9a7403bdcac531e79f05.jpg",
     "price": 7.00,
     "time": 4,
     "product_description": "Warm milk mixed with cocoa powder and sugar.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 41,
-    "product_name": "Still Water (1L)",
-    "product_image": "https://i.pinimg.com/736x/m1/p2/q3/m1p2p3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_name": "Water (1L)",
+    "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2prUvt84u1vOI3tq00101BeKIRkroNen8gw&s",
     "price": 2.00,
     "time": 1,
     "product_description": "Bottled natural drinking water.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 42,
     "product_name": "Milkshake (Vanilla)",
-    "product_image": "https://i.pinimg.com/736x/n1/q2/r3/n1q2r3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/d2/a1/53/d2a153ca4825ddcc1847eeb0f3a91123.jpg",
     "price": 10.00,
     "time": 5,
     "product_description": "Blended milk, vanilla ice cream, and flavor.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 43,
     "product_name": "Berry Smoothie",
-    "product_image": "https://i.pinimg.com/736x/o1/r2/s3/o1r2r3s4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/58/19/5e/58195ea33d7b4ba4ec02a69a8ab9a715.jpg",
     "price": 11.00,
     "time": 6,
     "product_description": "Mixed berries, yogurt, and honey.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 44,
     "product_name": "Georgian Lemonade (Tarragon)",
-    "product_image": "https://i.pinimg.com/736x/p1/s2/t3/p1s2t3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/1200x/00/36/ef/0036efca11d2ca744df4a737239488bb.jpg",
     "price": 4.50,
     "time": 2,
     "product_description": "Green colored fizzy drink with tarragon flavor.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
   },
   {
     "Id": 45,
     "product_name": "Cappuccino",
-    "product_image": "https://i.pinimg.com/736x/q1/t2/u3/q1t2t3m4e5r6s7a8s9d0f1g2h3j4k5l6.jpg",
+    "product_image": "https://i.pinimg.com/736x/49/84/f7/4984f7fa75952bd1d0547db5f0341790.jpg",
     "price": 6.00,
     "time": 3,
     "product_description": "Espresso, steamed milk, and thick foam.",
     "type": "drink",
     "review": [],
-    "star": 0
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 46,
+    "product_name": "Satsebeli",
+    "product_image": "https://i.pinimg.com/1200x/fe/01/6a/fe016abb8e659d520e51a5cfd89ed2bb.jpg",
+    "price": 3.00,
+    "time": 1,
+    "product_description": "Traditional Georgian tomato sauce with spices.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 47,
+    "product_name": "Tkemali",
+    "product_image": "https://i.pinimg.com/736x/e8/a0/42/e8a04251f5e0dfce685dbcafe841766c.jpg",
+    "price": 4.00,
+    "time": 1,
+    "product_description": "Sour plum sauce, often served with meat.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 48,
+    "product_name": "Ajika (Red)",
+    "product_image": "https://i.pinimg.com/736x/41/99/ed/4199edf8ca0ca7930b37da705caad948.jpg",
+    "price": 5.00,
+    "time": 1,
+    "product_description": "Spicy and aromatic paste with red peppers and garlic.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 49,
+    "product_name": "Ajika (Green)",
+    "product_image": "https://www.cookeatworld.com/wp-content/uploads/2021/09/Ajika-3.jpg",
+    "price": 5.00,
+    "time": 1,
+    "product_description": "Spicy and aromatic paste with green peppers and herbs.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 50,
+    "product_name": "Bazhe (Walnut Sauce)",
+    "product_image": "https://l450v.alamy.com/450v/2hnegkx/overhead-view-of-a-bowl-of-georgian-chicken-in-walnut-sauce-chicken-bazhe-with-coriander-2hnegkx.jpg",
+    "price": 6.00,
+    "time": 2,
+    "product_description": "Walnut sauce with garlic and spices, often used for poultry.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 51,
+    "product_name": "Mayonnaise",
+    "product_image": "https://www.marthastewart.com/thmb/1Q2kTsRxA8sFBSCFwHMCCL2zVA8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ms-homemade-mayonnaise-92343c7b84864b24aa538476768030dc.jpg",
+    "price": 2.00,
+    "time": 1,
+    "product_description": "Classic creamy sauce.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 52,
+    "product_name": "Garlic Sauce",
+    "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7rXxxBfdb-8ir7nvDi1QOjlzYyvFPIomsVw&s",
+    "price": 3.50,
+    "time": 1,
+    "product_description": "Creamy sauce with a strong garlic flavor.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 53,
+    "product_name": "Mustard",
+    "product_image": "https://leitesculinaria.com/wp-content/uploads/2024/05/homemade-yellow-mustard-1200-500x500.jpg",
+    "price": 2.50,
+    "time": 1,
+    "product_description": "Pungent sauce made from mustard seeds.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 54,
+    "product_name": "Pesto",
+    "product_image": "https://www.allrecipes.com/thmb/_4wwT0rq8ebbgtonV6nDj-0rECc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/200283-spinach-basil-pesto-DDMFS-4x3-c09e7fef9eca4f65aaba45b996bdf75c.jpg",
+    "price": 7.00,
+    "time": 2,
+    "product_description": "Sauce made from basil, pine nuts, cheese, and olive oil.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 55,
+    "product_name": "Ketchup",
+    "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtBch9xy0vUyxqRvorg3gM_c3R3SeOffa9JA&s",
+    "price": 2.00,
+    "time": 1,
+    "product_description": "Sweet tomato sauce.",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
+  },
+  {
+    "Id": 56,
+    "product_name": "Sweet Box",
+    "product_image": "https://cdn4.volusion.store/sndfg-wykrq/v/vspfiles/photos/Sweet-Box-Cuties-3.jpg?v-cache=1746146107",
+    "price": 10.00,
+    "time": 1,
+    "product_description": "Sweet Box Cuties Surprise Toy Collections with Candy for kids",
+    "type": "other",
+    "review": [],
+    "star": 5,
+    "vote": 1
   }
 ]

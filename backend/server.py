@@ -5,9 +5,11 @@ import os
 from email.message import EmailMessage
 import ssl
 import smtplib
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
+
 
 All_user = "users.json"
 All_product = "product.json"
@@ -59,6 +61,9 @@ def check_products():
 @app.post("/register")
 def register():
     
+    current_time = str(datetime.now())
+
+    
     # task 001
     data = request.get_json()
 
@@ -82,12 +87,19 @@ def register():
         "email": email,
         "password": password,
         "gender": None,
+        "phone": None,
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "review": [],
         "history": [],
         "friends": [],
         "favorite": [],
-        "notification": [],
+        "notification": {
+            current_time.split()[0] : [
+                {
+                    current_time.split('.')[0].split()[1]: ["Registration is successful! Now you can order food or get a job!"]
+                }
+            ]
+        },
         "curent_cart": [],
         "money": 1000 if email != 'futureana735@gmail.com' else 10000
     }

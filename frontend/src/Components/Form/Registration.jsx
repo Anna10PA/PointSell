@@ -17,8 +17,8 @@ function Registration() {
     }
   })
 
-  console.log(watch('email'))
-  console.log(errors)
+  // console.log(watch('email'))
+  // console.log(errors)
 
   return (
     <div className='flex flex-col items-start w-full gap-7 border-l border-gray-200 px-[60px] py-5 max-w-[500px] max-md:px-10'>
@@ -27,7 +27,7 @@ function Registration() {
 
       <form className='flex items-start gap-5 flex-col' onSubmit={handleSubmit(
         async (data) => {
-          console.log(data)
+          // console.log(data)
           try {
             let result = await fetch(
               'http://127.0.0.1:5000/register',
@@ -42,7 +42,7 @@ function Registration() {
             )
 
             let final = await result.json()
-            console.log(final)
+            // console.log(final)
 
             if (result.ok) {
               setMessage("Registration successful!")
@@ -74,7 +74,7 @@ function Registration() {
         <div className='w-full flex items-start flex-col gap-2'>
           <div className='flex items-center relative w-full'>
             <i className="fa-solid fa-lock text-[#F67F20] absolute left-3 top-3.5"></i>
-            <input type="password" className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.email ? 'border-gray-300' : 'border-red-600'}`} placeholder='Password' {...register('password', {
+            <input type="password" className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.password ? 'border-gray-300' : 'border-red-600'}`} placeholder='Password' {...register('password', {
               required: 'Enter password',
               minLength: {
                 value: 8,
@@ -88,7 +88,7 @@ function Registration() {
         <div className='w-full flex items-start flex-col gap-2'>
           <div className='flex items-center relative w-full'>
             <i className="fa-solid fa-lock text-[#F67F20] absolute left-3 top-3.5"></i>
-            <input type="password" className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.email ? 'border-gray-300' : 'border-red-600'}`} placeholder='Confirm Password' {...register('confirm_password', {
+            <input type="password" className={`border border-gray-300 rounded px-10 py-2 outline-none w-full ${!errors.confirm_password ? 'border-gray-300' : 'border-red-600'}`} placeholder='Confirm Password' {...register('confirm_password', {
               required: 'Confirm password',
               minLength: {
                 value: 8,
