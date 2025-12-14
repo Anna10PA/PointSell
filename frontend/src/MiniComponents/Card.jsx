@@ -1,7 +1,7 @@
 function Card({ img, title, price, desc, star, allInfo }) {
     return (
-        <div className='w-full p-5 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between' onClick={allInfo}>
-            <div className="w-full overflow-hidden rounded-xl ">
+        <div className='w-full p-5 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between'>
+            <div className="w-full overflow-hidden rounded-xl " onClick={allInfo}>
                 <img src={img} alt="" className='h-50 object-cover w-full hover:scale-[1.1] overflow-hidden duration-200' />
             </div>
             <div className='flex items-center justify-between w-full'>

@@ -34,7 +34,7 @@ function Notification() {
         }
         getInfos()
     }, [])
-    console.log(messages)
+    // console.log(messages)
 
     return (
         <>

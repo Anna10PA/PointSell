@@ -98,7 +98,8 @@ def register():
             {
                 "date": current_time.split()[0],
                 "time": current_time.split('.')[0].split()[1],
-                "message": "Registration is successful! Now you can order food or get a job!" if email != 'futureana735@gmail.com' else 'Hello Boss! 🫡😁'
+                "message": "Registration is successful! Now you can order food or get a job!" if email != 'futureana735@gmail.com' else 'Hello Boss! 🫡😁',
+                "read": False
             }
         ],
         "curent_cart": [],

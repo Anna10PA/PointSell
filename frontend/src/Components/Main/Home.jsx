@@ -104,10 +104,16 @@ function Home() {
                                         }}
                                         key={index} />
                                 }) :
-                                <video muted autoPlay loop>
-                                    <source src="/not_found.mp4" type="video/mp4" />
-                                    Not found
-                                </video>
+                                <div>
+                                    <video muted autoPlay loop>
+                                        <source src="/not_found.mp4" type="video/mp4" />
+                                        Not found
+                                    </video>
+                                    <div className="leading-loose">
+                                        <h1 className="text-center w-full text-2xl font-bold">The Product You Are Looking For In Not Found</h1>
+                                        <p className="text-center w-full text-gray-400">Please Try Another Product</p>
+                                    </div>
+                                </div>
                         }
                     </section>
                 </section>
