@@ -12,7 +12,7 @@ function NotificationCard({time, message, date}) {
                     {message}
                 </h1>
                 <h2 className="font-normal">
-                    {curent !== date ? date : Number(time.split(':')[0]) > 12 ? `${time.split(':')[0]}:${time.split(':')[1]} P.M` : `${time.split(':')[0]}:${time.split(':')[1]} A.M`}
+                    {curent !== date ? date : Number(time.split(':')[0]) >= 12 && Number(time.split(':')[1]) > 0? `${Number(time.split(':')[0]) != 12 ? Number(time.split(':')[0]) - 12 : 12}:${time.split(':')[1]} P.M` : `${time.split(':')[0]}:${time.split(':')[1]} A.M`}
                 </h2>
             </div>
         </div>
