@@ -69,12 +69,12 @@ function Notification() {
                     </Link>
                 </div>
             </nav>
-            <main className="w-full px-6 h-full">
-                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]  py-8">
+            <main className="w-full px-10 py-5 h-full">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Notification</h1>
                     <h3 className="text-lg text-[#F67F20] font-semibold cursor-pointer">Mark All As Read</h3>
                 </header>
-                <section className="border-gray-300 rounded-2xl border h-full overflow-hidden" >
+                <section className="border-gray-300 rounded-2xl border h-full overflow-hidden mt-3" >
                     {
                         messages.length > 0 ? 
                         messages.map((item, index) => {

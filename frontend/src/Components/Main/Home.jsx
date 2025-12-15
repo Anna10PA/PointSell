@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Card from "../../MiniComponents/Card"
 import { useForm } from "react-hook-form"
 import BgBlack from "../../MiniComponents/BgBlack"
+import CartCard from "../../MiniComponents/CartCard"
 
 
 function Home() {
@@ -118,8 +119,45 @@ function Home() {
                     </section>
                 </section>
             </main>
-            <aside className="h-full border-l border-gray-300 min-h-screen max-w-[350px] w-full max-lg:hidden">
-                <h1 className="text-gray-300 font-medium text-center leading-6 text-xl">+ <br />Add Product <br />From special menu</h1>
+            <aside className="h-full border-l border-gray-300 min-h-screen max-w-[370px] w-full max-lg:hidden px-5 py-3 flex items-start flex-col gap-4 relative">
+                <h1 className="font-bold text-2xl py-3">Order #12345</h1>
+                <div className="flex items-start flex-col gap-4 overflow-auto max-h-[50vh] w-full pr-3">
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+
+                    <CartCard img='https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg' name='Kababi' price={11.00} />
+
+                </div>
+                <div className="w-full min-h-[250px] h-full py-3 flex flex-col justify-between ">
+                    <div className="flex flex-col items-start gap-2.5">
+                        <div className="flex items-center justify-between w-full font-bold">
+                            <h1>Subtotal</h1>
+                            <h1>item{ }</h1>
+                        </div>
+                        <div className="text-gray-400 flex items-center justify-between w-full ">
+                            <h1>Change</h1>
+                            <h1>$20</h1>
+                        </div>
+                        <div className="text-gray-400 flex items-center justify-between w-full border-b border-gray-200 pb-3 mb-3">
+                            <h1>Tax</h1>
+                            <h1>$20</h1>
+                        </div>
+                        <div className="flex items-center justify-between w-full text-gray-950 font-extrabold text-lg">
+                            <h1>Total</h1>
+                            <h1>$3000</h1>
+                        </div>
+                    </div>
+                    <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 cursor-pointer">Place Order</button>
+                </div>
+                {/* <h1 className="text-gray-300 font-medium text-center leading-6 text-xl">+ <br />Add Product <br />From special menu</h1> */}
             </aside>
         </>
     )
