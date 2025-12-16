@@ -1,6 +1,6 @@
 [
     {
-        "name": null,
+        "name": "PointSell",
         "lastname": null,
         "age": null,
         "position": "Manager",
@@ -8,7 +8,7 @@
         "password": "PointSell_2025",
         "gender": null,
         "phone": null,
-        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+        "profileUrl": "/icon.png",
         "review": [],
         "history": [],
         "friends": [],
@@ -21,7 +21,28 @@
                 "read": false
             }
         ],
-        "curent_cart": [],
+        "curent_cart": [
+            {
+                "Id": "2031",
+                "count": 1
+            },
+            {
+                "Id": "2397",
+                "count": 1
+            },
+            {
+                "Id": "6730",
+                "count": 1
+            },
+            {
+                "Id": "1945",
+                "count": 1
+            },
+            {
+                "Id": "3412",
+                "count": 1
+            }
+        ],
         "money": 10000
     },
     {
@@ -29,8 +50,8 @@
         "lastname": null,
         "age": null,
         "position": "Customer",
-        "email": "putureana0210@gmail.com",
-        "password": "putureana0210@gmail.com",
+        "email": "puturidzeana0210@gmail.com",
+        "password": "puturidzeana0210@gmail.com",
         "gender": null,
         "phone": null,
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
@@ -40,9 +61,10 @@
         "favorite": [],
         "notification": [
             {
-                "date": "2025-12-14",
-                "time": "14:34:22",
-                "message": "Registration is successful! Now you can order food or get a job!"
+                "date": "2025-12-16",
+                "time": "00:20:14",
+                "message": "Registration is successful! Now you can order food or get a job!",
+                "read": false
             }
         ],
         "curent_cart": [],

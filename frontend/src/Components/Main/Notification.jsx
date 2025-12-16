@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import {useNavigate } from "react-router-dom"
+import Navigation from "../../MiniComponents/Navigation"
 import NotificationCard from "../../MiniComponents/NotificationCard"
 
 function Notification() {
@@ -38,37 +39,7 @@ function Notification() {
 
     return (
         <>
-            <nav className='border-r border-[#ececec] w-min flex items-center flex-col h-screen justify-start text-[#BBBBBB] gap-5'>
-                <div className='w-full border-b border-[#ececec]  object-cover flex items-center justify-center'>
-                    <img src="/icon.png" alt="icon" className='w-[90%] m-3.5' />
-                </div>
-                <div className="flex items-center flex-col h-[80%] justify-between text-[28px] px-8 max-md:px-4 max-md:text-2xl">
-                    <Link to='/home'>
-                        <i className="fa-solid fa-house hover:text-[#F67F20] duration-100"></i>
-                    </Link>
-                    <Link>
-                        <i className="fa-solid fa-bars-staggered hover:text-[#F67F20]"></i>
-                    </Link>
-                    <Link>
-                        <i className="fa-solid fa-book hover:text-[#F67F20]"></i>
-                    </Link>
-                    <Link>
-                        <i className="fa-solid fa-burger hover:text-[#F67F20]"></i>
-                    </Link>
-                    <Link to='/notification'>
-                        <i className="fa-solid fa-bell hover:text-[#F67F20] text-[#F67F20]"></i>
-                    </Link>
-                    <Link>
-                        <i className="fa-solid fa-user hover:text-[#F67F20]"></i>
-                    </Link>
-                    <Link>
-                        <i className="fa-solid fa-paper-plane hover:text-[#F67F20]"></i>
-                    </Link>
-                    <Link>
-                        <i className="fa-solid fa-gear hover:text-[#F67F20]"></i>
-                    </Link>
-                </div>
-            </nav>
+            <Navigation />
             <main className="w-full px-10 py-5 h-full">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Notification</h1>

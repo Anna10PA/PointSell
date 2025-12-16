@@ -14,6 +14,7 @@ CORS(app , supports_credentials=True)
 
 All_user = "users.json"
 All_product = "product.json"
+All_post = "posts.json"
 
 my_gmail = 'futureana735@gmail.com'
 my_password = os.environ.get('Gmail_password')  
@@ -158,6 +159,23 @@ def current_user():
     else:
         return jsonify({'error': 'User information not found in database'}), 404
     
+# პოსტების წამოღება
+@app.get('/check_posts')
+def check_posts():
+    if not os.path.exists(All_post):
+        return []
+    with open(All_post, "r", encoding="utf-8") as file:
+        return json.load(file)
+    
+# # 
+@app.get('/menegers_info')
+def meneger_info():
+    users = check_users()
+    meneger = next((user for user in users if user['email'] == my_gmail), None)
+    if meneger:
+        return jsonify(meneger)
+    else:
+        return jsonify({"error": "not found posts"}), 404
     
 @app.get("/")
 def home():
