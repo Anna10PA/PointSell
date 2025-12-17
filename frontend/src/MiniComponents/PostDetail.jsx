@@ -1,7 +1,6 @@
 import Comment from "./Comment"
 
 function PostDetail({ allInfo, open, client, curentUser }) {
-  console.log('sadsdasd', allInfo)
   return (
     <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5'>
       <div className={`${allInfo.post !== null ? 'h-[600px] overflow-hidden rounded w-[750px]' : 'hidden'}`}>
@@ -11,7 +10,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
         <div className='flex items-center gap-3 w-full relative '>
           <img src={client.profileUrl} alt="" className='w-15 h-15 rounded-[50%]' />
           <div className='leading-4.5 w-full'>
-            <h1 className='font-bold'>{client.name !== null ? client.name : client.email.split('@')[0]}</h1>
+            <h1 className='font-bold'>{client.name}</h1>
             <p className='text-sm text-gray-600 font-bold'>
               {client.position}
             </p>
