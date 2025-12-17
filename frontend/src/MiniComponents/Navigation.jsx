@@ -1,8 +1,32 @@
 import { Link, useLocation } from "react-router-dom"
+import { useState, useEffect } from "react"
 
 function Navigation() {
     let location = useLocation()
     let locationName = location.pathname
+
+    let [curentUser, setCurentUser] = useState('')
+
+    useEffect(() => {
+        async function getCurentUser() {
+            try {
+                let res = await fetch('http://localhost:5000/get_current_user', {
+                    method: "GET",
+                    credentials: 'include'
+                })
+                let result = await res.json()
+                if (!res.ok) {
+                    return "something went wrong"
+                } else {
+                    setCurentUser(result)
+                }
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        getCurentUser()
+    }, [])
+
 
     return (
         <nav className='border-r border-[#ececec] w-min flex items-center flex-col h-screen justify-start text-[#BBBBBB] gap-5'>
@@ -16,18 +40,22 @@ function Navigation() {
                 <Link to='/posts'>
                     <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/posts' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
-                <Link to='/pending%20orders'>
-                    <i className={`fa-solid fa-book hover:text-[#F67F20] ${locationName === '/pending%20orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                <Link to='/orders'>
+                    <i className={`fa-solid fa-book hover:text-[#F67F20] ${locationName === '/orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/products'>
-                    <i className={`fa-solid fa-burger hover:text-[#F67F20] ${locationName === '/pending%20orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-burger hover:text-[#F67F20] ${locationName === '/products' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/notification'>
                     <i className={`fa-solid fa-bell hover:text-[#F67F20] ${locationName === '/notification' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
-                <Link to='/costumers'>
-                    <i className={`fa-solid fa-user hover:text-[#F67F20] ${locationName === '/costumers' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
-                </Link>
+                {
+                    curentUser.position === "Manager" ?
+                        <Link to='/costumers'>
+                            <i className={`fa-solid fa-user hover:text-[#F67F20] ${locationName === '/costumers' ? 'text-[#F67F20]' : 'text-[#BBBBBB]'}`}></i>
+                        </Link>
+                    :null
+                }
                 <Link to='/messages'>
                     <i className={`fa-solid fa-paper-plane hover:text-[#F67F20] ${locationName === '/messages' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>

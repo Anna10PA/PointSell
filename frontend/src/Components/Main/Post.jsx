@@ -8,12 +8,32 @@ function Post() {
   const [curentUser, setCurentUser] = useState(0)
 
   const [openDetail, setOpenDetail] = useState(false)
-  const [foodInfo, setFoodInfo] = useState([])
+  const [post, setPostInfo] = useState([])
+
+  const [client, setClient] = useState('')
 
   const sendInfo = (item, isOpen) => {
-    setFoodInfo(item)
+    setPostInfo(item)
     setOpenDetail(!isOpen)
   }
+
+
+  useEffect(() => {
+    async function getAllProduct() {
+      let result = await fetch('http://localhost:5000/menegers_info', {
+        method: 'GET',
+        credentials: 'include'
+      })
+      let final = await result.json()
+      if (!result.ok) {
+        console.error("Not found")
+      } else {
+        setClient(final)
+      }
+    }
+    getAllProduct()
+  }, [])
+
 
   useEffect(() => {
     async function getCurentUser() {
@@ -59,10 +79,10 @@ function Post() {
 
   return (
     <>
-    {
-      openDetail ? 
-      <BgBlack /> : null
-    }
+      {
+        openDetail ?
+          <BgBlack allInfo={post} open={setOpenDetail} client={client} curentUser={curentUser} /> : null
+      }
       <Navigation />
       <main className="w-full flex flex-col px-10 py-5 gap-3 h-full">
         <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
@@ -77,16 +97,22 @@ function Post() {
           {
             allPost.length > 0 ?
               allPost.map((item, index) => {
-                return <PostCard 
-                info={item} 
-                key={index} 
-                sendInfo={()=> {
-                  sendInfo(item)
-                }} />
+                return <PostCard
+                  info={item}
+                  key={index}
+                  sendInfo={() => {
+                    sendInfo(item)
+                  }} />
               })
               :
-              <div className="flex items-center justify-center h-full w-full">
-                <h1>No Post Yet</h1>
+              <div className="flex items-center flex-col justify-center h-full w-full">
+                <video muted loop autoPlay>
+                  <source src='/no_post.mp4' type='video/mp4' />
+                </video>
+                <div className="leading-loose">
+                  <h1 className="text-center w-full text-2xl font-bold">No Post Yet</h1>
+                  <p className="text-center w-full text-gray-400">Check Again Later.</p>
+                </div>
               </div>
           }
         </section>

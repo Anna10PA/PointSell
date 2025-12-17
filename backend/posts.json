@@ -7,13 +7,8 @@
         "post": "https://i.pinimg.com/736x/f0/e0/a3/f0e0a3f0026c52624eed3516e83b6fdf.jpg",
         "title": "Khachapuri ❤️",
         "like": 3,
-        "comments": [
-            {
-                "user_name": "Gemali@gmail.com",
-                "time": "10:09:10",
-                "comment": "wow"
-            }
-        ]
+        "View": ["PointSell"],
+        "comments": []
     },
     {
         "id": "3278",
@@ -23,9 +18,12 @@
         "post": "https://i.pinimg.com/1200x/6a/88/32/6a8832d29a911b320f9c68af86f8e134.jpg",
         "title": "Pizza ❤️",
         "like": 3,
+        "View": ["PointSell"],
         "comments": [
             {
                 "user_name": "Gemali@gmail.com",
+                "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "date": "12-18-2025",
                 "time": "10:09:10",
                 "comment": "wow"
             }
@@ -36,12 +34,36 @@
         "user": "futureana735",
         "date": "12-17-2025",
         "time": "00:15:50",
+        "View": ["PointSell"],
         "post": "https://i.pinimg.com/736x/b5/b2/32/b5b23287a249b5d1bc60e343d7ba3a5a.jpg",
-        "title": "Lobiani ❤️",
+        "title": "Imagine the irresistible scent of a traditional Georgian Lobiani as it emerges from a roaring oven, its golden-brown surface perfectly charred and glistening with a light, melting brush of fresh butter. Inside this artisanal masterpiece, the smooth, seasoned kidney beans are mashed to a creamy perfection, blended with sautéed onions and a secret selection of aromatic local spices that create a true symphony of flavors in every single bite. This isn't just a simple bean-filled bread; it is a centuries-old culinary tradition that brings families together around a festive table, offering profound comfort and soul-warming satisfaction even on the coldest winter evenings. There is something deeply nostalgic and soulful about the way the flaky, delicate crust yields to the rich, savory filling, making it an unforgettable gastronomic experience that lingers on your palate and stays in your heart long after the last crumb is gone.",
         "like": 3,
         "comments": [
             {
                 "user_name": "Gemali@gmail.com",
+                "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "date": "12-18-2025",
+                "time": "10:09:10",
+                "comment": "wow"
+            },
+            {
+                "user_name": "Gemali@gmail.com",
+                "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "date": "12-18-2025",
+                "time": "10:09:10",
+                "comment": "wow"
+            },
+            {
+                "user_name": "Gemali@gmail.com",
+                "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "date": "12-18-2025",
+                "time": "10:09:10",
+                "comment": "wow"
+            },
+            {
+                "user_name": "Gemali@gmail.com",
+                "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "date": "12-18-2025",
                 "time": "10:09:10",
                 "comment": "wow"
             }

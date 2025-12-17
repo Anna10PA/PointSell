@@ -2,7 +2,7 @@ import FoodDetail from "./FoodDetail"
 import { useLocation } from "react-router-dom"
 import PostDetail from "./PostDetail"
 
-function BgBlack({ allInfo, open }) {
+function BgBlack({ allInfo, open, client, curentUser }) {
   let location = useLocation()
   let curentLocation = location.pathname
 
@@ -12,7 +12,7 @@ function BgBlack({ allInfo, open }) {
         <FoodDetail allInfo={allInfo} open={open} />
         :
         curentLocation === '/posts' ?
-          <PostDetail allInfo={allInfo} open={open} />
+          <PostDetail allInfo={allInfo} open={open} client={client} curentUser={curentUser} />
           : null
       }
     </div>
