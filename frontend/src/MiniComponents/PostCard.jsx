@@ -4,6 +4,8 @@ function PostCard({ info, sendInfo }) {
     const [client, setClient] = useState([])
     const [curentUser, setCurentUser] = useState([])
 
+    const curentTime = new Date()
+
     useEffect(() => {
         async function getCurentUser() {
             try {
@@ -57,7 +59,7 @@ function PostCard({ info, sendInfo }) {
                 <i className={` ${curentUser.position === "Manager" ? 'fa-solid fa-ellipsis-vertical ' : 'hidden'} text-2xl cursor-pointer`}></i>
             </div>
             <div>
-                <h1 className='font-medium line-clamp-1'>
+                <h1 className={`font-medium ${info.post ? 'line-clamp-1' : ''}`}>
                     {info.title}
                 </h1>
             </div>
@@ -65,14 +67,19 @@ function PostCard({ info, sendInfo }) {
                 <div className='w-full rounded overflow-hidden max-h-[380px] h-full' onClick={()=>{sendInfo(info)}}>
                     <img src={info.post} alt="" className='duration-200 hover:scale-[1.05] h-full w-full object-cover' />
                 </div>
-                : null
+                : <div className='h-full'></div>
             }
-            <div className='flex items-center justify-between w-full text-gray-600 text-3xl px-3 mt-1'>
+            <div className='flex items-center justify-between w-full text-gray-600 text-2xl px-3 mt-1'>
                 <i className={`fa-regular fa-heart cursor-pointer`}></i>
                 <i className="fa-regular fa-comment cursor-pointer" onClick={()=>{sendInfo(info)}}></i>
                 <h1 className='text-lg font-medium cursor-pointer'>
-                    {info.time}
+                    {info.date === `${curentTime.getFullYear()}-${curentTime.getMonth() + 1}-${curentTime.getDate()}` ? 
+                        `${info.time.split(':')[0]}:${info.time.split(':')[1]}` : 
+                    curentTime.getFullYear() == info.date.split('-')[2] ? 
+                        `${String(new Date(info.date)).split(' ')[2]} ${String(new Date(info.date)).split(' ')[1]}` :  
+                    `${String(new Date(info.date)).split(' ')[2]} ${String(new Date(info.date)).split(' ')[1]} ${String(new Date(info.date)).split(' ')[3]} `}
                 </h1>
+
             </div>
         </div>
     )

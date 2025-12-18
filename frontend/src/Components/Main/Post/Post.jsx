@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import Navigation from "../../MiniComponents/Navigation"
-import PostCard from "../../MiniComponents/PostCard"
-import BgBlack from "../../MiniComponents/BgBlack"
+import { Link } from "react-router-dom"
+
+import Navigation from "../../../MiniComponents/Navigation"
+import PostCard from "../../../MiniComponents/PostCard"
+import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Post() {
   const [allPost, setAllPost] = useState([])
@@ -89,9 +91,11 @@ function Post() {
           <h1 className="text-3xl font-bold">
             Posts
           </h1>
-          <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
-            Add New Post
-          </button>
+          <Link to='/add_post'>
+            <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
+              Add New Post
+            </button>
+          </Link>
         </header>
         <section className="w-full h-[80vh] overflow-auto grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-3">
           {

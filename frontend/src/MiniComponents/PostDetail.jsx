@@ -1,6 +1,42 @@
 import Comment from "./Comment"
+import { useState } from "react"
 
 function PostDetail({ allInfo, open, client, curentUser }) {
+
+  let [commentText, setCommentText] = useState('')
+
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault()
+
+    let commentData = {
+      post_id: allInfo.id, 
+      text: commentText,
+      user_name: curentUser.name,
+      user_email: curentUser.email ,
+      user_img: curentUser.profileUrl
+    }
+
+    try {
+      let res = await fetch('http://127.0.0.1:5000/add_comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(commentData),
+        credentials: 'include'
+      })
+
+      if (res.ok) {
+        let newComment = await res.json()
+        allInfo.comments.push(newComment)
+        setCommentText("")
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
+
   return (
     <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5'>
       <div className={`${allInfo.post !== null ? 'h-[600px] overflow-hidden rounded w-[750px]' : 'hidden'}`}>
@@ -48,11 +84,13 @@ function PostDetail({ allInfo, open, client, curentUser }) {
         </div>
         <div className='w-full h-max flex items-center gap-3 relative bottom-1'>
           <img src={curentUser.profileUrl} alt="" className='w-12.5 h-12.5 object-cover rounded-[50%]' />
-          <form className='w-full relative bottom-0'>
-            <input type="text" className='border w-full px-5 py-3 rounded-[40px] pr-12 outline-[#F67F20]' placeholder='Comment . . .' id="comment" />
-            <div className='absolute bg-[#F67F20] h-10 w-10 rounded-[50%] flex items-center justify-center cursor-pointer top-1 right-1'>
+          <form className='w-full relative bottom-0' onSubmit={handleCommentSubmit}>
+            <input type="text" className='border w-full px-5 py-3 rounded-[40px] pr-12 outline-[#F67F20]' placeholder='Comment . . .' id="comment" value={commentText} onChange={(e) => {
+              setCommentText(e.target.value)
+            }} />
+            <button className='absolute bg-[#F67F20] h-10 w-10 rounded-[50%] flex items-center justify-center cursor-pointer top-1 right-1 disabled:opacity-50' disabled={!commentText.trim()}>
               <i className="fa-solid fa-paper-plane text-white"></i>
-            </div>
+            </button>
           </form>
         </div>
       </div>

@@ -29,7 +29,7 @@ function Navigation() {
 
 
     return (
-        <nav className='border-r border-[#ececec] w-min flex items-center flex-col h-screen justify-start text-[#BBBBBB] gap-5'>
+        <nav className='border-r border-[#ececec] w-min flex items-center flex-col h-screen justify-start text-[#BBBBBB] gap-5 relative'>
             <div className='w-full border-b border-[#ececec]  object-cover flex items-center justify-center'>
                 <img src="/icon.png" alt="icon" className='w-[80%] m-1' />
             </div>
@@ -38,7 +38,7 @@ function Navigation() {
                     <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/home' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/posts'>
-                    <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/posts' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/posts' || locationName === '/add_post' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/orders'>
                     <i className={`fa-solid fa-book hover:text-[#F67F20] ${locationName === '/orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
