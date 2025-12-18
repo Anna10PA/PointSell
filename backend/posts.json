@@ -1,88 +1,33 @@
 [
     {
-        "id": "b7f5e2ae",
-        "title": "fffffffffffffffffffffffff",
-        "post": "http://127.0.0.1:5000/uploads/d598a66d-a51e-4fd2-b230-44ba53216c32.jpg",
-        "View": [
-            "pointSell"
-        ],
-        "comments": [],
-        "like": [],
-        "time": "19:46:35",
-        "date": "2025-12-18"
-    },
-    {
-        "id": "82275f8c",
-        "title": "asdasdas",
-        "post": "http://127.0.0.1:5000/uploads/3173303f-d933-4ffa-8367-1e1c650919ba.png",
-        "View": [
-            "pointSell"
-        ],
-        "comments": [],
-        "like": [],
-        "time": "19:46:27",
-        "date": "2025-12-18"
-    },
-    {
-        "id": "f3023a23",
-        "title": "Hello? New Post",
-        "post": "http://127.0.0.1:5000/uploads/4ea3aa9c-06e2-4f5b-b485-f4e17e4f00a7.png",
+        "id": "6acc2ea5",
+        "title": "THIS IS NEW POST HAHAHAHAHAHA, MARRY CRYSTMASS <3 ",
+        "post": "http://127.0.0.1:5000/uploads/ca6d7f24-76ef-4690-ae44-652d48c7a901.png",
         "View": [
             "pointSell"
         ],
         "comments": [
             {
-                "user_name": "PointSell",
-                "comment": "Hello! Do You Like IT?",
-                "user_img": "/icon.png",
-                "date": "2025-12-18"
-            }
-        ],
-        "like": [],
-        "time": "19:45:46",
-        "date": "2025-12-18"
-    },
-    {
-        "id": "d087b297",
-        "date": "12-15-2025",
-        "time": "00:15:50",
-        "View": [
-            "PointSell"
-        ],
-        "post": "https://i.pinimg.com/736x/b5/b2/32/b5b23287a249b5d1bc60e343d7ba3a5a.jpg",
-        "title": "Imagine the irresistible scent of a traditional Georgian Lobiani as it emerges from a roaring oven, its golden-brown surface perfectly charred and glistening with a light, melting brush of fresh butter. Inside this artisanal masterpiece, the smooth, seasoned kidney beans are mashed to a creamy perfection, blended with sautéed onions and a secret selection of aromatic local spices that create a true symphony of flavors in every single bite. This isn't just a simple bean-filled bread; it is a centuries-old culinary tradition that brings families together around a festive table, offering profound comfort and soul-warming satisfaction even on the coldest winter evenings. There is something deeply nostalgic and soulful about the way the flaky, delicate crust yields to the rich, savory filling, making it an unforgettable gastronomic experience that lingers on your palate and stays in your heart long after the last crumb is gone.",
-        "like": [],
-        "comments": [
-            {
-                "user_name": "PointSell",
-                "comment": "Hello! Do You Like IT?",
-                "user_img": "/icon.png",
-                "date": "2025-12-18"
-            },
-            {
-                "user_name": "PointSell",
-                "comment": "Hello?",
-                "user_img": "/icon.png",
-                "date": "2025-12-18"
-            },
-            {
-                "user_name": null,
-                "comment": "Hello ?",
+                "user_name": "puturidzeana0210",
+                "comment": "happy NEW YEAR <3",
                 "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
                 "date": "2025-12-18"
+            },
+            {
+                "user_name": "puturidzeana0210",
+                "comment": "hi",
+                "user_img": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "date": "2025-12-18"
+            },
+            {
+                "user_name": "PointSell",
+                "comment": "hi",
+                "user_img": "/icon.png",
+                "date": "2025-12-18"
             }
-        ]
-    },
-    {
-        "id": "g020c292",
-        "date": "12-14-2025",
-        "time": "10:15:50",
-        "View": [
-            "PointSell"
         ],
-        "post": "https://i.pinimg.com/1200x/6a/88/32/6a8832d29a911b320f9c68af86f8e134.jpg",
-        "title": "Pizza is a beloved dish of Italian origin, consisting of a flattened disk of bread dough topped with various ingredients, including tomato sauce, cheese, and a variety of toppings, baked to perfection.",
         "like": [],
-        "comments": []
+        "time": "22:55:15",
+        "date": "2025-12-18"
     }
 ]

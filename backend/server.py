@@ -71,8 +71,8 @@ def add_comment():
     data = request.get_json()
     post_id = data.get('post_id')
     comment_text = data.get('text')
-    user_email = data.get('email')
 
+    user_email = data.get('email')
     user_name = data.get('user_name') 
     user_img = data.get('user_img')
 
@@ -90,7 +90,7 @@ def add_comment():
                 "date": str(datetime.now()).split()[0]
             }
             
-            post['comments'].append(new_comment)
+            post['comments'].insert(0, new_comment)
             save_posts(posts)
             return jsonify(new_comment), 201
 
@@ -167,9 +167,10 @@ def login():
         session['email'] = email
         session['is_login'] = True
         return jsonify({'message': 'Login successful!'}), 200
-    return jsonify({'error': 'Invalid credentials'}), 401
+    return jsonify({'error': 'Invalid'}), 401
 
 
+# ჩემი ინფორმაცია / მენეჯერის
 @app.get('/menegers_info') 
 def meneger_info():
     users = check_users()

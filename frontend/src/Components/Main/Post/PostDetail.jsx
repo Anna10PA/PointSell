@@ -12,7 +12,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
     let commentData = {
       post_id: allInfo.id, 
       text: commentText,
-      user_name: curentUser.name,
+      user_name: curentUser.name || curentUser.email.split('@')[0],
       user_email: curentUser.email ,
       user_img: curentUser.profileUrl
     }
@@ -39,10 +39,10 @@ function PostDetail({ allInfo, open, client, curentUser }) {
 
   return (
     <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5'>
-      <div className={`${allInfo.post !== null ? 'h-[600px] overflow-hidden rounded w-[750px]' : 'hidden'}`}>
-        <img src={allInfo.post} alt={allInfo.post} className='w-full h-full object-cover' />
+      <div className={`${allInfo.post !== null ? 'h-[600px] min-w-[450px] overflow-y-hidden rounded w-[750px]' : 'hidden'}`}>
+        <img src={allInfo.post} alt={allInfo.post} className='w-full h-full object-cover ' />
       </div>
-      <div className='h-[600px] w-[65%] flex flex-col items-start gap-5 justify-between'>
+      <div className='h-[600px] w-[50%] flex flex-col items-start gap-5 justify-between'>
         <div className='flex items-center gap-3 w-full relative '>
           <img src={client.profileUrl} alt="" className='w-15 h-15 rounded-[50%]' />
           <div className='leading-4.5 w-full'>

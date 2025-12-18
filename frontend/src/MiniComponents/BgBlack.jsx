@@ -1,6 +1,6 @@
-import FoodDetail from "./FoodDetail"
+import FoodDetail from "../Components/Main/Home/FoodDetail"
 import { useLocation } from "react-router-dom"
-import PostDetail from "./PostDetail"
+import PostDetail from "../Components/Main/Post/PostDetail"
 
 function BgBlack({ allInfo, open, client, curentUser }) {
   let location = useLocation()

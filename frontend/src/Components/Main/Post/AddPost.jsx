@@ -78,8 +78,8 @@ function AllPost() {
                         className="w-full p-2 text-lg outline-none min-h-[50px] max-h-[300px] overflow-y-auto resize-none"
                     />
 
-                    {view && (
-                        <div className="relative mt-3">
+                    {view ?
+                        <div div className="relative mt-3">
                             <img
                                 src={view}
                                 alt="Preview"
@@ -92,7 +92,8 @@ function AllPost() {
                                 <i className="fa-solid fa-x text-xs"></i>
                             </div>
                         </div>
-                    )}
+                        : null
+                    }
 
                     <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-200">
                         <label className="cursor-pointer flex items-center gap-2 hover:text-white w-10 h-10 rounded-lg hover:hover:bg-orange-400 justify-center text-[#F67F20] duration-200">
@@ -115,7 +116,7 @@ function AllPost() {
                     </div>
                 </form>
             </main>
-        </div>
+        </div >
     )
 }
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import Navigation from "../../../MiniComponents/Navigation"
-import PostCard from "../../../MiniComponents/PostCard"
+import PostCard from "./PostCard"
 import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Post() {
@@ -97,7 +97,7 @@ function Post() {
             </button>
           </Link>
         </header>
-        <section className="w-full h-[80vh] overflow-auto grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]  gap-3">
+        <section className="w-full h-[80vh] overflow-auto scroll-none grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))]  gap-5">
           {
             allPost.length > 0 ?
               allPost.map((item, index) => {

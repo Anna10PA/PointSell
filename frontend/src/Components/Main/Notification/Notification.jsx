@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import {useNavigate } from "react-router-dom"
-import Navigation from "../../MiniComponents/Navigation"
-import NotificationCard from "../../MiniComponents/NotificationCard"
+import Navigation from "../../../MiniComponents/Navigation"
+import NotificationCard from "./NotificationCard"
 
 function Notification() {
     let [messages, setMessages] = useState([])

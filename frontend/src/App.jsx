@@ -1,7 +1,7 @@
 import Form from "./Components/Form/Forms"
-import Home from "./Components/Main/Home"
-import Notification from "./Components/Main/Notification"
-import AllProduct from "./Components/Main/AllProduct"
+import Home from "./Components/Main/Home/Home"
+import Notification from "./Components/Main/Notification/Notification"
+import AllProduct from "./Components/Main/AllProduct/AllProduct"
 import Post from "./Components/Main/Post/Post"
 import AddPost from "./Components/Main/Post/AddPost"
 

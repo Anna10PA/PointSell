@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-import Card from "../../MiniComponents/Card"
+import Card from "./Card"
 import { useForm } from "react-hook-form"
-import BgBlack from "../../MiniComponents/BgBlack"
-import CartCard from "../../MiniComponents/CartCard"
-import Navigation from "../../MiniComponents/Navigation"
+import BgBlack from "../../../MiniComponents/BgBlack"
+import CartCard from "./CartCard"
+import Navigation from "../../../MiniComponents/Navigation"
 
 
 function Home() {

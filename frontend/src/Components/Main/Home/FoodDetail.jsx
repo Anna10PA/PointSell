@@ -10,11 +10,11 @@ function FoodDetail({ allInfo, open }) {
 
   // console.log(allInfo)
   return (
-    <div className='bg-white h-min w-max flex items-start rounded-2xl overflow-hidden relative max-w-[600px] mx-10 max-md:flex-col max-md:pb-2.5 max-md:min-w-[200px] max-md:w-full max-sm:mx-1' >
+    <div className='bg-white h-min w-max flex items-start rounded-2xl overflow-hidden relative max-w-[600px] mx-10 max-md:flex-col max-md:pb-2.5 max-md:min-w-[200px] max-md:w-full max-sm:mx-1 p-5' >
       <i className="fa-solid fa-xmark absolute top-5 right-5 text-2xl duration-75 cursor-pointer hover:text-[#F67F20] z-50" onClick={() => {
         open(false)
       }}></i>
-      <div className='w-[95%] max-w-[300px] h-[350px] overflow-hidden min-w-[200px] max-md:min-w-full'>
+      <div className='w-[95%] max-w-[300px] h-[350px] overflow-hidden min-w-[200px] max-md:min-w-full rounded'>
         <img src={allInfo.product_image} alt={allInfo.product_image} className='object-cover w-full h-full duration-200 hover:scale-[1.05]' />
       </div>
       <div className='p-5 flex items-start flex-col justify-between h-full gap-3 w-max min-w-[280px] min-h-[300px] max-md:min-w-full max-md:w-full'>
