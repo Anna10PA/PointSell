@@ -7,11 +7,19 @@ import ssl
 import smtplib
 from datetime import datetime
 import uuid
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
+
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('Gmail_password')
 
 CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173"])
+
+
+Google_Client_Id = '553005797004-r8f7ri794npsv1kjab782t79p42vg6g3.apps.googleusercontent.com'
+
 
 post_folders = 'posts'
 if not os.path.exists(post_folders):
@@ -90,10 +98,71 @@ def add_comment():
                 "date": str(datetime.now()).split()[0]
             }
             
-            post['comments'].insert(0, new_comment)
+            post['comments'].append(new_comment)
             save_posts(posts)
             return jsonify(new_comment), 201
 
+    return jsonify({"error": "Post not found"}), 404
+
+
+# მოწონება
+@app.post('/like')
+def like():
+    data = request.get_json()
+    post_id = data.get('post_id')
+
+    user_email = data.get('email')
+
+    status = False
+    posts = check_posts()
+    for post in posts:
+        if post['id'] == post_id:
+            liker = user_email
+            
+            if 'like' not in post:
+                post['like'] = []
+
+            if user_email in post['like'] :
+                post['like'].remove(user_email)
+                status = True
+
+            else:
+                post['like'].append(liker)
+                status = False
+
+            save_posts(posts)
+            return jsonify({
+                "likes_count": len(post['like']),
+                "status": status
+            }), 200
+        
+
+    return jsonify({"error": "Post not found"}), 404
+
+
+# ნახვები
+@app.post('/view')
+def view():
+    data = request.get_json()
+    post_id = data.get('post_id')
+    user_email = data.get('email')
+
+    posts = check_posts()
+
+    for post in posts:
+        if post['id'] == post_id:
+            
+            if 'view' not in post:
+                post['view'] = []
+
+            if user_email not in post['view']:
+                post['view'].append(user_email)
+
+            save_posts(posts)
+            return jsonify({
+                "view": len(post['view']),
+            }), 200
+        
     return jsonify({"error": "Post not found"}), 404
 
 
@@ -170,6 +239,55 @@ def login():
     return jsonify({'error': 'Invalid'}), 401
 
 
+# შესვლა Google-ით
+@app.post('/google_login')
+def google_login():
+    data = request.get_json()
+    token = data.get('token')
+    
+    try:
+        user_info = id_token.verify_oauth2_token(token, requests.Request(), Google_Client_Id)
+        email = user_info['email']
+        
+        users = check_users()
+        user = next((u for u in users if u['email'] == email), None)
+
+        if not user:
+            user = {
+                "email": email,
+                "name": user_info.get('name') or user_info.get('User'),
+                "profileUrl": user_info.get('picture') or "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "password": str(uuid.uuid4()),
+                "position": "Customer",
+                "money": 1000,
+                "notification": [
+                    {
+                        "date": "2025-12-14",
+                        "time": "14:10:58",
+                        "message": "Hello User!",
+                        "read": False
+                    }
+                ],
+                "history": [],
+                "friends": [],
+                "favorite": [],
+                "curent_cart": [],
+                "gender": None,
+                "phone": None,
+                "age": None
+            }
+            
+            users.append(user)
+            save_users(users)
+            
+        session['email'] = email
+        session['is_login'] = True
+        return jsonify({"message": "Login successful"}), 200
+        
+    except ValueError:
+        return jsonify({"error": "Invalid Google Token"}), 400
+
+
 # ჩემი ინფორმაცია / მენეჯერის
 @app.get('/menegers_info') 
 def meneger_info():
@@ -202,7 +320,7 @@ def post_posts():
             "id": str(uuid.uuid4())[:8],
             "title": text,
             "post": image_url,
-            "View": ["pointSell"],
+            "view": [],
             "comments": [],
             "like": [],
             "time": str(datetime.now()).split()[1].split('.')[0],

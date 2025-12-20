@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 function PostCard({ info, sendInfo }) {
     const [client, setClient] = useState([])
     const [curentUser, setCurentUser] = useState([])
+    const [likesCount, setLikesCount] = useState(info.like ? info.like.length : 0)
+    const [isLiked, setIsLiked] = useState(false)
+    const [View, setView] = useState(info.view ? info.view.length : 0)
 
     const curentTime = new Date()
 
@@ -44,6 +47,89 @@ function PostCard({ info, sendInfo }) {
     }, [])
 
 
+    useEffect(() => {
+        async function getCurentUser() {
+            try {
+                let res = await fetch('http://localhost:5000/get_current_user', {
+                    method: "GET",
+                    credentials: 'include'
+                })
+                let result = await res.json()
+                if (res.ok) {
+                    setCurentUser(result)
+                    if (info.like && result.email) {
+                        setIsLiked(info.like.includes(result.email))
+                    }
+                }
+            } catch (e) {
+                console.error(e)
+            }
+        }
+        getCurentUser()
+    }, [info.like])
+
+
+    const view = async () => {
+        if (!curentUser) return
+
+        try {
+            const result = await fetch('http://127.0.0.1:5000/view', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    post_id: info.id,
+                    email: curentUser.email,
+                }),
+            })
+
+            let data = await result.json()
+
+            if (result.ok) {
+                setView(data.view)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
+    useEffect(() => {
+        async function getManagerInfo() {
+            let result = await fetch('http://localhost:5000/menegers_info')
+            let final = await result.json()
+            if (result.ok) {
+                setClient(final)
+            }
+        }
+        getManagerInfo()
+    }, [])
+
+
+    const Like = async () => {
+        if (!curentUser) return
+
+        try {
+            const result = await fetch('http://127.0.0.1:5000/like', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    post_id: info.id,
+                    email: curentUser.email,
+                }),
+                credentials: 'include'
+            })
+
+            let data = await result.json()
+
+            if (result.ok) {
+                setLikesCount(data.likes_count)
+                setIsLiked(!data.status)
+            }
+        } catch (error) {
+            console.error("Like error:", error)
+        }
+    }
+
     return (
         <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col items-start gap-4 max-w-[600px] max-lg:max-w-full'>
             <div className='flex items-center gap-5 justify-between w-full'>
@@ -64,20 +150,23 @@ function PostCard({ info, sendInfo }) {
                 </h1>
             </div>
             {info.post ?
-                <div className='w-full rounded overflow-hidden max-h-[380px] h-full' onClick={()=>{sendInfo(info)}}>
+                <div className='w-full rounded overflow-hidden max-h-[380px] h-full' onClick={() => { sendInfo(info), view() }}>
                     <img src={info.post} alt="" className='duration-200 hover:scale-[1.05] h-full w-full object-cover' />
                 </div>
                 : <div className='h-full'></div>
             }
-            <div className='flex items-center justify-between w-full text-gray-600 text-2xl px-3 mt-1'>
-                <i className={`fa-regular fa-heart cursor-pointer`}></i>
-                <i className="fa-regular fa-comment cursor-pointer" onClick={()=>{sendInfo(info)}}></i>
+            <div className='flex items-center justify-between w-full text-gray-600 text-[27px] px-3 mt-1'>
+                <i className={
+                    `fa-heart cursor-pointer ${isLiked ? 'text-red-600 fa-solid' : 'text-gray-600 fa-regular'}
+                    active:scale-[0.8] duration-100`}
+                    onClick={Like}></i>
+                <i className="fa-regular fa-comment cursor-pointer" onClick={() => { sendInfo(info), view() }}></i>
                 <h1 className='text-lg font-medium cursor-pointer'>
-                    {info.date === `${curentTime.getFullYear()}-${curentTime.getMonth() + 1}-${curentTime.getDate()}` ? 
-                        `${info.time.split(':')[0]}:${info.time.split(':')[1]}` : 
-                    curentTime.getFullYear() == info.date.split('-')[2] ? 
-                        `${String(new Date(info.date)).split(' ')[2]} ${String(new Date(info.date)).split(' ')[1]}` :  
-                    `${String(new Date(info.date)).split(' ')[2]} ${String(new Date(info.date)).split(' ')[1]} ${String(new Date(info.date)).split(' ')[3]} `}
+                    {info.date === `${curentTime.getFullYear()}-${curentTime.getMonth() + 1}-${curentTime.getDate()}` ?
+                        `${info.time.split(':')[0]}:${info.time.split(':')[1]}` :
+                        curentTime.getFullYear() == info.date.split('-')[2] ?
+                            `${String(new Date(info.date)).split(' ')[2]} ${String(new Date(info.date)).split(' ')[1]}` :
+                            `${String(new Date(info.date)).split(' ')[2]} ${String(new Date(info.date)).split(' ')[1]} ${String(new Date(info.date)).split(' ')[3]} `}
                 </h1>
 
             </div>

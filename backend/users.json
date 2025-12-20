@@ -46,28 +46,26 @@
         "money": 10000
     },
     {
-        "name": null,
-        "lastname": null,
-        "age": null,
-        "position": "Customer",
         "email": "puturidzeana0210@gmail.com",
-        "password": "puturidzeana0210@gmail.com",
-        "gender": null,
-        "phone": null,
-        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
-        "review": [],
-        "history": [],
-        "friends": [],
-        "favorite": [],
+        "name": "Ana Puturidze",
+        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
+        "password": "f18441a5-1a6b-4a57-82c2-ba7a00a05ce1",
+        "position": "Customer",
+        "money": 1000,
         "notification": [
             {
-                "date": "2025-12-16",
-                "time": "00:20:14",
-                "message": "Registration is successful! Now you can order food or get a job!",
+                "date": "2025-12-14",
+                "time": "14:10:58",
+                "message": "Hello User!",
                 "read": false
             }
         ],
+        "history": [],
+        "friends": [],
+        "favorite": [],
         "curent_cart": [],
-        "money": 1000
+        "gender": null,
+        "phone": null,
+        "age": null
     }
 ]

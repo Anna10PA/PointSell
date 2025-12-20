@@ -2,19 +2,41 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-function Login() {
-  let [message, setMessage] = useState('')
+import { GoogleLogin } from '@react-oauth/google'
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
+function Login() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: '',
     }
   })
+
+  let [message, setMessage] = useState('')
   let navigation = useNavigate()
 
-  // console.log(watch('email'))
-  // console.log(errors)
+  let googleLoginFunc = async (resu) => {
+    try {
+      let res = await fetch('http://localhost:5000/google_login', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: resu.credential }),
+        credentials: 'include'
+      });
+
+      let data = await res.json()
+
+      if (res.ok) {
+        navigation('/home')
+      } else {
+        setMessage(data.error || 'Google Login Failed')
+      }
+    } catch (e) {
+      console.error(e)
+      setMessage("Error with server")
+    }
+  }
+
   return (
     <div className='flex w-full flex-col items-start gap-7 border-l border-gray-200 px-[60px] py-5 max-w-[500px] max-md:px-10'>
       <h1 className='font-bold text-[30px]'>Welcome back!</h1>
@@ -41,6 +63,7 @@ function Login() {
             console.error(e)
           }
         })}>
+
         <div className='w-full flex items-start flex-col gap-2'>
 
           <div className='flex items-center relative w-full'>
@@ -69,20 +92,14 @@ function Login() {
         </Link>
         <button className='bg-[#F67F20] text-white font-bold px-5 rounded w-full py-2.5 cursor-pointer duration-200 hover:bg-orange-500'>Login</button>
       </form>
-      <h1 className={`${message ? 'bg-[red] px-7 py-2 text-white font-bold tracking-[1px] rounded': 'hidden'}`}>{message}</h1>
-      <div className='flex items-center justify-between w-full gap-5 flex-wrap max-md:justify-center max-md:gap-3'>
-        <button className='flex items-center justify-center gap-2.5 border-gray-300 px-10 py-2 rounded border-2 cursor-pointer max-md:w-full'>
-          <img src="https://tse3.mm.bing.net/th/id/OIP.FlHYuH8JYbUrdZqBaTQWWQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" className='w-5' />
-          <span className='font-bold'>
-            Google
-          </span>
-        </button>
-        <button className='flex items-center justify-center gap-2.5 border-gray-300 px-10 py-2 rounded border-2 cursor-pointer max-md:w-full'>
-          <i className="fa-brands fa-facebook-f text-[#3D6AD6]"></i>
-          <span className='font-bold '>
-            Facebook
-          </span>
-        </button>
+      <h1 className={`${message ? 'bg-[red] px-7 py-2 text-white font-bold tracking-[1px] rounded' : 'hidden'}`}>{message}</h1>
+      <div className='flex items-center justify-center w-full gap-5 flex-wrap max-md:justify-center max-md:gap-3'>
+          <GoogleLogin
+            onSuccess={googleLoginFunc}
+            onError={() => setMessage('Google Login Failed')}
+            width={250}
+          />
+  
       </div>
       <h2 className='font-semibold text-center w-full'>Don't you have a account?
         <Link to='/registration'>

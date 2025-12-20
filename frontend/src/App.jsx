@@ -6,20 +6,23 @@ import Post from "./Components/Main/Post/Post"
 import AddPost from "./Components/Main/Post/AddPost"
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<Form />} />
-          <Route path='/home' element={<Home />} />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="/products" element={<AllProduct />} />
-          <Route path="/posts" element={<Post />} />
-          <Route path='/add_post' element={<AddPost />} />
-        </Routes>
-      </BrowserRouter>
+      <GoogleOAuthProvider clientId='553005797004-r8f7ri794npsv1kjab782t79p42vg6g3.apps.googleusercontent.com'>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<Form />} />
+            <Route path='/home' element={<Home />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="/products" element={<AllProduct />} />
+            <Route path="/posts" element={<Post />} />
+            <Route path='/add_post' element={<AddPost />} />
+          </Routes>
+        </BrowserRouter>
+      </GoogleOAuthProvider>
     </>
   )
 }

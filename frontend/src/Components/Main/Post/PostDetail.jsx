@@ -1,19 +1,23 @@
 import Comment from "./Comment"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function PostDetail({ allInfo, open, client, curentUser }) {
+
+  let [likesCount, setLikesCount] = useState(allInfo.like ? allInfo.like.length : 0)
+  let [isLiked, setIsLiked] = useState(false)
+  let [View, setView] = useState(allInfo.view ? allInfo.view.length : 0)
 
   let [commentText, setCommentText] = useState('')
 
 
-  const handleCommentSubmit = async (e) => {
+  const commentSubmit = async (e) => {
     e.preventDefault()
 
-    let commentData = {
-      post_id: allInfo.id, 
+    let commentInfo = {
+      post_id: allInfo.id,
       text: commentText,
       user_name: curentUser.name || curentUser.email.split('@')[0],
-      user_email: curentUser.email ,
+      user_email: curentUser.email,
       user_img: curentUser.profileUrl
     }
 
@@ -21,7 +25,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
       let res = await fetch('http://127.0.0.1:5000/add_comment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(commentData),
+        body: JSON.stringify(commentInfo),
         credentials: 'include'
       })
 
@@ -36,9 +40,68 @@ function PostDetail({ allInfo, open, client, curentUser }) {
   }
 
 
+  useEffect(() => {
+    if (allInfo.like && curentUser?.email) {
+      setIsLiked(allInfo.like.includes(curentUser.email))
+    }
+  }, [allInfo, curentUser])
+
+
+  const Like = async () => {
+    if (!curentUser) return
+
+    try {
+      const result = await fetch('http://127.0.0.1:5000/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          post_id: allInfo.id,
+          email: curentUser.email,
+        }),
+      })
+
+      let data = await result.json()
+
+      if (result.ok) {
+        setLikesCount(data.likes_count)
+        setIsLiked(!data.status)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
+  const view = async () => {
+    if (!curentUser) return
+
+    try {
+      const result = await fetch('http://127.0.0.1:5000/view', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          post_id: info.id,
+          email: curentUser.email,
+        }),
+      })
+
+      let data = await result.json()
+
+      if (result.ok) {
+        setView(data.view)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+
+  useEffect(() => {
+    view()
+  }, [allInfo.id])
 
   return (
-    <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5'>
+    <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5' >
       <div className={`${allInfo.post !== null ? 'h-[600px] min-w-[450px] overflow-y-hidden rounded w-[750px]' : 'hidden'}`}>
         <img src={allInfo.post} alt={allInfo.post} className='w-full h-full object-cover ' />
       </div>
@@ -59,8 +122,11 @@ function PostDetail({ allInfo, open, client, curentUser }) {
           <p className='font-medium max-h-[170px] min-h-[60px] pb-3 overflow-auto w-full px-3'>{allInfo.title}</p>
           <div className='flex items-center justify-between w-full text-gray-600 border-b border-gray-300 pb-3 text-2xl px-4 mt-1 relative pr-10'>
             <div className='flex items-center gap-2.5'>
-              <i className={`fa-regular fa-heart cursor-pointer`}></i>
-              <span className='text-lg font-medium'>{allInfo.like}</span>
+              <i className={
+                `fa-heart cursor-pointer ${isLiked ? 'text-red-600 fa-solid' : 'text-gray-600 fa-regular'}
+                    active:scale-[0.8] duration-100`}
+                onClick={Like}></i>
+              <span className='text-lg font-medium'>{likesCount}</span>
             </div>
             <div className='flex items-center gap-2.5 '>
               <label htmlFor="comment">
@@ -70,7 +136,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
             </div>
             <div className='flex items-center gap-2.5 cursor-pointer'>
               <i className="fa-regular fa-eye"></i>
-              <span className='text-lg font-medium'>{allInfo.View.length}</span>
+              <span className='text-lg font-medium'>{View}</span>
             </div>
           </div>
         </div>
@@ -84,7 +150,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
         </div>
         <div className='w-full h-max flex items-center gap-3 relative bottom-1'>
           <img src={curentUser.profileUrl} alt="" className='w-12.5 h-12.5 object-cover rounded-[50%]' />
-          <form className='w-full relative bottom-0' onSubmit={handleCommentSubmit}>
+          <form className='w-full relative bottom-0' onSubmit={commentSubmit}>
             <input type="text" className='border w-full px-5 py-3 rounded-[40px] pr-12 outline-[#F67F20]' placeholder='Comment . . .' id="comment" value={commentText} onChange={(e) => {
               setCommentText(e.target.value)
             }} />
