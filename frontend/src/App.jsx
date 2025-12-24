@@ -4,6 +4,8 @@ import Notification from "./Components/Main/Notification/Notification"
 import AllProduct from "./Components/Main/AllProduct/AllProduct"
 import Post from "./Components/Main/Post/Post"
 import AddPost from "./Components/Main/Post/AddPost"
+import OrderType from "./Components/Main/Home/OrderType"
+import Deliver from "./Components/Main/Home/Deliver"
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { GoogleOAuthProvider } from '@react-oauth/google'
@@ -20,6 +22,8 @@ function App() {
             <Route path="/products" element={<AllProduct />} />
             <Route path="/posts" element={<Post />} />
             <Route path='/add_post' element={<AddPost />} />
+            <Route path='/order_type' element={<OrderType />} />
+            <Route path='/order/deliver' element={<Deliver />} />
           </Routes>
         </BrowserRouter>
       </GoogleOAuthProvider>

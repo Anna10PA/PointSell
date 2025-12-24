@@ -1,6 +1,6 @@
 [
     {
-        "name": null,
+        "name": "PointSell",
         "lastname": null,
         "age": null,
         "position": "Manager",
@@ -16,8 +16,37 @@
             }
         ],
         "curent_cart": {
-            "order": null,
-            "cart": []
+            "order": "8a8e5034",
+            "cart": [
+                {
+                    "Id": "1675",
+                    "count": 2
+                },
+                {
+                    "Id": "2185",
+                    "count": 1
+                },
+                {
+                    "Id": "5017",
+                    "count": 1
+                },
+                {
+                    "Id": "9902",
+                    "count": 1
+                },
+                {
+                    "Id": "9132",
+                    "count": 1
+                },
+                {
+                    "Id": "1289",
+                    "count": 1
+                },
+                {
+                    "Id": "7096",
+                    "count": 1
+                }
+            ]
         },
         "money": 10000
     }

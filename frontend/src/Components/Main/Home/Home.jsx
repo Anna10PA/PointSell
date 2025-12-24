@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Card from "./Card"
 import { useForm } from "react-hook-form"
@@ -9,6 +9,7 @@ import Navigation from "../../../MiniComponents/Navigation"
 
 function Home() {
     let [product, setProduct] = useState([])
+    let navigate = useNavigate()
     let { register, watch } = useForm({
         defaultValues: {
             product: ''
@@ -58,6 +59,7 @@ function Home() {
     }, [])
 
 
+    // კალათის გასუფთავება
     let cleanCart = async () => {
         try {
             let res = await fetch('http://localhost:5000/clean_cart', {
@@ -197,22 +199,24 @@ function Home() {
                             <div className="flex flex-col items-start gap-2.5">
                                 <div className="flex items-center justify-between w-full font-bold">
                                     <h1>Subtotal</h1>
-                                    <h1>${sum}</h1>
+                                    <h1>${sum.toFixed(2)}</h1>
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full ">
                                     <h1>Change</h1>
-                                    <h1>${Change}</h1>
+                                    <h1>${Change.toFixed(2)}</h1>
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full border-b border-gray-200 pb-3 mb-3">
                                     <h1>Tax</h1>
-                                    <h1>${sum < 100 ? 10 : sum >= 100 && sum < 200 ? 5 : 'Free'}</h1>
+                                    <h1>${sum < 100 ? (10).toFixed(2) : sum >= 100 && sum < 200 ? 5 : 'Free'}</h1>
                                 </div>
                                 <div className="flex items-center justify-between w-full text-gray-950 font-extrabold text-lg">
                                     <h1>Total</h1>
-                                    <h1>${sum + (sum < 100 ? 10 : sum >= 100 && sum < 200 ? 5 : 0) + Change}</h1>
+                                    <h1>${(sum + (sum < 100 ? 10 : sum >= 100 && sum < 200 ? 5 : 0) + Change).toFixed(2)}</h1>
                                 </div>
                             </div>
-                            <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 cursor-pointer">Place Order</button>
+                            <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 cursor-pointer" onClick={()=> {
+                                navigate('/order_type')
+                            }}>Place Order</button>
                         </div>
                     </div> :
                     <div className="h-[60vh] w-full flex items-center justify-center">

@@ -35,7 +35,7 @@ function Navigation() {
             </div>
             <div className="flex items-center flex-col h-[80%] justify-between text-[30px] px-8 max-md:px-4 max-md:text-2xl">
                 <Link to='/home'>
-                    <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/home' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/home' || locationName === '/order_type' || locationName === '/order/deliver'? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/posts'>
                     <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/posts' || locationName === '/add_post' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
