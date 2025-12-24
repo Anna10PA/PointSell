@@ -7,15 +7,14 @@ import ssl
 import smtplib
 from datetime import datetime
 import uuid
-from google.oauth2 import id_token
-from google.auth.transport import requests
+import requests
 
 
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('Gmail_password')
 
-CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173"])
+CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
 
 
 Google_Client_Id = '553005797004-r8f7ri794npsv1kjab782t79p42vg6g3.apps.googleusercontent.com'
@@ -181,6 +180,112 @@ def check_products():
         return json.load(file)
 
 
+# პროდუქტის კალათაში დამატება 
+@app.post('/user_cart')
+def cart():
+    if 'email' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    users = check_users() 
+    user = next((i for i in users if i['email'] == session['email']), None)
+
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+
+    data = request.get_json()
+    product_id = data.get('product_id')
+    
+    add_count = int(data.get('product_count')) if data.get('product_count') else 1
+
+    found = False
+    
+    if 'curent_cart' not in user :
+        user['curent_cart'] = {"order": None, "cart": []}
+    
+    if 'cart' not in user['curent_cart']:
+        user['curent_cart']['cart'] = []
+
+    for product in user['curent_cart'].get('cart'):
+        if product['Id'] == product_id:
+            product['count'] += add_count 
+            found = True
+            break
+
+    if not found:
+        user['curent_cart']['cart'].insert(0, {
+            "Id": product_id,
+            "count": add_count
+        })
+
+    if not user['curent_cart']['order']:
+        user['curent_cart']['order'] = str(uuid.uuid4()).split('-')[0]
+
+    save_users(users)
+    return jsonify(user['curent_cart']), 200
+
+
+# კალათის შიგნით კიდევ დამატება
+@app.post('/update_cart')
+def add_in_cart():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not login'}), 401
+    
+    data = request.get_json()
+    product_id = data.get('id')
+    new_value = data.get('count')
+
+    users = check_users()
+    user = next((u for u in users if u['email'] == session['email']), None)
+
+    if user:
+        for product in user['curent_cart']['cart']:
+            if product['Id'] == product_id:
+                product['count'] = new_value
+                save_users(users)
+                return jsonify({'message': 'sucsessful!'}), 200
+    else:
+        return jsonify({'error': 'not found'}), 404
+
+
+# კალათიდან წაშლა
+@app.post('/delete_from_cart')
+def delete_from_cart():
+    if 'email' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    data = request.get_json()
+    product_id = data.get('id')
+
+    users = check_users()
+    user = next((u for u in users if u['email'] == session['email']), None)
+
+    if user and 'curent_cart' in user:
+        user['curent_cart']['cart'] = [p for p in user['curent_cart']['cart'] if p['Id'] != product_id]
+        save_users(users)
+        return jsonify({"message": "Sucsessful!"}), 200
+
+    return jsonify({"error": "Not found"}), 404
+
+
+# კალათის მთლიანად გასუფთავება
+@app.post('/clean_cart')
+def clean_cart():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    users = check_users()
+    user = next((u for u in users if u['email'] == session['email']), None)
+
+    if user:
+        user['curent_cart'] = {
+            'order': None,
+            'cart': []
+        }
+        save_users(users)
+        return jsonify({'message': "save sucsessful!"}), 200
+    
+    return jsonify({'error': 'not found'}), 404
+
 # რეგისტრაცია
 @app.post("/register")
 def register():
@@ -207,10 +312,15 @@ def register():
         "notification": [
             {
                 "date": current_time.split()[0],
+                "time": current_time.split()[1],
                 "message": "Registration is successful!",
                 "read": False
             }
         ],
+        "curent_cart": {
+            "order": None,
+            "cart": []
+        },
         "money": 1000 if email != my_gmail else 10000
     }
 
@@ -243,19 +353,28 @@ def login():
 @app.post('/google_login')
 def google_login():
     data = request.get_json()
-    token = data.get('token')
+    token = data.get('token') 
     
     try:
-        user_info = id_token.verify_oauth2_token(token, requests.Request(), Google_Client_Id)
-        email = user_info['email']
+        response = requests.get('https://www.googleapis.com/oauth2/v3/userinfo',
+            headers={'Authorization': f'Bearer {token}'})
         
+        if response.status_code != 200:
+            return jsonify({"error": "Invalid Google Token"}), 400
+            
+        user_info = response.json()
+        email = user_info.get('email')
+        
+        if not email:
+            return jsonify({"error": "Email not found in Google account"}), 400
+
         users = check_users()
         user = next((u for u in users if u['email'] == email), None)
 
         if not user:
             user = {
                 "email": email,
-                "name": user_info.get('name') or user_info.get('User'),
+                "name": user_info.get('name') or user_info.get('given_name') or user_info.get('User'),
                 "profileUrl": user_info.get('picture') or "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
                 "password": str(uuid.uuid4()),
                 "position": "Customer",
@@ -271,7 +390,10 @@ def google_login():
                 "history": [],
                 "friends": [],
                 "favorite": [],
-                "curent_cart": [],
+                "curent_cart": {
+                    "order": None,
+                    "cart": []
+                },
                 "gender": None,
                 "phone": None,
                 "age": None
@@ -284,8 +406,9 @@ def google_login():
         session['is_login'] = True
         return jsonify({"message": "Login successful"}), 200
         
-    except ValueError:
-        return jsonify({"error": "Invalid Google Token"}), 400
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Server error during Google Login"}), 500
 
 
 # ჩემი ინფორმაცია / მენეჯერის
@@ -332,7 +455,7 @@ def post_posts():
         return jsonify(new_post), 201
     
     except Exception as e:
-        print(f"Error: {e}")
+        print(e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -353,7 +476,6 @@ def current_user():
     users = check_users()
     user = next((u for u in users if u['email'] == session['email']), None)
     return jsonify(user) if user else (jsonify({'error': 'Not found'}), 404)
-
 
 
 @app.get("/")

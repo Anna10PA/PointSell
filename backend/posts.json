@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "id": "cd3994c3",
+        "title": "new post\r\n",
+        "post": "http://127.0.0.1:5000/uploads/8c79fa14-8ee3-4807-819e-9653fff7b1e2.png",
+        "view": [
+            "futureana735@gmail.com",
+            null,
+            "puturidzeana0210@gmail.com"
+        ],
+        "comments": [
+            {
+                "user_name": "Ana Puturidze",
+                "comment": "fsdaf",
+                "user_img": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
+                "date": "2025-12-21"
+            },
+            {
+                "user_name": "PointSell",
+                "comment": "Hello GUYS!!! THIS IS MY NEW POST HAHAHAHA",
+                "user_img": "/icon.png",
+                "date": "2025-12-23"
+            }
+        ],
+        "like": [
+            "puturidzeana0210@gmail.com",
+            "futureana735@gmail.com"
+        ],
+        "time": "01:06:16",
+        "date": "2025-12-21"
+    }
+]

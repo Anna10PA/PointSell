@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google'
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -14,13 +14,16 @@ function Login() {
 
   let [message, setMessage] = useState('')
   let navigation = useNavigate()
+  
 
-  let googleLoginFunc = async (resu) => {
+  let login = useGoogleLogin({
+    onSuccess: async (resu) => {
     try {
+      console.log(resu)
       let res = await fetch('http://localhost:5000/google_login', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: resu.credential }),
+        body: JSON.stringify({ token: resu.access_token }),
         credentials: 'include'
       });
 
@@ -35,7 +38,13 @@ function Login() {
       console.error(e)
       setMessage("Error with server")
     }
-  }
+  },
+    onError: () => {
+      setMessage('Google Login Failed')
+    }
+  })
+
+
 
   return (
     <div className='flex w-full flex-col items-start gap-7 border-l border-gray-200 px-[60px] py-5 max-w-[500px] max-md:px-10'>
@@ -94,12 +103,19 @@ function Login() {
       </form>
       <h1 className={`${message ? 'bg-[red] px-7 py-2 text-white font-bold tracking-[1px] rounded' : 'hidden'}`}>{message}</h1>
       <div className='flex items-center justify-center w-full gap-5 flex-wrap max-md:justify-center max-md:gap-3'>
-          <GoogleLogin
-            onSuccess={googleLoginFunc}
-            onError={() => setMessage('Google Login Failed')}
-            width={250}
+        <button
+          type="button"
+          onClick={() => login()}
+          className="flex items-center justify-center gap-3 w-full border border-gray-300 rounded py-2.5 hover:bg-gray-100 duration-200 font-semibold text-gray-700 cursor-pointer"
+        >
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG5FqrS9OkN5XrA5_GXcN7OV-SoLIl0KPwoQ&s"
+            alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG5FqrS9OkN5XrA5_GXcN7OV-SoLIl0KPwoQ&s"
+            className="w-5 h-5"
           />
-  
+          Sign in with Google
+        </button>
+
       </div>
       <h2 className='font-semibold text-center w-full'>Don't you have a account?
         <Link to='/registration'>

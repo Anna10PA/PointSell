@@ -14,71 +14,91 @@ function Home() {
             product: ''
         }
     })
-
     let [sum, setSum] = useState(0)
-
+    let [Change, setChange] = useState(1)
     let [openDetail, setOpenDetail] = useState(false)
     let [foodInfo, setFoodInfo] = useState([])
-
-    let [client, setClient] = useState({ curent_cart: [] })
+    let [client, setClient] = useState({ curent_cart: { cart: [] } })
     let [allProduct, setAllProduct] = useState([])
 
+
+    // შავი გვერდი
     let sendInfo = (item, isOpen) => {
         setFoodInfo(item)
         setOpenDetail(!isOpen)
     }
 
-    useEffect(() => {
-        fetch('http://127.0.0.1:5000/product20list')
-            .then(res => res.json())
-            .then(data => setProduct(data))
-            .catch(err => console.error(err))
-    }, [])
+    // ამჟამინდელი მომხმარებლის ინფორმაციების წამოღება
+    let curentUser = async () => {
+        let result = await fetch('http://localhost:5000/get_current_user', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        let final = await result.json()
+        if (result.ok) {
+            setClient(final)
+        }
+    }
 
+    // ყველა პროდუქტის ინფორმაციის წამოღება
     useEffect(() => {
-        async function getCart() {
+        async function allProduct() {
             let result = await fetch('http://localhost:5000/product20list', {
                 method: 'GET',
                 credentials: 'include'
             })
             let final = await result.json()
-            if (!result.ok) {
-                console.error("Not found")
-            } else {
+            if (result.ok) {
+                setProduct(final)
                 setAllProduct(final)
             }
+            await curentUser()
         }
-        getCart()
+        allProduct()
     }, [])
 
 
-    useEffect(() => {
-        async function getAllProduct() {
-            let result = await fetch('http://localhost:5000/get_current_user', {
-                method: 'GET',
-                credentials: 'include'
-            })
-            let final = await result.json()
-            if (!result.ok) {
-                console.error("Not found")
-            } else {
-                setClient(final)
-            }
-        }
-        getAllProduct()
-    }, [])
-
-    useEffect(() => {
-        client.curent_cart.map((item, index) => {
-            return allProduct.map((prod, pIndex) => {
-                if (item.Id === prod.Id) {
-                    setSum(prev => prev + prod.price)
+    let cleanCart = async () => {
+        try {
+            let res = await fetch('http://localhost:5000/clean_cart', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
                 }
             })
-        })
 
-    }, [client])
+            if (res.ok) {
+                await curentUser()
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
+    // გადასახადი
+    useEffect(() => {
+        let total = 0
+        let change = 0
+
+        if (client.curent_cart?.cart?.length > 0) {
+            client.curent_cart.cart.map((item, _) => {
+                return product.map((prod, _) => {
+                    if (item.Id === prod.Id) {
+                        total += (Number(prod.price) * Number(item.count))
+                        change += 2
+                    }
+                })
+            })
+        }
+
+        setChange(total >= 100 ? 40 : change)
+        setSum(total)
+
+    }, [client, product])
+
+
+    // მოძებნა პროდუქტის
     let searchProduct = watch('product')
     let filteredProducts = product.filter((item) => {
         if (!searchProduct.trim()) {
@@ -109,6 +129,8 @@ function Home() {
                         </div>
                     </Link>
                 </header>
+
+                {/* მენიუ */}
                 <section className="flex flex-col gap-4">
                     <h2 className="font-bold text-xl bg-white w-full">Special Menu For You</h2>
                     <section className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh]">
@@ -124,6 +146,8 @@ function Home() {
                                         allInfo={() => {
                                             sendInfo(e)
                                         }}
+                                        id={e.Id}
+                                        update={curentUser}
                                         key={index} />
                                 }) :
                                 <div>
@@ -140,19 +164,29 @@ function Home() {
                     </section>
                 </section>
             </main>
+
+            {/* კალათა */}
             <aside className="h-full border-l border-gray-300 min-h-screen max-w-[370px] w-full max-lg:hidden px-5 py-3 flex items-start flex-col gap-4 relative">
-                {client.curent_cart.length > 0 ?
+                {client.curent_cart.cart.length > 0 ?
                     <div className="w-full h-full ">
                         <div className="flex items-center justify-between gap-2 w-full mb-3">
-                            <h1 className="font-bold text-2xl py-3">Order #12345</h1>
-                            <i className="fa-solid fa-xmark cursor-pointer text-2xl"></i>
+                            <h1 className="font-bold text-2xl py-3">Order #{client.curent_cart.order?.toUpperCase() || 'F67F20'}</h1>
+                            <i className="fa-solid fa-xmark cursor-pointer text-2xl" onClick={cleanCart}></i>
                         </div>
                         <div className="flex items-start flex-col gap-4 overflow-auto h-[50vh] w-full pr-3 pt-4">
                             {
-                                client.curent_cart.map((item, index) => {
-                                    return allProduct.map((prod, pIndex) => {
+                                client.curent_cart.cart.map((item, index) => {
+                                    return allProduct.map((prod, _) => {
                                         if (item.Id === prod.Id) {
-                                            return <CartCard name={prod.product_name} key={index} price={prod.price} img={prod.product_image} />
+                                            return <CartCard
+                                                name={prod.product_name}
+                                                key={index}
+                                                price={prod.price}
+                                                img={prod.product_image}
+                                                count={item.count}
+                                                update={curentUser}
+                                                id={item.Id}
+                                            />
                                         }
                                     })
                                 })
@@ -167,7 +201,7 @@ function Home() {
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full ">
                                     <h1>Change</h1>
-                                    <h1>$20</h1>
+                                    <h1>${Change}</h1>
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full border-b border-gray-200 pb-3 mb-3">
                                     <h1>Tax</h1>
@@ -175,7 +209,7 @@ function Home() {
                                 </div>
                                 <div className="flex items-center justify-between w-full text-gray-950 font-extrabold text-lg">
                                     <h1>Total</h1>
-                                    <h1>${sum + (sum < 100 ? 10 : sum >= 100 && sum < 200 ? 5 : 0)}</h1>
+                                    <h1>${sum + (sum < 100 ? 10 : sum >= 100 && sum < 200 ? 5 : 0) + Change}</h1>
                                 </div>
                             </div>
                             <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 cursor-pointer">Place Order</button>

@@ -1,4 +1,29 @@
-function Card({ img, title, price, desc, star, allInfo }) {
+function Card({ img, title, price, desc, star, allInfo, id, update }) {
+    
+    let addInCart = async () => {
+        try {
+
+            let res = await fetch('http://localhost:5000/user_cart', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    product_id: id,
+                    product_count: 1
+                }),
+            })
+
+            if (res.ok) {
+                update()
+            } 
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
     return (
         <div className='w-full p-5 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between' >
             <div className="w-full overflow-hidden rounded-xl " onClick={allInfo}>
@@ -18,7 +43,7 @@ function Card({ img, title, price, desc, star, allInfo }) {
                         {star.toFixed(1)}
                     </span>
                 </div>
-                <button className="bg-[#F67F20] text-white font-bold px-4 flex items-center gap-2 justify-center py-2 rounded-xl cursor-pointer duration-100 hover:bg-amber-500" >
+                <button className="bg-[#F67F20] text-white font-bold px-4 flex items-center gap-2 justify-center py-2 rounded-xl cursor-pointer duration-100 hover:bg-amber-500" onClick={addInCart}>
                     <i className="fa-solid fa-plus"></i>
                     <span>
                         Add Product

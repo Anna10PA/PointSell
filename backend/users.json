@@ -1,71 +1,24 @@
 [
     {
-        "name": "PointSell",
+        "name": null,
         "lastname": null,
         "age": null,
         "position": "Manager",
         "email": "futureana735@gmail.com",
         "password": "PointSell_2025",
-        "gender": null,
-        "phone": null,
-        "profileUrl": "/icon.png",
-        "review": [],
-        "history": [],
-        "friends": [],
-        "favorite": [],
+        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
-                "date": "2025-12-14",
-                "time": "14:10:58",
-                "message": "Hello Boss! 🫡😁",
+                "date": "2025-12-24",
+                "time": "13:37:21.625941",
+                "message": "Registration is successful!",
                 "read": false
             }
         ],
-        "curent_cart": [
-            {
-                "Id": "2031",
-                "count": 1
-            },
-            {
-                "Id": "2397",
-                "count": 1
-            },
-            {
-                "Id": "6730",
-                "count": 1
-            },
-            {
-                "Id": "1945",
-                "count": 1
-            },
-            {
-                "Id": "3412",
-                "count": 1
-            }
-        ],
+        "curent_cart": {
+            "order": null,
+            "cart": []
+        },
         "money": 10000
-    },
-    {
-        "email": "puturidzeana0210@gmail.com",
-        "name": "Ana Puturidze",
-        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
-        "password": "f18441a5-1a6b-4a57-82c2-ba7a00a05ce1",
-        "position": "Customer",
-        "money": 1000,
-        "notification": [
-            {
-                "date": "2025-12-14",
-                "time": "14:10:58",
-                "message": "Hello User!",
-                "read": false
-            }
-        ],
-        "history": [],
-        "friends": [],
-        "favorite": [],
-        "curent_cart": [],
-        "gender": null,
-        "phone": null,
-        "age": null
     }
 ]
