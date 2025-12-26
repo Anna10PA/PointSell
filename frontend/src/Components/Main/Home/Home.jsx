@@ -17,6 +17,8 @@ function Home() {
     })
     let [sum, setSum] = useState(0)
     let [Change, setChange] = useState(1)
+    let [discount, setDiscount] = useState(0)
+
     let [openDetail, setOpenDetail] = useState(false)
     let [foodInfo, setFoodInfo] = useState([])
     let [client, setClient] = useState({ curent_cart: { cart: [] } })
@@ -82,13 +84,17 @@ function Home() {
     useEffect(() => {
         let total = 0
         let change = 0
+        let disc = 0
 
         if (client.curent_cart?.cart?.length > 0) {
             client.curent_cart.cart.map((item, _) => {
                 return product.map((prod, _) => {
                     if (item.Id === prod.Id) {
                         total += (Number(prod.price) * Number(item.count))
-                        change += 2
+                        change += 1.5
+                        if (prod.discount) {
+                            disc += (Number(prod.price) * Number(prod.discount.split('%')[0])) / 100 * Number(item.count)
+                        }
                     }
                 })
             })
@@ -96,6 +102,7 @@ function Home() {
 
         setChange(total >= 100 ? 20 : change)
         setSum(total)
+        setDiscount(disc)
 
     }, [client, product])
 
@@ -148,6 +155,7 @@ function Home() {
                                         allInfo={() => {
                                             sendInfo(e)
                                         }}
+                                        discount={e.discount}
                                         id={e.Id}
                                         update={curentUser}
                                         key={index} />
@@ -203,18 +211,22 @@ function Home() {
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full ">
                                     <h1>Change</h1>
-                                    <h1>${Change.toFixed(2)}</h1>
+                                    <h1>${String(Change)}</h1>
+                                </div>
+                                <div className="text-gray-400 flex items-center justify-between w-full ">
+                                    <h1>Discount:</h1>
+                                    <h1>${discount.toFixed(2)}</h1>
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full border-b border-gray-200 pb-3 mb-3">
                                     <h1>Tax</h1>
-                                    <h1>${sum < 100 ? (10).toFixed(2) : sum >= 100 && sum < 200 ? 5 : 'Free'}</h1>
+                                    <h1>${sum < 100 ? (5).toFixed(2) : sum >= 100 && sum < 200 ? 3 : 'Free'}</h1>
                                 </div>
                                 <div className="flex items-center justify-between w-full text-gray-950 font-extrabold text-lg">
                                     <h1>Total</h1>
-                                    <h1>${(sum + (sum < 100 ? 10 : sum >= 100 && sum < 200 ? 5 : 0) + Change).toFixed(2)}</h1>
+                                    <h1>${(sum + (sum < 100 ? 5 : sum >= 100 && sum < 200 ? 3 : 0) + Change - discount).toFixed(2)}</h1>
                                 </div>
                             </div>
-                            <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 cursor-pointer" onClick={()=> {
+                            <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 mt-5 cursor-pointer" onClick={()=> {
                                 navigate('/order_type')
                             }}>Place Order</button>
                         </div>

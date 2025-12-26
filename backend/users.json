@@ -16,9 +16,60 @@
             }
         ],
         "curent_cart": {
+            "order": "14079bb6",
+            "cart": [
+                {
+                    "Id": "e2a9b4",
+                    "count": 1
+                },
+                {
+                    "Id": "d5a2c1",
+                    "count": 1
+                },
+                {
+                    "Id": "b9f3d7",
+                    "count": 1
+                },
+                {
+                    "Id": "2a5d8f",
+                    "count": 1
+                },
+                {
+                    "Id": "f5d3a9",
+                    "count": 1
+                },
+                {
+                    "Id": "f9e1d8",
+                    "count": 4
+                }
+            ]
+        },
+        "money": 10000
+    },
+    {
+        "email": "puturidzeana0210@gmail.com",
+        "name": "Ana Puturidze",
+        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
+        "password": "6c91396d-c417-4cc9-9807-d73ab843e248",
+        "position": "Customer",
+        "money": 1000,
+        "notification": [
+            {
+                "date": "2025-12-14",
+                "time": "14:10:58",
+                "message": "Hello User!",
+                "read": false
+            }
+        ],
+        "history": [],
+        "friends": [],
+        "favorite": [],
+        "curent_cart": {
             "order": null,
             "cart": []
         },
-        "money": 10000
+        "gender": null,
+        "phone": null,
+        "age": null
     }
 ]

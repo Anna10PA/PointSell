@@ -7,10 +7,11 @@ import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Post() {
   const [allPost, setAllPost] = useState([])
-  const [curentUser, setCurentUser] = useState(0)
+  const [curentUser, setCurentUser] = useState(null)
   const [openDetail, setOpenDetail] = useState(false)
   const [post, setPostInfo] = useState([])
   const [client, setClient] = useState('')
+  const [allUsers, setAllUsers] = useState([])
 
 
   // შავი ფონი
@@ -20,67 +21,27 @@ function Post() {
   }
 
 
-  // ჩემი / მენეჯერის ინფორმაცია
+  // ამჟამინდელი მომხმარებელი + ყველა მომხმარებელი + ყველა პოსტი
   useEffect(() => {
-    async function getManagerInfo() {
-      let result = await fetch('http://localhost:5000/menegers_info', {
-        method: 'GET',
-        credentials: 'include'
-      })
-      let final = await result.json()
-      if (!result.ok) {
-        console.error("Not found")
-      } else {
-        setClient(final)
-      }
-    }
-    getManagerInfo()
-  }, [])
-
-
-  // ამჟამინდელი მომხმარებელი
-  useEffect(() => {
-    async function getCurentUser() {
+    async function fetchData() {
       try {
-        let res = await fetch('http://localhost:5000/get_current_user', {
-          method: "GET",
-          credentials: 'include'
-        })
-        let result = await res.json()
-        if (!res.ok) {
-          return "something went wrong"
-        } else {
-          setCurentUser(result)
-        }
+        const [postsRes, currentRes, usersRes, myInfoRes] = await Promise.all([
+          fetch('http://localhost:5000/check_posts', { credentials: 'include' }),
+          fetch('http://localhost:5000/get_current_user', { credentials: 'include' }),
+          fetch('http://localhost:5000/get_all_user', { credentials: 'include' }),
+          fetch('http://localhost:5000/menegers_info', { credentials: 'include' })
+        ])
+
+        if (postsRes.ok) setAllPost(await postsRes.json())
+        if (currentRes.ok) setCurentUser(await currentRes.json())
+        if (usersRes.ok) setAllUsers(await usersRes.json())
+        if (myInfoRes.ok) setClient(await myInfoRes.json())
       } catch (e) {
         console.error(e)
       }
     }
-    getCurentUser()
+    fetchData()
   }, [])
-
-
-  // პოსტების შემოწმება
-  useEffect(() => {
-    async function checkPosts() {
-      try {
-        let res = await fetch('http://localhost:5000/check_posts', {
-          method: 'GET',
-          credentials: 'include'
-        })
-        
-        if (res.ok) {
-          let result = await res.json()
-          setAllPost(result)
-        }
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    checkPosts()
-  }, [])
-
 
   return (
     <>
@@ -91,6 +52,7 @@ function Post() {
             open={() => setOpenDetail(false)}
             client={client}
             curentUser={curentUser}
+            allUsers={allUsers}
             mode={openDetail} /> : null
       }
       <Navigation />
@@ -100,7 +62,7 @@ function Post() {
             Posts
           </h1>
           <Link to='/add_post'>
-            <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
+            <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser?.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
               Add New Post
             </button>
           </Link>

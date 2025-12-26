@@ -69,6 +69,7 @@ function PostCard({ info, sendInfo }) {
         getManagerInfo()
     }, [])
 
+
     // ლაიქები
     const Like = async () => {
         if (!curentUser) return
@@ -100,11 +101,11 @@ function PostCard({ info, sendInfo }) {
         <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col items-start gap-4 max-w-[600px] max-lg:max-w-full'>
             <div className='flex items-center gap-5 justify-between w-full'>
                 <div className='flex items-center gap-4'>
-                    <img src={client.profileUrl} alt={client.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />
+                    <img src={client?.profileUrl} alt={client?.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />
                     <div className='leading-4.5'>
-                        <h1 className='font-bold'>{client.name !== null ? client.name : client.email.split('@')[0]}</h1>
+                        <h1 className='font-bold'>{client?.name !== null ? client.name : client?.email.split('@')[0]}</h1>
                         <p className='text-sm text-gray-600 font-bold '>
-                            {client.position}
+                            {client?.position}
                         </p>
                     </div>
                 </div>

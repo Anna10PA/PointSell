@@ -2,8 +2,9 @@ import FoodDetail from "../Components/Main/Home/FoodDetail"
 import { useLocation } from "react-router-dom"
 import PostDetail from "../Components/Main/Post/PostDetail"
 import Warning from "./Warning"
+import Comment from "../Components/Main/Post/Comment"
 
-function BgBlack({ allInfo, open, client, curentUser, mode }) {
+function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
   let location = useLocation()
   let curentLocation = location.pathname
   let currentMonth = new Date().getMonth()
@@ -40,21 +41,22 @@ function BgBlack({ allInfo, open, client, curentUser, mode }) {
           <FoodDetail
             allInfo={allInfo}
             open={open} />
-        : curentLocation === '/posts' && mode === "delete" ?
-      <Warning
-        allInfo={allInfo}
-        open={open}
-        title={'Delete This Post?'}
-        message={'Are you sure, You want delete this post?'}
-        deleteFunction={deletePost}
-      />
-      : curentLocation === '/posts' && mode === "view" ?
-      <PostDetail
-        allInfo={allInfo}
-        open={open}
-        client={client}
-        curentUser={curentUser} />
-      : null
+          : curentLocation === '/posts' && mode === "delete" ?
+            <Warning
+              allInfo={allInfo}
+              open={open}
+              title={'Delete This Post?'}
+              message={'Are you sure, You want delete this post?'}
+              deleteFunction={deletePost}
+            />
+            : curentLocation === '/posts' && mode === "view" ?
+              <PostDetail
+                allInfo={allInfo}
+                open={open}
+                client={client}
+                allUsers={allUsers}
+                curentUser={curentUser} />
+              : null
       }
     </div>
   )

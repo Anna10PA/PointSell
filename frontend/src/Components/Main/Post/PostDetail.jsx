@@ -1,24 +1,29 @@
 import Comment from "./Comment"
 import { useState, useEffect } from "react"
 
-function PostDetail({ allInfo, open, client, curentUser }) {
+function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
 
+  let [commentText, setCommentText] = useState('')
+  let [allComment, setAllComment] = useState(allInfo.comments)
   let [likesCount, setLikesCount] = useState(allInfo.like ? allInfo.like.length : 0)
   let [isLiked, setIsLiked] = useState(false)
   let [View, setView] = useState(allInfo.view ? allInfo.view.length : 0)
 
-  let [commentText, setCommentText] = useState('')
+
+  useEffect(() => {
+    setAllComment(allInfo.comments)
+  }, [allInfo.comments])
 
 
+  // კომენტარის დამატება
   const commentSubmit = async (e) => {
     e.preventDefault()
 
     let commentInfo = {
       post_id: allInfo.id,
       text: commentText,
-      user_name: curentUser.name || curentUser.email.split('@')[0],
+      user_name: curentUser.name,
       user_email: curentUser.email,
-      user_img: curentUser.profileUrl
     }
 
     try {
@@ -31,7 +36,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
 
       if (res.ok) {
         let newComment = await res.json()
-        allInfo.comments.push(newComment)
+        setAllComment(prev => [...prev, newComment])
         setCommentText("")
       }
     } catch (error) {
@@ -40,6 +45,29 @@ function PostDetail({ allInfo, open, client, curentUser }) {
   }
 
 
+  // კომენტარის წაშლის ფუნქცია
+  const deleteComment = async (comment_id, post_id) => {
+    try {
+      const res = await fetch('http://localhost:5000/delete_comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          post_id: post_id,
+          comment_id: comment_id
+        }),
+        credentials: 'include'
+      })
+
+      if (res.ok) {
+        setAllComment(prev => prev.filter(c => c.id !== comment_id))
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+
+  // დალაიქებულია თუ არა
   useEffect(() => {
     if (allInfo.like && curentUser?.email) {
       setIsLiked(allInfo.like.includes(curentUser.email))
@@ -47,6 +75,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
   }, [allInfo, curentUser])
 
 
+  // დალაიქების ფუნქცია
   const Like = async () => {
     if (!curentUser) return
 
@@ -72,6 +101,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
   }
 
 
+  // ნახვის ფუნქცია
   const view = async () => {
     if (!curentUser) return
 
@@ -80,7 +110,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          post_id: info.id,
+          post_id: allInfo.id,
           email: curentUser.email,
         }),
       })
@@ -99,6 +129,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
   useEffect(() => {
     view()
   }, [allInfo.id])
+
 
   return (
     <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5' >
@@ -132,7 +163,7 @@ function PostDetail({ allInfo, open, client, curentUser }) {
               <label htmlFor="comment">
                 <i className="fa-regular fa-comment cursor-pointer"></i>
               </label>
-              <span className='text-lg font-medium'>{allInfo.comments.length}</span>
+              <span className='text-lg font-medium'>{allComment.length}</span>
             </div>
             <div className='flex items-center gap-2.5 cursor-pointer'>
               <i className="fa-regular fa-eye"></i>
@@ -142,9 +173,14 @@ function PostDetail({ allInfo, open, client, curentUser }) {
         </div>
         <div className='h-full flex items-center justify-start gap-3 flex-col  w-full relative overflow-auto   '>
           {
-            allInfo.comments.length > 0 ?
-              allInfo.comments.map((item, index) => {
-                return <Comment item={item} key={index} />
+            allComment.length > 0 ?
+              allComment.map((item, index) => {
+                return <Comment
+                  item={{ ...item, post_id: allInfo.id }}
+                  curentUser={curentUser}
+                  allUsers={allUsers}
+                  deleteComment={() => deleteComment(item.id, allInfo.id)}
+                  key={index} />
               }) : <h1 className='font-bold text-gray-500 w-full text-center'>No Comments Yet</h1>
           }
         </div>

@@ -60,6 +60,12 @@ def check_users():
         return json.load(file)
 
 
+# ყველა მომხმარებლის ინფორმაციის წამოღება
+@app.get('/get_all_user')
+def get_all_user():
+    return jsonify(check_users())
+
+
 # მომხმარებლის დამატება
 def save_users(users):
     with open(All_user, "w", encoding="utf-8") as file:
@@ -79,9 +85,7 @@ def add_comment():
     post_id = data.get('post_id')
     comment_text = data.get('text')
 
-    user_email = data.get('email')
-    user_name = data.get('user_name') 
-    user_img = data.get('user_img')
+    user_email = data.get('user_email')
 
     if not comment_text:
         return jsonify({"error": "Comment it empty"}), 400
@@ -91,10 +95,9 @@ def add_comment():
     for post in posts:
         if post['id'] == post_id:
             new_comment = {
-                "user_name":  user_name or user_email,
+                "id": str(uuid.uuid4()),
                 "user_email": user_email,
                 "comment": comment_text,
-                "user_img": user_img,
                 "date": str(datetime.now()).split()[0]
             }
             
@@ -103,6 +106,26 @@ def add_comment():
             return jsonify(new_comment), 201
 
     return jsonify({"error": "Post not found"}), 404
+
+
+# კომენტარის წაშლა
+@app.post('/delete_comment')
+def delete_comment():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+
+    data = request.get_json()
+    comment_id = data.get('comment_id')
+    post_id = data.get('post_id')
+
+    posts = check_posts()
+
+    for post in posts:
+        if str(post['id']) == str(post_id):
+            post['comments'] = [c for c in post['comments'] if c.get('id') != comment_id]
+            break
+    save_posts(posts)
+    return jsonify({'message': 'Deleted'}), 200
 
 
 # მოწონება

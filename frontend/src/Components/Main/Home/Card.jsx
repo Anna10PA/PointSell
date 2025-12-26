@@ -1,5 +1,5 @@
-function Card({ img, title, price, desc, star, allInfo, id, update }) {
-    
+function Card({ img, title, price, desc, star, allInfo, discount, id, update }) {
+
     let addInCart = async () => {
         try {
 
@@ -17,7 +17,7 @@ function Card({ img, title, price, desc, star, allInfo, id, update }) {
 
             if (res.ok) {
                 update()
-            } 
+            }
         } catch (error) {
             console.error(error)
         }
@@ -26,14 +26,22 @@ function Card({ img, title, price, desc, star, allInfo, id, update }) {
 
     return (
         <div className='w-full p-5 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between' >
-            <div className="w-full overflow-hidden rounded-xl " onClick={allInfo}>
+            <div className="w-full overflow-hidden rounded-xl relative" onClick={allInfo}>
+                <div className={`${discount ? ' absolute top-1 right-1 bg-orange-400 text-white font-bold rounded px-5 py-1.5 z-2 w-max' : 'hidden'}`}>
+                    - {discount}
+                </div>
                 <img src={img} alt="" className='h-50 object-cover w-full hover:scale-[1.1] overflow-hidden duration-200' />
             </div>
-            <div className='flex items-center justify-between w-full'>
+            <div className='flex items-center justify-between w-full gap-3'>
                 <h1 className='font-bold text-lg'>{title}</h1>
-                <h2 className='font-bold text-lg text-[#F67F20]'>
-                    ${price.toFixed(2)}
-                </h2>
+                <div className="flex items-center gap-4 ">
+                    <h2 className={`${discount ?  'text-gray-400 line-through decoration-1' : 'hidden'}`}>
+                        ${discount ? price.toFixed(2) : null}
+                    </h2>
+                    <h2 className='font-bold text-lg text-[#F67F20]'>
+                        ${discount ? (price - price * Number(discount.split('%')[0]) / 100).toFixed(2) : price}
+                    </h2>
+                </div>
             </div>
             <p className="text-gray-400">{desc}</p>
             <div className="flex items-center justify-between gap-3">
