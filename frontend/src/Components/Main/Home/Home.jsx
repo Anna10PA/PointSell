@@ -94,7 +94,7 @@ function Home() {
             })
         }
 
-        setChange(total >= 100 ? 40 : change)
+        setChange(total >= 100 ? 20 : change)
         setSum(total)
 
     }, [client, product])
@@ -173,7 +173,7 @@ function Home() {
                     <div className="w-full h-full ">
                         <div className="flex items-center justify-between gap-2 w-full mb-3">
                             <h1 className="font-bold text-2xl py-3">Order #{client.curent_cart.order?.toUpperCase() || 'F67F20'}</h1>
-                            <i className="fa-solid fa-xmark cursor-pointer text-2xl" onClick={cleanCart}></i>
+                            <i className="fa-solid fa-trash-can cursor-pointer text-2xl duration-100 hover:text-red-600 " onClick={cleanCart}></i>
                         </div>
                         <div className="flex items-start flex-col gap-4 overflow-auto h-[50vh] w-full pr-3 pt-4">
                             {

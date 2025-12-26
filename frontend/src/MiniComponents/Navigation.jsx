@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 function Navigation() {
     let location = useLocation()
     let locationName = location.pathname
+    let currentMonth = new Date().getMonth() 
 
     let [curentUser, setCurentUser] = useState('')
 
@@ -31,7 +32,7 @@ function Navigation() {
     return (
         <nav className='border-r border-[#ececec] w-min flex items-center flex-col h-screen justify-start text-[#BBBBBB] gap-5 relative'>
             <div className='w-full border-b border-[#ececec]  object-cover flex items-center justify-center'>
-                <img src="/icon.png" alt="icon" className='w-[80%] m-1' />
+                <img src={currentMonth === 11 ? "/icon_2.jpg" : 'icon.png'} alt="icon" className='w-[80%] m-1' />
             </div>
             <div className="flex items-center flex-col h-[80%] justify-between text-[30px] px-8 max-md:px-4 max-md:text-2xl">
                 <Link to='/home'>
@@ -44,7 +45,7 @@ function Navigation() {
                     <i className={`fa-solid fa-book hover:text-[#F67F20] ${locationName === '/orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/products'>
-                    <i className={`fa-solid fa-burger hover:text-[#F67F20] ${locationName === '/products' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-burger hover:text-[#F67F20] ${locationName === '/products' || locationName === '/add_product' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/notification'>
                     <i className={`fa-solid fa-bell hover:text-[#F67F20] ${locationName === '/notification' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>

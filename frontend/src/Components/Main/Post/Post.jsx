@@ -8,20 +8,21 @@ import BgBlack from "../../../MiniComponents/BgBlack"
 function Post() {
   const [allPost, setAllPost] = useState([])
   const [curentUser, setCurentUser] = useState(0)
-
   const [openDetail, setOpenDetail] = useState(false)
   const [post, setPostInfo] = useState([])
-
   const [client, setClient] = useState('')
 
-  const sendInfo = (item, isOpen) => {
+
+  // შავი ფონი
+  const sendInfo = (item, modeType) => {
     setPostInfo(item)
-    setOpenDetail(!isOpen)
+    setOpenDetail(modeType)
   }
 
 
+  // ჩემი / მენეჯერის ინფორმაცია
   useEffect(() => {
-    async function getAllProduct() {
+    async function getManagerInfo() {
       let result = await fetch('http://localhost:5000/menegers_info', {
         method: 'GET',
         credentials: 'include'
@@ -33,10 +34,11 @@ function Post() {
         setClient(final)
       }
     }
-    getAllProduct()
+    getManagerInfo()
   }, [])
 
 
+  // ამჟამინდელი მომხმარებელი
   useEffect(() => {
     async function getCurentUser() {
       try {
@@ -58,6 +60,7 @@ function Post() {
   }, [])
 
 
+  // პოსტების შემოწმება
   useEffect(() => {
     async function checkPosts() {
       try {
@@ -65,9 +68,9 @@ function Post() {
           method: 'GET',
           credentials: 'include'
         })
-        let result = await res.json()
-
+        
         if (res.ok) {
+          let result = await res.json()
           setAllPost(result)
         }
       } catch (e) {
@@ -83,7 +86,12 @@ function Post() {
     <>
       {
         openDetail ?
-          <BgBlack allInfo={post} open={setOpenDetail} client={client} curentUser={curentUser} /> : null
+          <BgBlack
+            allInfo={post}
+            open={() => setOpenDetail(false)}
+            client={client}
+            curentUser={curentUser}
+            mode={openDetail} /> : null
       }
       <Navigation />
       <main className="w-full flex flex-col px-10 py-5 gap-3 h-full">
@@ -104,8 +112,8 @@ function Post() {
                 return <PostCard
                   info={item}
                   key={index}
-                  sendInfo={() => {
-                    sendInfo(item)
+                  sendInfo={(mode) => {
+                    sendInfo(item, mode)
                   }} />
               })
               :

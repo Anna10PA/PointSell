@@ -1,9 +1,10 @@
 [
   {
-    "Id": "2397",
+    "Id": "a7b3c2",
     "product_name": "Khachapuri",
     "product_image": "https://i.pinimg.com/736x/f0/e0/a3/f0e0a3f0026c52624eed3516e83b6fdf.jpg",
-    "price": 10.00,
+    "price": 8.5,
+    "discount": "15%",
     "time": 5,
     "product_description": "Baked dough and melted cheese filling.",
     "type": "food",
@@ -13,10 +14,11 @@
     "vote": 1
   },
   {
-    "Id": "8105",
+    "Id": "f9e1d8",
     "product_name": "Lobiani",
     "product_image": "https://i.pinimg.com/736x/b5/b2/32/b5b23287a249b5d1bc60e343d7ba3a5a.jpg",
-    "price": 15.00,
+    "price": 12.75,
+    "discount": "10%",
     "time": 6,
     "product_description": "Baked dough filled with spiced mashed beans.",
     "type": "food",
@@ -26,10 +28,11 @@
     "vote": 1
   },
   {
-    "Id": "4621",
+    "Id": "c4b9a1",
     "product_name": "Mchadi",
     "product_image": "https://i.pinimg.com/1200x/e5/91/91/e591916795a9d11737c878e0601a7392.jpg",
-    "price": 5.00,
+    "price": 4.25,
+    "discount": "20%",
     "time": 4,
     "product_description": "Cornmeal and water, fried or baked.",
     "type": "food",
@@ -39,10 +42,11 @@
     "vote": 1
   },
   {
-    "Id": "9843",
+    "Id": "8d2e4f",
     "product_name": "Ghomi",
     "product_image": "https://i.pinimg.com/1200x/90/d0/d5/90d0d5b261082ddd661e3f65a67e7ea9.jpg",
-    "price": 10.00,
+    "price": 8.0,
+    "discount": "5%",
     "time": 7,
     "product_description": "Coarse cornmeal and grits cooked in water.",
     "type": "food",
@@ -52,10 +56,11 @@
     "vote": 1
   },
   {
-    "Id": "5278",
+    "Id": "3b7c9e",
     "product_name": "Pasanauri Khinkali",
     "product_image": "https://i.pinimg.com/736x/31/91/7b/31917b974d12faf5d772e99af6039835.jpg",
-    "price": 12.00,
+    "price": 10.5,
+    "discount": "15%",
     "time": 8,
     "product_description": "Boiled dough filled with spiced meat and broth.",
     "type": "food",
@@ -65,10 +70,11 @@
     "vote": 1
   },
   {
-    "Id": "1945",
+    "Id": "5a2d1f",
     "product_name": "Katleti",
     "product_image": "https://i.pinimg.com/1200x/36/bd/37/36bd375063df20a7ed99a1ee136e2830.jpg",
-    "price": 8.00,
+    "price": 6.8,
+    "discount": "25%",
     "time": 10,
     "product_description": "Fried minced meat patties with onions and spices.",
     "type": "food",
@@ -78,10 +84,11 @@
     "vote": 1
   },
   {
-    "Id": "6730",
+    "Id": "9b3e7c",
     "product_name": "Shaurma",
     "product_image": "https://i.pinimg.com/736x/d0/7b/86/d07b862fcb60b370657bf0a9564f1ae1.jpg",
-    "price": 18.00,
+    "price": 15.5,
+    "discount": "10%",
     "time": 10,
     "product_description": "Grilled meat, vegetables, and sauce wrapped in lavash.",
     "type": "food",
@@ -91,23 +98,25 @@
     "vote": 1
   },
   {
-    "Id": "3412",
+    "Id": "1d8f4a",
     "product_name": "Kupati",
     "product_image": "https://i.pinimg.com/736x/b0/e6/3e/b0e63e454f1162b28fff5b3a1776a40d.jpg",
-    "price": 14.00,
+    "price": 11.9,
+    "discount": "20%",
     "time": 9,
     "product_description": "Spiced pork and beef sausage links.",
     "type": "food",
-    "review": [],
     "info": "500 Grams",
+    "review": [],
     "star": 5,
     "vote": 1
   },
   {
-    "Id": "7096",
+    "Id": "e2c6d9",
     "product_name": "Ostri",
     "product_image": "https://i.pinimg.com/736x/c2/23/e2/c223e25e2d871562f3abbf82958653a2.jpg",
-    "price": 16.00,
+    "price": 13.5,
+    "discount": "15%",
     "time": 10,
     "product_description": "Spicy beef stew with tomato and garlic.",
     "type": "food",
@@ -117,10 +126,11 @@
     "vote": 1
   },
   {
-    "Id": "8511",
+    "Id": "7a4b1e",
     "product_name": "Chakapuli",
     "product_image": "https://i.pinimg.com/1200x/43/3c/f0/433cf0cb3a25736c6307c6b992093832.jpg",
-    "price": 20.00,
+    "price": 17.0,
+    "discount": "10%",
     "time": 10,
     "product_description": "Lamb stew with tarragon and green plums.",
     "type": "food",
@@ -130,10 +140,11 @@
     "vote": 1
   },
   {
-    "Id": "1289",
+    "Id": "f5d3a9",
     "product_name": "Shkmeruli",
     "product_image": "https://i.pinimg.com/736x/db/dc/1e/dbdc1e28d70a4f2a22501dd35a0e5468.jpg",
-    "price": 22.00,
+    "price": 19.5,
+    "discount": "5%",
     "time": 10,
     "product_description": "Crispy chicken in creamy garlic sauce.",
     "type": "food",
@@ -143,10 +154,11 @@
     "vote": 1
   },
   {
-    "Id": "5574",
+    "Id": "2e7c4b",
     "product_name": "Ajapsandali",
     "product_image": "https://i.pinimg.com/1200x/28/64/ce/2864ce6805a45933bdd060d369a69a5d.jpg",
-    "price": 12.00,
+    "price": 10.0,
+    "discount": "15%",
     "time": 8,
     "product_description": "Vegetable ragout with eggplant and bell peppers.",
     "type": "food",
@@ -156,10 +168,11 @@
     "vote": 1
   },
   {
-    "Id": "9132",
+    "Id": "d9f1a5",
     "product_name": "Satsivi",
     "product_image": "https://i.pinimg.com/736x/4b/5a/b1/4b5ab18c2efe561e8348eeb899006fac.jpg",
-    "price": 25.00,
+    "price": 21.0,
+    "discount": "10%",
     "time": 5,
     "product_description": "Poultry served in a cold walnut sauce.",
     "type": "food",
@@ -169,10 +182,11 @@
     "vote": 1
   },
   {
-    "Id": "7780",
+    "Id": "c8e2b4",
     "product_name": "Elarji",
     "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHQuqnb3yrw8xPGy7y7mIg5KQqi7yhSTB7Hg&s",
-    "price": 14.00,
+    "price": 12.0,
+    "discount": "15%",
     "time": 9,
     "product_description": "Cornmeal cooked with large amounts of cheese.",
     "type": "food",
@@ -182,10 +196,11 @@
     "vote": 1
   },
   {
-    "Id": "3054",
+    "Id": "b1a7d3",
     "product_name": "Kababi",
     "product_image": "https://i.pinimg.com/1200x/1c/ba/2c/1cba2c21c7c2eed9a9dc226c3a5f7f4a.jpg",
-    "price": 11.00,
+    "price": 9.5,
+    "discount": "10%",
     "time": 10,
     "product_description": "Grilled ground meat wrap with onions.",
     "type": "food",
@@ -195,10 +210,11 @@
     "vote": 1
   },
   {
-    "Id": "4567",
+    "Id": "4f9e1c",
     "product_name": "Badrijani Nigvzit",
     "product_image": "https://i.pinimg.com/1200x/83/67/3d/83673da8078291c260953223bb207b4e.jpg",
-    "price": 9.00,
+    "price": 7.5,
+    "discount": "20%",
     "time": 5,
     "product_description": "Fried eggplant rolls with walnut paste.",
     "type": "food",
@@ -208,10 +224,11 @@
     "vote": 1
   },
   {
-    "Id": "1123",
+    "Id": "2a5d8f",
     "product_name": "Pkhali Mix",
     "product_image": "https://nofrillskitchen.com/wp-content/uploads/2020/12/DSC09281.jpg",
-    "price": 10.00,
+    "price": 8.5,
+    "discount": "15%",
     "time": 5,
     "product_description": "Minced vegetables with walnuts and herbs.",
     "type": "food",
@@ -221,10 +238,11 @@
     "vote": 1
   },
   {
-    "Id": "6408",
+    "Id": "d3c7b9",
     "product_name": "Megruli Khachapuri",
     "product_image": "https://i.pinimg.com/1200x/6c/e8/b3/6ce8b305565682c042ebc8e1187ec8af.jpg",
-    "price": 14.00,
+    "price": 12.0,
+    "discount": "10%",
     "time": 10,
     "product_description": "Double cheese khachapuri with extra cheese on top.",
     "type": "food",
@@ -234,10 +252,11 @@
     "vote": 1
   },
   {
-    "Id": "3951",
+    "Id": "e1f4a2",
     "product_name": "Adjarian Khachapuri",
     "product_image": "https://i.pinimg.com/736x/57/98/e9/5798e9fd2166aaddf2ca856d946c0a87.jpg",
-    "price": 13.00,
+    "price": 11.5,
+    "discount": "15%",
     "time": 10,
     "product_description": "Boat-shaped dough with cheese, butter, and egg.",
     "type": "food",
@@ -247,10 +266,11 @@
     "vote": 1
   },
   {
-    "Id": "9902",
+    "Id": "9a3e6d",
     "product_name": "Ojakhuri",
     "product_image": "https://i.pinimg.com/736x/9f/ba/b2/9fbab2496ad426534ec64a634faf683e.jpg",
-    "price": 15.00,
+    "price": 13.0,
+    "discount": "10%",
     "time": 10,
     "product_description": "Roasted meat and potatoes with onions.",
     "type": "food",
@@ -260,10 +280,11 @@
     "vote": 1
   },
   {
-    "Id": "2586",
+    "Id": "f2b8c5",
     "product_name": "Chakhokhbili",
     "product_image": "https://i.pinimg.com/736x/13/11/56/131156d158d626adb25b0ab8fd40cdc9.jpg",
-    "price": 14.00,
+    "price": 12.0,
+    "discount": "15%",
     "time": 10,
     "product_description": "Chicken stew with tomatoes and fresh herbs.",
     "type": "food",
@@ -273,10 +294,11 @@
     "vote": 1
   },
   {
-    "Id": "4873",
+    "Id": "c4d1e9",
     "product_name": "Tolma",
     "product_image": "https://i.pinimg.com/1200x/f0/d8/c8/f0d8c8e223003e47f81eefc9ba162d01.jpg",
-    "price": 16.00,
+    "price": 13.5,
+    "discount": "20%",
     "time": 10,
     "product_description": "Meat and rice wrapped in vine leaves.",
     "type": "food",
@@ -286,10 +308,11 @@
     "vote": 1
   },
   {
-    "Id": "8349",
+    "Id": "b7a2f3",
     "product_name": "Kuchmachi",
     "product_image": "https://i.pinimg.com/1200x/6b/17/a1/6b17a1732b8418235238b2730f5c862b.jpg",
-    "price": 11.00,
+    "price": 9.0,
+    "discount": "15%",
     "time": 10,
     "product_description": "Spicy chicken livers with pomegranate seeds.",
     "type": "food",
@@ -299,10 +322,11 @@
     "vote": 1
   },
   {
-    "Id": "5017",
+    "Id": "e5d9c1",
     "product_name": "Caesar Salad",
     "product_image": "https://i.pinimg.com/736x/17/19/9c/17199c736fa9db346ef6f02394508516.jpg",
-    "price": 17.00,
+    "price": 14.5,
+    "discount": "10%",
     "time": 7,
     "product_description": "Lettuce, chicken, croutons, and parmesan sauce.",
     "type": "food",
@@ -312,10 +336,11 @@
     "vote": 1
   },
   {
-    "Id": "9660",
+    "Id": "f8a4b2",
     "product_name": "French Fries",
     "product_image": "https://i.pinimg.com/1200x/e5/4c/56/e54c563a59cac646262b2c330d1559c6.jpg",
-    "price": 6.00,
+    "price": 5.0,
+    "discount": "15%",
     "time": 5,
     "product_description": "Crispy fried potato strips with salt.",
     "type": "food",
@@ -325,10 +350,11 @@
     "vote": 1
   },
   {
-    "Id": "1493",
+    "Id": "1c7e9d",
     "product_name": "Mushroom Soup",
     "product_image": "https://i.pinimg.com/1200x/5d/f4/19/5df4191872aa73413316276b3ae3fdd1.jpg",
-    "price": 9.00,
+    "price": 7.5,
+    "discount": "10%",
     "time": 8,
     "product_description": "Creamy soup made with fresh mushrooms.",
     "type": "food",
@@ -338,10 +364,11 @@
     "vote": 1
   },
   {
-    "Id": "3206",
+    "Id": "d5f2a8",
     "product_name": "Chikhirtma",
     "product_image": "https://i.pinimg.com/736x/d7/42/25/d74225c8d11d6164a71fc30d6536306b.jpg",
-    "price": 10.00,
+    "price": 8.5,
+    "discount": "15%",
     "time": 8,
     "product_description": "Georgian chicken soup with egg and vinegar.",
     "type": "food",
@@ -351,10 +378,11 @@
     "vote": 1
   },
   {
-    "Id": "7531",
+    "Id": "b9c3e1",
     "product_name": "Beef Burger",
     "product_image": "https://i.pinimg.com/1200x/65/b7/8b/65b78bf00f5a87e5105d2b1cc0759d5f.jpg",
-    "price": 16.00,
+    "price": 14.0,
+    "discount": "10%",
     "time": 10,
     "product_description": "Beef patty, cheese, and veggies in a bun.",
     "type": "food",
@@ -364,10 +392,11 @@
     "vote": 1
   },
   {
-    "Id": "2185",
+    "Id": "a2d4f6",
     "product_name": "Greek Salad",
     "product_image": "https://i.pinimg.com/1200x/92/fb/c4/92fbc497e189aced07708b989c9b8ce0.jpg",
-    "price": 11.00,
+    "price": 9.5,
+    "discount": "15%",
     "time": 6,
     "product_description": "Cucumber, tomato, olives, and feta cheese.",
     "type": "food",
@@ -377,10 +406,11 @@
     "vote": 1
   },
   {
-    "Id": "6049",
+    "Id": "e9b1c7",
     "product_name": "Mtsvadi",
     "product_image": "https://i.pinimg.com/1200x/a5/5c/70/a55c702ef35f41627a3aded478f422a8.jpg",
-    "price": 18.00,
+    "price": 16.0,
+    "discount": "10%",
     "time": 10,
     "product_description": "Grilled pork skewers over grape wood embers.",
     "type": "food",
@@ -390,10 +420,11 @@
     "vote": 1
   },
   {
-    "Id": "3724",
+    "Id": "f3a8d2",
     "product_name": "Espresso",
     "product_image": "https://i.pinimg.com/736x/4c/28/e2/4c28e2420bf38c50120dba0cbaf42e8d.jpg",
-    "price": 4.00,
+    "price": 3.4,
+    "discount": "15%",
     "time": 2,
     "product_description": "Strong shot of black coffee.",
     "type": "drink",
@@ -403,10 +434,11 @@
     "vote": 1
   },
   {
-    "Id": "8910",
+    "Id": "1e7b4c",
     "product_name": "Latte",
     "product_image": "https://i.pinimg.com/1200x/f8/56/d2/f856d2d30045e34f7a3d7438d81c5141.jpg",
-    "price": 6.50,
+    "price": 5.5,
+    "discount": "10%",
     "time": 3,
     "product_description": "Espresso with steamed milk and foam.",
     "type": "drink",
@@ -416,10 +448,11 @@
     "vote": 1
   },
   {
-    "Id": "1675",
+    "Id": "d2f9a5",
     "product_name": "Coca-Cola (0.5L)",
     "product_image": "https://i.pinimg.com/736x/d9/90/b4/d990b4e3fafb7073f2ab7241e48aea0b.jpg",
-    "price": 3.00,
+    "price": 2.5,
+    "discount": "15%",
     "time": 1,
     "product_description": "Chilled carbonated soft drink.",
     "type": "drink",
@@ -429,10 +462,11 @@
     "vote": 1
   },
   {
-    "Id": "5448",
+    "Id": "c6e1b8",
     "product_name": "Borjomi",
     "product_image": "https://i.pinimg.com/736x/96/e2/67/96e2670206f831f60533f19402c43612.jpg",
-    "price": 3.50,
+    "price": 3.0,
+    "discount": "10%",
     "time": 1,
     "product_description": "Georgian natural mineral water.",
     "type": "drink",
@@ -442,10 +476,11 @@
     "vote": 1
   },
   {
-    "Id": "2982",
+    "Id": "b4a7d1",
     "product_name": "Fresh Orange Juice",
     "product_image": "https://i.pinimg.com/736x/f8/56/5b/f8565b7442a9df396adc387c8555d8b4.jpg",
-    "price": 8.00,
+    "price": 7.0,
+    "discount": "10%",
     "time": 5,
     "product_description": "Freshly squeezed orange juice.",
     "type": "drink",
@@ -455,10 +490,11 @@
     "vote": 1
   },
   {
-    "Id": "7233",
+    "Id": "f5d2c9",
     "product_name": "Iced Tea (Lemon)",
     "product_image": "https://i.pinimg.com/736x/aa/8d/2d/aa8d2de36c7e1cace188932bb0d9a7e4.jpg",
-    "price": 5.00,
+    "price": 4.25,
+    "discount": "15%",
     "time": 4,
     "product_description": "Chilled black tea with lemon slice.",
     "type": "drink",
@@ -468,10 +504,11 @@
     "vote": 1
   },
   {
-    "Id": "4019",
+    "Id": "a9e3b7",
     "product_name": "Mojito (Non-Alcoholic)",
     "product_image": "https://i.pinimg.com/736x/32/17/a9/3217a9d3c7b7aec9fbf5bc3c0785c0a4.jpg",
-    "price": 9.00,
+    "price": 7.5,
+    "discount": "20%",
     "time": 5,
     "product_description": "Lime, mint, sugar, and soda water.",
     "type": "drink",
@@ -481,10 +518,11 @@
     "vote": 1
   },
   {
-    "Id": "6556",
+    "Id": "c1f4d8",
     "product_name": "Fanta (0.5L)",
     "product_image": "https://i.pinimg.com/1200x/8c/eb/a9/8ceba9b9c6ed3d3c471b8de22b76f57c.jpg",
-    "price": 3.00,
+    "price": 2.5,
+    "discount": "15%",
     "time": 1,
     "product_description": "Orange flavored carbonated drink.",
     "type": "drink",
@@ -494,10 +532,11 @@
     "vote": 1
   },
   {
-    "Id": "9307",
+    "Id": "e2a9b4",
     "product_name": "Americano (Iced)",
     "product_image": "https://i.pinimg.com/736x/fd/02/63/fd0263d8b4309379bf141d4043b1fb16.jpg",
-    "price": 5.50,
+    "price": 4.5,
+    "discount": "10%",
     "time": 3,
     "product_description": "Espresso shots mixed with cold water.",
     "type": "drink",
@@ -507,10 +546,11 @@
     "vote": 1
   },
   {
-    "Id": "1821",
+    "Id": "f7d3a1",
     "product_name": "Hot Chocolate",
     "product_image": "https://i.pinimg.com/736x/c6/bd/8e/c6bd8edbc37f9a7403bdcac531e79f05.jpg",
-    "price": 7.00,
+    "price": 6.0,
+    "discount": "15%",
     "time": 4,
     "product_description": "Warm milk mixed with cocoa powder and sugar.",
     "type": "drink",
@@ -520,10 +560,11 @@
     "vote": 1
   },
   {
-    "Id": "5894",
+    "Id": "b5c9e2",
     "product_name": "Water (1L)",
     "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2prUvt84u1vOI3tq00101BeKIRkroNen8gw&s",
-    "price": 2.00,
+    "price": 1.5,
+    "discount": "25%",
     "time": 1,
     "product_description": "Bottled natural drinking water.",
     "type": "drink",
@@ -533,10 +574,11 @@
     "vote": 1
   },
   {
-    "Id": "2405",
+    "Id": "a1f8d4",
     "product_name": "Milkshake (Vanilla)",
     "product_image": "https://i.pinimg.com/736x/d2/a1/53/d2a153ca4825ddcc1847eeb0f3a91123.jpg",
-    "price": 10.00,
+    "price": 8.5,
+    "discount": "15%",
     "time": 5,
     "product_description": "Blended milk, vanilla ice cream, and flavor.",
     "type": "drink",
@@ -546,10 +588,11 @@
     "vote": 1
   },
   {
-    "Id": "8663",
+    "Id": "e3b7c2",
     "product_name": "Berry Smoothie",
     "product_image": "https://i.pinimg.com/736x/58/19/5e/58195ea33d7b4ba4ec02a69a8ab9a715.jpg",
-    "price": 11.00,
+    "price": 9.5,
+    "discount": "10%",
     "time": 6,
     "product_description": "Mixed berries, yogurt, and honey.",
     "type": "drink",
@@ -559,10 +602,11 @@
     "vote": 1
   },
   {
-    "Id": "4220",
+    "Id": "d9a4f5",
     "product_name": "Georgian Lemonade (Tarragon)",
     "product_image": "https://i.pinimg.com/1200x/00/36/ef/0036efca11d2ca744df4a737239488bb.jpg",
-    "price": 4.50,
+    "price": 3.8,
+    "discount": "15%",
     "time": 2,
     "product_description": "Green colored fizzy drink with tarragon flavor.",
     "type": "drink",
@@ -572,10 +616,11 @@
     "vote": 1
   },
   {
-    "Id": "6777",
+    "Id": "c2b8e7",
     "product_name": "Cappuccino",
     "product_image": "https://i.pinimg.com/736x/49/84/f7/4984f7fa75952bd1d0547db5f0341790.jpg",
-    "price": 6.00,
+    "price": 5.0,
+    "discount": "10%",
     "time": 3,
     "product_description": "Espresso, steamed milk, and thick foam.",
     "type": "drink",
@@ -585,10 +630,11 @@
     "vote": 1
   },
   {
-    "Id": "9885",
+    "Id": "f1d4a9",
     "product_name": "Satsebeli",
     "product_image": "https://i.pinimg.com/1200x/fe/01/6a/fe016abb8e659d520e51a5cfd89ed2bb.jpg",
-    "price": 3.00,
+    "price": 2.5,
+    "discount": "15%",
     "time": 1,
     "product_description": "Traditional Georgian tomato sauce with spices.",
     "type": "other",
@@ -598,10 +644,11 @@
     "vote": 1
   },
   {
-    "Id": "1459",
+    "Id": "b3e7c1",
     "product_name": "Tkemali",
     "product_image": "https://i.pinimg.com/736x/e8/a0/42/e8a04251f5e0dfce685dbcafe841766c.jpg",
-    "price": 4.00,
+    "price": 3.4,
+    "discount": "15%",
     "time": 1,
     "product_description": "Sour plum sauce, often served with meat.",
     "type": "other",
@@ -611,10 +658,11 @@
     "vote": 1
   },
   {
-    "Id": "5262",
+    "Id": "a8d2f5",
     "product_name": "Ajika (Red)",
     "product_image": "https://i.pinimg.com/736x/41/99/ed/4199edf8ca0ca7930b37da705caad948.jpg",
-    "price": 5.00,
+    "price": 4.25,
+    "discount": "15%",
     "time": 1,
     "product_description": "Spicy and aromatic paste with red peppers and garlic.",
     "type": "other",
@@ -624,10 +672,11 @@
     "vote": 1
   },
   {
-    "Id": "2940",
+    "Id": "e4c9b3",
     "product_name": "Ajika (Green)",
     "product_image": "https://www.cookeatworld.com/wp-content/uploads/2021/09/Ajika-3.jpg",
-    "price": 5.00,
+    "price": 4.25,
+    "discount": "15%",
     "time": 1,
     "product_description": "Spicy and aromatic paste with green peppers and herbs.",
     "type": "other",
@@ -637,10 +686,11 @@
     "vote": 1
   },
   {
-    "Id": "7183",
+    "Id": "d1f7a4",
     "product_name": "Bazhe (Walnut Sauce)",
     "product_image": "https://l450v.alamy.com/450v/2hnegkx/overhead-view-of-a-bowl-of-georgian-chicken-in-walnut-sauce-chicken-bazhe-with-coriander-2hnegkx.jpg",
-    "price": 6.00,
+    "price": 5.0,
+    "discount": "15%",
     "time": 2,
     "product_description": "Walnut sauce with garlic and spices, often used for poultry.",
     "type": "other",
@@ -650,10 +700,11 @@
     "vote": 1
   },
   {
-    "Id": "4658",
+    "Id": "b6e2c8",
     "product_name": "Mayonnaise",
     "product_image": "https://www.marthastewart.com/thmb/1Q2kTsRxA8sFBSCFwHMCCL2zVA8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ms-homemade-mayonnaise-92343c7b84864b24aa538476768030dc.jpg",
-    "price": 2.00,
+    "price": 1.7,
+    "discount": "15%",
     "time": 1,
     "product_description": "Classic creamy sauce.",
     "type": "other",
@@ -663,10 +714,11 @@
     "vote": 1
   },
   {
-    "Id": "8091",
+    "Id": "a3d9f1",
     "product_name": "Garlic Sauce",
     "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7rXxxBfdb-8ir7nvDi1QOjlzYyvFPIomsVw&s",
-    "price": 3.50,
+    "price": 3.0,
+    "discount": "15%",
     "time": 1,
     "product_description": "Creamy sauce with a strong garlic flavor.",
     "type": "other",
@@ -676,10 +728,11 @@
     "vote": 1
   },
   {
-    "Id": "1335",
+    "Id": "f4b2e5",
     "product_name": "Mustard",
     "product_image": "https://leitesculinaria.com/wp-content/uploads/2024/05/homemade-yellow-mustard-1200-500x500.jpg",
-    "price": 2.50,
+    "price": 2.1,
+    "discount": "15%",
     "time": 1,
     "product_description": "Pungent sauce made from mustard seeds.",
     "type": "other",
@@ -689,10 +742,11 @@
     "vote": 1
   },
   {
-    "Id": "5519",
+    "Id": "c7a8d3",
     "product_name": "Pesto",
     "product_image": "https://www.allrecipes.com/thmb/_4wwT0rq8ebbgtonV6nDj-0rECc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/200283-spinach-basil-pesto-DDMFS-4x3-c09e7fef9eca4f65aaba45b996bdf75c.jpg",
-    "price": 7.00,
+    "price": 5.9,
+    "discount": "15%",
     "time": 2,
     "product_description": "Sauce made from basil, pine nuts, cheese, and olive oil.",
     "type": "other",
@@ -702,10 +756,11 @@
     "vote": 1
   },
   {
-    "Id": "2874",
+    "Id": "e1b4f9",
     "product_name": "Ketchup",
     "product_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtBch9xy0vUyxqRvorg3gM_c3R3SeOffa9JA&s",
-    "price": 2.00,
+    "price": 1.7,
+    "discount": "15%",
     "time": 1,
     "product_description": "Sweet tomato sauce.",
     "type": "other",
@@ -715,10 +770,11 @@
     "vote": 1
   },
   {
-    "Id": "7926",
+    "Id": "d5a2c1",
     "product_name": "Sweet Box",
     "product_image": "https://cdn4.volusion.store/sndfg-wykrq/v/vspfiles/photos/Sweet-Box-Cuties-3.jpg?v-cache=1746146107",
-    "price": 10.00,
+    "price": 8.5,
+    "discount": "15%",
     "time": 1,
     "product_description": "Sweet Box Cuties Surprise Toy Collections with Candy for kids",
     "type": "other",
@@ -728,10 +784,11 @@
     "vote": 1
   },
   {
-    "Id": "2031",
+    "Id": "b9f3d7",
     "product_name": "Kinder Bueno",
     "product_image": "https://i.pinimg.com/736x/35/7a/84/357a84fef7bbe9b06a5f7568caeda866.jpg",
-    "price": 15.00,
+    "price": 12.75,
+    "discount": "15%",
     "time": 1,
     "product_description": "Sweet Candy For Kids",
     "type": "other",

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import Navigation from "../../../MiniComponents/Navigation"
 import ProductItem from "./ProductItem"
 
@@ -29,7 +30,9 @@ function AllProduct() {
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Product</h1>
-                    <button className="text-lg bg-[#F67F20] font-semibold cursor-pointer px-5 text-white py-2 rounded duration-100 hover:bg-orange-400">+ Add Product</button>
+                    <Link to='/add_product'>
+                        <button className="text-lg bg-[#F67F20] font-semibold cursor-pointer px-5 text-white py-2 rounded duration-100 hover:bg-orange-400">+ Add Product</button>
+                    </Link>
                 </header>
                 <div className="rounded-2xl h-[83vh] relative overflow-y-auto border border-gray-200 ">
                     <table className="w-full border-collapse rounded-2xl table-auto">

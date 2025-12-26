@@ -79,14 +79,16 @@ function AllPost() {
                     />
 
                     {view ?
-                        <div div className="relative mt-3">
+                        <div className="relative mt-3">
                             <img
                                 src={view}
                                 alt="Preview"
                                 className="w-full rounded-lg object-cover max-h-[400px]"
                             />
-                            <div
-                                onClick={() => { setView(null); setFile(null) }}
+                            <div onClick={() => {
+                                setView(null)
+                                setFile(null)
+                            }}
                                 className='absolute w-8 h-8 rounded-full bg-[#F67F20] text-white flex items-center justify-center top-2 right-2 cursor-pointer hover:bg-orange-400'
                             >
                                 <i className="fa-solid fa-x text-xs"></i>

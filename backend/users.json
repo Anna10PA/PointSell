@@ -6,7 +6,7 @@
         "position": "Manager",
         "email": "futureana735@gmail.com",
         "password": "PointSell_2025",
-        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+        "profileUrl": "/icon_2.jpg",
         "notification": [
             {
                 "date": "2025-12-24",
@@ -16,37 +16,8 @@
             }
         ],
         "curent_cart": {
-            "order": "8a8e5034",
-            "cart": [
-                {
-                    "Id": "1675",
-                    "count": 2
-                },
-                {
-                    "Id": "2185",
-                    "count": 1
-                },
-                {
-                    "Id": "5017",
-                    "count": 1
-                },
-                {
-                    "Id": "9902",
-                    "count": 1
-                },
-                {
-                    "Id": "9132",
-                    "count": 1
-                },
-                {
-                    "Id": "1289",
-                    "count": 1
-                },
-                {
-                    "Id": "7096",
-                    "count": 1
-                }
-            ]
+            "order": null,
+            "cart": []
         },
         "money": 10000
     }

@@ -92,6 +92,7 @@ def add_comment():
         if post['id'] == post_id:
             new_comment = {
                 "user_name":  user_name or user_email,
+                "user_email": user_email,
                 "comment": comment_text,
                 "user_img": user_img,
                 "date": str(datetime.now()).split()[0]
@@ -286,6 +287,7 @@ def clean_cart():
     
     return jsonify({'error': 'not found'}), 404
 
+
 # რეგისტრაცია
 @app.post("/register")
 def register():
@@ -457,6 +459,35 @@ def post_posts():
     except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 500
+
+
+# პოსტების წაშლა
+@app.post('/delete_post')
+def delete_post():
+    if 'email' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+
+    data = request.get_json()
+    post_id = data.get('id')
+
+    all_posts = check_posts()
+
+    post_check = next((post for post in all_posts if post['id'] == post_id), None)
+
+    if post_check:
+        all_posts.remove(post_check)
+
+        try:
+            with open(All_post, 'w', encoding='utf-8') as file:
+                json.dump(all_posts, file, ensure_ascii=False, indent=4)
+
+            return jsonify({'message': 'sucsessful!'}), 200
+        
+        except Exception as error:
+            print(error)
+            return jsonify({'error': str(error)}) , 401
+    else:
+        return jsonify({'error': 'Post not found'}), 404
 
 
 # პოსტების წამოღება
