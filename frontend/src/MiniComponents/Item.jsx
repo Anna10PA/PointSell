@@ -1,26 +1,31 @@
-import React from 'react'
+import { useLocation } from "react-router-dom"
 
-function ProductItem({ info }) {
+function Item({image, info, name, info2, info3, info4, price}) {
+    let location = useLocation()
+    let curentPage = location.pathname
+
     return (
         <tr>
             <td className='flex items-center gap-3 px-5 py-3 border border-gray-100'>
-                <img src={info.product_image} alt={info.product_image} className='h-15 w-15 object-cover rounded-xl' />
-                <h1 className='font-bold'>{info.product_name}</h1>
+                <img src={image ? image : 'example.png'} alt={image ? image : 'example.png'} className='h-15 w-15 object-cover rounded-xl' />
+                <h1 className='font-bold'>{name ? name : 'loading . . .'}</h1>
             </td>
             <td className='border border-gray-200 px-5 text-center text-green-500 font-bold'>
-                {info.time}m
+                {info2 ? info2 : 'loading . . .'}
+                {curentPage === '/products' ? 's' : null}
             </td>
             <td className='pl-4 text-gray-800 font-medium border-gray-200 border wrap-break-word'>
-                {info.info}
+                {info3 ? info3 : 'loading . . .'}
             </td>
-            <td className='text-red-500 font-bold text-center border-gray-200 border px-5'>
-                #{info.Id}
+            <td className='text-red-500 font-bold text-start border-gray-200 border px-5'>
+                {curentPage === '/products' ? '#' : null}
+                {info4 ? info4 : 'loading . . .'}
             </td>
             <td className='border-gray-200 border px-5 text-[#F67F20] font-bold text-center'>
-                ${info.price.toFixed(2)}
+                ${price ? price.toFixed(2): 0}
             </td>
             <td className=' border-gray-200 border h-full'>
-                <div className='flex items-start justify-center gap-7'>
+                <div className='flex items-start justify-center gap-4'>
                     <div className='flex items-center gap-2 text-green-500 duration-150 hover:text-white px-3 py-2 rounded cursor-pointer hover:bg-green-500'>
                         <i className="fa-solid fa-pen"></i>
                         <span className='font-bold'>
@@ -40,4 +45,4 @@ function ProductItem({ info }) {
     )
 }
 
-export default ProductItem
+export default Item

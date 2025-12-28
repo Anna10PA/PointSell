@@ -29,6 +29,7 @@ app.config['UPLOAD_FOLDER'] = post_folders
 All_user = "users.json"
 All_product = "product.json"
 All_post = "posts.json"
+All_orders = 'orders.json'
 
 
 my_gmail = 'futureana735@gmail.com'
@@ -76,6 +77,22 @@ def save_users(users):
 def save_posts(posts):
     with open(All_post, "w", encoding="utf-8") as file:
         json.dump(posts, file, indent=4, ensure_ascii=False)
+
+
+# შეკვეთებში დამატება
+def orders(order):
+    order_list = []
+    if os.path.exists(All_orders):
+        with open(All_orders, 'r', encoding='utf-8') as file:
+            try:
+                order_list = json.load(file)
+            except:
+                order_list = []
+
+    order_list.insert(0, order)
+
+    with open(All_orders, 'w', encoding='utf-8') as file:
+        json.dump(order_list, file, indent=4, ensure_ascii=False)
 
 
 # კომენტარის დამატება
@@ -311,6 +328,100 @@ def clean_cart():
     return jsonify({'error': 'not found'}), 404
 
 
+# გადასახდელი თანხის მონაცემების დამატება json ფაილში
+@app.post('/pay_sum')
+def pay_sum():
+    if "email" not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.get_json()
+    current_user_email = session['email']
+
+    users = check_users()
+    current_user = next((u for u in users if u['email'] == current_user_email), None)
+
+    if current_user:
+        current_user['curent_cart']['sum'] = {
+            'subtotal': data.get('subtotal'),
+            'change': data.get('change'),
+            'discount': data.get('discount'),
+            'tax': 0
+        }
+        save_users(users)
+        return jsonify({'message': 'Successfull!'}), 200
+    
+    return jsonify({'error': 'User not found'}), 404
+
+
+# გადახდა
+@app.post('/pay')
+def pay():    
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    current_time = str(datetime.now())
+    data = request.get_json()
+    users = check_users()
+
+    # წამოღება რექუესთის საშუალებით
+    order_number = data.get('order_number')
+    subtotal = float(data.get('subtotal') or 0)
+    change = float(data.get('change') or 0)
+    discount = float(data.get('discount') or 0)
+    tax = float(data.get('tax') or 0)
+
+    phone = data.get('phone')
+    address = data.get('address')
+    name = data.get('name')
+
+    sum = round(((subtotal + change + tax) - discount), 2)
+    curent_user = next((u for u in users if u['email'] == session['email']), None)
+
+    if curent_user:
+        if curent_user['money'] >= sum:
+        # შეკვეთებში დამატება
+            new_order = {
+                "order" : order_number,
+                "cart" : curent_user['curent_cart']['cart'],
+                "pay": sum,
+                "isReady": False,
+                "time": current_time
+            }
+            orders(new_order)
+
+
+        # მომხმარებლის მონაცემების განახლება
+            curent_user['money'] -= sum
+            curent_user['orders'].append(order_number)
+            curent_user['curent_cart'] = {
+                "order": None,
+                "cart": [],
+                "sum": {
+                    "discount": 0,
+                    "tax": 0,
+                    "change": 0,
+                    "subtotal": 0
+                }
+            }
+            curent_user['address'] = address
+            curent_user['phone'] = phone
+            curent_user['name'] = name
+            curent_user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"Your order has been successfully processed, and a payment of ${curent_user['money']} has been debited.",
+                "read": False
+            })
+            save_users(users) 
+
+            return jsonify({'success': 'Payment successful'}), 200
+        
+        else:
+            return jsonify({'error': 'Insufficient balance'}), 400
+    else:
+        return jsonify({'error': 'user not found'}), 404
+    
+
 # რეგისტრაცია
 @app.post("/register")
 def register():
@@ -328,8 +439,6 @@ def register():
 
     new_user = {
         "name": None,
-        "lastname": None,
-        "age": None,
         "position": "Customer" if email != my_gmail else "Manager",
         "email": email,
         "password": password,
@@ -344,9 +453,18 @@ def register():
         ],
         "curent_cart": {
             "order": None,
-            "cart": []
+            "cart": [],
+            "sum": {
+                "discount": None,
+                "tax": None,
+                "change": None,
+                "subtotal": None
+            }
         },
-        "money": 1000 if email != my_gmail else 10000
+        "money": 1000 if email != my_gmail else 10000,
+        "spent" : 0,
+        "address": None,
+        "orders": []
     }
 
     users.append(new_user)
@@ -412,16 +530,21 @@ def google_login():
                         "read": False
                     }
                 ],
-                "history": [],
                 "friends": [],
-                "favorite": [],
                 "curent_cart": {
                     "order": None,
-                    "cart": []
+                    "cart": [],
+                    "sum": {
+                        "discount": None,
+                        "tax": None,
+                        "change": None,
+                        "subtotal": None
+                    }
                 },
-                "gender": None,
+                "orders": [],
+                "address": None,
+                "spent": 0,
                 "phone": None,
-                "age": None
             }
             
             users.append(user)

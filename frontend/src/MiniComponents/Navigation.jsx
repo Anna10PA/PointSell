@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 function Navigation() {
     let location = useLocation()
     let locationName = location.pathname
-    let currentMonth = new Date().getMonth() 
+    let currentMonth = new Date().getMonth()
 
     let [curentUser, setCurentUser] = useState('')
 
@@ -36,7 +36,7 @@ function Navigation() {
             </div>
             <div className="flex items-center flex-col h-[80%] justify-between text-[30px] px-8 max-md:px-4 max-md:text-2xl">
                 <Link to='/home'>
-                    <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/home' || locationName === '/order_type' || locationName === '/order/deliver'? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/home' || locationName === '/order_type' || locationName === '/order/deliver' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/posts'>
                     <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/posts' || locationName === '/add_post' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
@@ -44,9 +44,13 @@ function Navigation() {
                 <Link to='/orders'>
                     <i className={`fa-solid fa-book hover:text-[#F67F20] ${locationName === '/orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
-                <Link to='/products'>
-                    <i className={`fa-solid fa-burger hover:text-[#F67F20] ${locationName === '/products' || locationName === '/add_product' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
-                </Link>
+                {
+                    curentUser.position === "Manager" ?
+                        <Link to='/products'>
+                            <i className={`fa-solid fa-burger hover:text-[#F67F20] ${locationName === '/products' || locationName === '/add_product' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                        </Link>
+                    : null
+                }
                 <Link to='/notification'>
                     <i className={`fa-solid fa-bell hover:text-[#F67F20] ${locationName === '/notification' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
@@ -55,7 +59,7 @@ function Navigation() {
                         <Link to='/costumers'>
                             <i className={`fa-solid fa-user hover:text-[#F67F20] ${locationName === '/costumers' ? 'text-[#F67F20]' : 'text-[#BBBBBB]'}`}></i>
                         </Link>
-                    :null
+                        : null
                 }
                 <Link to='/messages'>
                     <i className={`fa-solid fa-paper-plane hover:text-[#F67F20] ${locationName === '/messages' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>

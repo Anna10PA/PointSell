@@ -30,7 +30,6 @@ function OrderCard({ count, id }) {
         }
     }, [allProductList, id])
 
-    console.log(product)
     return (
         <div className='border border-gray-400 rounded-2xl p-3 flex items-center justify-between gap-5 pr-10 w-full'>
             <div className='flex items-center gap-3 w-65'>

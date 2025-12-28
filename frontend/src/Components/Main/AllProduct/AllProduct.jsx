@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Navigation from "../../../MiniComponents/Navigation"
-import ProductItem from "./ProductItem"
+import Table from "../../../MiniComponents/Table"
 
 function AllProduct() {
 
@@ -34,39 +34,17 @@ function AllProduct() {
                         <button className="text-lg bg-[#F67F20] font-semibold cursor-pointer px-5 text-white py-2 rounded duration-100 hover:bg-orange-400">+ Add Product</button>
                     </Link>
                 </header>
-                <div className="rounded-2xl h-[83vh] relative overflow-y-auto border border-gray-200 ">
-                    <table className="w-full border-collapse rounded-2xl table-auto">
-                        <thead className="sticky top-0 bg-white ">
-                            <tr className="text-gray-400 text-lg h-15 ">
-                                <th className="border border-gray-200 font-semibold">
-                                    Product
-                                </th>
-                                <th className="border border-gray-200 font-semibold">
-                                    Time
-                                </th>
-                                <th className="border border-gray-200 font-semibold">
-                                    Detail
-                                </th>
-                                <th className="border border-gray-200 font-semibold px-4">
-                                    Id
-                                </th>
-                                <th className="border border-gray-200 font-semibold">
-                                    Price
-                                </th>
-                                <th className="border border-gray-200 font-semibold">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                allProduct.map((item, index) => {
-                                    return <ProductItem info={item} key={index} />
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                {
+                    allProduct.length > 0 ?
+                        <Table 
+                        col1='Product'
+                        col2='Time'
+                        col3='Detail'
+                        col4='Id'
+                        col5='Price'
+                        ApiInfo={allProduct} />
+                        : null
+                }
             </main>
         </>
     )

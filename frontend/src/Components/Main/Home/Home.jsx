@@ -80,7 +80,8 @@ function Home() {
         }
     }
 
-    // გადასახადი
+
+    // გადასახადის გამოთვლა
     useEffect(() => {
         let total = 0
         let change = 0
@@ -115,6 +116,33 @@ function Home() {
         }
         return item.product_name.toLowerCase().includes(searchProduct.toLowerCase().trim())
     })
+
+
+    // გადასახადის დამატება json ფაილში
+    let paySum = async (s, c, d) => {
+        try {
+
+            let res = await fetch('http://localhost:5000/pay_sum', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    subtotal: s,
+                    change: c,
+                    discount: d,
+                    tax: 0
+                })
+            })
+            if (res.ok) {
+                navigate('/order_type')
+            }
+        }catch(e) {
+            console.error(e)
+        }
+    }
+
 
     return (
         <>
@@ -211,23 +239,19 @@ function Home() {
                                 </div>
                                 <div className="text-gray-400 flex items-center justify-between w-full ">
                                     <h1>Change</h1>
-                                    <h1>${String(Change)}</h1>
+                                    <h1>${Change.toFixed(2)}</h1>
                                 </div>
-                                <div className="text-gray-400 flex items-center justify-between w-full ">
+                                <div className="text-gray-400 flex items-center justify-between w-full border-b border-gray-200 pb-3 mb-3">
                                     <h1>Discount:</h1>
                                     <h1>${discount.toFixed(2)}</h1>
                                 </div>
-                                <div className="text-gray-400 flex items-center justify-between w-full border-b border-gray-200 pb-3 mb-3">
-                                    <h1>Tax</h1>
-                                    <h1>${sum < 100 ? (5).toFixed(2) : sum >= 100 && sum < 200 ? 3 : 'Free'}</h1>
-                                </div>
                                 <div className="flex items-center justify-between w-full text-gray-950 font-extrabold text-lg">
                                     <h1>Total</h1>
-                                    <h1>${(sum + (sum < 100 ? 5 : sum >= 100 && sum < 200 ? 3 : 0) + Change - discount).toFixed(2)}</h1>
+                                    <h1>${(sum + Change - discount).toFixed(2)}</h1>
                                 </div>
                             </div>
                             <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 mt-5 cursor-pointer" onClick={()=> {
-                                navigate('/order_type')
+                                paySum(sum, Change, discount)
                             }}>Place Order</button>
                         </div>
                     </div> :

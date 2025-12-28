@@ -39,7 +39,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
                         ${discount ? price.toFixed(2) : null}
                     </h2>
                     <h2 className='font-bold text-lg text-[#F67F20]'>
-                        ${discount ? (price - price * Number(discount.split('%')[0]) / 100).toFixed(2) : price}
+                        ${discount ? (price - price * Number(discount.split('%')[0]) / 100).toFixed(2) : price.toFixed(2)}
                     </h2>
                 </div>
             </div>
