@@ -8,6 +8,8 @@ import OrderType from "./Components/Main/Home/OrderType"
 import Deliver from "./Components/Main/Home/Deliver"
 import AddProductPage from "./Components/Main/AllProduct/AddProductPage"
 import Costumers from "./Components/Main/Costumers/Costumers"
+import PaymentResult from "./Components/Main/Home/PaymentResult"
+import Order from "./Components/Main/OrderPage/Order"
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { GoogleOAuthProvider } from '@react-oauth/google'
@@ -28,6 +30,8 @@ function App() {
             <Route path='/order/deliver' element={<Deliver />} />
             <Route path="/add_product" element={<AddProductPage />} />
             <Route path="/costumers" element={<Costumers />} />
+            <Route path='/payment' element={<PaymentResult />} />
+            <Route path='/orders' element={<Order/>} />
           </Routes>
         </BrowserRouter>
       </GoogleOAuthProvider>

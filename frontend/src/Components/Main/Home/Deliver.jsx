@@ -1,7 +1,7 @@
 import Navigation from "../../../MiniComponents/Navigation"
 import ProductAndChack from "./ProductAndChack"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 
 function Deliver() {
@@ -10,7 +10,8 @@ function Deliver() {
         mode: "onBlur"
     })
     let [deliverInfo, setDeliverInfo] = useState({})
-
+    let navigate = useNavigate()
+    let promoCode = 'HelloUser2009'
 
     // ნომრის შემოწმება
     let checkNumber = async (userNumber) => {
@@ -99,11 +100,13 @@ function Deliver() {
 
     // გადახდა
     let onSubmit = async (data) => {
+        let sum = Number(curentUser?.curent_cart?.sum?.subtotal) + (Number(deliverInfo.distance) * 2 + 1.5) + Number(curentUser?.curent_cart?.sum?.change)
+
         let orderData = {
             order_number: curentUser?.curent_cart?.order,
             subtotal: Number(curentUser?.curent_cart?.sum?.subtotal) || 0,
-            change: Number(curentUser?.curent_cart?.sum?.change) || 0,
-            discount: Number(curentUser?.curent_cart?.sum?.discount) || 0,
+            change:  Number(curentUser?.curent_cart?.sum?.change) || 0,
+            discount: !errors.promo_code ? Number(curentUser?.curent_cart?.sum?.discount) + sum * 70 / 100 : Number(curentUser?.curent_cart?.sum?.discount) || 0,
             tax: (Number(deliverInfo.distance) * 2 + 1.5) || 0,
             phone: Number(data.number),
             address: data.address,
@@ -123,13 +126,29 @@ function Deliver() {
             const result = await response.json()
 
             if (response.ok) {
-                alert(`Success! ${result.success}`)
+                navigate('/payment', {
+                    state: {
+                        text: result.success,
+                        order: curentUser?.curent_cart?.order,
+                        isPay: true
+                    }
+                })
             } else {
-                alert(`Error: ${result.error}`)
+                navigate('/payment', {
+                    state: {
+                        text: result.error,
+                        isPay: false
+                    }
+                })
             }
         } catch (error) {
             console.error(error)
-            alert("Something went wrong with the payment.")
+            navigate('/payment', {
+                state: {
+                    text: error,
+                    isPay: false
+                }
+            })
         }
     }
 
@@ -215,7 +234,7 @@ function Deliver() {
                                             if (value.trim() === "") {
                                                 return true
                                             }
-                                            return value === 'helloUser123' || 'Code is not correct'
+                                            return value === promoCode || 'Code is not correct'
                                         }
                                     })} />
                                 <button className='bg-[#f67f20] text-white font-bold px-3 py-2.5 rounded duration-100 hover:bg-orange-400 cursor-pointer' type='button' onClick={() => { trigger('promo_code') }}
@@ -256,8 +275,8 @@ function Deliver() {
                             <div>
                                 <h3 className="font-bold text-xl">Rules:</h3>
                                 <div className="mt-2 font-semibold text-gray-400">
-                                    <p>Start: 1.5$</p>
-                                    <p>1km = 2$</p>
+                                    <p>Start = $1.50</p>
+                                    <p>1 km = $2.00</p>
                                 </div>
                             </div>
                         </div>

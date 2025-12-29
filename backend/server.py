@@ -61,6 +61,15 @@ def check_users():
         return json.load(file)
 
 
+# შეკვეთების წამოღება
+@app.get('/orders')
+def get_orders():
+    if not os.path.exists(All_orders):
+        return []
+    with open(All_orders, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
 # ყველა მომხმარებლის ინფორმაციის წამოღება
 @app.get('/get_all_user')
 def get_all_user():
@@ -385,7 +394,8 @@ def pay():
                 "cart" : curent_user['curent_cart']['cart'],
                 "pay": sum,
                 "isReady": False,
-                "time": current_time
+                "time": current_time,
+                "type": 'online'
             }
             orders(new_order)
 
@@ -409,10 +419,16 @@ def pay():
             curent_user['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
-                "message": f"Your order has been successfully processed, and a payment of ${curent_user['money']} has been debited.",
+                "message": f"Your order has been successfully processed, and a payment of ${round(curent_user['money'], 2)} has been debited.",
                 "read": False
             })
+            curent_user['spent'] += sum
             save_users(users) 
+
+            # მეილზე გაგზავნა
+            text=f'Your order sucsesfully ordered! \n \n Pay: {round(sum, 2)}$ \n Balance: {round(curent_user['money'], 2)}$ \n Order number: {order_number}'
+
+            send_email(curent_user['email'], text)
 
             return jsonify({'success': 'Payment successful'}), 200
         

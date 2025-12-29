@@ -45,7 +45,7 @@ function Notification() {
                     <h1 className="text-3xl font-bold">Notification</h1>
                     <button className="text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded">Mark All As Read</button>
                 </header>
-                <section className="border-gray-300 rounded-2xl border h-full overflow-hidden mt-3" >
+                <section className="border-gray-300 rounded-2xl border  overflow-auto mt-3 h-[82vh]" >
                     {
                         messages.length > 0 ? 
                         messages.map((item, index) => {

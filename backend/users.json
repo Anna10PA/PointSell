@@ -1,1 +1,177 @@
-[]
+[
+    {
+        "name": "PointSell",
+        "position": "Manager",
+        "email": "futureana735@gmail.com",
+        "password": "PointSell_2025",
+        "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+        "notification": [
+            {
+                "date": "2025-12-29",
+                "time": "22:17:41.153048",
+                "message": "Your order has been successfully processed, and a payment of $9736.67 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "22:16:47.879819",
+                "message": "Your order has been successfully processed, and a payment of $9775.42 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "01:14:10.552294",
+                "message": "Your order has been successfully processed, and a payment of $9782.070000000002 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "01:02:34.052461",
+                "message": "Your order has been successfully processed, and a payment of $9825.12 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:58:49.429113",
+                "message": "Your order has been successfully processed, and a payment of $9832.560000000001 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:57:28.186194",
+                "message": "Your order has been successfully processed, and a payment of $9892.810000000001 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:47:49.213824",
+                "message": "Your order has been successfully processed, and a payment of $9909.29 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:42:15.656537",
+                "message": "Your order has been successfully processed, and a payment of $9917.59 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:39:53.214944",
+                "message": "Your order has been successfully processed, and a payment of $9939.29 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:36:22.566633",
+                "message": "Your order has been successfully processed, and a payment of $9982.12 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-29",
+                "time": "00:22:43.867393",
+                "message": "Your order has been successfully processed, and a payment of $13.15 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-28",
+                "time": "23:12:34.006347",
+                "message": "Your order has been successfully processed, and a payment of $9925.37 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-28",
+                "time": "23:06:28.894550",
+                "message": "Your order has been successfully processed, and a payment of $9955.470000000001 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-28",
+                "time": "23:02:56.319179",
+                "message": "Your order has been successfully processed, and a payment of $9963.77 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-28",
+                "time": "22:35:07.085693",
+                "message": "Your order has been successfully processed, and a payment of $9985.15 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-28",
+                "time": "22:31:18.774452",
+                "message": "Registration is successful!",
+                "read": false
+            }
+        ],
+        "curent_cart": {
+            "order": null,
+            "cart": [],
+            "sum": {
+                "discount": 0,
+                "tax": 0,
+                "change": 0,
+                "subtotal": 0
+            }
+        },
+        "money": 9736.670000000002,
+        "spent": 263.33000000000004,
+        "address": "თბილისი, დელისი",
+        "orders": [
+            "92155dc2",
+            "710ac99f",
+            "5e613735",
+            "69364066",
+            "a9182167",
+            "8e2324f1",
+            "00613a38",
+            "bf798375",
+            "539aa9d5",
+            "7e4fc78f",
+            "e546c673",
+            "f6828198",
+            "cb4c6b97",
+            "bb8ad00f",
+            "a6863a7c"
+        ],
+        "phone": 555555555
+    },
+    {
+        "email": "puturidzeana0210@gmail.com",
+        "name": "Ana Puturidze",
+        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
+        "password": "fbcaa2f9-95b9-4935-8fa4-d1183de16264",
+        "position": "Customer",
+        "money": 992.98,
+        "notification": [
+            {
+                "date": "2025-12-30",
+                "time": "00:05:25.203602",
+                "message": "Your order has been successfully processed, and a payment of $992.98 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-14",
+                "time": "14:10:58",
+                "message": "Hello User!",
+                "read": false
+            }
+        ],
+        "friends": [],
+        "curent_cart": {
+            "order": null,
+            "cart": [],
+            "sum": {
+                "discount": 0,
+                "tax": 0,
+                "change": 0,
+                "subtotal": 0
+            }
+        },
+        "orders": [
+            "6532593f"
+        ],
+        "address": "ნუცუბიძის პლატო N100",
+        "spent": 7.02,
+        "phone": 595123112
+    }
+]
