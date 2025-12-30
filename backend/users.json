@@ -7,6 +7,24 @@
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
+                "date": "2025-12-31",
+                "time": "01:27:41.493851",
+                "message": "Your order has been successfully processed, and a payment of $9642.67 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-31",
+                "time": "01:25:53.136268",
+                "message": "Your order has been successfully processed, and a payment of $9661.17 has been debited.",
+                "read": false
+            },
+            {
+                "date": "2025-12-31",
+                "time": "01:24:21.647512",
+                "message": "Your order has been successfully processed, and a payment of $9685.42 has been debited.",
+                "read": false
+            },
+            {
                 "date": "2025-12-29",
                 "time": "22:17:41.153048",
                 "message": "Your order has been successfully processed, and a payment of $9736.67 has been debited.",
@@ -113,8 +131,8 @@
                 "subtotal": 0
             }
         },
-        "money": 9736.670000000002,
-        "spent": 263.33000000000004,
+        "money": 9642.670000000002,
+        "spent": 357.33000000000004,
         "address": "თბილისი, დელისი",
         "orders": [
             "92155dc2",
@@ -131,7 +149,10 @@
             "f6828198",
             "cb4c6b97",
             "bb8ad00f",
-            "a6863a7c"
+            "a6863a7c",
+            "6cf2b843",
+            "f24cb587",
+            "97045b24"
         ],
         "phone": 555555555
     },

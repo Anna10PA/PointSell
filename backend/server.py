@@ -371,6 +371,7 @@ def pay():
     current_time = str(datetime.now())
     data = request.get_json()
     users = check_users()
+    all_products = check_products()
 
     # წამოღება რექუესთის საშუალებით
     order_number = data.get('order_number')
@@ -383,27 +384,36 @@ def pay():
     address = data.get('address')
     name = data.get('name')
 
-    sum = round(((subtotal + change + tax) - discount), 2)
-    curent_user = next((u for u in users if u['email'] == session['email']), None)
+    total_sum = round(((subtotal + change + tax) - discount), 2)
+    user = next((u for u in users if u['email'] == session['email']), None)
 
-    if curent_user:
-        if curent_user['money'] >= sum:
+    if user:
+        if user['money'] >= total_sum:
+            cart_items = user['curent_cart']['cart']
+            cart_items_id = [item['Id'] for item in cart_items]
+            product_times = [p['time'] for p in all_products if p['Id'] in cart_items_id]
+            sum_time = round(sum(product_times), 2)
+
         # შეკვეთებში დამატება
             new_order = {
                 "order" : order_number,
-                "cart" : curent_user['curent_cart']['cart'],
-                "pay": sum,
+                "cart" : user['curent_cart']['cart'],
+                "pay": total_sum,
                 "isReady": False,
                 "time": current_time,
-                "type": 'online'
+                "type": 'online',
+                "name": name,
+                "address": address,
+                "table": None,
+                "ready_time": sum_time
             }
             orders(new_order)
 
 
         # მომხმარებლის მონაცემების განახლება
-            curent_user['money'] -= sum
-            curent_user['orders'].append(order_number)
-            curent_user['curent_cart'] = {
+            user['money'] -= total_sum
+            user['orders'].append(order_number)
+            user['curent_cart'] = {
                 "order": None,
                 "cart": [],
                 "sum": {
@@ -413,22 +423,22 @@ def pay():
                     "subtotal": 0
                 }
             }
-            curent_user['address'] = address
-            curent_user['phone'] = phone
-            curent_user['name'] = name
-            curent_user['notification'].insert(0, {
+            user['address'] = address
+            user['phone'] = phone
+            user['name'] = name
+            user['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
-                "message": f"Your order has been successfully processed, and a payment of ${round(curent_user['money'], 2)} has been debited.",
+                "message": f"Your order has been successfully processed, and a payment of ${round(user['money'], 2)} has been debited.",
                 "read": False
             })
-            curent_user['spent'] += sum
+            user['spent'] += total_sum
             save_users(users) 
 
             # მეილზე გაგზავნა
-            text=f'Your order sucsesfully ordered! \n \n Pay: {round(sum, 2)}$ \n Balance: {round(curent_user['money'], 2)}$ \n Order number: {order_number}'
+            text=f'Your order sucsesfully ordered! \n \n Pay: {round(total_sum, 2)}$ \n Balance: {round(user['money'], 2)}$ \n Order number: {order_number}'
 
-            send_email(curent_user['email'], text)
+            send_email(user['email'], text)
 
             return jsonify({'success': 'Payment successful'}), 200
         

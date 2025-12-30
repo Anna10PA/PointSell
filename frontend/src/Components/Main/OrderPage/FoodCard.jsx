@@ -1,10 +1,21 @@
 import React from 'react'
 
-function FoodCard({image}) {
+function FoodCard({ image, name, price, count }) {
   return (
-    <div>
-      <img src={image} alt="" />
-      
+    <div className='border border-gray-400 p-3 rounded-2xl flex items-center w-full justify-between pr-8'>
+      <div className='flex items-center gap-5'>
+        <img src={image} alt="" className='w-20 h-20 object-cover rounded-2xl' />
+        <div className='flex items-center gap-3 font-bold text-xl'>
+          <h1>
+            {name}
+          </h1>
+          <h2>
+            X {count}
+          </h2>
+        </div>
+
+      </div>
+      <h1 className='text-xl font-bold text-[#f67f20]'>${(price * count).toFixed(2)}</h1>
     </div>
   )
 }

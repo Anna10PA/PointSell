@@ -105,7 +105,7 @@ function Deliver() {
         let orderData = {
             order_number: curentUser?.curent_cart?.order,
             subtotal: Number(curentUser?.curent_cart?.sum?.subtotal) || 0,
-            change:  Number(curentUser?.curent_cart?.sum?.change) || 0,
+            change: Number(curentUser?.curent_cart?.sum?.change) || 0,
             discount: !errors.promo_code ? Number(curentUser?.curent_cart?.sum?.discount) + sum * 70 / 100 : Number(curentUser?.curent_cart?.sum?.discount) || 0,
             tax: (Number(deliverInfo.distance) * 2 + 1.5) || 0,
             phone: Number(data.number),
@@ -145,7 +145,7 @@ function Deliver() {
             console.error(error)
             navigate('/payment', {
                 state: {
-                    text: error,
+                    text: "Connection error with server",
                     isPay: false
                 }
             })
