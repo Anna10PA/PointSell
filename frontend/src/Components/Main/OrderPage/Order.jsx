@@ -119,7 +119,7 @@ function Order() {
                             {curentOrd ? `Order #${curentOrd.toUpperCase()}` : ''}
                         </h2>
                     </header>
-                    <div className={`w-full h-[75vh] py-5 ${!curentOrd ? 'flex items-center justify-center' : ''}`}>
+                    <div className={`w-full py-5 ${!curentOrd ? 'flex items-center justify-center' : ''}`}>
                         {
                             curentOrd ?
                                 <div className="h-full flex flex-col items-start w-full gap-4 mt-2">
@@ -143,7 +143,7 @@ function Order() {
                                         </div>
                                     </div>
                                     <h1 className="font-bold text-xl mt-5">Orders</h1>
-                                    <div className="flex flex-col gap-3 items-start w-full">
+                                    <div className="flex flex-col gap-3 items-start w-full overflow-auto h-[50vh]">
                                         {
                                             (chosenOrd?.cart || []).map((item, index) => {
                                                 let product = allProduct.find(elem => elem.Id === item.Id)

@@ -10,6 +10,7 @@ import AddProductPage from "./Components/Main/AllProduct/AddProductPage"
 import Costumers from "./Components/Main/Costumers/Costumers"
 import PaymentResult from "./Components/Main/Home/PaymentResult"
 import Order from "./Components/Main/OrderPage/Order"
+import Table from './Components/Main/Home/Table.jsx'
 
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { GoogleOAuthProvider } from '@react-oauth/google'
@@ -26,12 +27,13 @@ function App() {
             <Route path="/products" element={<AllProduct />} />
             <Route path="/posts" element={<Post />} />
             <Route path='/add_post' element={<AddPost />} />
-            <Route path='/order_type' element={<OrderType />} />
+            <Route path='/order' element={<OrderType />} />
             <Route path='/order/deliver' element={<Deliver />} />
+            <Route path='/order/table' element={< Table />} />
             <Route path="/add_product" element={<AddProductPage />} />
             <Route path="/costumers" element={<Costumers />} />
             <Route path='/payment' element={<PaymentResult />} />
-            <Route path='/orders' element={<Order/>} />
+            <Route path='/orders' element={<Order />} />
           </Routes>
         </BrowserRouter>
       </GoogleOAuthProvider>

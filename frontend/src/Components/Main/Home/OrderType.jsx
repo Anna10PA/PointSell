@@ -16,7 +16,7 @@ function OrderType() {
                 </Link>
                 <section className="w-full flex items-center justify-center gap-10">
                     <div className="border border-gray-400 rounded-2xl p-7 cursor-pointer max-w-100 w-full flex flex-col items-center gap-10 shadow-[0px_10px_0px_rgb(0,0,0)] duration-200 hover:-translate-y-5 hover:shadow-[0px_30px_0px_rgb(0,0,0)] pb-10" onClick={()=> {
-                        navigate('/order')
+                        navigate('/order/table')
                     }}>
                         <img src="https://i.pinimg.com/736x/11/87/0a/11870ac440914fed6af9357df74c2b97.jpg" alt="table" className="w-full h-50 object-cover" />
                         <h1 className="w-full text-center font-bold text-xl">Taking it on the spot</h1>

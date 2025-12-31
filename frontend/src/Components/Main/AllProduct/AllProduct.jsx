@@ -27,7 +27,7 @@ function AllProduct() {
     return (
         <>
             <Navigation />
-            <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
+            <main className="w-full h-[98vh] flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Product</h1>
                     <Link to='/add_product'>

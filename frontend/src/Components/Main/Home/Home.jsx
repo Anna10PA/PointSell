@@ -136,7 +136,7 @@ function Home() {
                 })
             })
             if (res.ok) {
-                navigate('/order_type')
+                navigate('/order')
             }
         }catch(e) {
             console.error(e)

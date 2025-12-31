@@ -7,7 +7,7 @@ function Item({image, info, name, info2, info3, info4, price}) {
     return (
         <tr>
             <td className='flex items-center gap-3 px-5 py-3 border border-gray-100'>
-                <img src={image ? image : 'example.png'} alt={image ? image : 'example.png'} className='h-15 w-15 object-cover rounded-xl' />
+                <img src={image ? image : 'https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg'} alt={image ? image : 'https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg'} className='h-15 w-15 object-cover rounded-xl' />
                 <h1 className='font-bold'>{name ? name : 'loading . . .'}</h1>
             </td>
             <td className='border border-gray-200 px-5 text-center text-green-500 font-bold'>

@@ -429,7 +429,7 @@ def pay():
             user['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
-                "message": f"Your order has been successfully processed, and a payment of ${round(user['money'], 2)} has been debited.",
+                "message": f"Your order has been successfully processed, and a payment of ${total_sum} has been debited. \n Curent Balance is ${round(user['money'], 2)}",
                 "read": False
             })
             user['spent'] += total_sum

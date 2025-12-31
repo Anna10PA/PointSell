@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import DiscountNitification from "./DiscountNitification"
 
-function Deliver() {
+function Table() {
     let [curentUser, setCurentUser] = useState(null)
     let { register, handleSubmit, reset, formState: { errors }, watch } = useForm({
         mode: "onBlur"
@@ -57,8 +57,6 @@ function Deliver() {
                 setCurentUser(final)
                 reset({
                     name: final.name || '',
-                    number: final.phone || '',
-                    address: final.address || ''
                 })
             }
         }
@@ -67,49 +65,13 @@ function Deliver() {
     }, [reset])
 
 
-    // მიტანის სერვისის თანხის გამოთვლა + მისამართის შემოწმება
-    let taxCount = async (userAddress) => {
-        try {
-            let res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(userAddress)}&format=json&limit=1&countrycodes=ge`)
-            let result = await res.json()
-
-            if (result.length === 0) return 'Address is not correct'
-
-            // console.log(result)
-            let locLat = result[0].lat
-            let locLon = result[0].lon
-
-
-            let resultDeliver = await fetch(`https://router.project-osrm.org/route/v1/driving/44.7517260,41.7247267;${locLon},${locLat}?overview=false`)
-            let info = await resultDeliver.json()
-            // console.log(info)
-
-            if (info.code !== 'Ok') return "Sorry, not working"
-
-
-            let distanceKm = (info.routes[0].distance / 1000).toFixed(1)
-            let durationMin = Math.round(info.routes[0].duration / 60)
-
-            setDeliverInfo({
-                distance: distanceKm,
-                duration: durationMin
-            })
-            return true
-        } catch (error) {
-            console.error(error)
-            return false
-        }
-    }
-
-
     // გადახდა
     let promoCodeInput = watch('promo_code')
     let subtotal = Number(curentUser?.curent_cart?.sum?.subtotal) || 0
     let change = Number(curentUser?.curent_cart?.sum?.change) || 0
-    let tax = deliverInfo.distance ? (Number(deliverInfo.distance) * 2 + 1.5) : 1.5
-    let discount = Number(curentUser?.curent_cart?.sum?.discount)
+    let discount = Number(curentUser?.curent_cart?.sum?.discount) || 0
 
-    let sum = subtotal + change + tax - discount
+    let sum = subtotal + change - discount
     let discountValue = discount
 
     if (promoCodeInput === promoCode) {
@@ -131,9 +93,6 @@ function Deliver() {
             subtotal: subtotal,
             change: change,
             discount: Number(discountValue),
-            tax: tax,
-            phone: Number(data.number),
-            address: data.address,
             name: data.name
         }
 
@@ -200,7 +159,7 @@ function Deliver() {
                 <form className="flex flex-col gap-3" onSubmit={handleSubmit((data) => {
                     onSubmit(data)
                 })}>
-                    <div className='grid grid-cols-3 gap-5'>
+                    <div className='grid grid-cols-2 gap-5'>
                         <div className='flex items-start gap-3 flex-col'>
                             <label htmlFor="fullname" className='font-bold text-lg'>
                                 Recipent:
@@ -221,37 +180,7 @@ function Deliver() {
                             />
                             <span className='text-[red] font-semibold'>{errors.name ? errors.name.message : ''}</span>
                         </div>
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="PhoneNumber" className='font-bold text-lg'>
-                                Phone Number:
-                            </label>
-                            <input type="text" placeholder='Enter Phone Number' name='PhoneNumber' id='PhoneNumber' className={`order-gray-400 border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] ${errors.number ? 'border-red-600 border-2' : 'border-gray-400'}`}
-                                {...register('number',
-                                    {
-                                        required: "Enter your Phone number",
-                                        minLength: {
-                                            value: 9,
-                                            message: 'Must be number and min length 9'
-                                        },
-                                        validate: {
-                                            error_1: (element) => {
-                                                if (!element || typeof element !== 'string') return true
-                                                for (let i of element) {
-                                                    if (!'1234567890'.includes(i)) {
-                                                        return 'Must be number'
-                                                    }
-                                                }
-                                                return true
-                                            },
-                                            error_2: async (number) => {
-                                                return await checkNumber(number)
-                                            }
-                                        }
-                                    })} />
-                            <span className='text-[red] font-semibold'>
-                                {errors.number ? errors.number.message : ''}
-                            </span>
-                        </div>
+                        
                         <div className='flex items-start gap-3 flex-col'>
                             <label htmlFor="Code" className='font-bold text-lg'>
                                 Code:
@@ -270,44 +199,7 @@ function Deliver() {
                             </div>
                             <span className='text-[red] font-semibold'>{errors.promo_code ? errors.promo_code.message : ''}</span>
                         </div>
-                        <div className='flex items-start gap-3 flex-col col-start-1 col-end-3'>
-                            <label htmlFor="Address" className='font-bold text-lg' >
-                                Address:
-                            </label>
-                            <textarea name="Address" id="Address" placeholder='Enter Address' className={`border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] min-h-20 max-h-20 ${errors.address ? 'border-red-600 border-2' : 'border-gray-400 '}`}
-                                {...register('address', {
-                                    required: 'Enter Address',
-                                    validate: async (value) => {
-                                        return await taxCount(await value)
-                                    }
-                                })}></textarea>
-                            <span className='text-[red] font-semibold'>
-                                {errors.address ? errors.address.message : ''}
-                            </span>
-                        </div>
-                        <div className="rounded-lg border border-gray-400 p-4 flex items-start justify-start gap-3 w-full max-h-min">
-                            <div className="w-[50%]">
-                                <div className="flex items-center gap-4 text-gray-400 font-semibold">
-                                    <h1>Duration:</h1>
-                                    <h1>{deliverInfo.duration || ". . ."} m</h1>
-                                </div>
-                                <div className="flex items-center gap-4 text-gray-400 font-semibold">
-                                    <h1>Distance:</h1>
-                                    <h1>{deliverInfo.distance || '. . .'} km</h1>
-                                </div>
-                                <div className="flex items-center gap-4 text-[#f67f20] font-bold text-xl mt-3">
-                                    <h3>Tax:</h3>
-                                    <h3>{deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5).toFixed(2) : 0}$</h3>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-xl">Rules:</h3>
-                                <div className="mt-2 font-semibold text-gray-400">
-                                    <p>Start = $1.50</p>
-                                    <p>1 km = $2.00</p>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <ProductAndChack curentUser={curentUser} tax={deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5) : 1.5} discount={discountValue} hasVIPDiscount={gotDisc} />
                 </form>
@@ -316,4 +208,4 @@ function Deliver() {
     )
 }
 
-export default Deliver
+export default Table
