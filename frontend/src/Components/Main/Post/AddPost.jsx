@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import Navigation from '../../../MiniComponents/Navigation'
 import { useNavigate, Link } from 'react-router-dom'
 
 function AllPost() {
@@ -48,7 +47,7 @@ function AllPost() {
                 setText("")
                 setView(null)
                 setFile(null)
-                navigate('/posts')
+                navigate('/main/posts')
             }
         } catch (error) {
             console.error("Error sending post:", error)
@@ -56,11 +55,10 @@ function AllPost() {
     }
 
     return (
-        <div className='w-full h-full flex items-center relative'>
-            <Navigation />
-            <main className='w-full h-full flex items-center justify-center flex-col gap-10 '>
-                <Link to='/posts'>
-                    <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-35 cursor-pointer hover:bg-orange-400 duratuion-100'>
+        <main className='w-full flex items-center relative h-[98vh]'>
+            <section className='w-full flex items-center justify-center flex-col gap-10 '>
+                <Link to='/main/posts'>
+                    <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100'>
                         <i className="fa-solid fa-arrow-left"></i>
                     </button>
                 </Link>
@@ -117,8 +115,8 @@ function AllPost() {
                         </button>
                     </div>
                 </form>
-            </main>
-        </div >
+            </section>
+        </main >
     )
 }
 

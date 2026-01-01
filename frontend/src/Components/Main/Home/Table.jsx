@@ -1,4 +1,3 @@
-import Navigation from "../../../MiniComponents/Navigation"
 import ProductAndChack from "./ProductAndChack"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -136,7 +135,6 @@ function Table() {
 
     return (
         <>
-            <Navigation />
             {
                 openMessage ?
                     < DiscountNitification close={() => {

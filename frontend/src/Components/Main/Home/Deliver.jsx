@@ -149,7 +149,7 @@ function Deliver() {
 
             let result = await response.json()
             if (response.ok) {
-                navigate('/payment', {
+                navigate('/main/order/deliver/payment', {
                     state: {
                         text: result.success,
                         order: curentUser?.curent_cart?.order,
@@ -157,7 +157,7 @@ function Deliver() {
                     }
                 })
             } else {
-                navigate('/payment', {
+                navigate('/main/order/deliver/payment', {
                     state: {
                         text: result.error,
                         isPay: false
@@ -177,7 +177,6 @@ function Deliver() {
 
     return (
         <>
-            <Navigation />
             {
                 openMessage ?
                     < DiscountNitification close={() => {
@@ -188,7 +187,7 @@ function Deliver() {
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative">
                     <h1 className="text-3xl font-bold">
-                        Order #{curentUser ?
+                        Order #{curentUser !== null ?
                             curentUser.curent_cart.order.toUpperCase() : 'Loading . . . '}
                     </h1>
                     <Link to='/order_type'>

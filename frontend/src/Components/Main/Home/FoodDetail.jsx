@@ -64,7 +64,6 @@ function FoodDetail({ allInfo, open }) {
           </h1>
         </div>
       </div>
-      {/* <h1 className='absolute font-bold right-5 bottom-4 max-md:left-5 max-md:top-5 text-gray-400 max-md:bg-[rgba(255,255,255,0.74)] max-md:h-min max-md:w-max max-md:px-4 rounded py-1.5'>#{allInfo.Id}</h1> */}
     </div>
   )
 }

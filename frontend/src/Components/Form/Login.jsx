@@ -30,7 +30,7 @@ function Login() {
       let data = await res.json()
 
       if (res.ok) {
-        navigation('/home')
+        navigation('/main/home')
       } else {
         setMessage(data.error || 'Google Login Failed')
       }
@@ -63,7 +63,7 @@ function Login() {
             let final = await result.json()
 
             if (result.ok) {
-              navigation('/home')
+              navigation('/main/home')
             } else {
               setMessage(final.error || 'Something went wrong')
             }

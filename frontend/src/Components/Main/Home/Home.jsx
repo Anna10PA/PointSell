@@ -1,14 +1,15 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Card from "./Card"
 import { useForm } from "react-hook-form"
 import BgBlack from "../../../MiniComponents/BgBlack"
 import CartCard from "./CartCard"
-import Navigation from "../../../MiniComponents/Navigation"
+import { Info } from "../Main"
 
 
 function Home() {
-    let [product, setProduct] = useState([])
+    let { curentUser, getCurentUser, allProduct, getAllProduct } = useContext(Info)
+
     let navigate = useNavigate()
     let { register, watch } = useForm({
         defaultValues: {
@@ -21,8 +22,6 @@ function Home() {
 
     let [openDetail, setOpenDetail] = useState(false)
     let [foodInfo, setFoodInfo] = useState([])
-    let [client, setClient] = useState({ curent_cart: { cart: [] } })
-    let [allProduct, setAllProduct] = useState([])
 
 
     // შავი გვერდი
@@ -31,33 +30,10 @@ function Home() {
         setOpenDetail(!isOpen)
     }
 
-    // ამჟამინდელი მომხმარებლის ინფორმაციების წამოღება
-    let curentUser = async () => {
-        let result = await fetch('http://localhost:5000/get_current_user', {
-            method: 'GET',
-            credentials: 'include'
-        })
-        let final = await result.json()
-        if (result.ok) {
-            setClient(final)
-        }
-    }
 
     // ყველა პროდუქტის ინფორმაციის წამოღება
     useEffect(() => {
-        async function allProduct() {
-            let result = await fetch('http://localhost:5000/product20list', {
-                method: 'GET',
-                credentials: 'include'
-            })
-            let final = await result.json()
-            if (result.ok) {
-                setProduct(final)
-                setAllProduct(final)
-            }
-            await curentUser()
-        }
-        allProduct()
+        getAllProduct()
     }, [])
 
 
@@ -73,7 +49,7 @@ function Home() {
             })
 
             if (res.ok) {
-                await curentUser()
+                await getCurentUser()
             }
         } catch (error) {
             console.error(error)
@@ -87,9 +63,9 @@ function Home() {
         let change = 0
         let disc = 0
 
-        if (client.curent_cart?.cart?.length > 0) {
-            client.curent_cart.cart.map((item, _) => {
-                return product.map((prod, _) => {
+        if (curentUser?.curent_cart?.cart?.length > 0) {
+            curentUser?.curent_cart?.cart.map((item, _) => {
+                return allProduct.map((prod, _) => {
                     if (item.Id === prod.Id) {
                         total += (Number(prod.price) * Number(item.count))
                         change += 1.5
@@ -105,14 +81,14 @@ function Home() {
         setSum(total)
         setDiscount(disc)
 
-    }, [client, product])
+    }, [curentUser, allProduct])
 
 
     // მოძებნა პროდუქტის
     let searchProduct = watch('product')
-    let filteredProducts = product.filter((item) => {
+    let filteredProducts = allProduct?.filter((item) => {
         if (!searchProduct.trim()) {
-            return product
+            return allProduct
         }
         return item.product_name.toLowerCase().includes(searchProduct.toLowerCase().trim())
     })
@@ -136,9 +112,9 @@ function Home() {
                 })
             })
             if (res.ok) {
-                navigate('/order')
+                navigate('/main/order')
             }
-        }catch(e) {
+        } catch (e) {
             console.error(e)
         }
     }
@@ -150,7 +126,6 @@ function Home() {
                 <BgBlack allInfo={foodInfo} open={setOpenDetail} /> :
                 null
             }
-            <Navigation />
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">
@@ -160,7 +135,7 @@ function Home() {
                         <input type="text" placeholder="Search Anything Here" className="w-full outline-0 px-5 py-2" {...register('product')} />
                         <i className="fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3"></i>
                     </form>
-                    <Link to='/notification'>
+                    <Link to='/main/notification'>
                         <div className="min-w-12 min-h-12 bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100">
                             <i className="fa-solid fa-bell"></i>
                         </div>
@@ -172,8 +147,8 @@ function Home() {
                     <h2 className="font-bold text-xl bg-white w-full">Special Menu For You</h2>
                     <section className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh]">
                         {
-                            filteredProducts.length !== 0 ?
-                                filteredProducts.map((e, index) => {
+                            filteredProducts?.length !== 0 ?
+                                filteredProducts?.map((e, index) => {
                                     return <Card
                                         img={e.product_image}
                                         title={e.product_name}
@@ -185,7 +160,7 @@ function Home() {
                                         }}
                                         discount={e.discount}
                                         id={e.Id}
-                                        update={curentUser}
+                                        update={getCurentUser}
                                         key={index} />
                                 }) :
                                 <div>
@@ -205,16 +180,16 @@ function Home() {
 
             {/* კალათა */}
             <aside className="h-full border-l border-gray-300 min-h-screen max-w-[370px] w-full max-lg:hidden px-5 py-3 flex items-start flex-col gap-4 relative">
-                {client.curent_cart.cart.length > 0 ?
+                {curentUser?.curent_cart?.cart.length > 0 ?
                     <div className="w-full h-full ">
                         <div className="flex items-center justify-between gap-2 w-full mb-3">
-                            <h1 className="font-bold text-2xl py-3">Order #{client.curent_cart.order?.toUpperCase() || 'F67F20'}</h1>
+                            <h1 className="font-bold text-2xl py-3">Order #{curentUser?.curent_cart.order?.toUpperCase() || 'F67F20'}</h1>
                             <i className="fa-solid fa-trash-can cursor-pointer text-2xl duration-100 hover:text-red-600 " onClick={cleanCart}></i>
                         </div>
                         <div className="flex items-start flex-col gap-4 overflow-auto h-[50vh] w-full pr-3 pt-4">
                             {
-                                client.curent_cart.cart.map((item, index) => {
-                                    return allProduct.map((prod, _) => {
+                                curentUser?.curent_cart?.cart.map((item, index) => {
+                                    return allProduct?.map((prod, _) => {
                                         if (item.Id === prod.Id) {
                                             return <CartCard
                                                 name={prod.product_name}
@@ -222,7 +197,7 @@ function Home() {
                                                 price={prod.price}
                                                 img={prod.product_image}
                                                 count={item.count}
-                                                update={curentUser}
+                                                update={getCurentUser}
                                                 id={item.Id}
                                             />
                                         }
@@ -250,7 +225,7 @@ function Home() {
                                     <h1>${(sum + Change - discount).toFixed(2)}</h1>
                                 </div>
                             </div>
-                            <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 mt-5 cursor-pointer" onClick={()=> {
+                            <button className="bg-[#F67F20] text-white px-5 py-3 w-full rounded-xl font-bold tracking-tight duration-100 hover:bg-amber-500 mt-5 cursor-pointer" onClick={() => {
                                 paySum(sum, Change, discount)
                             }}>Place Order</button>
                         </div>

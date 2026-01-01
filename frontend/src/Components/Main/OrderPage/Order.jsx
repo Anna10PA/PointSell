@@ -1,14 +1,13 @@
-import Navigation from "../../../MiniComponents/Navigation"
 import FoodCard from "./FoodCard"
 import OrderCard from "./OrderCard"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { Info } from "../Main"
 
 function Order() {
     let [orders, setOrders] = useState([])
-    let [client, setClient] = useState({})
     let [curentOrd, setCurentOrd] = useState(null)
-    let [allProduct, setAllProduct] = useState([])
     let [chosenOrd, setChosenOrd] = useState(null)
+    let { allProduct, curentUser } = useContext(Info)
 
 
     // შეკვეთების წამოღება
@@ -31,38 +30,6 @@ function Order() {
     }, [])
 
 
-    // ყველა პროდუქტი
-    useEffect(() => {
-        async function allProduct() {
-            let result = await fetch('http://localhost:5000/product20list', {
-                method: 'GET',
-                credentials: 'include'
-            })
-            let final = await result.json()
-            if (result.ok) {
-                setAllProduct(final)
-            }
-        }
-        allProduct()
-    }, [])
-
-
-    // ამჟამინდელი მომხმარებელი
-    useEffect(() => {
-        let curentUser = async () => {
-            let result = await fetch('http://localhost:5000/get_current_user', {
-                method: 'GET',
-                credentials: 'include'
-            })
-            let final = await result.json()
-            if (result.ok) {
-                setClient(final)
-            }
-        }
-        curentUser()
-    }, [])
-
-
     // ღილაკით არჩეული შეკვეთა
     let curentOrder = (e) => {
         setCurentOrd(e)
@@ -79,7 +46,6 @@ function Order() {
 
     return (
         <>
-            <Navigation />
             <main className="w-full h-full flex items-start px-10 py-5 gap-10 ">
                 <section className="w-[50%]">
                     <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
@@ -101,8 +67,8 @@ function Order() {
                                                 order={item.order}
                                                 type={item.type}
                                                 pay={item.pay}
-                                                userOrders={client?.orders}
-                                                user={client?.email}
+                                                userOrders={curentUser?.orders}
+                                                user={curentUser?.email}
                                                 onClick={curentOrder}
                                                 show={curentOrd || false}
                                             />
@@ -116,7 +82,7 @@ function Order() {
                 <section className="w-[50%]">
                     <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] border-b border-gray-400">
                         <h2 className="text-3xl font-bold">
-                            {curentOrd ? `Order #${curentOrd.toUpperCase()}` : ''}
+                            {curentOrd ? `Order #${curentOrd}` : ''}
                         </h2>
                     </header>
                     <div className={`w-full py-5 ${!curentOrd ? 'flex items-center justify-center' : ''}`}>
@@ -149,13 +115,13 @@ function Order() {
                                                 let product = allProduct.find(elem => elem.Id === item.Id)
                                                 if (!product) return null
 
-                                                return <FoodCard 
-                                                key={index} 
-                                                image={product.product_image}
-                                                name={product.product_name}
-                                                price={product.price}
-                                                count={item.count}
-                                                 />
+                                                return <FoodCard
+                                                    key={index}
+                                                    image={product.product_image}
+                                                    name={product.product_name}
+                                                    price={product.price}
+                                                    count={item.count}
+                                                />
                                             })
                                         }
                                     </div>

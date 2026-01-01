@@ -1,5 +1,5 @@
 import Comment from "./Comment"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCont } from "react"
 
 function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
 

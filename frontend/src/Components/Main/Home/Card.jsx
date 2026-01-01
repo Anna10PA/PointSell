@@ -16,7 +16,9 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
             })
 
             if (res.ok) {
-                update()
+                if (typeof update === 'function') {
+                    await update()
+                }
             }
         } catch (error) {
             console.error(error)
@@ -35,7 +37,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
             <div className='flex items-center justify-between w-full gap-3'>
                 <h1 className='font-bold text-lg'>{title}</h1>
                 <div className="flex items-center gap-4 ">
-                    <h2 className={`${discount ?  'text-gray-400 line-through decoration-1' : 'hidden'}`}>
+                    <h2 className={`${discount ? 'text-gray-400 line-through decoration-1' : 'hidden'}`}>
                         ${discount ? price.toFixed(2) : null}
                     </h2>
                     <h2 className='font-bold text-lg text-[#F67F20]'>

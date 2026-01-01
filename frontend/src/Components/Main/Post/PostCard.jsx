@@ -1,42 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { Info } from '../Main'
 
 function PostCard({ info, sendInfo }) {
-    const [client, setClient] = useState([])
-    const [curentUser, setCurentUser] = useState([])
     const [likesCount, setLikesCount] = useState(info.like ? info.like.length : 0)
     const [isLiked, setIsLiked] = useState(false)
     const [View, setView] = useState(info.view ? info.view.length : 0)
     const curentTime = new Date()
 
+    const { managerInfo, curentUser } = useContext(Info)
 
-    // აჟამინდელი მომხმარებელი
+
     useEffect(() => {
-        async function getCurentUser() {
-            try {
-                let res = await fetch('http://localhost:5000/get_current_user', {
-                    method: "GET",
-                    credentials: 'include'
-                })
-                let result = await res.json()
-                if (!res.ok) {
-                    return "something went wrong"
-                } else {
-                    setCurentUser(result)
-                    if (info.like && result.email) {
-                        setIsLiked(info.like.includes(result.email))
-                    }
-                }
-            } catch (e) {
-                console.error(e)
+        if (curentUser) {
+            if (info.like && curentUser.email) {
+                setIsLiked(info.like.includes(curentUser.email))
             }
         }
-        getCurentUser()
-    }, [])
+    }, [curentUser])
+
 
     // ნახვები
     const view = async () => {
         if (!curentUser) return
-
         try {
             const result = await fetch('http://127.0.0.1:5000/view', {
                 method: 'POST',
@@ -46,9 +31,7 @@ function PostCard({ info, sendInfo }) {
                     email: curentUser.email,
                 }),
             })
-
             let data = await result.json()
-
             if (result.ok) {
                 setView(data.view)
             }
@@ -56,18 +39,6 @@ function PostCard({ info, sendInfo }) {
             console.error(error)
         }
     }
-
-    // ჩემი / მენეჯერის ინფორმაცია
-    useEffect(() => {
-        async function getManagerInfo() {
-            let result = await fetch('http://localhost:5000/menegers_info')
-            let final = await result.json()
-            if (result.ok) {
-                setClient(final)
-            }
-        }
-        getManagerInfo()
-    }, [])
 
 
     // ლაიქები
@@ -92,7 +63,7 @@ function PostCard({ info, sendInfo }) {
                 setIsLiked(!data.status)
             }
         } catch (error) {
-            console.error("Like error:", error)
+            console.error(error)
         }
     }
 
@@ -101,15 +72,15 @@ function PostCard({ info, sendInfo }) {
         <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col items-start gap-4 max-w-[600px] max-lg:max-w-full'>
             <div className='flex items-center gap-5 justify-between w-full'>
                 <div className='flex items-center gap-4'>
-                    <img src={client?.profileUrl} alt={client?.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />
+                    <img src={managerInfo?.profileUrl} alt={managerInfo?.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />
                     <div className='leading-4.5'>
-                        <h1 className='font-bold'>{client?.name !== null ? client.name : client?.email.split('@')[0]}</h1>
+                        <h1 className='font-bold'>{managerInfo?.name !== null ? managerInfo?.name : managerInfo?.email.split('@')[0]}</h1>
                         <p className='text-sm text-gray-600 font-bold '>
-                            {client?.position}
+                            {managerInfo?.position}
                         </p>
                     </div>
                 </div>
-                <i className={` ${curentUser.position === "Manager" ? 'fa-solid fa-ellipsis-vertical ' : 'hidden'} text-2xl cursor-pointer`} onClick={() => {
+                <i className={` ${curentUser?.position === "Manager" ? 'fa-solid fa-ellipsis-vertical ' : 'hidden'} text-2xl cursor-pointer`} onClick={() => {
                     sendInfo("delete")
                 }}></i>
             </div>

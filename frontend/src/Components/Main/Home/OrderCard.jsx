@@ -1,34 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { Info } from '../Main'
 
 function OrderCard({ count, id }) {
-    let [allProductList, setAllProduct] = useState([])
     let [product, setProduct] = useState(null)
+    let {allProduct, getAllProduct} = useContext(Info)
 
+    getAllProduct()
+    
     useEffect(() => {
-        async function allProduct() {
-            let result = await fetch('http://localhost:5000/product20list', {
-                method: 'GET',
-                credentials: 'include'
-            })
-            let final = await result.json()
-            if (result.ok) {
-                setAllProduct(final)
-            }
-        }
-        allProduct()
-    }, [])
-
-
-    useEffect(() => {
-        if (allProductList.length > 0) {
-            for (let item of allProductList) {
+        if (allProduct?.length > 0) {
+            for (let item of allProduct) {
                 if (item.Id == id) {
                     setProduct(item)
                     break
                 }
             }
         }
-    }, [allProductList, id])
+    }, [allProduct, id])
 
     return (
         <div className='border border-gray-400 rounded-2xl p-3 flex items-center justify-between gap-5 pr-10 w-full'>

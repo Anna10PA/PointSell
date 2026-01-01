@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 function AddProductPage() {
     return (
         <>
-            <Navigation />
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Add Product</h1>

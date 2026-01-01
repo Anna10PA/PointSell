@@ -12,13 +12,13 @@ function Item({image, info, name, info2, info3, info4, price}) {
             </td>
             <td className='border border-gray-200 px-5 text-center text-green-500 font-bold'>
                 {info2 ? info2 : 'loading . . .'}
-                {curentPage === '/products' ? 's' : null}
+                {curentPage === '/main/products' ? 's' : null}
             </td>
             <td className='pl-4 text-gray-800 font-medium border-gray-200 border wrap-break-word'>
                 {info3 ? info3 : 'loading . . .'}
             </td>
             <td className='text-red-500 font-bold text-start border-gray-200 border px-5'>
-                {curentPage === '/products' ? '#' : null}
+                {curentPage === '/main/products' ? '#' : null}
                 {info4 ? info4 : 'loading . . .'}
             </td>
             <td className='border-gray-200 border px-5 text-[#F67F20] font-bold text-center'>

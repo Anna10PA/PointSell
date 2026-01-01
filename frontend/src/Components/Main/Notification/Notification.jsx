@@ -1,45 +1,17 @@
-import { useEffect, useState } from "react"
-import {useNavigate } from "react-router-dom"
-import Navigation from "../../../MiniComponents/Navigation"
+import { useEffect, useState, useContext } from "react"
 import NotificationCard from "./NotificationCard"
+import { Info } from "../Main"
 
 function Notification() {
+    let { curentUser } = useContext(Info)
     let [messages, setMessages] = useState([])
-    let navigation = useNavigate()
 
-    useEffect(() => {
-        async function getInfos() {
-            try {
-                let response = await fetch('http://localhost:5000/get_current_user', {
-                    credentials: 'include'
-                })
-
-                if (response.status === 401) {
-                    navigation('/')
-                }
-
-                if (!response.ok) {
-                    console.error(response.status)
-                    return 
-                }
-
-                let final = await response.json()
-
-                if (final.notification) {
-                    setMessages(final.notification)
-                }
-
-            } catch (error) {
-                console.error("Error fetching user data:", error)
-            }
-        }
-        getInfos()
-    }, [])
-    // console.log(messages)
+    useEffect(()=> {
+        setMessages(curentUser?.notification)
+    }, [curentUser])
 
     return (
         <>
-            <Navigation />
             <main className="w-full px-10 py-5 h-full">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Notification</h1>
@@ -47,16 +19,16 @@ function Notification() {
                 </header>
                 <section className="border-gray-300 rounded-2xl border  overflow-auto mt-3 h-[82vh]" >
                     {
-                        messages.length > 0 ? 
-                        messages.map((item, index) => {
-                            return <NotificationCard 
-                            key={index}
-                            date={item.date}
-                            time={item.time}
-                            message={item.message}
-                            />
-                        }) 
-                        : <h1 className="px-10 py-5 text-center w-full font-bold text-3xl">Loading . . . </h1>
+                        messages?.length > 0 ?
+                            messages?.map((item, index) => {
+                                return <NotificationCard
+                                    key={index}
+                                    date={item.date}
+                                    time={item.time}
+                                    message={item.message}
+                                />
+                            })
+                            : <h1 className="px-10 py-5 text-center w-full font-bold text-3xl">Loading . . . </h1>
                     }
                 </section>
             </main>

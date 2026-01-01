@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-import Navigation from "../../../MiniComponents/Navigation"
 import PostCard from "./PostCard"
 import BgBlack from "../../../MiniComponents/BgBlack"
+import { Info } from "../Main"
 
 function Post() {
-  const [allPost, setAllPost] = useState([])
-  const [curentUser, setCurentUser] = useState(null)
+  // const [allPost, setAllPost] = useState([])
+  const { curentUser, allUser, allPost, managerInfo } = useContext(Info)
   const [openDetail, setOpenDetail] = useState(false)
   const [post, setPostInfo] = useState([])
-  const [client, setClient] = useState('')
-  const [allUsers, setAllUsers] = useState([])
 
 
   // შავი ფონი
@@ -20,29 +18,6 @@ function Post() {
     setOpenDetail(modeType)
   }
 
-
-  // ამჟამინდელი მომხმარებელი + ყველა მომხმარებელი + ყველა პოსტი
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [postsRes, currentRes, usersRes, myInfoRes] = await Promise.all([
-          fetch('http://localhost:5000/check_posts', { credentials: 'include' }),
-          fetch('http://localhost:5000/get_current_user', { credentials: 'include' }),
-          fetch('http://localhost:5000/get_all_user', { credentials: 'include' }),
-          fetch('http://localhost:5000/menegers_info', { credentials: 'include' })
-        ])
-
-        if (postsRes.ok) setAllPost(await postsRes.json())
-        if (currentRes.ok) setCurentUser(await currentRes.json())
-        if (usersRes.ok) setAllUsers(await usersRes.json())
-        if (myInfoRes.ok) setClient(await myInfoRes.json())
-      } catch (e) {
-        console.error(e)
-      }
-    }
-    fetchData()
-  }, [])
-
   return (
     <>
       {
@@ -50,18 +25,17 @@ function Post() {
           <BgBlack
             allInfo={post}
             open={() => setOpenDetail(false)}
-            client={client}
+            client={managerInfo}
             curentUser={curentUser}
-            allUsers={allUsers}
+            allUsers={allUser}
             mode={openDetail} /> : null
       }
-      <Navigation />
       <main className="w-full flex flex-col px-10 py-5 gap-3 h-full">
         <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
           <h1 className="text-3xl font-bold">
             Posts
           </h1>
-          <Link to='/add_post'>
+          <Link to='/main/add_post'>
             <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser?.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
               Add New Post
             </button>
@@ -69,8 +43,8 @@ function Post() {
         </header>
         <section className="w-full h-[80vh] overflow-auto scroll-none grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))]  gap-5">
           {
-            allPost.length > 0 ?
-              allPost.map((item, index) => {
+            allPost?.length > 0 ?
+              allPost?.map((item, index) => {
                 return <PostCard
                   info={item}
                   key={index}

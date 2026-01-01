@@ -5,7 +5,7 @@ function OrderCard({ order, type, pay, userOrders, user, onClick, show }) {
             userOrders?.includes(order) || user === 'futureana735@gmail.com' ? onClick(order) : null
         }}>
             <div className='flex items-center justify-between'>
-                <h1 className='font-bold text-xl'>Order #{order.toUpperCase()}</h1>
+                <h1 className='font-bold text-xl'>Order #{order?.toUpperCase()}</h1>
                 <h2 className={`${(userOrders?.includes(order) || user === 'futureana735@gmail.com') && show !== order ? 'text-[green] font-bold' : show === order && ( userOrders?.includes(order) || user === 'futureana735@gmail.com')? 'font-bold text-white' : userOrders?.includes(order) || user === 'futureana735@gmail.com'  ? 'bg-[#F5F5F5] hover:bg-gray-200' : 'hidden'}`}>${pay}</h2>
             </div>
             <div>
