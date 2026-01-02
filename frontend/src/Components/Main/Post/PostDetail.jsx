@@ -1,5 +1,5 @@
 import Comment from "./Comment"
-import { useState, useEffect, useCont } from "react"
+import { useState, useEffect } from "react"
 
 function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
 
@@ -140,7 +140,7 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
         <div className='flex items-center gap-3 w-full relative '>
           <img src={client.profileUrl} alt="" className='w-15 h-15 rounded-[50%]' />
           <div className='leading-4.5 w-full'>
-            <h1 className='font-bold'>{client.name}</h1>
+            <h1 className='font-bold'>{!client.name ? client.email.split('@')[0] : client.name}</h1>
             <p className='text-sm text-gray-600 font-bold'>
               {client.position}
             </p>

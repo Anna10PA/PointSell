@@ -69,7 +69,7 @@ function PostCard({ info, sendInfo }) {
 
 
     return (
-        <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col items-start gap-4 max-w-[600px] max-lg:max-w-full'>
+        <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col justify-between items-start gap-4 max-w-[600px] max-lg:max-w-full pb-10'>
             <div className='flex items-center gap-5 justify-between w-full'>
                 <div className='flex items-center gap-4'>
                     <img src={managerInfo?.profileUrl} alt={managerInfo?.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />
@@ -84,20 +84,22 @@ function PostCard({ info, sendInfo }) {
                     sendInfo("delete")
                 }}></i>
             </div>
-            <div>
-                <h1 className={`font-medium ${info.post ? 'line-clamp-1' : ''}`}>
-                    {info.title}
-                </h1>
-            </div>
-            {info.post ?
-                <div className='w-full rounded overflow-hidden max-h-[380px] h-full' onClick={() => {
-                    sendInfo("view")
-                    view()
-                }}>
-                    <img src={info.post} alt="" className='duration-200 hover:scale-[1.05] h-full w-full object-cover' />
+            <div className='h-full w-full flex flex-col items-start gap-5'>
+                <div>
+                    <h1 className={`font-medium ${info.post ? 'line-clamp-1' : ''}`}>
+                        {info.title}
+                    </h1>
                 </div>
-                : <div className='h-full'></div>
-            }
+                {info.post ?
+                    <div className='w-full rounded overflow-hidden max-h-[380px] h-full' onClick={() => {
+                        sendInfo("view")
+                        view()
+                    }}>
+                        <img src={info.post} alt="" className='duration-200 hover:scale-[1.05] h-full w-full object-cover' />
+                    </div>
+                    : <div className='h-full'></div>
+                }
+            </div>
             <div className='flex items-center justify-between w-full text-gray-600 text-[27px] px-3 mt-1'>
                 <i className={
                     `fa-heart cursor-pointer ${isLiked ? 'text-red-600 fa-solid' : 'text-gray-600 fa-regular'}

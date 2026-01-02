@@ -88,6 +88,11 @@ def save_posts(posts):
         json.dump(posts, file, indent=4, ensure_ascii=False)
 
 
+def save_products(product):
+    with open(All_product, 'w', encoding='utf-8') as file:
+        json.dump(product, file, indent=4, ensure_ascii=False)
+
+
 # შეკვეთებში დამატება
 def orders(order):
     order_list = []
@@ -656,7 +661,6 @@ def delete_post():
             return jsonify({'message': 'sucsessful!'}), 200
         
         except Exception as error:
-            print(error)
             return jsonify({'error': str(error)}) , 401
     else:
         return jsonify({'error': 'Post not found'}), 404
@@ -681,9 +685,78 @@ def current_user():
     return jsonify(user) if user else (jsonify({'error': 'Not found'}), 404)
 
 
+# შეტყობინების წაკითხვა
+def read_notification(typeRead):
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    all_users = check_users()
+    user = next((u for u in all_users if u['email'] == session['email']), None)
+
+    if not user:
+        return jsonify({'error': 'user not found'}), 404
+
+    notifications = user.get('notification')
+    if typeRead == '1':
+        if len(notifications) > 0 and not notifications[0].get('read'):
+            notifications[0]['read'] = True
+
+            save_users(all_users)
+            return jsonify({'message': 'sucsessful!'}), 200
+        
+        elif len(notifications) == 0:
+            return jsonify({'message': 'sucsessful!'}), 200
+        
+    elif typeRead == 'all':
+        if len(notifications) > 0:
+            for item in notifications:
+                if not item['read']:
+                    item['read'] = True
+            save_users(all_users)
+            return jsonify({'message': 'sucsessful!'}), 200
+    
+        elif len(notifications) == 0:
+            return jsonify({'message': 'sucsessful!'}), 200
+        
+        
+    return jsonify({'error': 'not found'}), 404
+
+
+# ბოლო მესიჯი
+@app.post('/last_notification')
+def last_notification():
+    return read_notification('1')
+
+
+# ყველა შეტყობინების ნახვა
+@app.post('/all_notification')
+def all_notification():
+    return read_notification('all')
+
+
+# პროდუქტის წაშლა
+@app.post('/delete_product')
+def delete_product():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.get_json()
+    product_id = data.get('id')
+    all_product = check_products()
+
+    product = next((p for p in all_product if p['Id'] == product_id), None)
+
+    if product:
+        all_product.remove(product)
+        save_products(all_product)
+        return jsonify({'message': 'sucsessful!'}), 200
+    return jsonify({'error': 'product not found'}), 404
+
+
 @app.get("/")
 def home():
     return "Flask is working for my luck! (((:"
+
 
 if __name__ == '__main__':
     app.run(debug=True)

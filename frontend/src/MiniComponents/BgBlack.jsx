@@ -27,6 +27,24 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
   }
 
 
+  // პროდუქტის წაშლის ფუნქცია
+  const deleteProduct = async () => {
+    try {
+      let res = await fetch('http://localhost:5000/delete_product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: allInfo }),
+        credentials: 'include'
+      })
+      if (res.ok) {
+        window.location.reload()
+      }
+    } catch(e) {
+      console.error(e)
+    }
+  }
+
+
   return (
     <div className="w-full h-full absolute z-10 bg-[rgba(0,0,0,0.77)] flex items-center justify-center">
       {curentLocation == '/home' && currentMonth == 11 ?
@@ -55,7 +73,15 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
                 client={client}
                 allUsers={allUsers}
                 curentUser={curentUser} />
-              : null
+              : curentLocation === '/main/products' && mode === 'delete_product' ?
+                <Warning
+                  open={open}
+                  title={'Delete This Product?'}
+                  message={'Are you sure, You want delete this Product?'}
+                  deleteFunction={deleteProduct}
+                />
+                : null
+
       }
     </div>
   )

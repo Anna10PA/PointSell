@@ -6,7 +6,6 @@ import BgBlack from "../../../MiniComponents/BgBlack"
 import { Info } from "../Main"
 
 function Post() {
-  // const [allPost, setAllPost] = useState([])
   const { curentUser, allUser, allPost, managerInfo } = useContext(Info)
   const [openDetail, setOpenDetail] = useState(false)
   const [post, setPostInfo] = useState([])

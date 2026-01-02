@@ -8,7 +8,7 @@ import { Info } from "../Main"
 
 
 function Home() {
-    let { curentUser, getCurentUser, allProduct, getAllProduct } = useContext(Info)
+    let { curentUser, getCurentUser, allProduct, getAllProduct, postReadNotification } = useContext(Info)
 
     let navigate = useNavigate()
     let { register, watch } = useForm({
@@ -120,6 +120,13 @@ function Home() {
     }
 
 
+    let notificatinClick = async (e) => {
+        e.preventDefault()
+        await postReadNotification('1')
+        navigate('/main/notification')
+    }
+
+
     return (
         <>
             {openDetail ?
@@ -136,8 +143,16 @@ function Home() {
                         <i className="fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3"></i>
                     </form>
                     <Link to='/main/notification'>
-                        <div className="min-w-12 min-h-12 bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100">
+                        <div className="min-w-12 min-h-12 bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100 relative" onClick={(e) => {
+                                notificatinClick(e)
+                            }}>
                             <i className="fa-solid fa-bell"></i>
+                            <div className={` ${curentUser?.notification?.filter(item => !item.read).length > 0 ? 'bg-white rounded-[50%] absolute top-1.5 right-1.5 text-[#f67f20] text-[10px] font-extrabold w-4 h-4 flex items-center justify-center border p-2' : 'hidden'}`}>
+                                {
+                                    curentUser?.notification?.length > 0 ?
+                                        (curentUser?.notification?.filter(item => !item.read).length > 9 ? '9+' : curentUser?.notification?.filter(item => !item.read).length) : null
+                                }
+                            </div>
                         </div>
                     </Link>
                 </header>

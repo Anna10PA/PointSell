@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
 import Table from "../../../MiniComponents/Table"
 import { Info } from "../Main"
 

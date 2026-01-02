@@ -1,6 +1,6 @@
 import Item from "./Item"
 
-function Table({col1, col2, col3, col4, col5, ApiInfo}) {
+function Table({col1, col2, col3, col4, col5, ApiInfo, func}) {
     return (
         <div className="rounded-2xl h-[83vh] relative overflow-y-auto border border-gray-200 ">
             <table className="w-full border-collapse rounded-2xl table-auto">
@@ -38,6 +38,7 @@ function Table({col1, col2, col3, col4, col5, ApiInfo}) {
                                 info3={item.product_description || item.address}
                                 info4={item.Id || item.email}
                                 price={item.price || item.spent}
+                                func={func}
                                 key={index} />
                         })
                         : null

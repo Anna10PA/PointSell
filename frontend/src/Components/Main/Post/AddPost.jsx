@@ -41,13 +41,12 @@ function AllPost() {
                 credentials: 'include'
             })
 
-            const result = await res.json()
-
             if (res.ok) {
                 setText("")
                 setView(null)
                 setFile(null)
                 navigate('/main/posts')
+                window.location.reload()
             }
         } catch (error) {
             console.error("Error sending post:", error)

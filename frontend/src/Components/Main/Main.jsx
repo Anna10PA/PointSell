@@ -21,19 +21,17 @@ import Order from "./OrderPage/Order"
 export let Info = createContext()
 
 function Main() {
-    const [isLoading, setIsLoading] = useState(true)
+    const [_, setIsLoading] = useState(true)
 
     let [curentUser, setCurentUser] = useState(null)
     let [allProduct, setAllProduct] = useState(null)
     let [allPost, setAllPost] = useState(null)
     let [allUser, setAllUser] = useState(null)
     let [managerInfo, setManagerInfo] = useState(null)
-    let [viewRes, setView] = useState(null)
-    let [likesCount, setLikesCount] = useState(null)
 
 
     // ამჟამინდელი მომხმარებლის ინფორმაცია
-    let getCurentUser = async () => {
+    async function getCurentUser() {
         let result = await fetch('http://localhost:5000/get_current_user', {
             method: 'GET',
             credentials: 'include'
@@ -55,7 +53,6 @@ function Main() {
         if (result.ok) {
             setAllProduct(final)
         }
-        await getCurentUser()
     }
 
 
@@ -107,6 +104,31 @@ function Main() {
     }
 
 
+    // შეტყობინების წაკითხვა
+    async function postReadNotification(readType) {
+        let url = readType == '1' ? 'last_notification' : 'all_notification'
+        if (!curentUser) return 
+
+        try {
+            let result = await fetch(`http://localhost:5000/${url}`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(curentUser)
+            })
+
+            if (result.ok) {
+                await getCurentUser()
+            }
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
+
+    // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
             setIsLoading(true)
@@ -123,9 +145,10 @@ function Main() {
         loadAllFunc()
     }, [])
 
+
     return (
         <div className="w-full flex items-start">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />
