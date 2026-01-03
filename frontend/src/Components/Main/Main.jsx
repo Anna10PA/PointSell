@@ -107,7 +107,7 @@ function Main() {
     // შეტყობინების წაკითხვა
     async function postReadNotification(readType) {
         let url = readType == '1' ? 'last_notification' : 'all_notification'
-        if (!curentUser) return 
+        if (!curentUser) return
 
         try {
             let result = await fetch(`http://localhost:5000/${url}`, {
@@ -122,7 +122,7 @@ function Main() {
             if (result.ok) {
                 await getCurentUser()
             }
-        } catch(e) {
+        } catch (e) {
             console.error(e)
         }
     }
@@ -162,6 +162,7 @@ function Main() {
                     <Route path="/add_product" element={<AddProductPage />} />
                     <Route path="/costumers" element={<Costumers />} />
                     <Route path='/order/deliver/payment' element={<PaymentResult />} />
+                    <Route path='/order/table/payment' element={<PaymentResult />} />
                     <Route path='/orders' element={<Order />} />
                 </Routes>
             </Info.Provider>

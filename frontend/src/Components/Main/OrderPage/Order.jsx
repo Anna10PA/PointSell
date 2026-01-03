@@ -103,8 +103,8 @@ function Order() {
                                             <h2 className="font-bold">{chosenOrd?.name}</h2>
                                         </div>
                                         <div className="flex items-center flex-col gap-1">
-                                            <h1 className="font-semibold text-gray-400 text-lg">Address</h1>
-                                            <h2 className="font-bold">{chosenOrd?.address}</h2>
+                                            <h1 className="font-semibold text-gray-400 text-lg">{chosenOrd?.address ? 'Address' : 'Table №'}</h1>
+                                            <h2 className="font-bold">{chosenOrd?.address ? chosenOrd?.address : chosenOrd?.table}</h2>
                                         </div>
                                         <div className="flex items-center flex-col gap-1">
                                             <h1 className="font-semibold text-gray-400 text-lg">Time</h1>

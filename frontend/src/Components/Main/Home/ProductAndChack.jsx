@@ -1,6 +1,10 @@
 import OrderCard from "./OrderCard"
+import { useLocation } from "react-router-dom"
 
 function ProductAndChack({curentUser, tax, discount, hasVIPDiscount, isSubmit}) {
+    let location = useLocation()
+    let curent_location = location.pathname
+
     return (
         <div className="flex items-start gap-5 relative">
             <div className="h-[40vh] overflow-auto flex flex-col items-start gap-3 w-full">
@@ -21,7 +25,7 @@ function ProductAndChack({curentUser, tax, discount, hasVIPDiscount, isSubmit}) 
                         <h1>Subtotal: </h1>
                         <h1>${curentUser ? Number(curentUser.curent_cart.sum.subtotal || 0).toFixed(2) : '0.00'}</h1>
                     </div>
-                    <div className="w-full flex items-center text-gray-400 justify-between font-semibold">
+                    <div className={`w-full flex items-center text-gray-400 justify-between font-semibold ${curent_location === '/main/order/table' ? 'hidden' : ''}`}>
                         <h1>Tax: </h1>
                         <h1>${tax.toFixed(2)}</h1>
                     </div>
@@ -36,7 +40,7 @@ function ProductAndChack({curentUser, tax, discount, hasVIPDiscount, isSubmit}) 
                 </div>
                 <div className="w-full flex items-center justify-between font-bold">
                     <h1>Total: </h1>
-                    <h1 className={`${hasVIPDiscount ? 'text-[#f67f20]' : 'text-black'}`}>${curentUser ? (curentUser.curent_cart.sum.subtotal + tax + curentUser.curent_cart.sum.change - Number(discount)).toFixed(2) : '0.00'}</h1>
+                    <h1 className={`${hasVIPDiscount ? 'text-[#f67f20]' : 'text-black'}`}>${curentUser ? ( curent_location === '/main/order/table' ? (Number(curentUser.curent_cart.sum.subtotal) + Number(curentUser.curent_cart.sum.change) - Number(discount)) : (curentUser.curent_cart.sum.subtotal + tax + curentUser.curent_cart.sum.change - Number(discount))).toFixed(2) : '0.00'}</h1>
                 </div>
                 <div className="w-full flex items-center gap-1 justify-between">
                     <button className={`h-12 bg-black text-white rounded font-semibold w-full cursor-pointer px-8 duration-100 hover:bg-gray-950 ${isSubmit ? 'cursor-not-allowed opacity-20' : 'cursor-pointer'}`} type="submit"

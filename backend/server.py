@@ -389,6 +389,8 @@ def pay():
     phone = data.get('phone')
     address = data.get('address')
     name = data.get('name')
+    table = int(data.get('table') or 0)
+    
 
     total_sum = round(((subtotal + change + tax) - discount), 2)
     user = next((u for u in users if u['email'] == session['email']), None)
@@ -408,10 +410,10 @@ def pay():
                 "pay": total_sum,
                 "isReady": False,
                 "time": current_time,
-                "type": 'online',
+                "type": 'online' if not table else 'table',
                 "name": name,
                 "address": address,
-                "table": None,
+                "table": table,
                 "ready_time": sum_time
             }
             orders(new_order)

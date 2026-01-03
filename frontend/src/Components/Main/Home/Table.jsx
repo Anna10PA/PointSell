@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import DiscountNitification from "./DiscountNitification"
+import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Table() {
     let [curentUser, setCurentUser] = useState(null)
@@ -14,34 +15,7 @@ function Table() {
     let promoCode = 'HelloUser2009'
     let [openMessage, setOpenMessage] = useState(false)
     let [gotDisc, setGotDisc] = useState(false)
-
-
-    // ნომრის შემოწმება
-    let checkNumber = async (userNumber) => {
-        const numStr = String(userNumber || "")
-
-        if (numStr.length !== 9 || !numStr.startsWith('5')) {
-            return "Number must be 9 digits and start with 5"
-        }
-
-        // console.log(result)
-        try {
-            let APIAccessKey = '429ca27b22f96212c97dd447d8e81ddf'
-            let res = await fetch(`https://apilayer.net/api/validate?access_key=${APIAccessKey}&number=995${userNumber}&country_code=GE&format=1`)
-            if (res.status === 429) return true
-            let result = await res.json()
-
-            if (result.valid) {
-                return true
-            } else {
-                return "Number is not correct"
-            }
-
-        } catch (e) {
-            console.error(e)
-            return true
-        }
-    }
+    let [submit, setSubmit] = useState(false)
 
 
     // ამჟამინდელი მომხმარებლის ინფორმაცია
@@ -87,11 +61,13 @@ function Table() {
     }, [promoCodeInput])
 
     let onSubmit = async (data) => {
+        setSubmit(true)
         let orderData = {
             order_number: curentUser?.curent_cart?.order,
             subtotal: subtotal,
             change: change,
             discount: Number(discountValue),
+            table: data.table_number,
             name: data.name
         }
 
@@ -107,29 +83,32 @@ function Table() {
 
             let result = await response.json()
             if (response.ok) {
-                navigate('/payment', {
+                navigate('/main/order/table/payment', {
                     state: {
                         text: result.success,
                         order: curentUser?.curent_cart?.order,
                         isPay: true
                     }
                 })
+                setSubmit(false)
             } else {
-                navigate('/payment', {
+                navigate('/main/order/table/payment', {
                     state: {
                         text: result.error,
                         isPay: false
                     }
                 })
+                setSubmit(false)
             }
         } catch (error) {
             console.error(error)
-            navigate('/payment', {
+            navigate('/main/order/table/payment', {
                 state: {
                     text: "Connection error with server",
                     isPay: false
                 }
             })
+            setSubmit(false)
         }
     }
 
@@ -142,22 +121,26 @@ function Table() {
                     }} />
                     : null
             }
+            {
+                submit ?
+                    <BgBlack /> : null
+            }
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative">
                     <h1 className="text-3xl font-bold">
                         Order #{curentUser ?
-                            curentUser.curent_cart.order.toUpperCase() : 'Loading . . . '}
+                            curentUser?.curent_cart?.order?.toUpperCase() : 'Loading . . . '}
                     </h1>
-                    <Link to='/order_type'>
+                    <Link to='/main/order'>
                         <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] cursor-pointer hover:bg-orange-400 duratuion-100'>
                             <i className="fa-solid fa-arrow-left"></i>
                         </button>
                     </Link>
                 </header>
-                <form className="flex flex-col gap-3" onSubmit={handleSubmit((data) => {
+                <form className="flex flex-col gap-3 justify-between h-[70vh]" onSubmit={handleSubmit((data) => {
                     onSubmit(data)
                 })}>
-                    <div className='grid grid-cols-2 gap-5'>
+                    <div className='grid grid-cols-3 gap-5'>
                         <div className='flex items-start gap-3 flex-col'>
                             <label htmlFor="fullname" className='font-bold text-lg'>
                                 Recipent:
@@ -178,7 +161,7 @@ function Table() {
                             />
                             <span className='text-[red] font-semibold'>{errors.name ? errors.name.message : ''}</span>
                         </div>
-                        
+
                         <div className='flex items-start gap-3 flex-col'>
                             <label htmlFor="Code" className='font-bold text-lg'>
                                 Code:
@@ -197,7 +180,73 @@ function Table() {
                             </div>
                             <span className='text-[red] font-semibold'>{errors.promo_code ? errors.promo_code.message : ''}</span>
                         </div>
-                        
+
+                        <div className='flex items-start gap-3 flex-col'>
+                            <label htmlFor="" className='font-bold text-lg'>Table</label>
+                            <select name="" id="" className={`w-full border px-4 rounded-lg py-2.5 text-gray-500 outline-[#f67f20]  ${errors.table_number ? 'border-red-600 border-2' : 'border-gray-400 '}`} {...register('table_number', {
+                                required: 'Choose a table number',
+                                validate: (e) => {
+                                    if (e === 'select') {
+                                        return 'Choose a table number'
+                                    }
+                                    return true
+                                }
+                            })}>
+                                <option value="select" disabled selected>Table Number</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                                <option value="46">46</option>
+                                <option value="47">47</option>
+                                <option value="48">48</option>
+                                <option value="49">49</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span className='text-[red] font-semibold'>{errors.table_number ? errors.table_number.message : ''}</span>
+                        </div>
+
                     </div>
                     <ProductAndChack curentUser={curentUser} tax={deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5) : 1.5} discount={discountValue} hasVIPDiscount={gotDisc} />
                 </form>

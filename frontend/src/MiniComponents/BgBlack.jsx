@@ -80,7 +80,7 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
                   message={'Are you sure, You want delete this Product?'}
                   deleteFunction={deleteProduct}
                 />
-                : curentLocation === '/main/order/deliver' ?
+                : curentLocation === '/main/order/deliver' || curentLocation === '/main/order/table'?
                   <div>
                     <h2 className='text-white text-4xl font-extrabold tracking-[1px]'>Payment In Progress . . .</h2>
                   </div>

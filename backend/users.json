@@ -5,7 +5,74 @@
         "email": "futureana735@gmail.com",
         "password": "PointSell_2025",
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
-        "notification": [],
+        "notification": [
+            {
+                "date": "2026-01-04",
+                "time": "00:24:10.575127",
+                "message": "Your order has been successfully processed, and a payment of $25.9 has been debited. \n Curent Balance is $9887.46",
+                "read": false
+            },
+            {
+                "date": "2026-01-04",
+                "time": "00:23:26.283580",
+                "message": "Your order has been successfully processed, and a payment of $74.04 has been debited. \n Curent Balance is $9913.36",
+                "read": false
+            },
+            {
+                "date": "2026-01-04",
+                "time": "00:13:55.187957",
+                "message": "Your order has been successfully processed, and a payment of $12.6 has been debited. \n Curent Balance is $9987.4",
+                "read": true
+            },
+            {
+                "date": "2026-01-04",
+                "time": "00:00:18.452293",
+                "message": "Your order has been successfully processed, and a payment of $47.4 has been debited. \n Curent Balance is $8293.89",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "23:57:06.531220",
+                "message": "Your order has been successfully processed, and a payment of $44.85 has been debited. \n Curent Balance is $8341.29",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "23:52:04.102569",
+                "message": "Your order has been successfully processed, and a payment of $11.7 has been debited. \n Curent Balance is $8386.14",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "23:41:20.519654",
+                "message": "Your order has been successfully processed, and a payment of $47.4 has been debited. \n Curent Balance is $8397.84",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "23:40:17.590920",
+                "message": "Your order has been successfully processed, and a payment of $8.72 has been debited. \n Curent Balance is $8445.24",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "23:06:58.814604",
+                "message": "Your order has been successfully processed, and a payment of $4.9 has been debited. \n Curent Balance is $8453.96",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "23:06:56.367024",
+                "message": "Your order has been successfully processed, and a payment of $4.9 has been debited. \n Curent Balance is $8458.86",
+                "read": true
+            },
+            {
+                "date": "2026-01-03",
+                "time": "22:20:42.121473",
+                "message": "Your order has been successfully processed, and a payment of $28.1 has been debited. \n Curent Balance is $8463.76",
+                "read": true
+            }
+        ],
         "curent_cart": {
             "order": null,
             "cart": [],
@@ -16,10 +83,50 @@
                 "subtotal": 0
             }
         },
-        "money": 8491.859999999997,
-        "spent": 1508.1400000000003,
-        "address": "ვაჟა-ფშაველას N100",
+        "money": 9887.46,
+        "spent": 112.53999999999999,
+        "address": null,
+        "orders": [
+            "5fc679ca",
+            "cc8066f6",
+            "8831f18a"
+        ],
+        "phone": null
+    },
+    {
+        "email": "puturidzeana0210@gmail.com",
+        "name": "Ana Puturidze",
+        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
+        "password": "c23c9885-49a3-4538-b68f-4456e4948bf8",
+        "position": "Customer",
+        "money": 1000,
+        "notification": [
+            {
+                "date": "2025-12-14",
+                "time": "14:10:58",
+                "message": "Hello User!",
+                "read": true
+            }
+        ],
+        "friends": [],
+        "curent_cart": {
+            "order": "26b24a37",
+            "cart": [
+                {
+                    "Id": "c4b9a1",
+                    "count": 4
+                }
+            ],
+            "sum": {
+                "subtotal": 17,
+                "change": 1.5,
+                "discount": 3.4,
+                "tax": 0
+            }
+        },
         "orders": [],
-        "phone": 555555512
+        "address": null,
+        "spent": 0,
+        "phone": null
     }
 ]
