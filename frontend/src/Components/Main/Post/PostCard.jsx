@@ -69,7 +69,7 @@ function PostCard({ info, sendInfo }) {
 
 
     return (
-        <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col justify-between items-start gap-4 max-w-[600px] max-lg:max-w-full pb-10'>
+        <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col justify-between items-start gap-4 max-w-[600px] max-lg:max-w-full pb-5'>
             <div className='flex items-center gap-5 justify-between w-full'>
                 <div className='flex items-center gap-4'>
                     <img src={managerInfo?.profileUrl} alt={managerInfo?.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />

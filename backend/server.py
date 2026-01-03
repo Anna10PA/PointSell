@@ -20,10 +20,10 @@ CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://1
 Google_Client_Id = '553005797004-r8f7ri794npsv1kjab782t79p42vg6g3.apps.googleusercontent.com'
 
 
-post_folders = 'posts'
-if not os.path.exists(post_folders):
-    os.makedirs(post_folders)
-app.config['UPLOAD_FOLDER'] = post_folders
+image_folders = 'images'
+if not os.path.exists(image_folders):
+    os.makedirs(image_folders)
+app.config['UPLOAD_FOLDER'] = image_folders
 
 
 All_user = "users.json"
@@ -88,6 +88,7 @@ def save_posts(posts):
         json.dump(posts, file, indent=4, ensure_ascii=False)
 
 
+# პროდუქტის შენახვა
 def save_products(product):
     with open(All_product, 'w', encoding='utf-8') as file:
         json.dump(product, file, indent=4, ensure_ascii=False)
@@ -226,7 +227,7 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-# პროდუქტების წაკითხვა
+# პროდუქტების წაკითხვის გამოძახება
 @app.get('/product20list')
 def check_products():
     if not os.path.exists(All_product):
@@ -393,10 +394,11 @@ def pay():
     user = next((u for u in users if u['email'] == session['email']), None)
 
     if user:
-        if user['money'] >= total_sum:
+        user_money = float(user.get('money', 0))
+        if user_money >= total_sum:
             cart_items = user['curent_cart']['cart']
             cart_items_id = [item['Id'] for item in cart_items]
-            product_times = [p['time'] for p in all_products if p['Id'] in cart_items_id]
+            product_times = [float(p.get('time', 0)) for p in all_products if p['Id'] in cart_items_id]
             sum_time = round(sum(product_times), 2)
 
         # შეკვეთებში დამატება
@@ -416,7 +418,9 @@ def pay():
 
 
         # მომხმარებლის მონაცემების განახლება
-            user['money'] -= total_sum
+            user['money'] = float(user['money']) - total_sum
+            user['spent'] = float(user.get('spent', 0)) + total_sum
+            
             user['orders'].append(order_number)
             user['curent_cart'] = {
                 "order": None,
@@ -437,7 +441,6 @@ def pay():
                 "message": f"Your order has been successfully processed, and a payment of ${total_sum} has been debited. \n Curent Balance is ${round(user['money'], 2)}",
                 "read": False
             })
-            user['spent'] += total_sum
             save_users(users) 
 
             # მეილზე გაგზავნა
@@ -585,8 +588,7 @@ def google_login():
         session['is_login'] = True
         return jsonify({"message": "Login successful"}), 200
         
-    except Exception as e:
-        print(f"Error: {e}")
+    except:
         return jsonify({"error": "Server error during Google Login"}), 500
 
 
@@ -634,7 +636,6 @@ def post_posts():
         return jsonify(new_post), 201
     
     except Exception as e:
-        print(e)
         return jsonify({"error": str(e)}), 500
 
 
@@ -751,6 +752,56 @@ def delete_product():
         save_products(all_product)
         return jsonify({'message': 'sucsessful!'}), 200
     return jsonify({'error': 'product not found'}), 404
+
+
+# პროდუქტის დამატება
+@app.post('/add_product')
+def add_product():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.form
+
+    image_file = request.files.get('product_image') 
+    name = data.get('product_name')
+    price = data.get('product_price')
+    discount = data.get('product_discount') or 0
+    category = data.get('product_category')
+    description = data.get('product_description')
+    info = data.get('product_info')
+    time = data.get('product_time') 
+
+    image_url = ""
+
+    if image_file:
+        extension = image_file.filename.split('.')[-1] 
+        new_filename = f"{uuid.uuid4()}.{extension}" 
+        
+        path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+        image_file.save(path)
+        
+        image_url = f"http://127.0.0.1:5000/uploads/{new_filename}"
+
+
+    new_product = {
+        "Id" : str(uuid.uuid4()).split('-')[0][1:-1],
+        'price': price,
+        "discount" : discount,
+        "product_name" : name,
+        "product_image" : image_url,
+        "type": category,
+        "product_description": description,
+        "info": info,
+        "star": 5,
+        "vote": 1,
+        "time": time,
+    }
+
+    products = check_products()
+    products.insert(0, new_product)
+    save_products(products)
+
+    return jsonify({'message': 'successful!'}), 200
 
 
 @app.get("/")

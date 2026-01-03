@@ -21,7 +21,7 @@ function Item({image, name, info2, info3, info4, price, func}) {
                 {info4 ? info4 : 'Unknown'}
             </td>
             <td className='border-gray-200 border px-5 text-[#F67F20] font-bold text-center'>
-                ${price ? price.toFixed(2): 0}
+                ${price ? Number(price || 0).toFixed(2): 0}
             </td>
             <td className=' border-gray-200 border h-full'>
                 <div className='flex items-start justify-center gap-4'>

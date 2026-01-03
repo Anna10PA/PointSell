@@ -28,7 +28,7 @@ function CartCard({ img, price, name, count, id, update }) {
                 <img src={img} alt={img} className='w-18 shrink-0 h-18 object-cover rounded-2xl' />
                 <div className='flex items-start flex-col font-bold leading-5.5'>
                     <h1 className='text-lg leading-5'>{name}</h1>
-                    <h2 className='text-[#F67F20] mt-2'>${price.toFixed(2)}</h2>
+                    <h2 className='text-[#F67F20] mt-2'>${Number(price || 0).toFixed(2)}</h2>
                 </div>
             </div>
             <div className='flex font-bold gap-3 items-center'>

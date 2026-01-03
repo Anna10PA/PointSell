@@ -1,25 +1,25 @@
 [
     {
-        "name": null,
+        "name": "Anna",
         "position": "Manager",
         "email": "futureana735@gmail.com",
         "password": "PointSell_2025",
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
-        "notification": [
-            {
-                "date": "2026-01-02",
-                "time": "14:02:06.755133",
-                "message": "Registration is successful!",
-                "read": true
-            }
-        ],
+        "notification": [],
         "curent_cart": {
             "order": null,
-            "cart": []
+            "cart": [],
+            "sum": {
+                "discount": 0,
+                "tax": 0,
+                "change": 0,
+                "subtotal": 0
+            }
         },
-        "money": 10000,
-        "spent": 0,
-        "address": null,
-        "orders": []
+        "money": 8491.859999999997,
+        "spent": 1508.1400000000003,
+        "address": "ვაჟა-ფშაველას N100",
+        "orders": [],
+        "phone": 555555512
     }
 ]

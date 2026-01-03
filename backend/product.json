@@ -9,7 +9,6 @@
         "product_description": "Baked dough and melted cheese filling.",
         "type": "food",
         "info": "6 Pieces",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -23,7 +22,6 @@
         "product_description": "Baked dough filled with spiced mashed beans.",
         "type": "food",
         "info": "6 Pieces",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -37,7 +35,6 @@
         "product_description": "Cornmeal and water, fried or baked.",
         "type": "food",
         "info": "4 Pieces of mchadi and 500 grams of cheese",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -51,7 +48,6 @@
         "product_description": "Coarse cornmeal and grits cooked in water.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -65,7 +61,6 @@
         "product_description": "Boiled dough filled with spiced meat and broth.",
         "type": "food",
         "info": "9 Pieces",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -79,7 +74,6 @@
         "product_description": "Fried minced meat patties with onions and spices.",
         "type": "food",
         "info": "4 Pieces mini katleti",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -93,7 +87,6 @@
         "product_description": "Grilled meat, vegetables, and sauce wrapped in lavash.",
         "type": "food",
         "info": "Big Shaurma",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -107,7 +100,6 @@
         "product_description": "Spiced pork and beef sausage links.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -121,7 +113,6 @@
         "product_description": "Spicy beef stew with tomato and garlic.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -135,7 +126,6 @@
         "product_description": "Lamb stew with tarragon and green plums.",
         "type": "food",
         "info": "500 Grams with chicken",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -149,7 +139,6 @@
         "product_description": "Crispy chicken in creamy garlic sauce.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -163,7 +152,6 @@
         "product_description": "Vegetable ragout with eggplant and bell peppers.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -177,7 +165,6 @@
         "product_description": "Poultry served in a cold walnut sauce.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -191,7 +178,6 @@
         "product_description": "Cornmeal cooked with large amounts of cheese.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -205,7 +191,6 @@
         "product_description": "Grilled ground meat wrap with onions.",
         "type": "food",
         "info": "3 Pieces",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -219,7 +204,6 @@
         "product_description": "Fried eggplant rolls with walnut paste.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -233,7 +217,6 @@
         "product_description": "Minced vegetables with walnuts and herbs.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -247,7 +230,6 @@
         "product_description": "Double cheese khachapuri with extra cheese on top.",
         "type": "food",
         "info": "6 Pieces",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -261,7 +243,6 @@
         "product_description": "Boat-shaped dough with cheese, butter, and egg.",
         "type": "food",
         "info": "Big Khachapuri",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -274,7 +255,6 @@
         "time": 10,
         "product_description": "Roasted meat and potatoes with onions.",
         "type": "food",
-        "review": [],
         "info": "500 Grams",
         "star": 5,
         "vote": 1
@@ -288,7 +268,6 @@
         "time": 10,
         "product_description": "Chicken stew with tomatoes and fresh herbs.",
         "type": "food",
-        "review": [],
         "info": "500 Grams",
         "star": 5,
         "vote": 1
@@ -302,7 +281,6 @@
         "time": 10,
         "product_description": "Meat and rice wrapped in vine leaves.",
         "type": "food",
-        "review": [],
         "info": "500 Grams",
         "star": 5,
         "vote": 1
@@ -317,7 +295,6 @@
         "product_description": "Spicy chicken livers with pomegranate seeds.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -331,7 +308,6 @@
         "product_description": "Lettuce, chicken, croutons, and parmesan sauce.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -344,7 +320,6 @@
         "time": 5,
         "product_description": "Crispy fried potato strips with salt.",
         "type": "food",
-        "review": [],
         "info": "500 Grams",
         "star": 5,
         "vote": 1
@@ -358,7 +333,6 @@
         "time": 8,
         "product_description": "Creamy soup made with fresh mushrooms.",
         "type": "food",
-        "review": [],
         "info": "500 Grams",
         "star": 5,
         "vote": 1
@@ -373,7 +347,6 @@
         "product_description": "Georgian chicken soup with egg and vinegar.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -387,7 +360,6 @@
         "product_description": "Cucumber, tomato, olives, and feta cheese.",
         "type": "food",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -401,7 +373,6 @@
         "product_description": "Grilled pork skewers over grape wood embers.",
         "type": "food",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -415,7 +386,6 @@
         "product_description": "Strong shot of black coffee.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -429,7 +399,6 @@
         "product_description": "Espresso with steamed milk and foam.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -443,7 +412,6 @@
         "product_description": "Chilled carbonated soft drink.",
         "type": "drink",
         "info": "0.5L",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -457,7 +425,6 @@
         "product_description": "Georgian natural mineral water.",
         "type": "drink",
         "info": "1L",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -471,7 +438,6 @@
         "product_description": "Freshly squeezed orange juice.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -485,7 +451,6 @@
         "product_description": "Chilled black tea with lemon slice.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -499,7 +464,6 @@
         "product_description": "Lime, mint, sugar, and soda water.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -513,7 +477,6 @@
         "product_description": "Orange flavored carbonated drink.",
         "type": "drink",
         "info": "0.5L",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -527,7 +490,6 @@
         "product_description": "Espresso shots mixed with cold water.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -541,7 +503,6 @@
         "product_description": "Warm milk mixed with cocoa powder and sugar.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -555,7 +516,6 @@
         "product_description": "Bottled natural drinking water.",
         "type": "drink",
         "info": "1L",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -569,7 +529,6 @@
         "product_description": "Blended milk, vanilla ice cream, and flavor.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -583,7 +542,6 @@
         "product_description": "Mixed berries, yogurt, and honey.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -597,7 +555,6 @@
         "product_description": "Green colored fizzy drink with tarragon flavor.",
         "type": "drink",
         "info": "1L",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -611,7 +568,6 @@
         "product_description": "Espresso, steamed milk, and thick foam.",
         "type": "drink",
         "info": "1 Cup",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -625,7 +581,6 @@
         "product_description": "Traditional Georgian tomato sauce with spices.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -639,7 +594,6 @@
         "product_description": "Sour plum sauce, often served with meat.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -653,7 +607,6 @@
         "product_description": "Spicy and aromatic paste with red peppers and garlic.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -667,7 +620,6 @@
         "product_description": "Spicy and aromatic paste with green peppers and herbs.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -681,7 +633,6 @@
         "product_description": "Walnut sauce with garlic and spices, often used for poultry.",
         "type": "other",
         "info": "500 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -695,7 +646,6 @@
         "product_description": "Classic creamy sauce.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -709,7 +659,6 @@
         "product_description": "Creamy sauce with a strong garlic flavor.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -723,7 +672,6 @@
         "product_description": "Pungent sauce made from mustard seeds.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -737,7 +685,6 @@
         "product_description": "Sauce made from basil, pine nuts, cheese, and olive oil.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -751,7 +698,6 @@
         "product_description": "Sweet tomato sauce.",
         "type": "other",
         "info": "200 Grams",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -765,7 +711,6 @@
         "product_description": "Sweet Box Cuties Surprise Toy Collections with Candy for kids",
         "type": "other",
         "info": "1 Toy",
-        "review": [],
         "star": 5,
         "vote": 1
     },
@@ -779,7 +724,6 @@
         "product_description": "Sweet Candy For Kids",
         "type": "other",
         "info": "3 Pieces",
-        "review": [],
         "star": 5,
         "vote": 1
     }

@@ -3,9 +3,8 @@ import { Info } from '../Main'
 
 function OrderCard({ count, id }) {
     let [product, setProduct] = useState(null)
-    let {allProduct, getAllProduct} = useContext(Info)
+    let {allProduct} = useContext(Info)
 
-    getAllProduct()
     
     useEffect(() => {
         if (allProduct?.length > 0) {
@@ -26,7 +25,7 @@ function OrderCard({ count, id }) {
             </div>
             <h2 className='font-bold text-lg'>Quantity: {count}</h2>
             <h2 className='font-bold text-lg'>time: {product? product.time * count : '0'}s</h2>
-            <h2 className='text-[#f67f20] font-bold text-lg'>${product ? product.price.toFixed(2) : 'Loading . . .'}</h2>
+            <h2 className='text-[#f67f20] font-bold text-lg'>${product ? Number(product.price || 0).toFixed(2) : 'Loading . . .'}</h2>
         </div>
     )
 }

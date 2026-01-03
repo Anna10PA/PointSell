@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 function AddProductPage() {
     let { register, handleSubmit, formState: { errors } } = useForm()
     let image = useRef()
+    let navigate = useNavigate()
 
+    // სურათის დამატება
     const imageChangeFunc = (e) => {
         const selectedFile = e.target.files[0]
         if (selectedFile) {
@@ -13,6 +15,33 @@ function AddProductPage() {
             image.current.src = imageUrl
             image.current.classList.remove('hidden')
         }
+    }
+
+
+    // გაგზავნა / დამატება
+    const submit = async (data) => {
+        let formData = new FormData()
+
+        formData.append('product_name', data.product_name)
+        formData.append('product_image', data.product_file[0])
+        formData.append('product_price', data.price)
+        formData.append('product_time', data.time)
+        formData.append('product_discount', data.discount)
+        formData.append('product_description', data.description)
+        formData.append('product_info', data.info)
+        formData.append('product_category', data.category)
+
+        let res = await fetch('http://localhost:5000/add_product', {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'
+        })
+
+        if (res.ok) {
+            navigate('/main/products')
+            window.location.reload()
+        }
+
     }
 
     return (
@@ -27,25 +56,25 @@ function AddProductPage() {
                             <i className="fa-solid fa-arrow-left"></i>
                         </button>
                     </Link>
-                    <section className="flex w-full justify-center flex-col gap-5 items-center ">
+                    <form className="flex w-full justify-center flex-col gap-5 items-center " onSubmit={handleSubmit(submit)}>
                         <div className="flex flex-col gap-4 items-center " >
                             <div className="bg-[#F5F5F5] rounded-xl h-40 w-40 flex items-center justify-center relative cursor-pointer overflow-hidden">
                                 <input
                                     type="file"
-                                    className="border z-20 absolute top-0 w-full h-full opacity-0  "
+                                    className="border z-20 absolute cursor-pointer top-0 w-full h-full opacity-0  "
                                     accept="image/*"
                                     required
-                                    onChange={imageChangeFunc}
+                                    {...register('product_file', {
+                                        onChange: (e) => imageChangeFunc(e)
+                                    })}
                                 />
-                                <i className={`fa-solid fa-images text-[#BBBBBB] text-4xl ${image.current?.src.length > 0 ? 'hidden' : ''}`}></i>
+                                <i className={`fa-solid fa-images text-[#BBBBBB] text-4xl cursor-pointer ${image.current?.src.length > 0 ? 'hidden' : ''}`}></i>
                                 <img src="" alt="" ref={image} className="z-10 hidden absolute object-cover h-full w-full" />
                             </div>
                             <h1 className="font-bold text-2xl">Upload Image</h1>
                         </div>
-                        <form className="w-full flex flex-col items-center gap-4" onSubmit={handleSubmit((data) => {
-                            console.log(data)
-                        })}>
-                            <div className="w-full grid grid-cols-4 gap-5">
+                        <div className="w-full flex flex-col items-center gap-4">
+                            <div className="w-full grid grid-cols-5 gap-5">
                                 <div className="flex flex-col items-start gap-1">
                                     <div className="flex flex-col items-start gap-2 w-full">
                                         <label htmlFor="" className="font-bold text-lg">Product Name:</label>
@@ -97,15 +126,32 @@ function AddProductPage() {
                                     </div>
                                     <span className="text-red-600">{errors.discount ? errors.discount.message : ''}</span>
                                 </div>
+                                <div className="flex flex-col items-start gap-1">
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <label htmlFor="" className="font-bold text-lg">Time:</label>
+                                        <input type="text" className={`px-4 py-2 border ${errors.time ? 'border-red-600 border-2' : 'border-gray-400'} rounded outline-[#f67f20] w-full`} placeholder="Product Time"
+                                            {...register('time', {
+                                                validate: (item) => {
+                                                    for (let i of item.trim()) {
+                                                        if (!'0123456789.'.includes(i.toLowerCase())) {
+                                                            return 'Must be number'
+                                                        }
+                                                    }
+                                                    return true
+                                                }
+                                            })} />
+                                    </div>
+                                    <span className="text-red-600">{errors.time ? errors.time.message : ''}</span>
+                                </div>
                                 <div className="flex flex-col items-start gap-2 w-full">
                                     <label htmlFor="" className="font-bold text-lg">Category:</label>
-                                    <select name="" id="" className="w-full border border-gray-400 px-4 rounded py-2 text-gray-500 outline-[#f67f20]">
+                                    <select name="" id="" className="w-full border border-gray-400 px-4 rounded py-2 text-gray-500 outline-[#f67f20]" {...register('category')}>
                                         <option value="food">Food</option>
                                         <option value="drink">Drink</option>
                                         <option value="other">Other</option>
                                     </select>
                                 </div>
-                                <div className="flex flex-col items-start gap-2 w-full col-start-1 col-end-6 ">
+                                <div className="flex flex-col items-start gap-2 w-full col-start-1 col-end-4">
                                     <div className="flex flex-col items-start gap-2 w-full">
                                         <label htmlFor="" className="font-bold text-lg">Description:</label>
                                         <textarea className={`px-4 py-2 border ${errors.description ? 'border-red-600 border-2' : 'border-gray-400'} rounded outline-[#f67f20] w-full`} placeholder="Product Description" {...register('description', {
@@ -114,10 +160,19 @@ function AddProductPage() {
                                     </div>
                                     <span className="text-red-600">{errors.description ? errors.description.message : ''}</span>
                                 </div>
+                                <div className="flex flex-col items-start gap-2 w-full col-start-4 col-end-6 ">
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <label htmlFor="" className="font-bold text-lg">Info:</label>
+                                        <textarea className={`px-4 py-2 border ${errors.info ? 'border-red-600 border-2' : 'border-gray-400'} rounded outline-[#f67f20] w-full`} placeholder="Product Info" {...register('info', {
+                                            required: 'Enter Product Info'
+                                        })} ></textarea>
+                                    </div>
+                                    <span className="text-red-600">{errors.info ? errors.info.message : ''}</span>
+                                </div>
                             </div>
                             <button className="bg-[#f67f20] text-white px-8 py-3 font-bold text-lg rounded-lg duration-100 hover:bg-amber-500 cursor-pointer" >Save Product</button>
-                        </form>
-                    </section>
+                        </div>
+                    </form>
                 </section>
             </main>
         </>

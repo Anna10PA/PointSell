@@ -38,7 +38,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
                 <h1 className='font-bold text-lg'>{title}</h1>
                 <div className="flex items-center gap-4 ">
                     <h2 className={`${discount ? 'text-gray-400 line-through decoration-1' : 'hidden'}`}>
-                        ${discount ? price.toFixed(2) : null}
+                        ${discount ? Number(price || 0).toFixed(2) : null}
                     </h2>
                     <h2 className='font-bold text-lg text-[#F67F20]'>
                         ${discount ? (price - price * Number(discount.split('%')[0]) / 100).toFixed(2) : price.toFixed(2)}

@@ -42,7 +42,7 @@ function FoodDetail({ allInfo, open }) {
                 ${Number(allInfo.price * (100 - Number(allInfo.discount.split('%')[0])) / 100).toFixed(2)}
               </h3>
               <h4 className={` ${allInfo.discount ? 'text-xl font-bold line-through decoration-1 text-gray-400' : 'hidden'}`}>
-                ${allInfo.discount ? allInfo.price.toFixed(2) : null}
+                ${allInfo.discount ? Number(allInfo.price || 0).toFixed(2) : null}
               </h4>
             </div>
           </div>

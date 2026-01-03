@@ -1,9 +1,9 @@
-import Navigation from "../../../MiniComponents/Navigation"
 import ProductAndChack from "./ProductAndChack"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import DiscountNitification from "./DiscountNitification"
+import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Deliver() {
     let [curentUser, setCurentUser] = useState(null)
@@ -15,6 +15,7 @@ function Deliver() {
     let promoCode = 'HelloUser2009'
     let [openMessage, setOpenMessage] = useState(false)
     let [gotDisc, setGotDisc] = useState(false)
+    let [submit, setSubmit] = useState(false)
 
 
     // ნომრის შემოწმება
@@ -69,6 +70,7 @@ function Deliver() {
 
     // მიტანის სერვისის თანხის გამოთვლა + მისამართის შემოწმება
     let taxCount = async (userAddress) => {
+        if (!userAddress) return
         try {
             let res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(userAddress)}&format=json&limit=1&countrycodes=ge`)
             let result = await res.json()
@@ -82,12 +84,11 @@ function Deliver() {
 
             let resultDeliver = await fetch(`https://router.project-osrm.org/route/v1/driving/44.7517260,41.7247267;${locLon},${locLat}?overview=false`)
             let info = await resultDeliver.json()
-            // console.log(info)
 
             if (info.code !== 'Ok') return "Sorry, not working"
 
 
-            let distanceKm = (info.routes[0].distance / 1000).toFixed(1)
+            let distanceKm = info.routes[0].distance / 1000
             let durationMin = Math.round(info.routes[0].duration / 60)
 
             setDeliverInfo({
@@ -106,15 +107,12 @@ function Deliver() {
     let promoCodeInput = watch('promo_code')
     let subtotal = Number(curentUser?.curent_cart?.sum?.subtotal) || 0
     let change = Number(curentUser?.curent_cart?.sum?.change) || 0
-    let tax = deliverInfo.distance ? (Number(deliverInfo.distance) * 2 + 1.5) : 1.5
-    let discount = Number(curentUser?.curent_cart?.sum?.discount)
+    let tax = deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5) : 1.5
+    let baseDiscount = Number(curentUser?.curent_cart?.sum?.discount) || 0
 
-    let sum = subtotal + change + tax - discount
-    let discountValue = discount
+    let sum = subtotal + change + tax - baseDiscount
+    let discountValue = promoCodeInput === promoCode ? (sum * 0.95) : baseDiscount
 
-    if (promoCodeInput === promoCode) {
-        discountValue = (sum * 0.95).toFixed(2)
-    }
     useEffect(() => {
         if (promoCodeInput === promoCode) {
             setOpenMessage(true)
@@ -126,6 +124,9 @@ function Deliver() {
     }, [promoCodeInput])
 
     let onSubmit = async (data) => {
+        if (submit) return
+
+        setSubmit(true)
         let orderData = {
             order_number: curentUser?.curent_cart?.order,
             subtotal: subtotal,
@@ -146,7 +147,6 @@ function Deliver() {
                 body: JSON.stringify(orderData),
                 credentials: 'include'
             })
-
             let result = await response.json()
             if (response.ok) {
                 navigate('/main/order/deliver/payment', {
@@ -156,6 +156,7 @@ function Deliver() {
                         isPay: true
                     }
                 })
+                setSubmit(false)
             } else {
                 navigate('/main/order/deliver/payment', {
                     state: {
@@ -163,15 +164,17 @@ function Deliver() {
                         isPay: false
                     }
                 })
+                setSubmit(false)
             }
         } catch (error) {
             console.error(error)
-            navigate('/payment', {
+            navigate('/main/order/deliver/payment', {
                 state: {
                     text: "Connection error with server",
                     isPay: false
                 }
             })
+            setSubmit(false)
         }
     }
 
@@ -184,11 +187,15 @@ function Deliver() {
                     }} />
                     : null
             }
+            {
+                submit ?
+                    <BgBlack /> : null
+            }
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative">
                     <h1 className="text-3xl font-bold">
                         Order #{curentUser !== null ?
-                            curentUser.curent_cart.order.toUpperCase() : 'Loading . . . '}
+                            curentUser?.curent_cart?.order?.toUpperCase() : 'Loading . . . '}
                     </h1>
                     <Link to='/order_type'>
                         <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] cursor-pointer hover:bg-orange-400 duratuion-100'>
@@ -274,12 +281,8 @@ function Deliver() {
                                 Address:
                             </label>
                             <textarea name="Address" id="Address" placeholder='Enter Address' className={`border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] min-h-20 max-h-20 ${errors.address ? 'border-red-600 border-2' : 'border-gray-400 '}`}
-                                {...register('address', {
-                                    required: 'Enter Address',
-                                    validate: async (value) => {
-                                        return await taxCount(await value)
-                                    }
-                                })}></textarea>
+                                {...register('address', { required: 'Enter Address' })}
+                                onBlur={(e) => taxCount(e.target.value)}></textarea>
                             <span className='text-[red] font-semibold'>
                                 {errors.address ? errors.address.message : ''}
                             </span>
@@ -288,15 +291,15 @@ function Deliver() {
                             <div className="w-[50%]">
                                 <div className="flex items-center gap-4 text-gray-400 font-semibold">
                                     <h1>Duration:</h1>
-                                    <h1>{deliverInfo.duration || ". . ."} m</h1>
+                                    <h1>{deliverInfo.duration || "0"} m</h1>
                                 </div>
                                 <div className="flex items-center gap-4 text-gray-400 font-semibold">
                                     <h1>Distance:</h1>
-                                    <h1>{deliverInfo.distance || '. . .'} km</h1>
+                                    <h1>{Number(deliverInfo.distance || 0).toFixed(1) || '0'} km</h1>
                                 </div>
                                 <div className="flex items-center gap-4 text-[#f67f20] font-bold text-xl mt-3">
                                     <h3>Tax:</h3>
-                                    <h3>{deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5).toFixed(2) : 0}$</h3>
+                                    <h3>{deliverInfo.distance ? Number(deliverInfo.distance * 2 + 1.5 || 0).toFixed(2) : 0}$</h3>
                                 </div>
                             </div>
                             <div>
@@ -308,7 +311,12 @@ function Deliver() {
                             </div>
                         </div>
                     </div>
-                    <ProductAndChack curentUser={curentUser} tax={deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5) : 1.5} discount={discountValue} hasVIPDiscount={gotDisc} />
+                    <ProductAndChack
+                        curentUser={curentUser}
+                        tax={deliverInfo.distance ? Number(deliverInfo.distance * 2 + 1.5 || 0) : 1.5}
+                        discount={discountValue}
+                        hasVIPDiscount={gotDisc}
+                        isSubmit={submit} />
                 </form>
             </main>
         </>

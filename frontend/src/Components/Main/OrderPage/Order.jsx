@@ -84,6 +84,9 @@ function Order() {
                         <h2 className="text-3xl font-bold">
                             {curentOrd ? `Order #${curentOrd}` : ''}
                         </h2>
+                        <i className={` ${curentOrd ? 'fa-solid fa-xmark text-2xl cursor-pointer' : 'hidden'}`} onClick={()=> {
+                        setCurentOrd()
+                        }}></i>
                     </header>
                     <div className={`w-full py-5 ${!curentOrd ? 'flex items-center justify-center' : ''}`}>
                         {
@@ -104,7 +107,7 @@ function Order() {
                                             <h2 className="font-bold">{chosenOrd?.address}</h2>
                                         </div>
                                         <div className="flex items-center flex-col gap-1">
-                                            <h1 className="font-semibold text-gray-400 text-lg">Order</h1>
+                                            <h1 className="font-semibold text-gray-400 text-lg">Time</h1>
                                             <h2 className="font-bold">{chosenOrd?.ready_time}m</h2>
                                         </div>
                                     </div>

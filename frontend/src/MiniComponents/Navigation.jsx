@@ -39,7 +39,7 @@ function Navigation() {
                     <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/main/home' || locationName === '/main/order' || locationName === '/main/order/deliver' || locationName === '/main/payment' || locationName === '/main/order/table' || locationName === '/main/order/deliver/payment' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/main/posts'>
-                    <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/main/posts' || locationName === '/add_post' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-clone hover:text-[#F67F20] ${locationName === '/main/posts' || locationName === '/main/add_post' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/main/orders'>
                     <i className={`fa-solid fa-book hover:text-[#F67F20] ${locationName === '/main/orders' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>

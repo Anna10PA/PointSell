@@ -25,7 +25,7 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: resu.access_token }),
         credentials: 'include'
-      });
+      })
 
       let data = await res.json()
 
