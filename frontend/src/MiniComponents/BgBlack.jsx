@@ -2,11 +2,13 @@ import FoodDetail from '../Components/Main/Home/FoodDetail'
 import { useLocation } from "react-router-dom"
 import PostDetail from "../Components/Main/Post/PostDetail"
 import Warning from "./Warning"
+import { useState } from 'react'
 
 function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
   let location = useLocation()
   let curentLocation = location.pathname
   let currentMonth = new Date().getMonth()
+
 
   // პოსტის წაშლის ფუნქცია
   const deletePost = async () => {
@@ -44,6 +46,26 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
     }
   }
 
+  // მომხმარებლის წაშლის ფუნქცია
+  const deleteUser = async () => {
+    if (!allInfo) {
+      return
+    }
+    try {
+      let res = await fetch('http://localhost:5000/delete_user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_email: allInfo }),
+        credentials: 'include'
+      })
+      if (res.ok) {
+        window.location.reload()
+      }
+    }
+    catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <div className="w-full h-full absolute z-10 bg-[rgba(0,0,0,0.77)] flex items-center justify-center">
@@ -80,11 +102,19 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
                   message={'Are you sure, You want delete this Product?'}
                   deleteFunction={deleteProduct}
                 />
-                : curentLocation === '/main/order/deliver' || curentLocation === '/main/order/table'?
-                  <div>
-                    <h2 className='text-white text-4xl font-extrabold tracking-[1px]'>Payment In Progress . . .</h2>
-                  </div>
-                  : null
+                : curentLocation === '/main/costumers' && mode === 'delete_user' ?
+                  <Warning
+                    open={open}
+                    title={'Delete This User?'}
+                    message={'Are you sure, You want delete this user?'}
+                    deleteFunction={deleteUser}
+                    user={allInfo}
+                  />
+                  : curentLocation === '/main/order/deliver' || curentLocation === '/main/order/table' ?
+                    <div>
+                      <h2 className='text-white text-4xl font-extrabold tracking-[1px]'>Payment In Progress . . .</h2>
+                    </div>
+                    : null
 
       }
     </div>

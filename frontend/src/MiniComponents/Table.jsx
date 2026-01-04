@@ -38,6 +38,7 @@ function Table({col1, col2, col3, col4, col5, ApiInfo, func}) {
                                 info3={item.product_description || item.address}
                                 info4={item.Id || item.email}
                                 price={item.price || item.spent}
+                                hasBlock={item.block || null}
                                 func={func}
                                 key={index} />
                         })

@@ -88,7 +88,8 @@ function Table() {
                         text: result.success,
                         order: curentUser?.curent_cart?.order,
                         isPay: true
-                    }
+                    },
+                    replace: true
                 })
                 setSubmit(false)
             } else {
@@ -96,7 +97,8 @@ function Table() {
                     state: {
                         text: result.error,
                         isPay: false
-                    }
+                    },
+                    replace: true
                 })
                 setSubmit(false)
             }
@@ -106,7 +108,8 @@ function Table() {
                 state: {
                     text: "Connection error with server",
                     isPay: false
-                }
+                },
+                replace: true
             })
             setSubmit(false)
         }

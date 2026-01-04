@@ -154,7 +154,9 @@ function Deliver() {
                         text: result.success,
                         order: curentUser?.curent_cart?.order,
                         isPay: true
-                    }
+                    },
+                    replace: true
+
                 })
                 setSubmit(false)
             } else {
@@ -162,7 +164,9 @@ function Deliver() {
                     state: {
                         text: result.error,
                         isPay: false
-                    }
+                    },
+                    replace: true
+
                 })
                 setSubmit(false)
             }
@@ -172,7 +176,8 @@ function Deliver() {
                 state: {
                     text: "Connection error with server",
                     isPay: false
-                }
+                },
+                replace: true
             })
             setSubmit(false)
         }
@@ -197,7 +202,7 @@ function Deliver() {
                         Order #{curentUser !== null ?
                             curentUser?.curent_cart?.order?.toUpperCase() : 'Loading . . . '}
                     </h1>
-                    <Link to='/order_type'>
+                    <Link to='/main/order'>
                         <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] cursor-pointer hover:bg-orange-400 duratuion-100'>
                             <i className="fa-solid fa-arrow-left"></i>
                         </button>

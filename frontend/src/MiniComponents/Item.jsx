@@ -1,8 +1,11 @@
 import { useLocation } from "react-router-dom"
+import { Info } from "../Components/Main/Main"
+import { useContext } from "react"
 
-function Item({image, name, info2, info3, info4, price, func}) {
+function Item({ image, name, info2, info3, info4, price, func, hasBlock }) {
     let location = useLocation()
     let curentPage = location.pathname
+    let { blockUser } = useContext(Info)
 
     return (
         <tr>
@@ -21,27 +24,50 @@ function Item({image, name, info2, info3, info4, price, func}) {
                 {info4 ? info4 : 'Unknown'}
             </td>
             <td className='border-gray-200 border px-5 text-[#F67F20] font-bold text-center'>
-                ${price ? Number(price || 0).toFixed(2): 0}
+                ${price ? Number(price || 0).toFixed(2) : 0}
             </td>
             <td className=' border-gray-200 border h-full'>
-                <div className='flex items-start justify-center gap-4'>
-                    <div className='flex items-center gap-2 text-green-500 duration-150 hover:text-white px-3 py-2 rounded cursor-pointer hover:bg-green-500'>
-                        <i className="fa-solid fa-pen"></i>
-                        <span className='font-bold'>
-                            Edit
-                        </span>
+                <div className='flex items-start justify-center w-full gap-4 '>
+                    <div className={`flex items-center gap-2  duration-150  px-3 py-2 rounded cursor-pointer  hover:text-white  ${curentPage === '/main/costumers' && !hasBlock ? 'text-red-600 hover:bg-red-600' :
+                        curentPage === '/main/costumers' && hasBlock ? 'text-gray-600 hover:bg-gray-600 hover:text-white' : 'text-green-500 hover:bg-green-500'}`} onClick={() => {
+                            if (curentPage === '/main/costumers') {
+                                blockUser(info4 !== 'futureana735@gmail.com' ? info4 : null)
+                            }
+                        }}>
+                        {curentPage === '/main/costumers' && !hasBlock ?
+                            <>
+                                <i className="fa-solid fa-user-slash"></i>
+                                <span className='font-bold'>
+                                    Block
+                                </span>
+                            </> :
+                            curentPage === '/main/costumers' && hasBlock ?
+                                <>
+                                    <i className="fa-solid fa-user"></i>
+                                    <span className='font-bold'>
+                                        Unblock
+                                    </span>
+                                </>
+                                :
+                                <>
+                                    <i className="fa-solid fa-pen"></i>
+                                    <span className='font-bold'>
+                                        Edit
+                                    </span>
+                                </>
+                        }
                     </div>
-                    <div className='flex items-center gap-2 text-[#F67F20] duration-150 hover:bg-orange-400 hover:text-white px-3 py-2 rounded cursor-pointer' onClick={()=> {
-                        func(info4, 'delete_product')
+                    <div className={`flex items-center gap-2 text-[#F67F20] duration-150 hover:bg-orange-400 hover:text-white px-3 py-2 rounded cursor-pointer `} onClick={() => {
+                        func(info4 !== 'futureana735@gmail.com' ? info4 : null, !info4.includes('@') ? 'delete_product' : 'delete_user')
                     }}>
                         <i className="fa-solid fa-trash"></i>
-                        <span className='font-bold'>
+                        <span className='font-bold' >
                             Delete
                         </span>
                     </div>
                 </div>
             </td>
-        </tr>
+        </tr >
     )
 }
 

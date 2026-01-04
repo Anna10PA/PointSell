@@ -128,6 +128,37 @@ function Main() {
     }
 
 
+    // მომხმარების დაბლოკვა
+    async function blockUser(email) {
+        if (!email) return
+
+        let res = await fetch('http://localhost:5000/block_user', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+
+        if (res.ok) {
+            setAllUser(prevUsers => {
+                return prevUsers.map(user => {
+                    if (user.email === email) {
+                        return { ...user, block: !user.block }
+                    }
+                    return user
+                })
+            })
+        } else {
+            const errorData = await res.json()
+            console.error("Error blocking user:", errorData.error)
+
+        }
+    }
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -148,7 +179,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />

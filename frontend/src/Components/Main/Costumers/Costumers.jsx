@@ -1,12 +1,29 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import Table from "../../../MiniComponents/Table"
 import { Info } from "../Main"
+import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Costumers() {
     let { allUser } = useContext(Info)
+    let [itm, setId] = useState(null)
+    let [openDetail, setOpenDetail] = useState(false)
+
+    // შავი ფონი
+    const sendInfo = (item, modeType) => {
+        setOpenDetail(modeType)
+        setId(item)
+    }
 
     return (
         <>
+            {
+                openDetail ?
+                    <BgBlack
+                        open={() => setOpenDetail(false)}
+                        func={sendInfo}
+                        allInfo={itm}
+                        mode={openDetail} /> : null
+            }
             <main className="w-full h-[98vh] flex flex-col px-10 py-5 gap-5">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
                     <h1 className="text-3xl font-bold">Costumers</h1>
@@ -19,7 +36,9 @@ function Costumers() {
                             col3='Address'
                             col4='Email'
                             col5='Spent'
-                            ApiInfo={allUser} />
+                            ApiInfo={allUser}
+                            func={sendInfo}
+                        />
                         : null
                 }
             </main >

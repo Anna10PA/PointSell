@@ -500,7 +500,8 @@ def register():
         "money": 1000 if email != my_gmail else 10000,
         "spent" : 0,
         "address": None,
-        "orders": []
+        "orders": [],
+        "block": False
     }
 
     users.append(new_user)
@@ -521,10 +522,14 @@ def login():
     users = check_users() 
     user = next((user for user in users if user['email'] == email and user['password'] == password), None)
     
-    if user:
+    if user and not user['block']:
         session['email'] = email
         session['is_login'] = True
         return jsonify({'message': 'Login successful!'}), 200
+    
+    elif user and user['block']:
+        return jsonify({'error': 'Your account has been blocked'}), 404
+    
     return jsonify({'error': 'Invalid'}), 401
 
 
@@ -581,11 +586,15 @@ def google_login():
                 "address": None,
                 "spent": 0,
                 "phone": None,
+                "block": False
             }
             
             users.append(user)
             save_users(users)
-            
+
+        elif user and user['block']:
+            return jsonify({'error': 'Your account has been blocked'}), 404
+
         session['email'] = email
         session['is_login'] = True
         return jsonify({"message": "Login successful"}), 200
@@ -804,6 +813,46 @@ def add_product():
     save_products(products)
 
     return jsonify({'message': 'successful!'}), 200
+
+
+# მომხმარებლის წაშლა
+@app.post('/delete_user')
+def delete_user() :
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.get_json()
+    user_email = data.get('user_email')
+    all_user = check_users()
+
+    user = next((p for p in all_user if p['email'] == user_email), None)
+
+    if user:
+        all_user.remove(user)
+        save_users(all_user)
+        return jsonify({'message': 'sucsessful!'}), 200
+    return jsonify({'error': 'product not found'}), 404
+
+
+# მომხმარებლის დაბლოკვა
+@app.post('/block_user')
+def block_user():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.get_json()
+    email = data.get('email')
+
+    users = check_users()
+    user = next((u for u in users if u['email'] == email), None)
+
+    if user:
+        user['block'] = not user['block']
+
+        save_users(users)
+        return jsonify({'message': 'sucsessful!'}), 200
+    
+    return jsonify({'error': 'user not found'}), 404
 
 
 @app.get("/")
