@@ -8,15 +8,39 @@
         "notification": [
             {
                 "date": "2026-01-05",
+                "time": "16:38:11.997850",
+                "message": "Your order has been successfully processed, and a payment of $3.02 has been debited. \n Curent Balance is $9761.83",
+                "read": true
+            },
+            {
+                "date": "2026-01-05",
+                "time": "01:36:52.656414",
+                "message": "Your order has been successfully processed, and a payment of $23.4 has been debited. \n Curent Balance is $9764.85",
+                "read": true
+            },
+            {
+                "date": "2026-01-05",
+                "time": "01:35:42.014415",
+                "message": "Your order has been successfully processed, and a payment of $43.83 has been debited. \n Curent Balance is $9788.25",
+                "read": true
+            },
+            {
+                "date": "2026-01-05",
+                "time": "01:29:05.671526",
+                "message": "Your order has been successfully processed, and a payment of $4.73 has been debited. \n Curent Balance is $9832.08",
+                "read": true
+            },
+            {
+                "date": "2026-01-05",
                 "time": "01:17:53.458004",
                 "message": "Your order has been successfully processed, and a payment of $11.7 has been debited. \n Curent Balance is $9836.81",
-                "read": false
+                "read": true
             },
             {
                 "date": "2026-01-05",
                 "time": "01:15:01.106498",
                 "message": "Your order has been successfully processed, and a payment of $21.9 has been debited. \n Curent Balance is $9848.51",
-                "read": false
+                "read": true
             },
             {
                 "date": "2026-01-04",
@@ -105,16 +129,10 @@
         ],
         "curent_cart": {
             "order": null,
-            "cart": [],
-            "sum": {
-                "discount": 0,
-                "tax": 0,
-                "change": 0,
-                "subtotal": 0
-            }
+            "cart": []
         },
-        "money": 9836.809999999998,
-        "spent": 163.18999999999997,
+        "money": 9761.829999999998,
+        "spent": 238.16999999999996,
         "address": null,
         "orders": [
             "5fc679ca",
@@ -124,40 +142,12 @@
             "31c9b044",
             "c68dffb5",
             "eab7fa75",
-            "06ddbbd4"
+            "06ddbbd4",
+            "1f2d1389",
+            "3e087979",
+            "c6d817fe",
+            "1efe652b"
         ],
-        "phone": null,
-        "block": false
-    },
-    {
-        "email": "puturidzeana0210@gmail.com",
-        "name": "Ana Puturidze",
-        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
-        "password": "a726c3be-c509-4800-9a94-9ed98a72d62e",
-        "position": "Customer",
-        "money": 1000,
-        "notification": [
-            {
-                "date": "2025-12-14",
-                "time": "14:10:58",
-                "message": "Hello User!",
-                "read": true
-            }
-        ],
-        "friends": [],
-        "curent_cart": {
-            "order": null,
-            "cart": [],
-            "sum": {
-                "discount": null,
-                "tax": null,
-                "change": null,
-                "subtotal": null
-            }
-        },
-        "orders": [],
-        "address": null,
-        "spent": 0,
         "phone": null,
         "block": false
     }

@@ -13,6 +13,8 @@ import AllProduct from "./AllProduct/AllProduct"
 import Post from "./Post/Post"
 import AddPost from "./Post/AddPost"
 
+import Setting from "./Settings/Setting.jsx"
+
 import Notification from './Notification/Notification.jsx'
 import Navigation from "../../MiniComponents/Navigation"
 import Costumers from "./Costumers/Costumers"
@@ -195,6 +197,7 @@ function Main() {
                     <Route path='/order/deliver/payment' element={<PaymentResult />} />
                     <Route path='/order/table/payment' element={<PaymentResult />} />
                     <Route path='/orders' element={<Order />} />
+                    <Route path='/setting/*' element={<Setting />} />
                 </Routes>
             </Info.Provider>
         </div >

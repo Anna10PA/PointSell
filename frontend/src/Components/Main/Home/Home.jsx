@@ -70,7 +70,7 @@ function Home() {
                         total += (Number(prod.price) * Number(item.count))
                         change += 1.5
                         if (prod.discount) {
-                            disc += (Number(prod.price) * Number(prod.discount.split('%')[0])) / 100 * Number(item.count)
+                            disc += (Number(prod.price) * (Number(prod.discount.split('%')[0])) / 100) * Number(item.count)
                         }
                     }
                 })

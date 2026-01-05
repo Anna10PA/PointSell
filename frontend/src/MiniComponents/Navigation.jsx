@@ -64,8 +64,8 @@ function Navigation() {
                 <Link to='/main/messages'>
                     <i className={`fa-solid fa-paper-plane hover:text-[#F67F20] ${locationName === '/main/messages' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
-                <Link to='/main/settings'>
-                    <i className={`fa-solid fa-gear hover:text-[#F67F20] ${locationName === '/main/settings' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                <Link to='/main/setting'>
+                    <i className={`fa-solid fa-gear hover:text-[#F67F20] ${locationName === '/main/setting' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
             </div>
         </nav>

@@ -7,6 +7,7 @@ function PaymentResult() {
 
     return (
         <>
+        {/* {window.location.reload()} */}
             <main className="w-full h-screen flex justify-center relative flex-col items-center">
                 <div className="w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100 flex items-center justify-center" onClick={()=> {
                     navigate('/main/home')

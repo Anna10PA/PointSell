@@ -446,7 +446,7 @@ def pay():
             save_users(users) 
 
             # მეილზე გაგზავნა
-            text=f'Your order sucsesfully ordered! \n \n Pay: {round(total_sum, 2)}$ \n Balance: {round(user['money'], 2)}$ \n Order number: {order_number}'
+            text=f'Your order successfully ordered! \n \n Pay: {round(total_sum, 2)}$ \n Balance: {round(user['money'], 2)}$ \n Order number: {order_number}'
 
             send_email(user['email'], text)
 

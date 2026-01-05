@@ -17,9 +17,6 @@ function Registration() {
     }
   })
 
-  // console.log(watch('email'))
-  // console.log(errors)
-
   return (
     <div className='flex flex-col items-start w-full gap-7 border-l border-gray-200 px-[60px] py-5 max-w-[500px] max-md:px-10'>
 
