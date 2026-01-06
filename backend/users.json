@@ -4,151 +4,79 @@
         "position": "Manager",
         "email": "futureana735@gmail.com",
         "password": "PointSell_2025",
+        "registration_date": "2026-01-06",
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
-                "date": "2026-01-05",
-                "time": "16:38:11.997850",
-                "message": "Your order has been successfully processed, and a payment of $3.02 has been debited. \n Curent Balance is $9761.83",
-                "read": true
+                "date": "2026-01-06",
+                "time": "23:47:50.564737",
+                "message": "Your order has been successfully processed, and a payment of $24.45 has been debited. \n Curent Balance is $9975.55",
+                "read": false
             },
             {
-                "date": "2026-01-05",
-                "time": "01:36:52.656414",
-                "message": "Your order has been successfully processed, and a payment of $23.4 has been debited. \n Curent Balance is $9764.85",
-                "read": true
-            },
-            {
-                "date": "2026-01-05",
-                "time": "01:35:42.014415",
-                "message": "Your order has been successfully processed, and a payment of $43.83 has been debited. \n Curent Balance is $9788.25",
-                "read": true
-            },
-            {
-                "date": "2026-01-05",
-                "time": "01:29:05.671526",
-                "message": "Your order has been successfully processed, and a payment of $4.73 has been debited. \n Curent Balance is $9832.08",
-                "read": true
-            },
-            {
-                "date": "2026-01-05",
-                "time": "01:17:53.458004",
-                "message": "Your order has been successfully processed, and a payment of $11.7 has been debited. \n Curent Balance is $9836.81",
-                "read": true
-            },
-            {
-                "date": "2026-01-05",
-                "time": "01:15:01.106498",
-                "message": "Your order has been successfully processed, and a payment of $21.9 has been debited. \n Curent Balance is $9848.51",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "23:27:24.510506",
-                "message": "Your order has been successfully processed, and a payment of $9.85 has been debited. \n Curent Balance is $9870.41",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "00:47:13.116331",
-                "message": "Your order has been successfully processed, and a payment of $5.18 has been debited. \n Curent Balance is $9880.26",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "00:42:34.325454",
-                "message": "Your order has been successfully processed, and a payment of $2.02 has been debited. \n Curent Balance is $9885.44",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "00:24:10.575127",
-                "message": "Your order has been successfully processed, and a payment of $25.9 has been debited. \n Curent Balance is $9887.46",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "00:23:26.283580",
-                "message": "Your order has been successfully processed, and a payment of $74.04 has been debited. \n Curent Balance is $9913.36",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "00:13:55.187957",
-                "message": "Your order has been successfully processed, and a payment of $12.6 has been debited. \n Curent Balance is $9987.4",
-                "read": true
-            },
-            {
-                "date": "2026-01-04",
-                "time": "00:00:18.452293",
-                "message": "Your order has been successfully processed, and a payment of $47.4 has been debited. \n Curent Balance is $8293.89",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "23:57:06.531220",
-                "message": "Your order has been successfully processed, and a payment of $44.85 has been debited. \n Curent Balance is $8341.29",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "23:52:04.102569",
-                "message": "Your order has been successfully processed, and a payment of $11.7 has been debited. \n Curent Balance is $8386.14",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "23:41:20.519654",
-                "message": "Your order has been successfully processed, and a payment of $47.4 has been debited. \n Curent Balance is $8397.84",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "23:40:17.590920",
-                "message": "Your order has been successfully processed, and a payment of $8.72 has been debited. \n Curent Balance is $8445.24",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "23:06:58.814604",
-                "message": "Your order has been successfully processed, and a payment of $4.9 has been debited. \n Curent Balance is $8453.96",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "23:06:56.367024",
-                "message": "Your order has been successfully processed, and a payment of $4.9 has been debited. \n Curent Balance is $8458.86",
-                "read": true
-            },
-            {
-                "date": "2026-01-03",
-                "time": "22:20:42.121473",
-                "message": "Your order has been successfully processed, and a payment of $28.1 has been debited. \n Curent Balance is $8463.76",
+                "date": "2026-01-06",
+                "time": "18:18:49.491942",
+                "message": "Registration is successful!",
                 "read": true
             }
         ],
+        "visit": [
+            "2026-01-06"
+        ],
         "curent_cart": {
             "order": null,
-            "cart": []
+            "cart": [],
+            "sum": {
+                "discount": 0,
+                "tax": 0,
+                "change": 0,
+                "subtotal": 0
+            }
         },
-        "money": 9761.829999999998,
-        "spent": 238.16999999999996,
+        "money": 9975.55,
+        "spent": 24.45,
         "address": null,
         "orders": [
-            "5fc679ca",
-            "cc8066f6",
-            "8831f18a",
-            "40369c31",
-            "31c9b044",
-            "c68dffb5",
-            "eab7fa75",
-            "06ddbbd4",
-            "1f2d1389",
-            "3e087979",
-            "c6d817fe",
-            "1efe652b"
+            "ecd2c73a"
         ],
+        "block": false,
+        "phone": null
+    },
+    {
+        "email": "puturidzeana0210@gmail.com",
+        "name": "Ana Puturidze",
+        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocIAICoNcLB8EM0wIZoxhb1BhbpuESY18KXl7bkbPqeLUIe1OA=s96-c",
+        "password": "57cd7f9f-2312-4d0e-be0d-6439b50abde5",
+        "registration_date": "2026-01-06",
+        "position": "Customer",
+        "money": 1000,
+        "notification": [
+            {
+                "date": "2025-12-14",
+                "time": "14:10:58",
+                "message": "Hello User!",
+                "read": false
+            }
+        ],
+        "visit": [
+            "2026-01-06"
+        ],
+        "friends": [],
+        "curent_cart": {
+            "order": null,
+            "cart": [],
+            "sum": {
+                "discount": null,
+                "tax": null,
+                "change": null,
+                "subtotal": null
+            }
+        },
+        "orders": [],
+        "address": null,
+        "spent": 0,
         "phone": null,
-        "block": false
+        "block": false,
+        "birthday": "2009-10-02"
     }
 ]

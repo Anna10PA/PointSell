@@ -478,6 +478,7 @@ def register():
         "position": "Customer" if email != my_gmail else "Manager",
         "email": email,
         "password": password,
+        "registration_date": current_time.split()[0],
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
@@ -487,6 +488,7 @@ def register():
                 "read": False
             }
         ],
+        "visit": [current_time.split()[0]],
         "curent_cart": {
             "order": None,
             "cart": [],
@@ -536,6 +538,7 @@ def login():
 # შესვლა Google-ით
 @app.post('/google_login')
 def google_login():
+    current_time = str(datetime.now())
     data = request.get_json()
     token = data.get('token') 
     
@@ -561,6 +564,7 @@ def google_login():
                 "name": user_info.get('name') or user_info.get('given_name') or user_info.get('User'),
                 "profileUrl": user_info.get('picture') or "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
                 "password": str(uuid.uuid4()),
+                "registration_date": current_time.split()[0],
                 "position": "Customer",
                 "money": 1000,
                 "notification": [
@@ -571,6 +575,7 @@ def google_login():
                         "read": False
                     }
                 ],
+                "visit": [current_time.split()[0]],
                 "friends": [],
                 "curent_cart": {
                     "order": None,

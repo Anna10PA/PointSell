@@ -1,4 +1,7 @@
-import { Link, useLocation, Routes, Route } from 'react-router-dom'
+import { Link, useLocation, Routes, Route, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+
+import { Info } from '../Main'
 
 import PersonalInformation from './PersonalInformation'
 import EmployeeInformation from './EmployeeInformation'
@@ -8,9 +11,11 @@ import Opening from './Opening'
 function Setting() {
     let location = useLocation()
     let locationName = location.pathname
+    let { curentUser } = useContext(Info)
+    let navigate = useNavigate()
 
     return (
-        <main className="w-full h-[98vh] flex flex-col px-10 py-5 gap-5">
+        <main className="w-full h-[98vh] flex flex-col px-10 py-5">
             <header className="flex items-center justify-between gap-5 min-h-[10vh]">
                 <h1 className="text-3xl font-bold">Setting</h1>
             </header>
@@ -24,8 +29,8 @@ function Setting() {
                             </div>
                         </div>
                         <div className='text-center'>
-                            <h1 className='font-bold text-2xl'>Fullname</h1>
-                            <p className='font-semibold text-gray-400'>Manager</p>
+                            <h1 className='font-bold text-2xl'>{curentUser?.name || curentUser?.email.split('@')[0]}</h1>
+                            <p className='font-semibold text-gray-400'>{curentUser?.position}</p>
                         </div>
                     </div>
                     <div className='w-full flex flex-col items-start gap-4'>
@@ -53,7 +58,11 @@ function Setting() {
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
                         </Link>
-                        <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer rounded'>Log out</button>
+                        <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer rounded' onClick={() => {
+                            navigate('/', {
+                                replace: true
+                            })
+                        }}>Log out</button>
                     </div>
                 </section>
                 <section className='w-[60%]'>
