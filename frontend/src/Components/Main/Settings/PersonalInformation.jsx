@@ -12,7 +12,7 @@ function PersonalInformation() {
 
 
     let [disabled, setDisabled] = useState(true)
-    let { register, handleSubmit, reset } = useForm({
+    let { register, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             fullname: curentUser?.name,
             email: curentUser?.email,
@@ -25,11 +25,11 @@ function PersonalInformation() {
     useEffect(() => {
         if (curentUser) {
             reset({
-                fullname: curentUser.name || 'Unknown',
-                email: curentUser.email || 'Unknown',
-                phone: curentUser.phone || 'Unknown',
-                address: curentUser.address || 'Unknown',
-                birthday: curentUser.birthday || 'Unknown'
+                fullname: curentUser.name,
+                email: curentUser.email,
+                phone: curentUser.phone,
+                address: curentUser.address,
+                birthday: curentUser.birthday
             })
         }
     }, [curentUser, reset])
@@ -46,16 +46,18 @@ function PersonalInformation() {
         return result
     }
 
+    console.log(errors)
     return (
         <section>
-            <div>
+            <div className='min-h-[12vh]'>
                 <div className='leading-10'>
                     <h1 className='text-[27px] font-bold'>Personal Information</h1>
                     <p className='text-gray-400'>Detailed information about you that only you can see.</p>
                 </div>
             </div>
-            <section className='h-[65vh] w-full flex flex-col gap-10 items-start overflow-auto'>
+            <section className='h-[65vh] w-full flex flex-col gap-20 items-start overflow-auto py-6'>
                 <div className='w-full h-[65vh] flex items-center flex-col gap-3 justify-center'>
+                    <h2 className='font-bold text-2xl text-center w-full'>Card Info</h2>
                     <div className='w-full grid grid-cols-2 justify-items-center items-center'>
                         <div className='w-max px-10 flex items-center flex-col justify-center gap-3 h-75'>
                             <div className="group w-[210px] h-35 ">
@@ -86,9 +88,9 @@ function PersonalInformation() {
                             <div className='flex items-center gap-3'>
                                 {
                                     getNext7Day(time).map((item, index) => {
-                                        let result = item.split('-')[2] % 7 === 0 && index !== 0 ? '🎁' : index === 0 ? 'Used' : curentUser?.position === 'Customer' ? '$100' : curentUser?.position === 'Worker' ? '$300' : curentUser?.position === 'Manager' ? '$500' : null
+                                        let result = item.split('-')[2] % 3 === 0 && index !== 0 ? '🎁' : index === 0 ? 'Used' : curentUser?.position === 'Customer' ? '$100' : curentUser?.position === 'Worker' ? '$300' : curentUser?.position === 'Manager' ? '$500' : null
 
-                                        return <div className='flex flex-col gap-3 items-center'>
+                                        return <div className='flex flex-col gap-3 items-center' key={index}>
                                             <div className={`${index === 0 ? 'bg-[#f67f20]' : 'bg-gray-400'} h-10 w-10 rounded-[50%] flex items-center justify-center font-bold text-white`} key={index}>{item.split('-')[2]}</div>
                                             <span className={`${result === 'Used' ? 'text-[#f67f20]' : 'text-gray-400'} font-semibold`}>{result}</span>
                                         </div>
@@ -97,7 +99,7 @@ function PersonalInformation() {
                             </div>
                         </div>
                     </div>
-                    <div className='flex items-center justify-around w-full'>
+                    <div className='flex items-center justify-around w-full '>
                         <h1 className='font-semibold text-gray-400'>
                             Registration Date: {registerDay ? String(registerDay).split(' ').slice(1, 4).join(" ") : null}
                         </h1>
@@ -106,37 +108,62 @@ function PersonalInformation() {
                         </h1>
                     </div>
                 </div>
-                <form className='w-full grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 justify-items-center items-end' onSubmit={(e) => {
-                    e.preventDefault()
-                }}>
-                    <div className='flex flex-col gap-3 w-full'>
-                        <label htmlFor="" className='font-bold'>Fullname</label>
-                        <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('fullname')} />
-                    </div>
-                    <div className='flex flex-col gap-3 w-full'>
-                        <label htmlFor="" className='font-bold'>Email</label>
-                        <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled {...register('email')} />
-                    </div>
-                    <div className='flex flex-col gap-3 w-full'>
-                        <label htmlFor="" className='font-bold'>Address</label>
-                        <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('address')} />
-                    </div>
-                    <div className='flex flex-col gap-3 w-full'>
-                        <label htmlFor="" className='font-bold'>Phone Number</label>
-                        <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('phone')} />
-                    </div>
-                    <div className='flex flex-col gap-3 w-full'>
-                        <label htmlFor="" className='font-bold'>Birthday</label>
-                        <input type="date" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('birthday')} />
-                    </div>
-                    <button
-                        type='button'
-                        className='w-full h-12 cursor-pointer font-bold text-white rounded-lg bg-[#f67f20] active:scale-95 duration-200 '
-                        onClick={() => setDisabled(!disabled)}
-                    >
-                        Edit
-                    </button>
-                </form>
+                <div className='w-full h-[60vh]'>
+                    <h2 className='font-bold text-2xl text-center'>Accaunt Info</h2>
+                    <form className='w-full grid py-10 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 justify-items-center items-center' onSubmit={handleSubmit(() => {
+                        console.log(e)
+                    })}>
+                        <div className='flex flex-col gap-3 w-full'>
+                            <label htmlFor="" className='font-bold'>Fullname</label>
+                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Fullname' disabled={disabled} {...register('fullname', {
+                                validate: (date) => {
+                                    for (let i of date) {
+                                        if (!'qwertyuioplkjhgfdsazxcvbnm '.includes(i.toLowerCase())) {
+                                            return 'Must be latter'
+                                        } return true
+                                    }
+                                }
+                            })} />
+                            <span className='text-red-600'>{errors.fullname ? errors.fullname.message : ''}</span>
+                        </div>
+                        <div className='flex flex-col gap-3 w-full'>
+                            <label htmlFor="" className='font-bold'>Email</label>
+                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Email' disabled {...register('email')} />
+                            <span></span>
+                        </div>
+                        <div className='flex flex-col gap-3 w-full'>
+                            <label htmlFor="" className='font-bold'>Address</label>
+                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Address' disabled={disabled} {...register('address')} />
+                            <span></span>
+                        </div>
+                        <div className='flex flex-col gap-3 w-full'>
+                            <label htmlFor="" className='font-bold'>Phone Number</label>
+                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Phone' disabled={disabled} {...register('phone', {
+                                validate: (data) => {
+                                    for (let i of data) {
+                                        if (!'0123456789'.includes(i)) {
+                                            return 'Must be number'
+                                        }
+                                        return true
+                                    }
+                                }
+                            })} />
+                            <span className='text-red-600'>{errors.phone ? errors.phone.message : ''}</span>
+                        </div>
+                        <div className='flex flex-col gap-3 w-full'>
+                            <label htmlFor="" className='font-bold'>Birthday</label>
+                            <input type="date" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('birthday')} />
+                            <span className='text-red-600'>{errors.fullname ? errors.fullname.message : ''}</span>
+                        </div>
+                        <button
+                            type='submit'
+                            className='w-full h-12 mt-5 cursor-pointer font-bold text-white rounded-lg bg-[#f67f20] active:scale-95 duration-200 '
+                            onClick={() => setDisabled(!disabled )}
+                        >
+                            Edit
+                        </button>
+                    </form>
+                </div>
             </section>
         </section>
     )
