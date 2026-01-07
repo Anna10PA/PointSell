@@ -33,7 +33,7 @@ All_post = "posts.json"
 All_orders = 'orders.json'
 
 
-my_gmail = 'futureana735@gmail.com'
+my_gmail = 'puturidzeana0210@gmail.com'
 my_password = os.environ.get('Gmail_password')  
 
 
@@ -935,7 +935,7 @@ def reset_password():
             current_count = user.get('count', 0) + 1
             user['count'] = current_count
             
-            if current_count >= 3 and user['email'] != 'futureana735@gmail.com':
+            if current_count >= 3 and user['email'] != my_gmail:
                 user['block'] = True
                 save_users(users)
                 return jsonify({'error': 'Too many attempts. Blocked!'}), 403

@@ -31,7 +31,7 @@ function Item({ image, name, info2, info3, info4, price, func, hasBlock }) {
                     <div className={`flex items-center gap-2  duration-150  px-3 py-2 rounded cursor-pointer  hover:text-white  ${curentPage === '/main/costumers' && !hasBlock ? 'text-red-600 hover:bg-red-600' :
                         curentPage === '/main/costumers' && hasBlock ? 'text-gray-600 hover:bg-gray-600 hover:text-white' : 'text-green-500 hover:bg-green-500'}`} onClick={() => {
                             if (curentPage === '/main/costumers') {
-                                blockUser(info4 !== 'futureana735@gmail.com' ? info4 : null)
+                                blockUser(info4 !== 'puturidzeana0210@gmail.com' ? info4 : null)
                             }
                         }}>
                         {curentPage === '/main/costumers' && !hasBlock ?
@@ -58,7 +58,7 @@ function Item({ image, name, info2, info3, info4, price, func, hasBlock }) {
                         }
                     </div>
                     <div className={`flex items-center gap-2 text-[#F67F20] duration-150 hover:bg-orange-400 hover:text-white px-3 py-2 rounded cursor-pointer `} onClick={() => {
-                        func(info4 !== 'futureana735@gmail.com' ? info4 : null, !info4.includes('@') ? 'delete_product' : 'delete_user')
+                        func(info4 !== 'puturidzeana0210@gmail.com' ? info4 : null, !info4.includes('@') ? 'delete_product' : 'delete_user')
                     }}>
                         <i className="fa-solid fa-trash"></i>
                         <span className='font-bold' >
