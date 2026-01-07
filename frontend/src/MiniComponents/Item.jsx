@@ -14,7 +14,7 @@ function Item({ image, name, info2, info3, info4, price, func, hasBlock }) {
                 <h1 className='font-bold'>{name ? name : 'Unknown'}</h1>
             </td>
             <td className='border border-gray-200 px-5 text-center text-green-500 font-bold'>
-                {info2 ? info2 : 'Unknown'}
+                {info2 ? info2 : '0'}
                 {curentPage === '/main/products' ? 's' : null}
             </td>
             <td className='pl-4 text-gray-800 font-medium border-gray-200 border wrap-break-word'>

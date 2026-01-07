@@ -101,6 +101,9 @@ function PersonalInformation() {
                     </div>
                     <div className='flex items-center justify-around w-full '>
                         <h1 className='font-semibold text-gray-400'>
+                            Spent: ${curentUser?.spent}
+                        </h1>
+                        <h1 className='font-semibold text-gray-400'>
                             Registration Date: {registerDay ? String(registerDay).split(' ').slice(1, 4).join(" ") : null}
                         </h1>
                         <h1 className='font-semibold text-gray-400'>
@@ -158,7 +161,7 @@ function PersonalInformation() {
                         <button
                             type='submit'
                             className='w-full h-12 mt-5 cursor-pointer font-bold text-white rounded-lg bg-[#f67f20] active:scale-95 duration-200 '
-                            onClick={() => setDisabled(!disabled )}
+                            onClick={() => setDisabled(!disabled)}
                         >
                             Edit
                         </button>

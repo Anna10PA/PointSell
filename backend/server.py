@@ -8,6 +8,7 @@ import smtplib
 from datetime import datetime
 import uuid
 import requests
+import random
 
 
 
@@ -516,6 +517,8 @@ def register():
 @app.post('/login')
 def login():
     data = request.get_json()
+    current_time = str(datetime.now())
+
     if not data:
         return jsonify({'error': 'no data'}), 400
     
@@ -527,6 +530,16 @@ def login():
     if user and not user['block']:
         session['email'] = email
         session['is_login'] = True
+        if current_time.split()[0] not in user['visit']:
+            user['visit'].append(current_time.split()[0])
+            user['money'] += 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
+            user['notification'].insert(0, {
+                'date': current_time.split()[0],
+                'time': current_time.split()[1],
+                'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
+            })
+            save_users(users)
+
         return jsonify({'message': 'Login successful!'}), 200
     
     elif user and user['block']:
@@ -597,6 +610,18 @@ def google_login():
             users.append(user)
             save_users(users)
 
+        elif user:
+            if current_time.split()[0] not in user['visit']:
+                user['visit'].append(current_time.split()[0])
+                user['money'] += 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
+                user['notification'].insert(0, {
+                    'date': current_time.split()[0],
+                    'time': current_time.split()[1],
+                    'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
+                })
+                save_users(users)
+                return jsonify({"message": 'succsessful!'}), 200
+            
         elif user and user['block']:
             return jsonify({'error': 'Your account has been blocked'}), 404
 
@@ -858,6 +883,67 @@ def block_user():
         return jsonify({'message': 'sucsessful!'}), 200
     
     return jsonify({'error': 'user not found'}), 404
+
+
+# სავერიფიკაციო კოდის გაგზავნა/შედგენა
+@app.post('/verification_code')
+def verification_code():
+    data = request.get_json()
+    email = data.get('email')
+
+    users = check_users()
+    user = next((u for u in users if u['email'] == email), None)
+    
+    if user:
+        if user.get('block'):
+            return jsonify({'error': 'Account is blocked'}), 403
+
+        verify_code = str(random.randint(1000000, 9999999))
+        
+        session['verify_code'] = verify_code
+        session['reset_email'] = email  
+        
+        send_email(email, f"Hello! Your verify code is: {verify_code}")
+        return jsonify({'message': 'Code sent successful!'}), 200
+    
+    return jsonify({'error': 'User not found'}), 404
+
+
+# პაროლის აღდგენა საიტიდან
+@app.post('/reset_password')
+def reset_password():
+    if 'reset_email' not in session or 'verify_code' not in session:
+        return jsonify({'error': 'Session expired'}), 400
+    
+    data = request.get_json()
+    users = check_users()
+    input_code = data.get('code')
+    
+    reset_email = session['reset_email']
+    user = next((u for u in users if u['email'] == reset_email), None)
+
+    if user:
+        if user.get('block'):
+            return jsonify({'error': 'Account is blocked!'}), 403
+
+        if input_code == session['verify_code']:
+            user['count'] = 0  
+            save_users(users)
+            return jsonify({'message': 'success'}), 200
+        
+        else:
+            current_count = user.get('count', 0) + 1
+            user['count'] = current_count
+            
+            if current_count >= 3 and user['email'] != 'futureana735@gmail.com':
+                user['block'] = True
+                save_users(users)
+                return jsonify({'error': 'Too many attempts. Blocked!'}), 403
+            
+            save_users(users)
+            return jsonify({'error': f'Wrong code. {3 - current_count} attempts left'}), 400
+
+    return jsonify({'error': 'User not found'}), 404
 
 
 @app.get("/")

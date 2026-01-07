@@ -8,10 +8,15 @@
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
+                "date": "2026-01-08",
+                "time": "00:50:57.758436",
+                "message": "Daily Gift! You have been credited with $500"
+            },
+            {
                 "date": "2026-01-06",
                 "time": "23:47:50.564737",
                 "message": "Your order has been successfully processed, and a payment of $24.45 has been debited. \n Curent Balance is $9975.55",
-                "read": false
+                "read": true
             },
             {
                 "date": "2026-01-06",
@@ -21,26 +26,23 @@
             }
         ],
         "visit": [
-            "2026-01-06"
+            "2026-01-06",
+            "2026-01-07",
+            "2026-01-08"
         ],
         "curent_cart": {
             "order": null,
-            "cart": [],
-            "sum": {
-                "discount": 0,
-                "tax": 0,
-                "change": 0,
-                "subtotal": 0
-            }
+            "cart": []
         },
-        "money": 9975.55,
+        "money": 10975.55,
         "spent": 24.45,
         "address": null,
         "orders": [
             "ecd2c73a"
         ],
         "block": false,
-        "phone": null
+        "phone": null,
+        "count": 0
     },
     {
         "email": "puturidzeana0210@gmail.com",
@@ -49,17 +51,24 @@
         "password": "57cd7f9f-2312-4d0e-be0d-6439b50abde5",
         "registration_date": "2026-01-06",
         "position": "Customer",
-        "money": 1000,
+        "money": 1100,
         "notification": [
+            {
+                "date": "2026-01-07",
+                "time": "16:01:00.101873",
+                "message": "Daily Gift! You have been credited with $100",
+                "read": true
+            },
             {
                 "date": "2025-12-14",
                 "time": "14:10:58",
                 "message": "Hello User!",
-                "read": false
+                "read": true
             }
         ],
         "visit": [
-            "2026-01-06"
+            "2026-01-06",
+            "2026-01-07"
         ],
         "friends": [],
         "curent_cart": {

@@ -7,6 +7,7 @@ import PersonalInformation from './PersonalInformation'
 import EmployeeInformation from './EmployeeInformation'
 import Password from './Password'
 import Opening from './Opening'
+import GetCode from './GetCode'
 
 function Setting() {
     let location = useLocation()
@@ -52,12 +53,12 @@ function Setting() {
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
                         </Link>
-                        <Link to="/main/setting/open" className="w-full">
+                        {/* <Link to="/main/setting/open" className="w-full">
                             <div className={`flex items-center justify-between border px-5 py-3 rounded cursor-pointer  hover:bg-gray-10 ${locationName == '/main/setting/open' ? 'border-[#f67f20] bg-[#f67f20] text-white' : 'border-gray-300'}`}>
                                 <h1 className='font-bold'>Opening</h1>
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
-                        </Link>
+                        </Link> */}
                         <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer rounded' onClick={() => {
                             navigate('/', {
                                 replace: true
@@ -71,6 +72,7 @@ function Setting() {
                         <Route path='employers_information' element={<EmployeeInformation />} />
                         <Route path='password' element={<Password />} />
                         <Route path='open' element={<Opening />} />
+                        <Route path='password/verify' element={<GetCode />}/>
                     </Routes>
                 </section>
             </section>

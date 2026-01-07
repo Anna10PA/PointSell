@@ -161,6 +161,7 @@ function Main() {
         }
     }
 
+    
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
