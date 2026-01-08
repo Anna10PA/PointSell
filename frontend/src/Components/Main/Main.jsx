@@ -161,7 +161,29 @@ function Main() {
         }
     }
 
-    
+
+    async function resetPassword(email, password) {
+        let res = await fetch('http://localhost:5000/change_password', {
+            method: "POST",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+
+        let result = await res.json()
+        if (res.ok) {
+            alert(result.message)
+        }else {
+            alert(result.error)
+        }
+    }
+
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -182,7 +204,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />

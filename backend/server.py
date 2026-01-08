@@ -536,6 +536,7 @@ def login():
             user['notification'].insert(0, {
                 'date': current_time.split()[0],
                 'time': current_time.split()[1],
+                "read": False,
                 'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
             })
             save_users(users)
@@ -631,6 +632,69 @@ def google_login():
         
     except:
         return jsonify({"error": "Server error during Google Login"}), 500
+
+
+# პაროლის შეცვლა
+@app.post('/change_password')
+def change_password():
+    current_time = str(datetime.now())
+    data = request.get_json()
+    email = data["email"]
+    password = data['password']
+    users = check_users()
+
+    if email:
+        user = next((u for u in users if u['email'] == email), None)
+
+        if user:
+            user['password'] = password
+            user['notification'] = {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": "Password Change Successfully",
+                "read": False
+            }
+            save_users(users)
+            send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
+            return jsonify({'message': 'sucsessful!'}), 200
+        
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+
+    return jsonify({'error': 'empty value / no content'}), 204
+
+
+# მომხმარებლის მონაცემების შეცვლა
+@app.post('/change_user_info')
+def change_user_info():
+    current_time = str(datetime.now())
+    data = request.get_json()
+    email = data['email']
+    address = data['address']
+    phone = data['phone']
+    name = data['name']
+    date = data['date']
+
+    users = check_users()
+    user = next((u for u in users if u['email'] == email), None)
+
+    if user:
+        user['name'] = name
+        user['address'] = address
+        user['phone'] = phone
+        user['date'] = date
+        user['notification'].insert(0, {
+            "date": current_time.split()[0],
+            "time": current_time.split()[1],
+            "message": "Information Update Successfully!",
+            "read": False
+        })
+        save_users(users)
+        
+        return jsonify({'message': 'sucsessfully'}), 200
+    
+    return jsonify({'error': 'not found'}), 404
 
 
 # ჩემი ინფორმაცია / მენეჯერის

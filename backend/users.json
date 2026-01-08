@@ -1,12 +1,126 @@
 [
     {
-        "name": null,
+        "name": "Ana Puturidze",
         "position": "Manager",
         "email": "puturidzeana0210@gmail.com",
-        "password": "PointSell_2025",
+        "password": "Ana12345678",
         "registration_date": "2026-01-08",
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
+            {
+                "date": "2026-01-09",
+                "time": "01:08:10.967079",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "01:08:07.239486",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "01:04:55.052024",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "01:04:23.598421",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "01:00:13.742132",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "01:00:10.029429",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:53:50.831320",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:53:43.009335",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:53:14.485909",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:53:08.792206",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:52:14.553519",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:52:07.803028",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:31:04.434269",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:31:02.234286",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:30:59.296281",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:30:35.648203",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "00:30:10.793546",
+                "read": true,
+                "message": "Daily Gift! You have been credited with $500"
+            },
+            {
+                "date": "2026-01-08",
+                "time": "21:29:57.728212",
+                "message": "Daily Gift! You have been credited with $500",
+                "read": true
+            },
+            {
+                "date": "2026-01-08",
+                "time": "16:21:53.213951",
+                "message": "Daily Gift! You have been credited with $500",
+                "read": true
+            },
             {
                 "date": "2026-01-08",
                 "time": "02:12:43.147976",
@@ -15,7 +129,9 @@
             }
         ],
         "visit": [
-            "2026-01-08"
+            "2026-01-07",
+            "2026-01-08",
+            "2026-01-09"
         ],
         "curent_cart": {
             "order": null,
@@ -27,11 +143,13 @@
                 "subtotal": null
             }
         },
-        "money": 10000,
+        "money": 11500,
         "spent": 0,
-        "address": null,
+        "address": "ვაჟა-ფშაველას N100",
         "orders": [],
         "block": false,
-        "count": 0
+        "count": 0,
+        "phone": "512312315",
+        "date": "2009-02-10"
     }
 ]

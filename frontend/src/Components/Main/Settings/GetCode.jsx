@@ -30,7 +30,7 @@ function GetCode() {
             let result = await res.json()
             if (res.ok) {
                 setLoading(false)
-                alert("Work!")
+                navigate('reset_password', {state: curentUser.email})
             } else {
                 setError(result.error)
             }

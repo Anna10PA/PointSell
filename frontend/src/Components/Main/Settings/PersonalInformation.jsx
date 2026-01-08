@@ -18,7 +18,8 @@ function PersonalInformation() {
             email: curentUser?.email,
             phone: curentUser?.phone,
             address: curentUser?.address,
-            birthday: curentUser?.birthday
+            birthday: curentUser?.birthday,
+            date: curentUser?.date
         }
     })
 
@@ -29,7 +30,7 @@ function PersonalInformation() {
                 email: curentUser.email,
                 phone: curentUser.phone,
                 address: curentUser.address,
-                birthday: curentUser.birthday
+                date: curentUser.date
             })
         }
     }, [curentUser, reset])
@@ -113,8 +114,23 @@ function PersonalInformation() {
                 </div>
                 <div className='w-full h-[60vh]'>
                     <h2 className='font-bold text-2xl text-center'>Accaunt Info</h2>
-                    <form className='w-full grid py-10 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 justify-items-center items-center' onSubmit={handleSubmit(() => {
-                        console.log(e)
+                    <form className='w-full grid py-10 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 justify-items-center items-center' onSubmit={handleSubmit(async (data) => {
+                        let res = await fetch('http://localhost:5000/change_user_info', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            credentials: 'include',
+                            body: JSON.stringify({
+                                email: curentUser.email,
+                                phone: data.phone,
+                                address: data.address,
+                                name: data.fullname,
+                                date: data.date
+                            })
+                        })
+
+                        if (res.ok) {
+                            alert('Work!')
+                        }
                     })}>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Fullname</label>
@@ -123,11 +139,12 @@ function PersonalInformation() {
                                     for (let i of date) {
                                         if (!'qwertyuioplkjhgfdsazxcvbnm '.includes(i.toLowerCase())) {
                                             return 'Must be latter'
-                                        } return true
+                                        }
                                     }
+                                    return true
                                 }
                             })} />
-                            <span className='text-red-600'>{errors.fullname ? errors.fullname.message : ''}</span>
+                            <span className='text-red-600'>{errors?.fullname ? errors?.fullname.message : ''}</span>
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Email</label>
@@ -136,8 +153,13 @@ function PersonalInformation() {
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Address</label>
-                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Address' disabled={disabled} {...register('address')} />
-                            <span></span>
+                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Address' disabled={disabled} {...register('address', {
+                                required: (curentUser?.position === 'Manager' || curentUser?.position === 'Worker')
+                                    ? "Enter Your Address"
+                                    : false
+                            }
+                            )} />
+                            <span className='text-red-600 font-semibold'>{errors?.address ? errors?.address?.message : ''}</span>
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Phone Number</label>
@@ -147,23 +169,26 @@ function PersonalInformation() {
                                         if (!'0123456789'.includes(i)) {
                                             return 'Must be number'
                                         }
-                                        return true
                                     }
+                                    if (data.length !== 9 || data[0] != 5) {
+                                        return 'Must Have 9 Symbol and start number 5'
+                                    }
+                                    return true
                                 }
                             })} />
                             <span className='text-red-600'>{errors.phone ? errors.phone.message : ''}</span>
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Birthday</label>
-                            <input type="date" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('birthday')} />
-                            <span className='text-red-600'>{errors.fullname ? errors.fullname.message : ''}</span>
+                            <input type="date" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('date')} />
+                            <span className='text-red-600'>{errors.date ? errors.date.message : ''}</span>
                         </div>
                         <button
                             type='submit'
                             className='w-full h-12 mt-5 cursor-pointer font-bold text-white rounded-lg bg-[#f67f20] active:scale-95 duration-200 '
                             onClick={() => setDisabled(!disabled)}
                         >
-                            Edit
+                            {disabled ? 'Edit' : 'Save'}
                         </button>
                     </form>
                 </div>

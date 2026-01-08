@@ -65,11 +65,11 @@ function Navigation() {
                     <i className={`fa-solid fa-paper-plane hover:text-[#F67F20] ${locationName === '/main/messages' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/main/setting'>
-                    <i className={`fa-solid fa-gear hover:text-[#F67F20] ${locationName === '/main/setting' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-gear hover:text-[#F67F20] ${locationName === '/main/setting' || locationName === '/main/setting/employers_information' || locationName === '/main/setting/password' || locationName === '/main/setting/password/verify' || locationName === '/main/setting/password/verify/reset_password' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
             </div>
         </nav>
     )
 }
-
+// /main/setting/password/verify/reset_password
 export default Navigation
