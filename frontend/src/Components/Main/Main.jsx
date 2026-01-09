@@ -13,12 +13,16 @@ import AllProduct from "./AllProduct/AllProduct"
 import Post from "./Post/Post"
 import AddPost from "./Post/AddPost"
 
-import Setting from "./Settings/Setting.jsx"
+import Messages from "./Messages/Messages.jsx"
+import SearchFriend from "./Messages/SearchFriend.jsx"
 
 import Notification from './Notification/Notification.jsx'
 import Navigation from "../../MiniComponents/Navigation"
-import Costumers from "./Costumers/Costumers"
+
 import Order from "./OrderPage/Order"
+import Costumers from "./Costumers/Costumers"
+import Setting from "./Settings/Setting.jsx"
+
 
 export let Info = createContext()
 
@@ -218,6 +222,8 @@ function Main() {
                     <Route path='/order/table' element={< Table />} />
                     <Route path="/add_product" element={<AddProductPage />} />
                     <Route path="/costumers" element={<Costumers />} />
+                    <Route path="/messages" element={<Messages />}/>
+                    <Route path="/search_friend" element={<SearchFriend />} />
                     <Route path='/order/deliver/payment' element={<PaymentResult />} />
                     <Route path='/order/table/payment' element={<PaymentResult />} />
                     <Route path='/orders' element={<Order />} />

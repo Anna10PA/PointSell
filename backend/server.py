@@ -610,8 +610,12 @@ def google_login():
             
             users.append(user)
             save_users(users)
+            session['email'] = email
+            session['is_login'] = True
+            return jsonify({"message": "Login successful"}), 200
+        
 
-        elif user:
+        elif user and not user['block']:
             if current_time.split()[0] not in user['visit']:
                 user['visit'].append(current_time.split()[0])
                 user['money'] += 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
@@ -621,14 +625,13 @@ def google_login():
                     'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
                 })
                 save_users(users)
-                return jsonify({"message": 'succsessful!'}), 200
+
+                session['email'] = email
+                session['is_login'] = True
+                return jsonify({"message": "Login successful"}), 200
             
         elif user and user['block']:
             return jsonify({'error': 'Your account has been blocked'}), 404
-
-        session['email'] = email
-        session['is_login'] = True
-        return jsonify({"message": "Login successful"}), 200
         
     except:
         return jsonify({"error": "Server error during Google Login"}), 500
@@ -789,6 +792,59 @@ def current_user():
     users = check_users()
     user = next((u for u in users if u['email'] == session['email']), None)
     return jsonify(user) if user else (jsonify({'error': 'Not found'}), 404)
+
+
+# მეგობრების დამატება / წაშლა
+@app.post('/friends_delete_or_add')
+def friends_delete_or_add():
+    current_time = str(datetime.now())
+
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.get_json()
+    friend_email = data['email']
+
+    users = check_users()
+    current_user = next((u for u in users if u['email'] == friend_email), None)
+    friend = next((u for u in users if u['email'] == friend_email))
+
+    if current_user and friend:
+        if friend_email in current_user['friends']:
+            current_user['friends'].remove(friend_email)
+            current_user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f'You Delete {friend_email} from your friend list',
+                "read": False
+            })
+            friend['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f'You {current_user['email']} removed from their friends list',
+                "read": False
+            })
+        elif friend_email in current_user['friend_request']:
+            current_user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f'You Delete {friend_email} from your request list',
+                "read": False
+            })
+
+        else:
+            current_user['friend_request'].append(friend_email)
+            friend['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f'You send Friend Request {current_user['email']}',
+                "read": False
+            })
+        save_users(users)
+
+        return jsonify({'message': 'add successfully'}), 200
+    
+    return jsonify({'error': 'user is not found'}), 404
 
 
 # შეტყობინების წაკითხვა

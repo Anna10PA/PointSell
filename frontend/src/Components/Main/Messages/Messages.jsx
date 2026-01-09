@@ -1,0 +1,48 @@
+import { useState, useContext, useEffect } from "react"
+import MessageNotification from "./MessageNotification"
+import { useNavigate } from "react-router-dom"
+import Chat from "./Chat"
+import { Info } from "../Main"
+
+function Messages() {
+    let [user2Info, set2UserInfo] = useState(null)
+    let [user2Email, set2Email] = useState(null)
+    let { curentUser, allUser } = useContext(Info)
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        set2UserInfo(allUser?.find((u) => u?.email == user2Email))
+    }, [user2Email])
+
+    return (
+        <main className="w-full flex items-start gap-5">
+            <section className="w-[48%] h-[95vh] flex flex-col px-10 py-5 gap-5">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] ">
+                    <h1 className="text-3xl font-bold">Messsages</h1>
+                    <button className="bg-[#f67f20] px-5 py-3 rounded text-white font-bold cursor-pointer duration-100 hover:bg-orange-400" onClick={()=> {
+                        navigate('/main/search_friend')
+                    }}>Add Friend</button>
+                </header>
+                <section className='border relative border-gray-300 rounded-xl h-full'>
+                    <h2 className='font-bold text-gray-400 tracking-[0.5px] sticky top-0 right-0 bg-white px-5 py-4 pb-2'>Personal</h2>
+                    <div className='w-full h-full px-5 py-4 pt-0 overflow-auto'>
+                        <MessageNotification
+                            name='Ana'
+                            image='https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg' unread={15}
+                            lastMessage={'I love you'}
+                            user={set2Email}
+                            email='kvaskhvadzemanana@gmail.com'
+                        />
+                    </div>
+                </section>
+            </section>
+            {
+                user2Email ? 
+                <Chat user={user2Info} /> : 
+                <h1>Not Chat Eveble</h1>
+            }
+        </main>
+    )
+}
+
+export default Messages

@@ -1,7 +1,6 @@
 import { Info } from "../Main"
 import { useContext } from "react"
-import User from "./User"
-
+import User from "../../../MiniComponents/User"
 
 function EmployeeInformation() {
   let { allUser } = useContext(Info)
@@ -16,8 +15,8 @@ function EmployeeInformation() {
         <table className="w-full h-full border-collapse">
           <thead className="w-full sticky top-0 right-0 bg-white" >
             <tr className="w-full flex justify-between">
-              <th className="w-1/2 border border-gray-300 h-15 flex items-center justify-center text-xl">Employer</th>
-              <th className="w-1/2 border border-gray-300 h-15 flex items-center justify-center text-xl">Email</th>
+              <th className="w-1/2 border-b border-t border-gray-300 h-15 flex items-center justify-center text-xl">Employer</th>
+              <th className="w-1/2 border-b border-t border-gray-300 h-15 flex items-center justify-center text-xl">Email</th>
             </tr>
           </thead>
           <tbody className="w-full mt-15">

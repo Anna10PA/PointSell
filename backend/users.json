@@ -8,6 +8,18 @@
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
+                "date": "2026-01-10",
+                "time": "01:04:32.733825",
+                "read": true,
+                "message": "Daily Gift! You have been credited with $500"
+            },
+            {
+                "date": "2026-01-09",
+                "time": "19:08:47.466791",
+                "message": "Your order has been successfully processed, and a payment of $11.7 has been debited. \n Curent Balance is $11488.3",
+                "read": true
+            },
+            {
                 "date": "2026-01-09",
                 "time": "01:38:37.485353",
                 "message": "Information Update Successfully!",
@@ -143,19 +155,31 @@
         "visit": [
             "2026-01-07",
             "2026-01-08",
-            "2026-01-09"
+            "2026-01-09",
+            "2026-01-10"
         ],
         "curent_cart": {
             "order": null,
-            "cart": []
+            "cart": [],
+            "sum": {
+                "discount": 0,
+                "tax": 0,
+                "change": 0,
+                "subtotal": 0
+            }
         },
-        "money": 11500,
-        "spent": 0,
-        "address": "ვაჟა-ფშაველას N100",
-        "orders": [],
+        "money": 11988.3,
+        "friends": [
+            "kvaskhvadzemanana@gmail.com"
+        ],
+        "spent": 11.7,
+        "address": null,
+        "orders": [
+            "69423acf"
+        ],
         "block": false,
         "count": 0,
-        "phone": "512312315",
+        "phone": null,
         "date": "2009-02-10"
     },
     {
@@ -165,8 +189,13 @@
         "password": "b7bc0b12-9314-4ad1-bc0d-857cec594a6e",
         "registration_date": "2026-01-09",
         "position": "Worker",
-        "money": 1000,
+        "money": 1300,
         "notification": [
+            {
+                "date": "2026-01-10",
+                "time": "01:02:13.144182",
+                "message": "Daily Gift! You have been credited with $300"
+            },
             {
                 "date": "2025-12-14",
                 "time": "14:10:58",
@@ -175,7 +204,8 @@
             }
         ],
         "visit": [
-            "2026-01-09"
+            "2026-01-09",
+            "2026-01-10"
         ],
         "friends": [],
         "curent_cart": {
@@ -192,6 +222,6 @@
         "address": null,
         "spent": 0,
         "phone": null,
-        "block": false
+        "block": true
     }
 ]

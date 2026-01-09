@@ -62,7 +62,7 @@ function Navigation() {
                         : null
                 }
                 <Link to='/main/messages'>
-                    <i className={`fa-solid fa-paper-plane hover:text-[#F67F20] ${locationName === '/main/messages' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-paper-plane hover:text-[#F67F20] ${locationName === '/main/messages' ||locationName ===  '/main/search_friend'  ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/main/setting'>
                     <i className={`fa-solid fa-gear hover:text-[#F67F20] ${locationName === '/main/setting' || locationName === '/main/setting/employers_information' || locationName === '/main/setting/password' || locationName === '/main/setting/password/verify' || locationName === '/main/setting/password/verify/reset_password' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
