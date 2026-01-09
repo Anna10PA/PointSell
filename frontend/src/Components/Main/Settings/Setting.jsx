@@ -67,8 +67,8 @@ function Setting() {
                         <Route path='employers_information' element={<EmployeeInformation />} />
                         <Route path='password' element={<Password />} />
                         <Route path='open' element={<Opening />} />
-                        <Route path='password/verify' element={<GetCode />}/>
-                        <Route path='password/verify/reset_password' element={<ResetPassword />}/>
+                        <Route path='password/verify' element={<GetCode />} />
+                        <Route path='password/verify/reset_password' element={<ResetPassword />} />
                     </Routes>
                 </section>
             </section>

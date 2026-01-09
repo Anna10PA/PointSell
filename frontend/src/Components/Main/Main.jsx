@@ -162,6 +162,7 @@ function Main() {
     }
 
 
+    // პაროლის აღდგენა
     async function resetPassword(email, password) {
         let res = await fetch('http://localhost:5000/change_password', {
             method: "POST",

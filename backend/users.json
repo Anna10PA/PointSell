@@ -4,9 +4,21 @@
         "position": "Manager",
         "email": "puturidzeana0210@gmail.com",
         "password": "Ana12345678",
-        "registration_date": "2026-01-08",
+        "registration_date": "2026-01-07",
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
+            {
+                "date": "2026-01-09",
+                "time": "01:38:37.485353",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
+            {
+                "date": "2026-01-09",
+                "time": "01:38:30.784552",
+                "message": "Information Update Successfully!",
+                "read": true
+            },
             {
                 "date": "2026-01-09",
                 "time": "01:08:10.967079",
@@ -135,13 +147,7 @@
         ],
         "curent_cart": {
             "order": null,
-            "cart": [],
-            "sum": {
-                "discount": null,
-                "tax": null,
-                "change": null,
-                "subtotal": null
-            }
+            "cart": []
         },
         "money": 11500,
         "spent": 0,
@@ -151,5 +157,41 @@
         "count": 0,
         "phone": "512312315",
         "date": "2009-02-10"
+    },
+    {
+        "email": "kvaskhvadzemanana@gmail.com",
+        "name": "მანანა კვასხვაძე",
+        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocKafHRori5hNnkz2X-TsUZs1etyAEUiaTrSVxm8Xtd3A7HNFw=s96-c",
+        "password": "b7bc0b12-9314-4ad1-bc0d-857cec594a6e",
+        "registration_date": "2026-01-09",
+        "position": "Worker",
+        "money": 1000,
+        "notification": [
+            {
+                "date": "2025-12-14",
+                "time": "14:10:58",
+                "message": "Hello User!",
+                "read": false
+            }
+        ],
+        "visit": [
+            "2026-01-09"
+        ],
+        "friends": [],
+        "curent_cart": {
+            "order": null,
+            "cart": [],
+            "sum": {
+                "discount": null,
+                "tax": null,
+                "change": null,
+                "subtotal": null
+            }
+        },
+        "orders": [],
+        "address": null,
+        "spent": 0,
+        "phone": null,
+        "block": false
     }
 ]
