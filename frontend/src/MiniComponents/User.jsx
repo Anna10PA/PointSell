@@ -1,12 +1,63 @@
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 
-function User({ name, email, image, addFriend, sender=[] }) {
+function User({ name, email, image, sender = [], myEmail = '' }) {
     let location = useLocation()
     let locationName = location.pathname
-    
+    let [friendList, setFriendList] = useState([])
+
+    // მეგობრობის გაგზავნა / წაშლა
+    let senRequest = async () => {
+        let res = await fetch('http://localhost:5000/friends_delete_or_add', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+        if (res.ok) {
+            setFriendList(prevList => {
+                if (prevList.includes(myEmail)) {
+                    return prevList.filter(item => item !== myEmail)
+                } else {
+                    return [...prevList, myEmail]
+                }
+            })
+        }
+
+    }
+
+    // რექვესთებიდან წაშლა / დამატება
+    let confirmOrDelete = async (type) => {
+        let res = await fetch('http://localhost:5000/delete_or_confirm', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                type: type
+            })
+        })
+        if (res.ok) {
+            alert('WORK')
+        }
+    }
+
+    useEffect(() => {
+        if (locationName === '/main/search_friend') {
+            setFriendList(sender)
+        }
+    }, [sender, locationName])
+
+    console.log(email)
     return (
         <tr className="flex w-full justify-between">
-            <td className={`flex items-center gap-3 border-b border-gray-300 p-2 ${locationName == '/main/search_friend' ? ' w-2/5' : 'w-1/2'} `}>
+            <td className={`flex items-center gap-3 border-b border-gray-300 p-2 ${locationName == '/main/search_friend'  ? ' w-2/5' : 'w-1/2'} `}>
                 <img src={image} alt="" className="w-16 h-16 rounded-lg object-cover" />
                 <h1 className="font-bold text-md wrap-break-word whitespace-normal">{name}</h1>
             </td>
@@ -17,18 +68,31 @@ function User({ name, email, image, addFriend, sender=[] }) {
             </td>
             <td className={`${locationName === '/main/search_friend' ? 'flex items-center gap-3 border-b border-gray-300  p-2 w-1/5 text-[#f67f20] font-bold ' : 'hidden'}`}>
                 {
-                    !sender.includes(email) ? <button className="px-5 py-3 duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer flex items-center gap-4 rounded">
-                        <i className="fa-solid fa-user-plus"></i>
-                        Add Friend
-                    </button> :
-                        <button className="px-5 py-3 duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer flex items-center gap-4 rounded">
+                    !friendList?.includes(myEmail) ?
+                        <button className="px-5 py-3 duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer flex items-center gap-4 rounded" onClick={senRequest}>
+                            <i className="fa-solid fa-user-plus"></i>
+                            Add Friend
+                        </button> :
+                        <button className="px-5 py-3 duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer flex items-center gap-4 rounded" onClick={senRequest}>
                             <i className="fa-solid fa-user-minus"></i>
                             Remove Friend
                         </button>
                 }
 
             </td>
-        </tr>
+            <td className={`${locationName === '/main/requests' ? 'flex items-center gap-3 border-b border-gray-300  p-2 w-1/5  font-bold ' : 'hidden'}`} >
+                <button className="bg-[#f67f20] h-9 w-9 flex items-center justify-center rounded-[50%] text-white duration-200 hover:bg-orange-400 cursor-pointer" onClick={() => {
+                    confirmOrDelete('delete')
+                }}>
+                    <i className="fa-solid fa-xmark"></i>
+                </button>
+                <button className="bg-[#f67f20] h-9 w-9 flex items-center justify-center rounded-[50%] text-white duration-200 hover:bg-orange-400 cursor-pointer" onClick={() => {
+                    confirmOrDelete('add')
+                }}>
+                    <i className="fa-solid fa-check"></i>
+                </button>
+            </td>
+        </tr >
     )
 }
 

@@ -18,7 +18,7 @@ app.secret_key = os.environ.get('Gmail_password')
 CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
 
 
-Google_Client_Id = '553005797004-r8f7ri794npsv1kjab782t79p42vg6g3.apps.googleusercontent.com'
+Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
 
 
 image_folders = 'images'
@@ -489,6 +489,8 @@ def register():
                 "read": False
             }
         ],
+        "friends": [],
+        "friend_request": [],
         "visit": [current_time.split()[0]],
         "curent_cart": {
             "order": None,
@@ -504,7 +506,8 @@ def register():
         "spent" : 0,
         "address": None,
         "orders": [],
-        "block": False
+        "block": False,
+        "date": None
     }
 
     users.append(new_user)
@@ -553,12 +556,13 @@ def login():
 @app.post('/google_login')
 def google_login():
     current_time = str(datetime.now())
+    
     data = request.get_json()
     token = data.get('token') 
     
     try:
         response = requests.get('https://www.googleapis.com/oauth2/v3/userinfo',
-            headers={'Authorization': f'Bearer {token}'})
+                               headers={'Authorization': f'Bearer {token}'})
         
         if response.status_code != 200:
             return jsonify({"error": "Invalid Google Token"}), 400
@@ -567,7 +571,7 @@ def google_login():
         email = user_info.get('email')
         
         if not email:
-            return jsonify({"error": "Email not found in Google account"}), 400
+            return jsonify({"error": "Email not found"}), 400
 
         users = check_users()
         user = next((u for u in users if u['email'] == email), None)
@@ -575,66 +579,55 @@ def google_login():
         if not user:
             user = {
                 "email": email,
-                "name": user_info.get('name') or user_info.get('given_name') or user_info.get('User'),
-                "profileUrl": user_info.get('picture') or "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
+                "name": user_info.get('name') or "User",
+                "profileUrl": user_info.get('picture') or "",
                 "password": str(uuid.uuid4()),
                 "registration_date": current_time.split()[0],
                 "position": "Customer",
                 "money": 1000,
-                "notification": [
-                    {
-                        "date": "2025-12-14",
-                        "time": "14:10:58",
-                        "message": "Hello User!",
-                        "read": False
-                    }
-                ],
-                "visit": [current_time.split()[0]],
+                "notification": [{
+                    "date": current_time.split()[0], 
+                    "time": current_time.split()[1], 
+                    "message": "Welcome!", 
+                    "read": False
+                }],
+                "visit": current_time.split()[0],
                 "friends": [],
+                "friend_request": [],
                 "curent_cart": {
-                    "order": None,
-                    "cart": [],
-                    "sum": {
-                        "discount": None,
-                        "tax": None,
-                        "change": None,
-                        "subtotal": None
-                    }
-                },
+                    "order": None, 
+                    "cart": [], 
+                    "sum": {"subtotal": 0}
+                    },
                 "orders": [],
-                "address": None,
-                "spent": 0,
-                "phone": None,
-                "block": False
+                "block": False,
+                "date": None
             }
-            
             users.append(user)
-            save_users(users)
-            session['email'] = email
-            session['is_login'] = True
-            return jsonify({"message": "Login successful"}), 200
         
+        elif user.get('block'):
+            return jsonify({'error': 'Account is blocked'}), 403
 
-        elif user and not user['block']:
-            if current_time.split()[0] not in user['visit']:
+        else:
+            if current_time.split()[0] not in user.get('visit', []):
+                bonus = 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
+                user['money'] += bonus
                 user['visit'].append(current_time.split()[0])
-                user['money'] += 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
                 user['notification'].insert(0, {
-                    'date': current_time.split()[0],
-                    'time': current_time.split()[1],
-                    'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
+                    "date": current_time.split()[0], 
+                    "time": current_time.split()[1], 
+                    "message": f"Daily Bonus ${bonus}!", 
+                    "read": False
                 })
-                save_users(users)
 
-                session['email'] = email
-                session['is_login'] = True
-                return jsonify({"message": "Login successful"}), 200
-            
-        elif user and user['block']:
-            return jsonify({'error': 'Your account has been blocked'}), 404
+        save_users(users)
+        session['email'] = email
+        session['is_login'] = True
         
-    except:
-        return jsonify({"error": "Server error during Google Login"}), 500
+        return jsonify({"message": "Login successful"}), 200
+        
+    except Exception as e:
+        return jsonify({"error": "Internal server error"}), 500
 
 
 # პაროლის შეცვლა
@@ -806,12 +799,13 @@ def friends_delete_or_add():
     friend_email = data['email']
 
     users = check_users()
-    current_user = next((u for u in users if u['email'] == friend_email), None)
+    current_user = next((u for u in users if u['email'] == session['email']), None)
     friend = next((u for u in users if u['email'] == friend_email))
 
     if current_user and friend:
         if friend_email in current_user['friends']:
             current_user['friends'].remove(friend_email)
+            friend['friends'].remove(current_user['email'])
             current_user['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
@@ -824,20 +818,27 @@ def friends_delete_or_add():
                 "message": f'You {current_user['email']} removed from their friends list',
                 "read": False
             })
-        elif friend_email in current_user['friend_request']:
+        elif current_user['email'] in friend['friend_request']:
             current_user['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
                 "message": f'You Delete {friend_email} from your request list',
                 "read": False
             })
+            friend['friend_request'].remove(current_user['email'])
 
         else:
-            current_user['friend_request'].append(friend_email)
+            friend['friend_request'].append(session['email'])
             friend['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
-                "message": f'You send Friend Request {current_user['email']}',
+                "message": f'{current_user['email']} send you friend request',
+                "read": False
+            })
+            current_user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f'You send Friend Request {friend_email}',
                 "read": False
             })
         save_users(users)
@@ -845,6 +846,46 @@ def friends_delete_or_add():
         return jsonify({'message': 'add successfully'}), 200
     
     return jsonify({'error': 'user is not found'}), 404
+
+
+# მეგობრობის მოთხოვნის დასტური / უარყოფა 
+@app.post('/delete_or_confirm')
+def delete_or_confirm():
+    current_time = str(datetime.now())
+
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    else:
+        data = request.get_json()
+        operation_type = data['type']
+        friend_email = data['email']
+
+        all_user = check_users()
+        friend = next((u for u in all_user if u['email'] == friend_email), None)
+        user = next((u for u in all_user if u['email'] == session['email']), None)
+
+        if friend and user:
+            if operation_type == 'delete':
+                user['friend_request'].remove(friend_email)
+                
+                friend['notification'].insert(0, {
+                    'date': current_time.split()[0],
+                    "time": current_time.split()[1],
+                    "message": f"{session['email']} did not confirm your friend request",
+                    "read": False
+                })
+
+            elif operation_type == 'add':
+                user['friend_request'].remove(friend_email)
+                user['friends'].append(friend_email)
+                friend['friends'].append(session['email'])
+
+            else:
+                return jsonify({'error': 'operation type is not found'}), 404
+            save_users(all_user)
+        else:
+            return jsonify({'error': 'user is not found'}), 404
 
 
 # შეტყობინების წაკითხვა

@@ -1,13 +1,15 @@
 import { useState, useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Info } from '../Main'
+import User from '../../../MiniComponents/User'
 
 
 function PersonalInformation() {
     let [view, setView] = useState(false)
-    let { curentUser } = useContext(Info)
+    let { curentUser, allUser } = useContext(Info)
     let registerDay = new Date(curentUser?.registration_date)
     let currentTime = new Date()
+    let [friend, setFriend] = useState([])
     let time = `${currentTime.getFullYear()}-${currentTime.getMonth() + 1}-${currentTime.getDate()}`
 
 
@@ -23,6 +25,7 @@ function PersonalInformation() {
         }
     })
 
+
     useEffect(() => {
         if (curentUser) {
             reset({
@@ -34,6 +37,17 @@ function PersonalInformation() {
             })
         }
     }, [curentUser, reset])
+
+
+    useEffect(() => {
+        if (curentUser?.friends && allUser) {
+            let foundFriends = allUser.filter(user =>
+                curentUser?.friends?.map(e => e.toLowerCase()).includes(user.email.toLowerCase())
+            )
+            setFriend(foundFriends)
+        }
+    }, [curentUser, allUser])
+
 
     let getNext7Day = (start) => {
         let result = []
@@ -47,7 +61,6 @@ function PersonalInformation() {
         return result
     }
 
-    console.log(errors)
     return (
         <section>
             <div className='min-h-[12vh]'>
@@ -186,11 +199,37 @@ function PersonalInformation() {
                         <button
                             type='submit'
                             className='w-full h-12 mt-5 cursor-pointer font-bold text-white rounded-lg bg-[#f67f20] active:scale-95 duration-200 '
-                            onClick={() => setDisabled(!disabled)}
-                        >
+                            onClick={() => setDisabled(!disabled)}>
                             {disabled ? 'Edit' : 'Save'}
                         </button>
                     </form>
+                </div>
+                <div className='w-full min-h-[60vh] overflow-auto rounded-xl relative p-4'>
+                    <thead className='w-full flex justify-center pb-5 items-center sticky top-0 bg-white'>
+                        <h2 className='font-bold text-2xl text-center'>Friends List</h2>
+                        <h3 className='absolute right-3 text-gray-400'>Found: ({friend?.length})</h3>
+                    </thead>
+                    <table className="w-full border-collapse h-[40vh]">
+                        <tbody>
+                            {friend?.length > 0 ? (
+                                friend.map((item, index) => (
+                                    <User
+                                        key={index}
+                                        name={item.name}
+                                        email={item.email}
+                                        image={item.profileUrl}
+                                        myEmail={curentUser?.email}
+                                    />
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3" className="text-center py-10 text-gray-400">
+                                        No friends found.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </section>

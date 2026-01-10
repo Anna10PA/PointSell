@@ -224,6 +224,7 @@ function Main() {
                     <Route path="/costumers" element={<Costumers />} />
                     <Route path="/messages" element={<Messages />}/>
                     <Route path="/search_friend" element={<SearchFriend />} />
+                    <Route path="/requests" element={<SearchFriend />} />
                     <Route path='/order/deliver/payment' element={<PaymentResult />} />
                     <Route path='/order/table/payment' element={<PaymentResult />} />
                     <Route path='/orders' element={<Order />} />
