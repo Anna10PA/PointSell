@@ -205,17 +205,21 @@ function PersonalInformation() {
                     </form>
                 </div>
                 <div className='w-full min-h-[60vh] overflow-auto rounded-xl relative p-4'>
-                    <thead className='w-full flex justify-center pb-5 items-center sticky top-0 bg-white'>
-                        <h2 className='font-bold text-2xl text-center'>Friends List</h2>
-                        <h3 className='absolute right-3 text-gray-400'>Found: ({friend?.length})</h3>
-                    </thead>
                     <table className="w-full border-collapse h-[40vh]">
+                    <thead className='w-full flex justify-center items-center sticky top-0 bg-white'>
+                        <tr className='w-full'>
+                            <th className='w-full flex items-center justify-center'>
+                                <h2 className='font-bold text-2xl text-center'>Friends List</h2>
+                                <h3 className='absolute right-3 text-gray-400'>Found: ({friend?.length})</h3>
+                            </th>
+                        </tr>
+                    </thead>
                         <tbody>
                             {friend?.length > 0 ? (
                                 friend.map((item, index) => (
                                     <User
                                         key={index}
-                                        name={item.name}
+                                        name={item.name || item.email.split('@')[0]}
                                         email={item.email}
                                         image={item.profileUrl}
                                         myEmail={curentUser?.email}

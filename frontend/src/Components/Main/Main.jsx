@@ -34,6 +34,7 @@ function Main() {
     let [allPost, setAllPost] = useState(null)
     let [allUser, setAllUser] = useState(null)
     let [managerInfo, setManagerInfo] = useState(null)
+    let [friend, setFriends] = useState([])
 
 
     // ამჟამინდელი მომხმარებლის ინფორმაცია
@@ -183,12 +184,12 @@ function Main() {
         let result = await res.json()
         if (res.ok) {
             alert(result.message)
-        }else {
+        } else {
             alert(result.error)
         }
     }
-
-
+    
+    
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -199,17 +200,28 @@ function Main() {
                 getAllProduct(),
                 getAllPost(),
                 getAllUser(),
-                getManagerInfo()
+                getManagerInfo(),
             ])
             setIsLoading(false)
         }
         loadAllFunc()
     }, [])
+    
+
+    // მეგობრების ინფორმაცია
+    useEffect(() => {
+        if (curentUser?.friends && allUser?.length > 0) {
+            let foundFriends = allUser.filter(user =>
+                curentUser.friends.map(e => e.toLowerCase()).includes(user?.email?.toLowerCase())
+            )
+            setFriends(foundFriends)
+        }
+    }, [curentUser, allUser])
 
 
     return (
         <div className="w-full flex items-start">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />
@@ -222,7 +234,7 @@ function Main() {
                     <Route path='/order/table' element={< Table />} />
                     <Route path="/add_product" element={<AddProductPage />} />
                     <Route path="/costumers" element={<Costumers />} />
-                    <Route path="/messages" element={<Messages />}/>
+                    <Route path="/messages" element={<Messages />} />
                     <Route path="/search_friend" element={<SearchFriend />} />
                     <Route path="/requests" element={<SearchFriend />} />
                     <Route path='/order/deliver/payment' element={<PaymentResult />} />

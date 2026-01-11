@@ -31,6 +31,7 @@ All_user = "users.json"
 All_product = "product.json"
 All_post = "posts.json"
 All_orders = 'orders.json'
+All_message = 'Message'
 
 
 my_gmail = 'puturidzeana0210@gmail.com'
@@ -81,6 +82,20 @@ def get_all_user():
 def save_users(users):
     with open(All_user, "w", encoding="utf-8") as file:
         json.dump(users, file, indent=4, ensure_ascii=False)
+
+
+# მესიჯები
+def messages(file_name, message):
+    address = f'{All_message}/{file_name}'
+    
+    if os.path.exists(address):
+        with open(address, 'w', encoding='utf-8') as file:
+            json.dump(message, file, indent=4, ensure_ascii=False)
+    else:
+        context = [] 
+        with open(address, 'w', encoding='utf-8') as file:
+            json.dump(context, file, indent=4)
+        return context
 
 
 # პოსტების შენახვა
@@ -880,12 +895,48 @@ def delete_or_confirm():
                 user['friend_request'].remove(friend_email)
                 user['friends'].append(friend_email)
                 friend['friends'].append(session['email'])
+                
+                chat_file_name = f"{'_'.join(sorted([user['email'], friend_email]))}.json"
+                address = os.path.join(All_message, chat_file_name)
+
+                if not os.path.exists(address):
+                    with open(address, 'w', encoding='utf-8') as file:
+                        json.dump([], file, indent=4) 
 
             else:
                 return jsonify({'error': 'operation type is not found'}), 404
             save_users(all_user)
         else:
             return jsonify({'error': 'user is not found'}), 404
+
+
+# ნებისმიერის მესიჯების წაკითხვა
+def read_messages(file_path):
+    try:
+        if not os.path.exists(file_path):
+            return []
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return json.load(file)
+    except Exception as e:
+        return []
+
+# ნებისმიერი მესიჯების წაკითხვის ფუნქცია
+@app.post('/read_user_messages')
+def read_user_messages():
+    if 'email' not in session:
+        return jsonify({'error': 'User is not logged in'}), 401
+    
+    data = request.get_json()
+    friend_email = data.get('email')
+    
+    if not friend_email:
+        return jsonify({'error': 'Friend email is required'}), 400
+
+    chat_name = '_'.join(sorted([friend_email, session['email']]))
+    file_path = os.path.join(All_message, f"{chat_name}.json")
+
+    messages_data = read_messages(file_path)
+    return jsonify(messages_data), 200
 
 
 # შეტყობინების წაკითხვა
