@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import MessageCard from "./MessageCard"
-
+import { useForm } from "react-hook-form"
 
 function Chat({ user }) {
     let [message, setMessages] = useState([])
-    useEffect(() => {
+    let { register, handleSubmit, watch, reset } = useForm()
+    let value = watch('message')
+    let chat = useRef(null)
 
+    // მესიჯების წამოღება
+    useEffect(() => {
         let readMessages = async () => {
             let res = await fetch('http://localhost:5000/read_user_messages', {
                 method: "POST",
@@ -22,11 +26,57 @@ function Chat({ user }) {
                 let data = await res.json()
                 setMessages(data)
             }
-
         }
         readMessages()
     }, [user?.email])
-    console.log(message)
+
+
+    // მესიჯების დამატება
+    async function sendNewMessage(data) {
+        let res = await fetch('http://localhost:5000/send_new_message', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: data?.message,
+                email: user?.email
+            })
+        })
+        if (res.ok) {
+            let createdMessage = await res.json()
+            setMessages(prev => [...prev, createdMessage])
+            reset()
+        }
+    }
+
+
+    // მესიჯების წაშლა
+    let delete_message = async (msg, time) => {
+        let res = await fetch('http://localhost:5000/delete_message', {
+            method: "POST",
+            credentials: 'include',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: user?.email,
+                message: msg,
+                date: time
+            })
+        })
+        if (res.ok) {
+            setMessages(prev => prev.filter(messg => !(messg.date === time && messg.message === msg)))
+        }else {
+            alert('ver waishala')
+        }
+    }
+
+
+    // ავტომატური ჩასქროლვა
+    useEffect(() => {
+        chat.current.scrollTop = chat.current.scrollHeight
+    }, [message])
+
     return (
         <section className="w-[47%] h-[73vh]">
             <header className="w-full flex items-center justify-between py-5 border-b border-gray-300">
@@ -49,8 +99,7 @@ function Chat({ user }) {
                     </div>
                 </div>
             </header>
-            <section className="h-[72vh] overflow-y-auto py-5 w-full flex flex-col gap-3 px-4">
-
+            <section className="h-[72vh] overflow-y-auto py-5 w-full flex flex-col gap-3 " ref={chat}>
                 {
                     message.length > 0 ? message?.map((item, index) => {
                         return <MessageCard
@@ -58,19 +107,21 @@ function Chat({ user }) {
                             sender={item.sender}
                             message={item.message}
                             time={item.date}
+                            image={user?.profileUrl}
+                            delete_message={delete_message}
                         />
                     }) :
                         <video autoPlay muted loop>
-                            <source src='/dog_2.mp4' type="video/mp4" />
+                            <source src='/dog_3.mp4' type="video/mp4" />
                         </video>
                 }
             </section>
-            <div className="w-full relative">
-                <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-5 py-3 outline-[#f67f20] border border-gray-300 pr-14" />
-                <div className="w-10 h-10 bg-[#f67f20] rounded-[50%] text-white flex items-center justify-center absolute top-1 right-1">
+            <form className="w-full relative" onSubmit={handleSubmit(sendNewMessage)}>
+                <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-5 py-3 outline-[#f67f20] border border-gray-300 pr-14" {...register('message')} />
+                <button className="w-10 h-10 bg-[#f67f20] rounded-[50%] text-white flex items-center justify-center absolute top-1 right-1 disabled:opacity-50" disabled={!value || value.trim() === ''}>
                     <i className="fa-solid fa-paper-plane"></i>
-                </div>
-            </div>
+                </button>
+            </form>
         </section>
     )
 }

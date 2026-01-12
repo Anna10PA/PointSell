@@ -920,7 +920,8 @@ def read_messages(file_path):
     except Exception as e:
         return []
 
-# ნებისმიერი მესიჯების წაკითხვის ფუნქცია
+
+# ნებისმიერი მესიჯების წაკითხვა
 @app.post('/read_user_messages')
 def read_user_messages():
     if 'email' not in session:
@@ -938,6 +939,68 @@ def read_user_messages():
     messages_data = read_messages(file_path)
     return jsonify(messages_data), 200
 
+
+# მესიჯების გაგზავნა
+@app.post('/send_new_message')
+def send_new_message():
+    current_time = str(datetime.now())
+
+    if 'email' not in session:
+        return jsonify({'error': 'user is logged'}), 401 
+    
+    data = request.get_json()
+    message = data['message']
+    friend_email = data['email']
+    sender_email = session['email']
+
+    file_name = '_'.join(sorted([friend_email, sender_email]))
+    file_path = os.path.join(All_message, f"{file_name}.json")
+
+    new_message = {
+        "sender": session['email'],
+        "message": message,
+        "date": current_time,
+        "read": False
+    }
+
+    try:
+        messages = []
+        if os.path.exists(file_path):
+            with open(file_path, 'r', encoding='utf-8') as file:
+                messages = json.load(file)
+
+        messages.append(new_message)
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(messages, file, indent=4, ensure_ascii=False)
+        return jsonify(new_message), 200
+    
+    except Exception as e:
+        return jsonify({'error': e}), 500
+
+
+# მესიჯების წაშლა
+@app.post('/delete_message')
+def delete_message():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not logged'}), 401
+    
+    data = request.get_json()
+    friend_email = data['email']
+    dlt_message = data['message']
+    msg_time = data['date']
+
+    file_name = '_'.join(sorted([session['email'], friend_email]))
+    file_path = os.path.join(All_message, f"{file_name}.json")
+    result = read_messages(file_path)
+    print('Hello this is error', file_name)
+    if result:
+        message = [m for m in result if not (m['message'] == dlt_message and str(m['date']) == str(msg_time))]
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(message, file, indent=4)
+        return jsonify({'message': 'operation successful!'}), 200
+    else:
+        return jsonify({'error': 'message is not found'}), 404
+    
 
 # შეტყობინების წაკითხვა
 def read_notification(typeRead):
