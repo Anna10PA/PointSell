@@ -12,7 +12,8 @@ import random
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/'
+            )
 app.secret_key = os.environ.get('Gmail_password')
 
 CORS(app, supports_credentials=True, origins=[
@@ -1224,9 +1225,13 @@ def reset_password():
     return jsonify({'error': 'User not found'}), 404
 
 
-@app.get("/")
-def home():
-    return "Flask is working for my luck! (((:"
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 if __name__ == '__main__':
