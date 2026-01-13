@@ -1201,10 +1201,10 @@ def reset_password():
         if user.get('block'):
             return jsonify({'error': 'Account is blocked!'}), 403
 
-        if input_code == session['verify_code']:
-            user['count'] = 0  
+        if str(input_code) == str(session['verify_code']):
+            current_count = user.get('count', 0) + 1
+            user['count'] = current_count
             save_users(users)
-            return jsonify({'message': 'success'}), 200
         
         else:
             current_count = user.get('count', 0) + 1

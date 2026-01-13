@@ -18,8 +18,10 @@ function GetCode() {
 
 
     let onVerifySubmit = async (data) => {
+        setLoading(true)
+        setError("")
+
         try {
-            setLoading(true)
             let res = await fetch('http://localhost:5000/reset_password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -28,12 +30,13 @@ function GetCode() {
             })
 
             let result = await res.json()
+            setLoading(false)
             if (res.ok) {
-                setLoading(false)
                 navigate('reset_password', {state: curentUser.email})
             } else {
                 setError(result.error)
             }
+            
         } catch (e) {
             console.error(e)
         }

@@ -66,7 +66,7 @@ function Chat({ user }) {
         })
         if (res.ok) {
             setMessages(prev => prev.filter(messg => !(messg.date === time && messg.message === msg)))
-        }else {
+        } else {
             alert('ver waishala')
         }
     }
@@ -117,8 +117,11 @@ function Chat({ user }) {
                 }
             </section>
             <form className="w-full relative" onSubmit={handleSubmit(sendNewMessage)}>
-                <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-5 py-3 outline-[#f67f20] border border-gray-300 pr-14" {...register('message')} />
-                <button className="w-10 h-10 bg-[#f67f20] rounded-[50%] text-white flex items-center justify-center absolute top-1 right-1 disabled:opacity-50" disabled={!value || value.trim() === ''}>
+                <div className="w-10 h-10 hover:bg-[#f67f20] rounded-[50%] text-[#f67f20] cursor-pointer hover:text-white duration-200 flex items-center justify-center absolute top-1 left-1">
+                    <i className="fa-solid fa-dice"></i>
+                </div>
+                <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-12 py-3 outline-[#f67f20] border border-gray-300" {...register('message')} />
+                <button className="w-10 h-10 bg-[#f67f20] rounded-[50%] text-white flex items-center justify-center absolute top-1 right-1 cursor-pointer disabled:opacity-50 disabled:cursor-text" disabled={!value || value.trim() === ''}>
                     <i className="fa-solid fa-paper-plane"></i>
                 </button>
             </form>

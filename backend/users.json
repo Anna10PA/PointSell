@@ -8,6 +8,12 @@
         "profileUrl": "https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg",
         "notification": [
             {
+                "date": "2026-01-13",
+                "time": "22:44:54.756375",
+                "read": true,
+                "message": "Daily Gift! You have been credited with $500"
+            },
+            {
                 "date": "2026-01-12",
                 "time": "00:12:01.104350",
                 "read": true,
@@ -20,7 +26,8 @@
             "2026-01-09",
             "2026-01-10",
             "2026-01-11",
-            "2026-01-12"
+            "2026-01-12",
+            "2026-01-13"
         ],
         "curent_cart": {
             "order": null,
@@ -32,7 +39,7 @@
                 "subtotal": 0
             }
         },
-        "money": 12988.3,
+        "money": 13488.3,
         "friends": [
             "kvaskhvadzemanana@gmail.com"
         ],
@@ -55,9 +62,15 @@
         "password": "b7bc0b12-9314-4ad1-bc0d-857cec594a6e",
         "registration_date": "2026-01-09",
         "position": "Worker",
-        "money": 1900,
+        "money": 2200,
         "friend_request": [],
         "notification": [
+            {
+                "date": "2026-01-13",
+                "time": "22:45:31.633455",
+                "message": "Daily Bonus $300!",
+                "read": true
+            },
             {
                 "date": "2026-01-12",
                 "time": "01:03:09.679414",
@@ -69,7 +82,8 @@
             "2026-01-09",
             "2026-01-10",
             "2026-01-11",
-            "2026-01-12"
+            "2026-01-12",
+            "2026-01-13"
         ],
         "friends": [
             "puturidzeana0210@gmail.com"
