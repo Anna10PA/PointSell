@@ -735,7 +735,7 @@ def post_posts():
             new_filename = f"{uuid.uuid4()}.{extension}" 
             path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
             image_file.save(path)
-            image_url = f"http://127.0.0.1:5000/uploads/{new_filename}"
+            image_url = f"https://pointsell-4.onrender.com/uploads/{new_filename}"
 
         posts = check_posts()
         new_post = {
@@ -1230,4 +1230,5 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
