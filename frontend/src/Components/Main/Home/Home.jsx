@@ -40,7 +40,7 @@ function Home() {
     // კალათის გასუფთავება
     let cleanCart = async () => {
         try {
-            let res = await fetch('http://localhost:5000/clean_cart', {
+            let res = await fetch('https://pointsell-4.onrender.com/clean_cart', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -98,7 +98,7 @@ function Home() {
     let paySum = async (s, c, d) => {
         try {
 
-            let res = await fetch('http://localhost:5000/pay_sum', {
+            let res = await fetch('https://pointsell-4.onrender.com/pay_sum', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

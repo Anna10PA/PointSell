@@ -4,7 +4,7 @@ function CartCard({ img, price, name, count, id, update }) {
 
     let action = async (type) => {
         let newCount = type === 'add' ? count + 1 : count - 1
-        let url = newCount === 0 ? 'http://localhost:5000/delete_from_cart' : 'http://localhost:5000/update_cart'
+        let url = newCount === 0 ? 'https://pointsell-4.onrender.com/delete_from_cart' : 'https://pointsell-4.onrender.com/update_cart'
 
         let result = await fetch(url, {
             method: 'POST',

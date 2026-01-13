@@ -49,7 +49,7 @@ function Deliver() {
     // ამჟამინდელი მომხმარებლის ინფორმაცია
     useEffect(() => {
         let getUserInfo = async () => {
-            let result = await fetch('http://localhost:5000/get_current_user', {
+            let result = await fetch('https://pointsell-4.onrender.com/get_current_user', {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -139,7 +139,7 @@ function Deliver() {
         }
 
         try {
-            let response = await fetch('http://localhost:5000/pay', {
+            let response = await fetch('https://pointsell-4.onrender.com/pay', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

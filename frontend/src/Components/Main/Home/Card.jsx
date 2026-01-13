@@ -3,7 +3,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
     let addInCart = async () => {
         try {
 
-            let res = await fetch('http://localhost:5000/user_cart', {
+            let res = await fetch('https://pointsell-4.onrender.com/user_cart', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

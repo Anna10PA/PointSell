@@ -11,7 +11,7 @@ function Navigation() {
     useEffect(() => {
         async function getCurentUser() {
             try {
-                let res = await fetch('http://localhost:5000/get_current_user', {
+                let res = await fetch('https://pointsell-4.onrender.com/get_current_user', {
                     method: "GET",
                     credentials: 'include'
                 })

@@ -39,7 +39,7 @@ function Main() {
 
     // ამჟამინდელი მომხმარებლის ინფორმაცია
     async function getCurentUser() {
-        let result = await fetch('http://localhost:5000/get_current_user', {
+        let result = await fetch('https://pointsell-4.onrender.com/get_current_user', {
             method: 'GET',
             credentials: 'include'
         })
@@ -52,7 +52,7 @@ function Main() {
 
     // ყველა პროდუქტის ინფორმაციის წამოღება
     async function getAllProduct() {
-        let result = await fetch('http://localhost:5000/product20list', {
+        let result = await fetch('https://pointsell-4.onrender.com/product20list', {
             method: 'GET',
             credentials: 'include'
         })
@@ -66,7 +66,7 @@ function Main() {
     // ყველა პოსტი
     async function getAllPost() {
         try {
-            const result = await fetch('http://localhost:5000/check_posts', {
+            const result = await fetch('https://pointsell-4.onrender.com/check_posts', {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -82,7 +82,7 @@ function Main() {
     // ყველა მომხმარებლის ინფორმაცია
     async function getAllUser() {
         try {
-            const result = await fetch('http://localhost:5000/get_all_user', {
+            const result = await fetch('https://pointsell-4.onrender.com/get_all_user', {
                 credentials: 'include',
                 method: 'GET'
             })
@@ -98,7 +98,7 @@ function Main() {
     // ჩემი / მენეჯერის ინფორმაცია
     async function getManagerInfo() {
         try {
-            const result = await fetch('http://localhost:5000/menegers_info', {
+            const result = await fetch('https://pointsell-4.onrender.com/menegers_info', {
                 credentials: 'include',
                 method: 'GET'
             })
@@ -117,7 +117,7 @@ function Main() {
         if (!curentUser) return
 
         try {
-            let result = await fetch(`http://localhost:5000/${url}`, {
+            let result = await fetch(`https://pointsell-4.onrender.com/${url}`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -139,7 +139,7 @@ function Main() {
     async function blockUser(email) {
         if (!email) return
 
-        let res = await fetch('http://localhost:5000/block_user', {
+        let res = await fetch('https://pointsell-4.onrender.com/block_user', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -169,7 +169,7 @@ function Main() {
 
     // პაროლის აღდგენა
     async function resetPassword(email, password) {
-        let res = await fetch('http://localhost:5000/change_password', {
+        let res = await fetch('https://pointsell-4.onrender.com/change_password', {
             method: "POST",
             credentials: 'include',
             headers: {

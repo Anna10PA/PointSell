@@ -12,7 +12,7 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
   // პოსტის წაშლის ფუნქცია
   const deletePost = async () => {
     try {
-      let res = await fetch('http://localhost:5000/delete_post', {
+      let res = await fetch('https://pointsell-4.onrender.com/delete_post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: allInfo.id }),
@@ -31,7 +31,7 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
   // პროდუქტის წაშლის ფუნქცია
   const deleteProduct = async () => {
     try {
-      let res = await fetch('http://localhost:5000/delete_product', {
+      let res = await fetch('https://pointsell-4.onrender.com/delete_product', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: allInfo }),
@@ -51,7 +51,7 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
       return
     }
     try {
-      let res = await fetch('http://localhost:5000/delete_user', {
+      let res = await fetch('https://pointsell-4.onrender.com/delete_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_email: allInfo }),

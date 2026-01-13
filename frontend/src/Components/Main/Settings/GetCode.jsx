@@ -22,7 +22,7 @@ function GetCode() {
         setError("")
 
         try {
-            let res = await fetch('http://localhost:5000/reset_password', {
+            let res = await fetch('https://pointsell-4.onrender.com/reset_password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

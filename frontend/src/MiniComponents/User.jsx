@@ -8,7 +8,7 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
 
     // მეგობრობის გაგზავნა / წაშლა
     let senRequest = async () => {
-        let res = await fetch('http://localhost:5000/friends_delete_or_add', {
+        let res = await fetch('https://pointsell-4.onrender.com/friends_delete_or_add', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -32,7 +32,7 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
 
     // რექვესთებიდან წაშლა / დამატება
     let confirmOrDelete = async (type) => {
-        let res = await fetch('http://localhost:5000/delete_or_confirm', {
+        let res = await fetch('https://pointsell-4.onrender.com/delete_or_confirm', {
             method: 'POST',
             credentials: 'include',
             headers: {

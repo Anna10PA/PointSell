@@ -31,7 +31,7 @@ function AddProductPage() {
         formData.append('product_info', data.info)
         formData.append('product_category', data.category)
 
-        let res = await fetch('http://localhost:5000/add_product', {
+        let res = await fetch('https://pointsell-4.onrender.com/add_product', {
             method: 'POST',
             body: formData,
             credentials: 'include'

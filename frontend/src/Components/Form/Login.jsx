@@ -20,7 +20,7 @@ function Login() {
     onSuccess: async (resu) => {
     try {
       console.log(resu)
-      let res = await fetch('http://localhost:5000/google_login', {
+      let res = await fetch('https://pointsell-4.onrender.com/google_login', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: resu.access_token }),
@@ -53,7 +53,7 @@ function Login() {
         async (data) => {
           try {
 
-            let result = await fetch('http://localhost:5000/login', {
+            let result = await fetch('https://pointsell-4.onrender.com/login', {
               method: 'POST',
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),

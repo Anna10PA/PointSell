@@ -11,7 +11,7 @@ function Chat({ user }) {
     // მესიჯების წამოღება
     useEffect(() => {
         let readMessages = async () => {
-            let res = await fetch('http://localhost:5000/read_user_messages', {
+            let res = await fetch('https://pointsell-4.onrender.com/read_user_messages', {
                 method: "POST",
                 credentials: 'include',
                 headers: {
@@ -33,7 +33,7 @@ function Chat({ user }) {
 
     // მესიჯების დამატება
     async function sendNewMessage(data) {
-        let res = await fetch('http://localhost:5000/send_new_message', {
+        let res = await fetch('https://pointsell-4.onrender.com/send_new_message', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -54,7 +54,7 @@ function Chat({ user }) {
 
     // მესიჯების წაშლა
     let delete_message = async (msg, time) => {
-        let res = await fetch('http://localhost:5000/delete_message', {
+        let res = await fetch('https://pointsell-4.onrender.com/delete_message', {
             method: "POST",
             credentials: 'include',
             headers: { "Content-Type": "application/json" },

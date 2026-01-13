@@ -48,7 +48,7 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
   // კომენტარის წაშლის ფუნქცია
   const deleteComment = async (comment_id, post_id) => {
     try {
-      const res = await fetch('http://localhost:5000/delete_comment', {
+      const res = await fetch('https://pointsell-4.onrender.com/delete_comment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

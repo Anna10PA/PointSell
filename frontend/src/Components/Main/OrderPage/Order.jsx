@@ -14,7 +14,7 @@ function Order() {
     useEffect(() => {
         let getOrders = async () => {
             try {
-                let res = await fetch('http://localhost:5000/orders', {
+                let res = await fetch('https://pointsell-4.onrender.com/orders', {
                     method: 'GET',
                     credentials: 'include'
                 })

@@ -128,7 +128,7 @@ function PersonalInformation() {
                 <div className='w-full h-[60vh]'>
                     <h2 className='font-bold text-2xl text-center'>Accaunt Info</h2>
                     <form className='w-full grid py-10 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 justify-items-center items-center' onSubmit={handleSubmit(async (data) => {
-                        let res = await fetch('http://localhost:5000/change_user_info', {
+                        let res = await fetch('https://pointsell-4.onrender.com/change_user_info', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             credentials: 'include',
