@@ -24,6 +24,13 @@ CORS(app, supports_credentials=True, origins=[
     "https://pointsell.onrender.com"
 ])
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Cross-Origin-Opener-Policy'] = 'same-origin-allow-popups'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
+
+
 Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
 
 
@@ -642,8 +649,9 @@ def google_login():
                 })
 
         save_users(users)
+        session.clear() 
         session['email'] = email
-        session['is_login'] = True
+        session.permanent = True
         
         return jsonify({"message": "Login successful"}), 200
         
