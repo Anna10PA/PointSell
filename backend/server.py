@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
 import json
+from datetime import timedelta
 import os
 from email.message import EmailMessage
 import ssl
@@ -15,7 +16,8 @@ import random
 app = Flask(__name__)
 app.config.update(
     SESSION_COOKIE_SAMESITE='None',
-    SESSION_COOKIE_SECURE=True
+    SESSION_COOKIE_SECURE=True,
+    PERMANENT_SESSION_LIFETIME=timedelta(days=5)
 )
 app.secret_key = os.environ.get('Gmail_password')
 
@@ -27,7 +29,6 @@ CORS(app, supports_credentials=True, origins=[
 @app.after_request
 def add_cors_headers(response):
     response.headers['Cross-Origin-Opener-Policy'] = 'same-origin-allow-popups'
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
 
 
