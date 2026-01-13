@@ -748,7 +748,7 @@ def post_posts():
             new_filename = f"{uuid.uuid4()}.{extension}" 
             path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
             image_file.save(path)
-            image_url = f"https://pointsell-4.onrender.com/uploads/{new_filename}"
+            image_url = f"https://pointsell-4.onrender.com/images/{new_filename}"
 
         posts = check_posts()
         new_post = {
