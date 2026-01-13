@@ -1112,7 +1112,7 @@ def add_product():
         path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         image_file.save(path)
         
-        image_url = f"https://pointsell.onrender.com/uploads/{new_filename}"
+        image_url = f"https://pointsell-4.onrender.com/uploads/{new_filename}"
 
 
     new_product = {
