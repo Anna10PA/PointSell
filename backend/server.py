@@ -13,6 +13,10 @@ import random
 
 
 app = Flask(__name__)
+app.config.update(
+    SESSION_COOKIE_SAMESITE='None',
+    SESSION_COOKIE_SECURE=True
+)
 app.secret_key = os.environ.get('Gmail_password')
 
 CORS(app, supports_credentials=True, origins=[
