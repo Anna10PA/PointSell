@@ -23,7 +23,7 @@ function PostCard({ info, sendInfo }) {
     const view = async () => {
         if (!curentUser) return
         try {
-            const result = await fetch('http://127.0.0.1:5000/view', {
+            const result = await fetch('https://pointsell-4.onrender.com/view', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -46,7 +46,7 @@ function PostCard({ info, sendInfo }) {
         if (!curentUser) return
 
         try {
-            const result = await fetch('http://127.0.0.1:5000/like', {
+            const result = await fetch('https://pointsell-4.onrender.com/like', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

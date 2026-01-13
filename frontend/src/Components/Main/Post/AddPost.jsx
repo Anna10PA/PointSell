@@ -35,7 +35,7 @@ function AllPost() {
         }
 
         try {
-            const res = await fetch('http://127.0.0.1:5000/post_post', {
+            const res = await fetch('https://pointsell-4.onrender.com/post_post', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'

@@ -27,7 +27,7 @@ function Registration() {
           // console.log(data)
           try {
             let result = await fetch(
-              'http://127.0.0.1:5000/register',
+              'https://pointsell-4.onrender.com/register',
               {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
