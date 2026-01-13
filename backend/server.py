@@ -1008,7 +1008,7 @@ def delete_message():
     file_name = '_'.join(sorted([session['email'], friend_email]))
     file_path = os.path.join(All_message, f"{file_name}.json")
     result = read_messages(file_path)
-    print('Hello this is error', file_name)
+
     if result:
         message = [m for m in result if not (m['message'] == dlt_message and str(m['date']) == str(msg_time))]
         with open(file_path, 'w', encoding='utf-8') as file:
@@ -1112,7 +1112,7 @@ def add_product():
         path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         image_file.save(path)
         
-        image_url = f"http://127.0.0.1:5000/uploads/{new_filename}"
+        image_url = f"https://pointsell.onrender.com/uploads/{new_filename}"
 
 
     new_product = {

@@ -40,9 +40,7 @@
             }
         },
         "money": 13488.3,
-        "friends": [
-            "kvaskhvadzemanana@gmail.com"
-        ],
+        "friends": [],
         "friend_request": [],
         "spent": 11.7,
         "address": null,
@@ -53,56 +51,6 @@
         "count": 0,
         "phone": null,
         "date": "2009-02-10",
-        "active": true
-    },
-    {
-        "email": "kvaskhvadzemanana@gmail.com",
-        "name": "მანანა კვასხვაძე",
-        "profileUrl": "https://lh3.googleusercontent.com/a/ACg8ocKafHRori5hNnkz2X-TsUZs1etyAEUiaTrSVxm8Xtd3A7HNFw=s96-c",
-        "password": "b7bc0b12-9314-4ad1-bc0d-857cec594a6e",
-        "registration_date": "2026-01-09",
-        "position": "Worker",
-        "money": 2200,
-        "friend_request": [],
-        "notification": [
-            {
-                "date": "2026-01-13",
-                "time": "22:45:31.633455",
-                "message": "Daily Bonus $300!",
-                "read": true
-            },
-            {
-                "date": "2026-01-12",
-                "time": "01:03:09.679414",
-                "message": "Daily Bonus $300!",
-                "read": true
-            }
-        ],
-        "visit": [
-            "2026-01-09",
-            "2026-01-10",
-            "2026-01-11",
-            "2026-01-12",
-            "2026-01-13"
-        ],
-        "friends": [
-            "puturidzeana0210@gmail.com"
-        ],
-        "curent_cart": {
-            "order": null,
-            "cart": [],
-            "sum": {
-                "discount": null,
-                "tax": null,
-                "change": null,
-                "subtotal": null
-            }
-        },
-        "orders": [],
-        "address": null,
-        "spent": 0,
-        "phone": null,
-        "block": false,
         "active": true
     }
 ]
