@@ -15,8 +15,10 @@ import random
 app = Flask(__name__)
 app.secret_key = os.environ.get('Gmail_password')
 
-CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
-
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:5173", 
+    "https://Point_Sell.onrender.com" 
+])
 
 Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
 
@@ -952,6 +954,7 @@ def send_new_message():
     message = data['message']
     friend_email = data['email']
     sender_email = session['email']
+    print('This is Password', os.environ.get('Gmail_password'))
 
     file_name = '_'.join(sorted([friend_email, sender_email]))
     file_path = os.path.join(All_message, f"{file_name}.json")
