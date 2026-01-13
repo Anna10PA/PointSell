@@ -17,7 +17,8 @@ app.secret_key = os.environ.get('Gmail_password')
 
 CORS(app, supports_credentials=True, origins=[
     "http://localhost:5173", 
-    "https://PointSell-4.onrender.com" 
+    "https://PointSell-4.onrender.com" ,
+    "https://pointsell-frontend.onrender.com"
 ])
 
 Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
