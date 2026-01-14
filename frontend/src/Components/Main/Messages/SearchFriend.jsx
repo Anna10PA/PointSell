@@ -34,19 +34,14 @@ function SearchFriend() {
         }
     }, [searchEmail, allUser, curentUser])
 
-
     useEffect(() => {
-        let getRequest = async () => {
-            try {
-                getAllUsers()
-            } catch (err) {
-                console.error(err)
-            }
+        getAllUsers()
 
-            let interval = setInterval(getRequest, 3000)
+        let interval = setInterval(() => {
+            getAllUsers()
+        }, 3000)
 
-            return () => clearInterval(interval)
-        }
+        return () => clearInterval(interval)
     }, [])
 
     return (
