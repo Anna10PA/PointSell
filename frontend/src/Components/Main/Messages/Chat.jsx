@@ -8,7 +8,7 @@ function Chat({ user }) {
     let { register, handleSubmit, watch, reset } = useForm()
     let value = watch('message')
     let chat = useRef(null)
-    let { curentUser } = useContext(useContext)
+    let { curentUser } = useContext(Info)
 
     // მესიჯების წამოღება
     useEffect(() => {
