@@ -908,7 +908,8 @@ def delete_or_confirm():
                     })
 
             elif operation_type == 'add':
-                user['friend_request'].remove(friend_email)
+                if friend_email in user.get('friend_request', []):
+                    user['friend_request'].remove(friend_email)
                 user['friends'].append(friend_email)
                 friend['friends'].append(session['email'])
                 
