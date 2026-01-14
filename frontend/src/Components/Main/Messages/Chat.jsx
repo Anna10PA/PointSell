@@ -1,12 +1,14 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useContext } from "react"
 import MessageCard from "./MessageCard"
 import { useForm } from "react-hook-form"
+import { Info } from "../Main"
 
 function Chat({ user }) {
     let [message, setMessages] = useState([])
     let { register, handleSubmit, watch, reset } = useForm()
     let value = watch('message')
     let chat = useRef(null)
+    let { curentUser } = useContext(useContext)
 
     // მესიჯების წამოღება
     useEffect(() => {
@@ -79,21 +81,25 @@ function Chat({ user }) {
 
 
     // მესიჯების ავტომატური განახლება
-    let readMessage = async () => {
+    const readMessage = useCallback(async () => {
         if (!user?.email) return
 
-        let res = await fetch('https://pointsell-4.onrender.com/read_user_messages', {
-            method: "POST",
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: user?.email })
-        })
+        try {
+            let res = await fetch('https://pointsell-4.onrender.com/read_user_messages', {
+                method: "POST",
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: user?.email })
+            })
 
-        if (res.ok) {
-            let data = await res.json()
-            setMessages(data)
+            if (res.ok) {
+                let data = await res.json()
+                setMessages(data)
+            }
+        } catch (error) {
+            console.error("Fetch error:", error)
         }
-    }
+    }, [user?.email])
 
     useEffect(() => {
         readMessage()
@@ -103,8 +109,7 @@ function Chat({ user }) {
         }, 3000)
 
         return () => clearInterval(interval)
-    }, [user?.email])
-
+    }, [user?.email, readMessage])
 
 
     return (
