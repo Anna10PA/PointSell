@@ -908,11 +908,17 @@ def delete_or_confirm():
                     })
 
             elif operation_type == 'add':
-                if friend_email in user.get('friend_request', []):
+                friend_requests = user.get('friend_request', [])
+    
+                if friend_email in friend_requests:
                     user['friend_request'].remove(friend_email)
-                user['friends'].append(friend_email)
-                friend['friends'].append(session['email'])
-                
+    
+                if friend_email not in user['friends']:
+                    user['friends'].append(friend_email)
+                    
+                if session['email'] not in friend['friends']:
+                    friend['friends'].append(session['email'])
+                            
                 chat_file_name = f"{'_'.join(sorted([user['email'], friend_email]))}.json"
                 address = os.path.join(All_message, chat_file_name)
 
