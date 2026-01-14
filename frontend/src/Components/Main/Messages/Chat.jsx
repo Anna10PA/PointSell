@@ -79,15 +79,32 @@ function Chat({ user }) {
 
 
     // მესიჯების ავტომატური განახლება
+    let readMessage = async () => {
+        if (!user?.email) return
+
+        let res = await fetch('https://pointsell-4.onrender.com/read_user_messages', {
+            method: "POST",
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: user?.email })
+        })
+
+        if (res.ok) {
+            let data = await res.json()
+            setMessages(data)
+        }
+    }
+
     useEffect(() => {
-        sendNewMessage(user?.email)
+        readMessage()
 
         let interval = setInterval(() => {
-            sendNewMessage(user?.email)
-        }, 5000)
+            readMessage()
+        }, 3000)
 
         return () => clearInterval(interval)
     }, [user?.email])
+
 
 
     return (
