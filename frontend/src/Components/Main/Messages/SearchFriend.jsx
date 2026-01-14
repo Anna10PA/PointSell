@@ -11,7 +11,7 @@ function SearchFriend() {
     let location_name = location.pathname
 
     let { register, watch } = useForm()
-    let { allUser, curentUser } = useContext(Info)
+    let { allUser, curentUser, getAllUsers } = useContext(Info)
     let [foundUsers, setFoundUsers] = useState([])
 
     let searchEmail = watch('search')
@@ -33,6 +33,21 @@ function SearchFriend() {
             }
         }
     }, [searchEmail, allUser, curentUser])
+
+
+    useEffect(() => {
+        let getRequest = async () => {
+            try {
+                getAllUsers()
+            } catch (err) {
+                console.error(err)
+            }
+
+            let interval = setInterval(getRequest, 3000)
+
+            return () => clearInterval(interval)
+        }
+    }, [])
 
     return (
         <main className="w-full flex items-start gap-5">
