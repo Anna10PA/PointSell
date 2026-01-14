@@ -897,14 +897,15 @@ def delete_or_confirm():
 
         if friend and user:
             if operation_type == 'delete':
-                user['friend_request'].remove(friend_email)
-                
-                friend['notification'].insert(0, {
-                    'date': current_time.split()[0],
-                    "time": current_time.split()[1],
-                    "message": f"{session['email']} did not confirm your friend request",
-                    "read": False
-                })
+                if friend_email in user.get('friend_request', []):
+                    user['friend_request'].remove(friend_email)
+                    
+                    friend['notification'].insert(0, {
+                        'date': current_time.split()[0],
+                        "time": current_time.split()[1],
+                        "message": f"{session['email']} did not confirm your friend request",
+                        "read": False
+                    })
 
             elif operation_type == 'add':
                 user['friend_request'].remove(friend_email)
