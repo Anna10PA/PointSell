@@ -1254,6 +1254,7 @@ def api():
     all_product = check_products()
     return jsonify([all_users, all_product])
 
+
 @app.get("/")
 def home():
     return "Flask is working for my luck! (((:"

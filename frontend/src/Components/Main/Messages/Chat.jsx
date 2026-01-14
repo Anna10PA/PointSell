@@ -87,7 +87,7 @@ function Chat({ user }) {
         }, 5000)
 
         return () => clearInterval(interval)
-    }, [allInfo.email])
+    }, [user?.email])
 
 
     return (
