@@ -221,7 +221,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />

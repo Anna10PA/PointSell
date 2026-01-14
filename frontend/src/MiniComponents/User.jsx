@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useLocation } from "react-router-dom"
+import { Info } from "../Components/Main/Main"
 
 function User({ name, email, image, sender = [], myEmail = '' }) {
     let location = useLocation()
     let locationName = location.pathname
     let [friendList, setFriendList] = useState([])
+    let { getAllUser } = useContext(Info)
+
 
     // მეგობრობის გაგზავნა / წაშლა
     let senRequest = async () => {
@@ -19,13 +22,8 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
             })
         })
         if (res.ok) {
-            setFriendList(prevList => {
-                if (prevList.includes(myEmail)) {
-                    return prevList.filter(item => item !== myEmail)
-                } else {
-                    return [...prevList, myEmail]
-                }
-            })
+            alert('work')
+            getAllUser()
         }
 
     }

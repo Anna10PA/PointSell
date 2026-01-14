@@ -11,7 +11,7 @@ function SearchFriend() {
     let location_name = location.pathname
 
     let { register, watch } = useForm()
-    let { allUser, curentUser, getAllUsers } = useContext(Info)
+    let { allUser, curentUser, getAllUser } = useContext(Info)
     let [foundUsers, setFoundUsers] = useState([])
 
     let searchEmail = watch('search')
@@ -35,10 +35,10 @@ function SearchFriend() {
     }, [searchEmail, allUser, curentUser])
 
     useEffect(() => {
-        getAllUsers()
+        getAllUser()
 
         let interval = setInterval(() => {
-            getAllUsers()
+            getAllUser()
         }, 3000)
 
         return () => clearInterval(interval)

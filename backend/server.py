@@ -915,13 +915,16 @@ def delete_or_confirm():
     
                 if friend_email not in user['friends']:
                     user['friends'].append(friend_email)
-                    
+
                 if session['email'] not in friend['friends']:
                     friend['friends'].append(session['email'])
                             
                 chat_file_name = f"{'_'.join(sorted([user['email'], friend_email]))}.json"
-                address = os.path.join(All_message, chat_file_name)
 
+                if not os.path.exists(All_message):
+                    os.makedirs(All_message)
+
+                address = os.path.join(All_message, chat_file_name)
                 if not os.path.exists(address):
                     with open(address, 'w', encoding='utf-8') as file:
                         json.dump([], file, indent=4) 
@@ -1244,6 +1247,12 @@ def reset_password():
 
     return jsonify({'error': 'User not found'}), 404
 
+
+@app.route('/api')
+def api():
+    all_users = check_users()
+    all_product = check_products()
+    return jsonify([all_users, all_product])
 
 @app.get("/")
 def home():
