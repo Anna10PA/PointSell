@@ -252,7 +252,7 @@ def view():
 
 
 # სურათების გამოჩენა
-@app.get('/uploads/<filename>')
+@app.get('/images/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
@@ -1123,7 +1123,7 @@ def add_product():
         path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         image_file.save(path)
         
-        image_url = f"https://pointsell-4.onrender.com/uploads/{new_filename}"
+        image_url = f"https://pointsell-4.onrender.com/images/{new_filename}"
 
 
     new_product = {
