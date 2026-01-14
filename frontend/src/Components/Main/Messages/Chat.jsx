@@ -77,6 +77,19 @@ function Chat({ user }) {
         chat.current.scrollTop = chat.current.scrollHeight
     }, [message])
 
+
+    // მესიჯების ავტომატური განახლება
+    useEffect(() => {
+        sendNewMessage(user?.email)
+
+        let interval = setInterval(() => {
+            sendNewMessage(user?.email)
+        }, 5000)
+
+        return () => clearInterval(interval)
+    }, [allInfo.email])
+
+
     return (
         <section className="w-[47%] h-[73vh]">
             <header className="w-full flex items-center justify-between py-5 border-b border-gray-300">
