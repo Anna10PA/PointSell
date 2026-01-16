@@ -558,6 +558,8 @@ def login():
     password = data.get("password")
     users = check_users() 
     user = next((user for user in users if user['email'] == email and user['password'] == password), None)
+
+    print(user)
     
     if user and not user['block']:
         session['email'] = email
