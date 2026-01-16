@@ -17,12 +17,12 @@ function SearchFriend() {
     let searchEmail = watch('search')
 
     useEffect(() => {
-        if (location_name !== '/main/requests') {
+        if (location_name === '/main/requests') {
             if (searchEmail && searchEmail.trim() !== '') {
                 let requests = allUser.filter(user =>
                     curentUser.friend_request.includes(user.email)
                 )
-                setFoundUsers(requests);
+                setFoundUsers(requests)
             } else {
                 setFoundUsers([])
             }
