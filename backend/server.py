@@ -17,7 +17,6 @@ app = Flask(__name__)
 app.config.update(
     SESSION_COOKIE_SAMESITE='None',
     SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_DOMAIN='.onrender.com',
     PERMANENT_SESSION_LIFETIME=timedelta(days=5)
 )
 app.secret_key = os.environ.get('Gmail_password')
@@ -29,7 +28,10 @@ CORS(app, supports_credentials=True, origins=[
 
 @app.after_request
 def add_cors_headers(response):
-    response.headers['Cross-Origin-Opener-Policy'] = 'same-origin-allow-popups'
+    response.headers["Access-Control-Allow-Origin"] = "https://pointsell.onrender.com"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST"
     return response
 
 
@@ -815,9 +817,14 @@ def check_posts():
 def current_user():
     if 'email' not in session:
         return jsonify({'error': 'Not logged in'}), 401
+    
     users = check_users()
     user = next((u for u in users if u['email'] == session['email']), None)
-    return jsonify(user) if user else (jsonify({'error': 'Not found'}), 404)
+
+    if user:
+        return jsonify(user)
+    
+    return jsonify({'error': 'Not found'}), 400
 
 
 # მეგობრების დამატება / წაშლა
