@@ -63,13 +63,16 @@ def send_email(user_email, text):
     em['To'] = user_email
     em['Subject'] = subject
     em.set_content(text)
-    context = ssl.create_default_context()
+
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as smtp:
+            smtp.starttls()
             smtp.login(my_gmail, my_password)
-            smtp.sendmail(my_gmail, user_email, em.as_string())
+            smtp.send_message(em)
+            print("Message sent")
+
     except Exception as e:
-        print("Email failed:", e)
+        print(f"Error: {e}")
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
