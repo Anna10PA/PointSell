@@ -1261,6 +1261,23 @@ def reset_password():
     return jsonify({'error': 'User not found'}), 404
 
 
+# საიტიდან გამოსვლა
+@app.post('/log_out')
+def log_out():
+    if 'email' not in session:
+        return jsonify({'error': 'user is logged'}), 401
+    
+    users = check_users()    
+    user = next((u for u in users if u['email'] == session['email']), None)
+    if user:
+        user['active'] = False
+        session['is_login'] = False
+        user = None
+        return jsonify({'message': 'log out successful!'}), 200
+    
+    return jsonify({'error': 'user is not found'}), 404
+
+
 @app.get("/")
 def home():
     all_users = check_users()
