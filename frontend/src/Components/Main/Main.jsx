@@ -87,11 +87,15 @@ function Main() {
                 method: 'GET'
             })
 
-            if (result.ok) setAllUser(await result.json())
-            if (curentUser) {
-                let newMe = data.find(user => user.email === curentUser.email)
-                if (newMe) {
-                    setCurentUser(newMe)
+            if (result.ok) {
+                let data = await result.json()
+                setAllUser(data)
+                
+                if (curentUser) {
+                    let newMe = data.find(user => user.email === curentUser.email)
+                    if (newMe) {
+                        setCurentUser(newMe)
+                    }
                 }
             }
 
