@@ -17,6 +17,7 @@ app = Flask(__name__)
 app.config.update(
     SESSION_COOKIE_SAMESITE='None',
     SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_DOMAIN='.onrender.com',
     PERMANENT_SESSION_LIFETIME=timedelta(days=5)
 )
 app.secret_key = os.environ.get('Gmail_password')
@@ -24,7 +25,7 @@ app.secret_key = os.environ.get('Gmail_password')
 CORS(app, supports_credentials=True, origins=[
     "http://localhost:5173", 
     "https://pointsell.onrender.com"
-])
+], expose_headers=["Content-Type", "Authorization"])
 
 @app.after_request
 def add_cors_headers(response):
