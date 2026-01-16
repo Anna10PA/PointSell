@@ -142,6 +142,7 @@ function Chat({ user }) {
                             message={item.message}
                             time={item.date}
                             image={user?.profileUrl}
+                            active={user?.active}
                             delete_message={delete_message}
                         />
                     }) :

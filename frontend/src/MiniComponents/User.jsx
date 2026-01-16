@@ -52,7 +52,6 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
         }
     }, [sender, locationName])
 
-    console.log(email)
     return (
         <tr className="flex w-full justify-between">
             <td className={`flex items-center gap-3 border-b border-gray-300 p-2 ${locationName == '/main/search_friend'  ? ' w-2/5' : 'w-1/2'} `}>

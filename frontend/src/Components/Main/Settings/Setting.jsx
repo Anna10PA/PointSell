@@ -16,6 +16,20 @@ function Setting() {
     let { curentUser } = useContext(Info)
     let navigate = useNavigate()
 
+    async function log_out() {
+        let res = await fetch('https://pointsell-4.onrender.com/log_out', {
+            method: "POST",
+            credentials: 'include',
+            body: JSON.stringify({ 'is_login': false })
+        })
+
+        if (res.ok) {
+            navigate('/', {
+                replace: true
+            })
+        }
+    }
+
     return (
         <main className="w-full h-[98vh] flex flex-col px-10 py-5">
             <header className="flex items-center justify-between gap-5 min-h-[10vh]">
@@ -54,11 +68,7 @@ function Setting() {
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
                         </Link>
-                        <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer rounded' onClick={() => {
-                            navigate('/', {
-                                replace: true
-                            })
-                        }}>Log out</button>
+                        <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer rounded' onClick={log_out}>Log out</button>
                     </div>
                 </section>
                 <section className='w-[60%]'>

@@ -539,7 +539,8 @@ def register():
         "address": None,
         "orders": [],
         "block": False,
-        "date": None
+        "date": None,
+        "active": False
     }
 
     users.append(new_user)
@@ -575,7 +576,8 @@ def login():
                 'time': current_time.split()[1],
                 "read": False,
                 'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
-            })
+            }),
+            user["active"] = True
             save_users(users)
 
         return jsonify({'message': 'Login successful!'}), 200
@@ -635,7 +637,8 @@ def google_login():
                     },
                 "orders": [],
                 "block": False,
-                "date": None
+                "date": None,
+                "active": True
             }
             users.append(user)
         
