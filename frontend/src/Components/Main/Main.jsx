@@ -88,6 +88,12 @@ function Main() {
             })
 
             if (result.ok) setAllUser(await result.json())
+            if (curentUser) {
+                let newMe = data.find(user => user.email === curentUser.email)
+                if (newMe) {
+                    setCurentUser(newMe)
+                }
+            }
 
         } catch (e) {
             console.error(e)
@@ -188,8 +194,8 @@ function Main() {
             alert(result.error)
         }
     }
-    
-    
+
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -206,7 +212,7 @@ function Main() {
         }
         loadAllFunc()
     }, [])
-    
+
 
     // მეგობრების ინფორმაცია
     useEffect(() => {
