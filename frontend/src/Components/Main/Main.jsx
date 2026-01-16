@@ -90,7 +90,7 @@ function Main() {
             if (result.ok) {
                 let data = await result.json()
                 setAllUser(data)
-                
+
                 if (curentUser) {
                     let newMe = data.find(user => user.email === curentUser.email)
                     if (newMe) {
@@ -108,7 +108,7 @@ function Main() {
     // ჩემი / მენეჯერის ინფორმაცია
     async function getManagerInfo() {
         try {
-            const result = await fetch('https://pointsell-4.onrender.com/menegers_info', {
+            const result = await fetch('https://pointsell-4.onrender.com/managars_info', {
                 credentials: 'include',
                 method: 'GET'
             })
