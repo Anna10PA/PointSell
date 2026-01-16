@@ -17,32 +17,35 @@ function SearchFriend() {
     let searchEmail = watch('search')
 
     useEffect(() => {
-        if (location_name !== '/main/requests') {
-            if (searchEmail && searchEmail.trim() !== '') {
-                let found = allUser?.filter(item => item.email.toLowerCase().includes(searchEmail.toLowerCase()) && curentUser.email !== item.email)
-                setFoundUsers(found)
-            } else {
-                setFoundUsers([])
-            }
+        if (!allUser || !curentUser) return
+
+        if (location_name === '/main/requests') {
+            let requests = allUser.filter(user =>
+                curentUser.friend_request?.includes(user.email)
+            )
+            setFoundUsers(requests)
         } else {
-            if (curentUser?.friend_request.length > 0) {
-                let found = allUser?.filter(item => item?.email?.toLowerCase().includes(searchEmail?.toLowerCase()) && curentUser?.email !== item.email)
+            if (searchEmail && searchEmail.trim() !== '') {
+                let found = allUser.filter(item =>
+                    item.email.toLowerCase().includes(searchEmail.toLowerCase()) &&
+                    item.email !== curentUser.email
+                )
                 setFoundUsers(found)
             } else {
                 setFoundUsers([])
             }
         }
-    }, [searchEmail, allUser, curentUser])
+    }, [searchEmail, allUser, curentUser, location_name]); ~
 
-    useEffect(() => {
-        getAllUser()
-
-        let interval = setInterval(() => {
+        useEffect(() => {
             getAllUser()
-        }, 3000)
 
-        return () => clearInterval(interval)
-    }, [])
+            let interval = setInterval(() => {
+                getAllUser()
+            }, 3000)
+
+            return () => clearInterval(interval)
+        }, [])
 
     return (
         <main className="w-full flex items-start gap-5">
