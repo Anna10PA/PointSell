@@ -17,11 +17,13 @@ function SearchFriend() {
     let searchEmail = watch('search')
 
     useEffect(() => {
-        if (location_name === '/main/requests') {
-            let requests = allUser?.filter(user =>
-                curentUser?.friend_request.includes(user.email)
-            )
-            setFoundUsers(requests)
+        if (location_name !== '/main/requests') {
+            if (searchEmail && searchEmail.trim() !== '') {
+                let found = allUser?.filter(item => item.email.toLowerCase().includes(searchEmail.toLowerCase()) && curentUser.email !== item.email)
+                setFoundUsers(found)
+            } else {
+                setFoundUsers([])
+            }
         } else {
             if (curentUser?.friend_request.length > 0) {
                 let found = allUser?.filter(item => item?.email?.toLowerCase().includes(searchEmail?.toLowerCase()) && curentUser?.email !== item.email)
@@ -30,7 +32,7 @@ function SearchFriend() {
                 setFoundUsers([])
             }
         }
-    }, [searchEmail, allUser, curentUser, location_name])
+    }, [searchEmail, allUser, curentUser])
 
     useEffect(() => {
         getAllUser()
