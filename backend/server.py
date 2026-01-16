@@ -1251,16 +1251,11 @@ def reset_password():
     return jsonify({'error': 'User not found'}), 404
 
 
-@app.route('/api')
-def api():
-    all_users = check_users()
-    all_product = check_products()
-    return jsonify([all_users, all_product, All_orders])
-
-
 @app.get("/")
 def home():
-    return "Flask is working for my luck! (((:"
+    all_users = check_users()
+    all_product = check_products()
+    return jsonify([all_users, all_product])
 
 
 if __name__ == '__main__':
