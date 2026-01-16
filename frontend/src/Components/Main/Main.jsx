@@ -108,7 +108,7 @@ function Main() {
     // ჩემი / მენეჯერის ინფორმაცია
     async function getManagerInfo() {
         try {
-            const result = await fetch('https://pointsell-4.onrender.com/managars_info', {
+            const result = await fetch('https://pointsell-4.onrender.com/managers_info', {
                 credentials: 'include',
                 method: 'GET'
             })

@@ -727,7 +727,7 @@ def change_user_info():
 
 
 # ჩემი ინფორმაცია / მენეჯერის
-@app.get('/menegers_info') 
+@app.get('/managers_info') 
 def meneger_info():
     users = check_users()
 
@@ -1255,7 +1255,7 @@ def reset_password():
 def api():
     all_users = check_users()
     all_product = check_products()
-    return jsonify([all_users, all_product])
+    return jsonify([all_users, all_product, All_orders])
 
 
 @app.get("/")
