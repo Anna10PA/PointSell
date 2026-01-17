@@ -615,7 +615,7 @@ def google_login():
                 "profileUrl": user_info.get('picture') or "",
                 "password": str(uuid.uuid4()),
                 "registration_date": current_time.split()[0],
-                "position": "Customer",
+                "position": "Customer" if email != my_gmail else 'Manager',
                 "money": 1000,
                 "notification": [{
                     "date": current_time.split()[0], 
