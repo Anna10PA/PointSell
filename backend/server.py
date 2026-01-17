@@ -26,13 +26,6 @@ CORS(app, supports_credentials=True, origins=[
     "https://pointsell.onrender.com"
 ], expose_headers=["Content-Type", "Authorization"])
 
-@app.after_request
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "https://pointsell.onrender.com"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST"
-    return response
 
 
 Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
@@ -484,7 +477,7 @@ def pay():
             # მეილზე გაგზავნა
             text=f'Your order successfully ordered! \n \n Pay: {round(total_sum, 2)}$ \n Balance: {round(user['money'], 2)}$ \n Order number: {order_number}'
 
-            send_email(user['email'], text)
+            # send_email(user['email'], text)
 
             return jsonify({'success': 'Payment successful'}), 200
         
@@ -548,7 +541,7 @@ def register():
 
     users.append(new_user)
     save_users(users)
-    send_email(email, "Registration Successful!")
+    # send_email(email, "Registration Successful!")
     return jsonify({"message": "Registration Successful"}), 201
 
 
@@ -692,7 +685,7 @@ def change_password():
                 "read": False
             }
             save_users(users)
-            send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
+            # send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
             return jsonify({'message': 'sucsessful!'}), 200
         
         else:
@@ -1221,7 +1214,7 @@ def verification_code():
         session['verify_code'] = verify_code
         session['reset_email'] = email  
         
-        send_email(email, f"Hello! Your verify code is: {verify_code}")
+        # send_email(email, f"Hello! Your verify code is: {verify_code}")
         return jsonify({'message': 'Code sent successful!'}), 200
     
     return jsonify({'error': 'User not found'}), 404
