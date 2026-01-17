@@ -652,6 +652,7 @@ def google_login():
                     "message": f"Daily Bonus ${bonus}!", 
                     "read": False
                 })
+                user['active'] = True
 
         save_users(users)
         session.clear() 
