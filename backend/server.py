@@ -49,6 +49,10 @@ my_password = os.environ.get('Gmail_password')
 
 
 # მეილზე გაგზავნის ფუნქცია
+import smtplib
+import ssl  # დაამატე ეს უსაფრთხოებისთვის
+from email.message import EmailMessage
+
 def send_email(user_email, text):
     subject = "PointSell"
     em = EmailMessage()
@@ -57,12 +61,14 @@ def send_email(user_email, text):
     em['Subject'] = subject
     em.set_content(text)
 
+    context = ssl.create_default_context()
+
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as smtp:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
             smtp.login(my_gmail, my_password)
             smtp.send_message(em)
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Backend Error: {e}")
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
