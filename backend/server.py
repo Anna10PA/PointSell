@@ -58,7 +58,7 @@ def send_email(user_email, text):
     em.set_content(text)
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as smtp:
+        with smtplib.SMTP("smtp.gmail.com", 465) as smtp:
             smtp.starttls()
             smtp.login(my_gmail, my_password)
             smtp.send_message(em)
