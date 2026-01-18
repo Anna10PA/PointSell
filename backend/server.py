@@ -477,7 +477,7 @@ def pay():
             # მეილზე გაგზავნა
             text=f'Your order successfully ordered! \n \n Pay: {round(total_sum, 2)}$ \n Balance: {round(user['money'], 2)}$ \n Order number: {order_number}'
 
-            # send_email(user['email'], text)
+            send_email(user['email'], text)
 
             return jsonify({'success': 'Payment successful'}), 200
         
@@ -541,7 +541,7 @@ def register():
 
     users.append(new_user)
     save_users(users)
-    # send_email(email, "Registration Successful!")
+    send_email(email, "Registration Successful!")
     return jsonify({"message": "Registration Successful"}), 201
 
 
@@ -686,7 +686,7 @@ def change_password():
                 "read": False
             }
             save_users(users)
-            # send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
+            send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
             return jsonify({'message': 'sucsessful!'}), 200
         
         else:
