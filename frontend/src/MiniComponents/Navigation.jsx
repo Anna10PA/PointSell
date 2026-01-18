@@ -32,9 +32,9 @@ function Navigation() {
     return (
         <nav className='border-r border-[#ececec] w-min flex items-center flex-col h-screen justify-start text-[#BBBBBB] gap-5 relative'>
             <div className='w-full border-b border-[#ececec]  object-cover flex items-center justify-center'>
-                <img src={currentMonth === 11 ? "/icon_2.jpg" : '/icon.png'} alt="icon" className='w-[80%] m-1' />
+                <img src={currentMonth === 11 || currentMonth === 0 ? "/icon_2.jpg" : '/icon.png'} alt="icon" className='w-[80%] m-1' />
             </div>
-            <div className="flex items-center flex-col h-[80%] justify-between text-[30px] px-8 max-md:px-4 max-md:text-2xl">
+            <div className="flex items-center flex-col h-[82%] max-sm:h-[87%] justify-between text-[30px] px-8 max-sm:px-5 max-sm:text-[25px]">
                 <Link to='/main/home'>
                     <i className={`fa-solid fa-house hover:text-[#F67F20] duration-100 ${locationName === '/main/home' || locationName === '/main/order' || locationName === '/main/order/deliver' || locationName === '/main/order/table/payment' ||  locationName === '/main/order/table' || locationName === '/main/order/deliver/payment' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>

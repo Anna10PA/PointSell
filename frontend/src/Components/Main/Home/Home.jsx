@@ -23,6 +23,8 @@ function Home() {
     let [openDetail, setOpenDetail] = useState(false)
     let [foodInfo, setFoodInfo] = useState([])
 
+    let [searchOpen, setSearchOpen] = useState(false)
+    let [openCart, setOpenCart] = useState(false)
 
     // შავი გვერდი
     let sendInfo = (item, isOpen) => {
@@ -133,34 +135,48 @@ function Home() {
                 <BgBlack allInfo={foodInfo} open={setOpenDetail} /> :
                 null
             }
-            <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
-                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
-                    <h1 className="text-3xl font-bold">
+            <main className="w-full h-full flex flex-col px-10 py-5 gap-5 max-sm:px-3 max-sm:py-2 max-sm:gap-2 relative">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] ">
+                    <h1 className="text-3xl font-bold max-sm:text-[29px]">
                         Point<span className="text-[#F67F20]">sell</span>
                     </h1>
-                    <form className="relative border border-[#bbb] rounded-4xl w-full max-w-[500px] overflow-hidden">
-                        <input type="text" placeholder="Search Anything Here" className="w-full outline-0 px-5 py-2" {...register('product')} />
-                        <i className="fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3"></i>
-                    </form>
-                    <Link to='/main/notification'>
-                        <div className="min-w-12 min-h-12 bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100 relative" onClick={(e) => {
+                    <div className="flex items-center w-[50%]">
+                        <form className={`relative border border-[#bbb] rounded-4xl w-full max-w-[500px] overflow-hidden max-sm:absolute max-sm:right-30 bg-white duration-200 max-sm:${searchOpen ? 'w-[90%] max-sm:translate-x-30 z-40 max-sm:max-w-[630px] max-sm:right-0' : 'w-min'}`}>
+                            <input type="text" placeholder="Search Anything Here" className="w-full max-sm:w-[80%] outline-0 px-5 py-2" {...register('product')} />
+                            <i className={`fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3 `} onClick={() => {
+                                setSearchOpen(!searchOpen)
+                            }}></i>
+                        </form>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <Link to='/main/notification'>
+                            <div className="min-w-12 min-h-12 max-sm:min-h-10 max-sm:min-w-10 max-sm:text-sm bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100 relative" onClick={(e) => {
                                 notificatinClick(e)
                             }}>
-                            <i className="fa-solid fa-bell"></i>
-                            <div className={` ${curentUser?.notification?.filter(item => !item.read).length > 0 ? 'bg-white rounded-[50%] absolute top-1.5 right-1.5 text-[#f67f20] text-[10px] font-extrabold w-4 h-4 flex items-center justify-center border p-2' : 'hidden'}`}>
-                                {
-                                    curentUser?.notification?.length > 0 ?
-                                        (curentUser?.notification?.filter(item => !item.read).length > 9 ? '9+' : curentUser?.notification?.filter(item => !item.read).length) : null
-                                }
+                                <i className="fa-solid fa-bell"></i>
+                                <div className={` ${curentUser?.notification?.filter(item => !item.read).length > 0 ? 'bg-white rounded-[50%] absolute top-1.5 right-1.5 text-[#f67f20] text-[10px] font-extrabold w-4 h-4 flex items-center justify-center border p-1 max-sm:min-w-2 max-sm:min-h-2 max-sm:p-0 ' : 'hidden'}`}>
+                                    {
+                                        curentUser?.notification?.length > 0 ?
+                                            (curentUser?.notification?.filter(item => !item.read).length > 9 ? '9+' : curentUser?.notification?.filter(item => !item.read).length) : null
+                                    }
+                                </div>
+                            </div>
+                        </Link>
+                        <div className="min-w-12 min-h-12 max-sm:min-h-10 max-sm:min-w-10 max-sm:text-sm bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100 relative lg:hidden" onClick={() => {
+                            setOpenCart(!openCart)
+                        }}>
+                            <i className="fa-solid fa-cart-arrow-down"></i>
+                            <div className="bg-white rounded-[50%] absolute top-1.5 right-1.5 text-[#f67f20] text-[10px] font-extrabold w-4 h-4 flex items-center justify-center border p-1 max-sm:min-w-2 max-sm:min-h-2 max-sm:p-0 ">
+                                <h1>{curentUser?.curent_cart?.cart.length}</h1>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 </header>
 
                 {/* მენიუ */}
                 <section className="flex flex-col gap-4">
-                    <h2 className="font-bold text-xl bg-white w-full">Special Menu For You</h2>
-                    <section className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh]">
+                    <h2 className="font-bold text-xl bg-white w-full max-sm:text-[18px]">Special Menu For You</h2>
+                    <section className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh]">
                         {
                             filteredProducts?.length !== 0 ?
                                 filteredProducts?.map((e, index) => {
@@ -194,12 +210,21 @@ function Home() {
             </main>
 
             {/* კალათა */}
-            <aside className="h-full border-l border-gray-300 min-h-screen max-w-[370px] w-full max-lg:hidden px-5 py-3 flex items-start flex-col gap-4 relative">
+            <aside className={`duration-300 border-l border-gray-300 max-w-[370px] w-full flex items-start flex-col gap-4 relative px-5 py-3 max-lg:absolute max-lg:right-0 max-lg:top-0 max-lg:bg-white max-lg:z-50 ${openCart
+                ? 'max-lg:translate-x-0 max-lg:block'
+                : 'max-lg:translate-x-full max-lg:hidden '}`}>
                 {curentUser?.curent_cart?.cart.length > 0 ?
                     <div className="w-full h-full ">
                         <div className="flex items-center justify-between gap-2 w-full mb-3">
                             <h1 className="font-bold text-2xl py-3">Order #{curentUser?.curent_cart.order?.toUpperCase() || 'F67F20'}</h1>
-                            <i className="fa-solid fa-trash-can cursor-pointer text-2xl duration-100 hover:text-red-600 " onClick={cleanCart}></i>
+                            <div className="flex items-center gap-3">
+                                <i className="fa-solid fa-trash-can cursor-pointer text-2xl duration-100 hover:text-red-600 " onClick={cleanCart}></i>
+                                <div className="lg:hidden">
+                                    <i className="fa-solid fa-xmark cursor-pointer text-2xl duration-100 hover:text-red-600 lg:hidden" onClick={() => {
+                                        setOpenCart(!openCart)
+                                    }}></i>
+                                </div>
+                            </div>
                         </div>
                         <div className="flex items-start flex-col gap-4 overflow-auto h-[50vh] w-full pr-3 pt-4">
                             {
@@ -218,7 +243,6 @@ function Home() {
                                         }
                                     })
                                 })
-
                             }
                         </div>
                         <div className="w-full min-h-[250px] h-full py-3 flex flex-col justify-between ">

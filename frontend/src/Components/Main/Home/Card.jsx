@@ -27,7 +27,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
 
 
     return (
-        <div className='w-full p-5 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between' >
+        <div className='w-full p-5 max-sm:p-3 border-gray-300 border rounded-2xl flex flex-col gap-3 justify-between' >
             <div className="w-full overflow-hidden rounded-xl relative" onClick={allInfo}>
                 <div className={`${discount ? ' absolute top-1 right-1 bg-orange-400 text-white font-bold rounded px-5 py-1.5 z-2 w-max' : 'hidden'}`}>
                     - {discount}
@@ -56,7 +56,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update }) 
                 <button className="bg-[#F67F20] text-white font-bold px-4 flex items-center gap-2 justify-center py-2 rounded-xl cursor-pointer duration-100 hover:bg-amber-500" onClick={addInCart}>
                     <i className="fa-solid fa-plus"></i>
                     <span>
-                        Add Product
+                        Add
                     </span>
                 </button>
             </div>

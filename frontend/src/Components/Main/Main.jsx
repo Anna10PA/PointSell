@@ -230,7 +230,7 @@ function Main() {
 
 
     return (
-        <div className="w-full flex items-start">
+        <div className="w-full flex items-start h-screen">
             <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser }}>
                 <Navigation />
                 <Routes>

@@ -68,7 +68,7 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
 
   return (
     <div className="w-full h-full absolute z-10 bg-[rgba(0,0,0,0.77)] flex items-center justify-center">
-      {curentLocation == '/main/home' && currentMonth == 11 ?
+      {curentLocation == '/main/home' && currentMonth == 11 || curentLocation == '/main/home' && currentMonth == 0?
         <div className="w-full h-full flex items-center justify-center flex-col relative">
           <img src="/nagdi santa.png" className="w-[250px] absolute top-4 left-[32%] z-20" alt="" />
           <FoodDetail
