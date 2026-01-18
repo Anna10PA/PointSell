@@ -58,12 +58,9 @@ def send_email(user_email, text):
     em.set_content(text)
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 465) as smtp:
-            smtp.starttls()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as smtp:
             smtp.login(my_gmail, my_password)
             smtp.send_message(em)
-            print("Message sent")
-
     except Exception as e:
         print(f"Error: {e}")
 
