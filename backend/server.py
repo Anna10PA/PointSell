@@ -1121,6 +1121,7 @@ def vote():
 
         
         save_products(all_product)
+        return jsonify({"message": "Success"}), 200
     else:
         return jsonify({'error': "product is not found"}), 404
     
