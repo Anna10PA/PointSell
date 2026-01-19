@@ -1108,7 +1108,7 @@ def vote():
     if voted_product:
         user = next((u for u in voted_product['vote'] if u['email'] == email), None)
         if user:
-            voted_product['vote']['star'] = star
+            user['star'] = star
         else:
             voted_product['vote'].append({
                 "email": email,
