@@ -1091,6 +1091,40 @@ def all_notification():
     return read_notification('all')
 
 
+# პროდუქტის შეფასება
+@app.post('/vote')
+def vote():
+    if 'email' not in session:
+        return jsonify({"error": 'user logged'}), 401
+    
+    data = request.get_json()
+    star = int(data['star'])
+    product = data['product']
+    email = data['email']
+
+    all_product = check_products()
+    voted_product = next((p for p in all_product if p['Id'] == product), None)
+
+    if voted_product:
+        user = next((u for u in voted_product['vote'] if u['email'] == email), None)
+        if user:
+            voted_product['vote']['star'] = star
+        else:
+            voted_product['vote'].append({
+                "email": email,
+                "star": star
+            })
+
+        total_stars = sum(v['star'] for v in voted_product['vote'])
+        vote_count = len(voted_product['vote'])
+        voted_product['star'] = round(total_stars / vote_count, 1)
+
+        
+        save_products(all_product)
+    else:
+        return jsonify({'error': "product is not found"}), 404
+    
+
 # პროდუქტის წაშლა
 @app.post('/delete_product')
 def delete_product():

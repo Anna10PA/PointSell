@@ -2,12 +2,13 @@ import { useContext, useState } from 'react'
 import { Info } from '../Main'
 
 function FoodStar({ id, close }) {
-    let { allProduct, curentUser } = useContext(Info)
+    let { allProduct, curentUser, sendStar } = useContext(Info)
     
     let product = allProduct?.find(pr => pr.Id === id)
     let star = product?.vote.find(e => e.email === curentUser?.email)
     
-    let [rating, setRating] = useState(star || 0)
+    let [rating, setRating] = useState(star.star || 0)
+    let [start, _] = useState(star.star || 0)
 
     return (
         <div className="w-full h-full absolute z-90 bg-[rgba(0,0,0,0.77)] flex items-center justify-center max-md:p-3 rounded">
@@ -44,7 +45,9 @@ function FoodStar({ id, close }) {
                         '🤔'
                     }
                 </div>
-                <button disabled={rating === 0} className='disabled:bg-gray-300 disabled:text-gray-700 disabled:opacity-50 font-bold px-10 py-2 rounded cursor-pointer bg-[#f67f20] text-white'>Save</button>
+                <button disabled={rating === start} className='disabled:bg-gray-300 disabled:text-gray-700 disabled:opacity-50 font-bold px-10 py-2 rounded cursor-pointer bg-[#f67f20] text-white' onClick={()=> {
+                    sendStar(rating, curentUser?.email, product)
+                }}>Save</button>
             </div>
         </div>
     )

@@ -200,6 +200,28 @@ function Main() {
     }
 
 
+    // ვარსკვლავების დაწერა
+    async function sendStar(star, email, product) {
+        let res = await fetch('https://pointsell-4.onrender.com/vote', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                star: star,
+                email: email,
+                product: product
+            })
+        })
+        if (res.ok) {
+            alert('Vote')
+        }else {
+            alert('not working')
+        }
+
+    }
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -231,7 +253,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />
