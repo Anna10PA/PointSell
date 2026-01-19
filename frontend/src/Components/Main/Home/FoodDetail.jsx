@@ -9,17 +9,17 @@ function FoodDetail({ allInfo, open }) {
   }
 
   return (
-    <div className='bg-white h-min w-max flex items-start rounded-2xl overflow-hidden relative max-w-[600px] mx-10 max-md:flex-col max-md:pb-2.5 max-md:min-w-[200px] max-md:w-full max-sm:mx-1 p-5' >
+    <div className='bg-white h-min w-max flex items-start rounded-2xl overflow-hidden relative max-w-[600px] mx-10 max-md:flex-col max-md:pb-2.5 max-md:min-w-[200px] max-md:w-full max-md:mx-1 p-5 max-md:p-3 max-md:h-min' >
       <i className="fa-solid fa-xmark absolute top-5 right-5 text-2xl duration-75 cursor-pointer hover:text-[#F67F20] z-50" onClick={() => {
         open(false)
       }}></i>
-      <div className='w-[95%] max-w-[300px] h-[350px] overflow-hidden min-w-[200px] max-md:min-w-full rounded'>
+      <div className='w-[95%] max-w-[300px] h-[350px] max-md:h-[250px] max-md:max-w-[260px] overflow-hidden min-w-[200px] max-md:min-w-full rounded '>
         <img src={allInfo.product_image} alt={allInfo.product_image} className='object-cover w-full h-full duration-200 ' />
       </div>
-      <div className='p-5 flex items-start flex-col justify-between h-full gap-3 w-max min-w-[280px] min-h-[300px] max-md:min-w-full max-md:w-full'>
+      <div className='p-5 flex items-start flex-col justify-between gap-3 w-max min-w-[280px] min-h-[300px] max-md:min-w-full max-md:w-full max-md:p-2 max-md:justify-start max-md:gap-1 max-md:mt-4'>
         <h1 className='text-3xl font-extrabold'>{allInfo.product_name}</h1>
-        <div className="flex items-start flex-col gap-6 h-[80%] ">
-          <div className=" h-[50%] flex items-start flex-col justify-between mt-3">
+        <div className="flex items-start flex-col gap-6 h-[80%] max-md:h-max w-full">
+          <div className=" h-[50%] flex items-start flex-col w-full justify-between mt-3 max-md:h-max">
             <div className="flex items-center gap-3">
               <i className="fa-solid fa-info  bg-gray-400 text-[10px] rounded-[50%] text-white px-2 py-1.5"></i>
               <p className="text-gray-400 leading-[1.3] w-[80%] text-sm">{allInfo.product_description}</p>

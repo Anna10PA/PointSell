@@ -6,8 +6,8 @@ function ProductAndChack({curentUser, tax, discount, hasVIPDiscount, isSubmit}) 
     let curent_location = location.pathname
 
     return (
-        <div className="flex items-start gap-5 relative">
-            <div className="h-[40vh] overflow-auto flex flex-col items-start gap-3 w-full">
+        <div className="flex items-start gap-5 relative max-xl:flex-col ">
+            <div className="max-h-[40vh] overflow-auto flex flex-col items-start gap-3 w-full max-xl:max-h-[180px] max-md:max-h-[120px]">
                 {
                     curentUser ?
                         curentUser.curent_cart.cart.map((item, index) => {
@@ -19,7 +19,7 @@ function ProductAndChack({curentUser, tax, discount, hasVIPDiscount, isSubmit}) 
                         }) : <h1>Loading . . . </h1>
                 }
             </div>
-            <div className="w-100 h-[40vh] border border-gray-400 rounded-xl p-5 flex flex-col items-start justify-between">
+            <div className="w-100 h-[40vh] border border-gray-400 rounded-xl p-5 flex flex-col items-start justify-between max-xl:w-full">
                 <div className="w-full flex flex-col items-start gap-3 border-b border-gray-300 pb-5">
                     <div className="w-full flex items-center justify-between font-bold">
                         <h1>Subtotal: </h1>

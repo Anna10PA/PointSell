@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import BgBlack from "../../../MiniComponents/BgBlack"
 import CartCard from "./CartCard"
 import { Info } from "../Main"
+import FoodStar from "./FoodStar"
 
 
 function Home() {
@@ -25,6 +26,8 @@ function Home() {
 
     let [searchOpen, setSearchOpen] = useState(false)
     let [openCart, setOpenCart] = useState(false)
+    let [openStar, setOpenStar] = useState(false)
+
 
     // შავი გვერდი
     let sendInfo = (item, isOpen) => {
@@ -133,19 +136,35 @@ function Home() {
         <>
             {openDetail ?
                 <BgBlack allInfo={foodInfo} open={setOpenDetail} /> :
-                null
+                openStar ?
+                    <FoodStar id={openStar} close={setOpenStar}/> : null
+
             }
+
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5 max-sm:px-3 max-sm:py-2 max-sm:gap-2 relative">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] ">
                     <h1 className="text-3xl font-bold max-sm:text-[29px]">
                         Point<span className="text-[#F67F20]">sell</span>
                     </h1>
-                    <div className="flex items-center w-[50%]">
-                        <form className={`relative border border-[#bbb] rounded-4xl w-full max-w-[500px] overflow-hidden max-sm:absolute max-sm:right-30 bg-white duration-200 max-sm:${searchOpen ? 'w-[90%] max-sm:translate-x-30 z-40 max-sm:max-w-[630px] max-sm:right-0' : 'w-min'}`}>
-                            <input type="text" placeholder="Search Anything Here" className="w-full max-sm:w-[80%] outline-0 px-5 py-2" {...register('product')} />
-                            <i className={`fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3 `} onClick={() => {
-                                setSearchOpen(!searchOpen)
-                            }}></i>
+                    <div className="flex items-center w-[50%] justify-end">
+                        <form className={`relative border border-[#bbb] rounded-4xl bg-white duration-300 overflow-hidden ${searchOpen
+                                ? 'max-sm:w-full max-sm:absolute max-sm:right-0 z-40'
+                                : 'max-sm:w-10 max-sm:h-10 w-full max-w-[500px]'}`}>
+
+                            <input
+                                type="text"
+                                placeholder="Search Anything Here"
+                                className={`w-full outline-0 px-5 py-2 ${!searchOpen && 'max-sm:opacity-0'}`}
+                                {...register('product')}
+                            />
+
+                            <i className={`fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3 `}
+                                onClick={() => {
+                                    if (window.innerWidth < 768) {
+                                        setSearchOpen(!searchOpen)
+                                    }
+                                }}>
+                            </i>
                         </form>
                     </div>
                     <div className="flex items-center gap-3">
@@ -176,7 +195,7 @@ function Home() {
                 {/* მენიუ */}
                 <section className="flex flex-col gap-4">
                     <h2 className="font-bold text-xl bg-white w-full max-sm:text-[18px]">Special Menu For You</h2>
-                    <section className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh]">
+                    <section className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh] max-sm:max-h-[80vh]">
                         {
                             filteredProducts?.length !== 0 ?
                                 filteredProducts?.map((e, index) => {
@@ -192,6 +211,7 @@ function Home() {
                                         discount={e.discount}
                                         id={e.Id}
                                         update={getCurentUser}
+                                        starOpen={setOpenStar}
                                         key={index} />
                                 }) :
                                 <div>
@@ -210,20 +230,20 @@ function Home() {
             </main>
 
             {/* კალათა */}
-            <aside className={`duration-300 border-l border-gray-300 max-w-[370px] w-full flex items-start flex-col gap-4 relative px-5 py-3 max-lg:absolute max-lg:right-0 max-lg:top-0 max-lg:bg-white max-lg:z-50 ${openCart
+            <aside className={`duration-300 border-l h-full border-gray-300 max-w-[370px] w-full flex items-start flex-col gap-4 relative px-5 py-3 max-lg:absolute max-lg:right-0 max-lg:top-0 max-lg:bg-white max-lg:z-50 ${openCart
                 ? 'max-lg:translate-x-0 max-lg:block'
                 : 'max-lg:translate-x-full max-lg:hidden '}`}>
+                <div className="lg:hidden absolute top-7 right-3">
+                    <i className="fa-solid fa-xmark cursor-pointer text-2xl duration-100 hover:text-red-600 lg:hidden" onClick={() => {
+                        setOpenCart(!openCart)
+                    }}></i>
+                </div>
                 {curentUser?.curent_cart?.cart.length > 0 ?
                     <div className="w-full h-full ">
-                        <div className="flex items-center justify-between gap-2 w-full mb-3">
+                        <div className="flex items-center justify-between gap-2 w-full mb-3 relative">
                             <h1 className="font-bold text-2xl py-3">Order #{curentUser?.curent_cart.order?.toUpperCase() || 'F67F20'}</h1>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 mr-5">
                                 <i className="fa-solid fa-trash-can cursor-pointer text-2xl duration-100 hover:text-red-600 " onClick={cleanCart}></i>
-                                <div className="lg:hidden">
-                                    <i className="fa-solid fa-xmark cursor-pointer text-2xl duration-100 hover:text-red-600 lg:hidden" onClick={() => {
-                                        setOpenCart(!openCart)
-                                    }}></i>
-                                </div>
                             </div>
                         </div>
                         <div className="flex items-start flex-col gap-4 overflow-auto h-[50vh] w-full pr-3 pt-4">
@@ -245,7 +265,7 @@ function Home() {
                                 })
                             }
                         </div>
-                        <div className="w-full min-h-[250px] h-full py-3 flex flex-col justify-between ">
+                        <div className="w-full min-h-[250px] py-3 flex flex-col ">
                             <div className="flex flex-col items-start gap-2.5">
                                 <div className="flex items-center justify-between w-full font-bold">
                                     <h1>Subtotal</h1>

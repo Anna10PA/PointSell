@@ -135,9 +135,9 @@ function Table() {
                 submit ?
                     <BgBlack /> : null
             }
-            <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
-                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative">
-                    <h1 className="text-3xl font-bold">
+            <main className="w-full h-full flex flex-col px-10 py-5 gap-5 overflow-auto max-sm:px-3 max-sm:py-2 max-sm:gap-1">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative max-sm:min-h-[8vh]">
+                    <h1 className="text-3xl font-bold max-sm:text-2xl">
                         Order #{curentUser ?
                             curentUser?.curent_cart?.order?.toUpperCase() : 'Loading . . . '}
                     </h1>
@@ -150,9 +150,9 @@ function Table() {
                 <form className="flex flex-col gap-3 justify-between h-[70vh]" onSubmit={handleSubmit((data) => {
                     onSubmit(data)
                 })}>
-                    <div className='grid grid-cols-3 gap-5'>
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="fullname" className='font-bold text-lg'>
+                    <div className='grid grid-cols-3 gap-5 max-md:grid-cols-2 max-md:gap-2 max-sm:grid-cols-1'>
+                        <div className='flex items-start gap-3 flex-col max-md:gap-1'>
+                            <label htmlFor="fullname" className='font-bold text-lg max-md:text-sm'>
                                 Recipent:
                             </label>
                             <input type="text" placeholder='Enter Fullname' name='fullname' id='fullname' className={` border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] ${errors.name ? 'border-red-600 border-2' : 'border-gray-400'}`}
@@ -172,8 +172,8 @@ function Table() {
                             <span className='text-[red] font-semibold'>{errors.name ? errors.name.message : ''}</span>
                         </div>
 
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="Code" className='font-bold text-lg'>
+                        <div className='flex items-start gap-3 flex-col max-md:gap-1'>
+                            <label htmlFor="Code" className='font-bold text-lg max-md:text-sm'>
                                 Code:
                             </label>
                             <div className='w-full flex items-center gap-3'>
@@ -191,8 +191,8 @@ function Table() {
                             <span className='text-[red] font-semibold'>{errors.promo_code ? errors.promo_code.message : ''}</span>
                         </div>
 
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="" className='font-bold text-lg'>Table</label>
+                        <div className='flex items-start gap-3 flex-col max-md:col-span-2 max-md:gap-1 max-sm:col-span-1'>
+                            <label htmlFor="" className='font-bold text-lg max-md:text-sm'>Table</label>
                             <select name="" id="" className={`w-full border px-4 rounded-lg py-2.5 text-gray-500 outline-[#f67f20]  ${errors.table_number ? 'border-red-600 border-2' : 'border-gray-400 '}`} {...register('table_number', {
                                 required: 'Choose a table number',
                                 validate: (e) => {

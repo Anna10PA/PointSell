@@ -8,8 +8,8 @@ function PaymentResult() {
     return (
         <>
         {/* {window.location.reload()} */}
-            <main className="w-full h-screen flex justify-center relative flex-col items-center">
-                <div className="w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100 flex items-center justify-center" onClick={()=> {
+            <main className="w-full h-screen flex justify-center relative flex-col items-center px-3">
+                <div className="w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100 flex items-center justify-center max-md:text-center max-sm:left-2 max-sm:top-4" onClick={()=> {
                     navigate('/main/home')
                 }}>
                     <i className="fa-solid fa-angle-left"></i>
@@ -20,17 +20,17 @@ function PaymentResult() {
                         not found
                     </video>
                 }
-                <h1 className="font-bold text-3xl mb-3">
+                <h1 className="font-bold text-3xl mb-3 max-md:text-xl">
                     {text}
                 </h1>
                 {
                     isPay ?
-                        <p className="text-gray-400">
+                        <p className="text-gray-400 text-center max-md:text-sm">
                             Your Order Number Is <span className="text-gray-500 font-bold">
                                 {order.toUpperCase()}
                             </span>
                             , Thanks for choice our Restaurant!
-                        </p> : <p className="text-gray-400">
+                        </p> : <p className="text-gray-400 text-center  max-md:text-sm">
                             Sorry, Something went wrong. Thanks for choice our Restaurant!
                         </p>
                 }

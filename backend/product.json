@@ -10,7 +10,12 @@
         "type": "food",
         "info": "6 Pieces",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f9e1d8",
@@ -23,7 +28,12 @@
         "type": "food",
         "info": "6 Pieces",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c4b9a1",
@@ -36,7 +46,12 @@
         "type": "food",
         "info": "4 Pieces of mchadi and 500 grams of cheese",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "8d2e4f",
@@ -49,7 +64,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "3b7c9e",
@@ -62,7 +82,12 @@
         "type": "food",
         "info": "9 Pieces",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "5a2d1f",
@@ -75,7 +100,12 @@
         "type": "food",
         "info": "4 Pieces mini katleti",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "9b3e7c",
@@ -88,7 +118,12 @@
         "type": "food",
         "info": "Big Shaurma",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "1d8f4a",
@@ -101,7 +136,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e2c6d9",
@@ -114,7 +154,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "7a4b1e",
@@ -127,7 +172,12 @@
         "type": "food",
         "info": "500 Grams with chicken",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f5d3a9",
@@ -140,7 +190,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "2e7c4b",
@@ -153,7 +208,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d9f1a5",
@@ -166,7 +226,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c8e2b4",
@@ -179,7 +244,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b1a7d3",
@@ -192,7 +262,12 @@
         "type": "food",
         "info": "3 Pieces",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "4f9e1c",
@@ -205,7 +280,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "2a5d8f",
@@ -218,7 +298,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d3c7b9",
@@ -231,7 +316,12 @@
         "type": "food",
         "info": "6 Pieces",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e1f4a2",
@@ -244,7 +334,12 @@
         "type": "food",
         "info": "Big Khachapuri",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "9a3e6d",
@@ -257,7 +352,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f2b8c5",
@@ -270,7 +370,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c4d1e9",
@@ -283,7 +388,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b7a2f3",
@@ -296,7 +406,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e5d9c1",
@@ -309,7 +424,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f8a4b2",
@@ -322,7 +442,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "1c7e9d",
@@ -335,7 +460,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d5f2a8",
@@ -348,7 +478,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "a2d4f6",
@@ -361,7 +496,12 @@
         "type": "food",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e9b1c7",
@@ -374,7 +514,12 @@
         "type": "food",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f3a8d2",
@@ -387,7 +532,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "1e7b4c",
@@ -400,7 +550,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d2f9a5",
@@ -413,7 +568,12 @@
         "type": "drink",
         "info": "0.5L",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c6e1b8",
@@ -426,7 +586,12 @@
         "type": "drink",
         "info": "1L",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b4a7d1",
@@ -439,7 +604,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f5d2c9",
@@ -452,7 +622,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "a9e3b7",
@@ -465,7 +640,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c1f4d8",
@@ -478,7 +658,12 @@
         "type": "drink",
         "info": "0.5L",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e2a9b4",
@@ -491,7 +676,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f7d3a1",
@@ -504,7 +694,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b5c9e2",
@@ -517,7 +712,12 @@
         "type": "drink",
         "info": "1L",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "a1f8d4",
@@ -530,7 +730,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e3b7c2",
@@ -543,7 +748,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d9a4f5",
@@ -556,7 +766,12 @@
         "type": "drink",
         "info": "1L",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c2b8e7",
@@ -569,7 +784,12 @@
         "type": "drink",
         "info": "1 Cup",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f1d4a9",
@@ -582,7 +802,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b3e7c1",
@@ -595,7 +820,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "a8d2f5",
@@ -608,7 +838,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e4c9b3",
@@ -621,7 +856,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d1f7a4",
@@ -634,7 +874,12 @@
         "type": "other",
         "info": "500 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b6e2c8",
@@ -647,7 +892,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "a3d9f1",
@@ -660,12 +910,17 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "f4b2e5",
         "product_name": "Mustard",
-        "product_image": "https://leitesculinaria.com/wp-content/uploads/2024/05/homemade-yellow-mustard-1200-500x500.jpg",
+        "product_image": "https://leitesculigan.com/wp-content/uploads/2024/05/homemade-yellow-mustard-1200-500x500.jpg",
         "price": 2.1,
         "discount": "15%",
         "time": 1,
@@ -673,7 +928,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "c7a8d3",
@@ -686,7 +946,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "e1b4f9",
@@ -699,7 +964,12 @@
         "type": "other",
         "info": "200 Grams",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "d5a2c1",
@@ -712,7 +982,12 @@
         "type": "other",
         "info": "1 Toy",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     },
     {
         "Id": "b9f3d7",
@@ -725,6 +1000,11 @@
         "type": "other",
         "info": "3 Pieces",
         "star": 5,
-        "vote": 1
+        "vote": [
+            {
+                "email": "puturidzeana0210@gmail.com",
+                "star": 5
+            }
+        ]
     }
 ]

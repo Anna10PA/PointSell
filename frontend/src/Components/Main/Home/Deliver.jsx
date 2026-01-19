@@ -196,9 +196,9 @@ function Deliver() {
                 submit ?
                     <BgBlack /> : null
             }
-            <main className="w-full h-full flex flex-col px-10 py-5 gap-5">
-                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative">
-                    <h1 className="text-3xl font-bold">
+            <main className="w-full h-full flex flex-col px-10 py-5 gap-5 overflow-auto max-sm:px-3 max-sm:py-2 max-sm:gap-1 ">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] relative max-sm:min-h-[8vh]">
+                    <h1 className="text-3xl font-bold max-sm:text-2xl">
                         Order #{curentUser !== null ?
                             curentUser?.curent_cart?.order?.toUpperCase() : 'Loading . . . '}
                     </h1>
@@ -211,9 +211,9 @@ function Deliver() {
                 <form className="flex flex-col gap-3" onSubmit={handleSubmit((data) => {
                     onSubmit(data)
                 })}>
-                    <div className='grid grid-cols-3 gap-5'>
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="fullname" className='font-bold text-lg'>
+                    <div className='grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1'>
+                        <div className='flex items-start gap-3 flex-col max-md:gap-1 max-sm:col-span-2'>
+                            <label htmlFor="fullname" className='font-bold text-lg max-md:text-sm'>
                                 Recipent:
                             </label>
                             <input type="text" placeholder='Enter Fullname' name='fullname' id='fullname' className={` border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] ${errors.name ? 'border-red-600 border-2' : 'border-gray-400'}`}
@@ -232,8 +232,8 @@ function Deliver() {
                             />
                             <span className='text-[red] font-semibold'>{errors.name ? errors.name.message : ''}</span>
                         </div>
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="PhoneNumber" className='font-bold text-lg'>
+                        <div className='flex items-start gap-3 flex-col max-md:gap-1 max-sm:col-span-2'>
+                            <label htmlFor="PhoneNumber" className='font-bold text-lg max-md:text-sm'>
                                 Phone Number:
                             </label>
                             <input type="text" placeholder='Enter Phone Number' name='PhoneNumber' id='PhoneNumber' className={`order-gray-400 border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] ${errors.number ? 'border-red-600 border-2' : 'border-gray-400'}`}
@@ -263,8 +263,8 @@ function Deliver() {
                                 {errors.number ? errors.number.message : ''}
                             </span>
                         </div>
-                        <div className='flex items-start gap-3 flex-col'>
-                            <label htmlFor="Code" className='font-bold text-lg'>
+                        <div className='flex items-start gap-3 flex-col max-md:gap-1 max-md:col-span-2'>
+                            <label htmlFor="Code" className='font-bold text-lg max-md:text-sm'>
                                 Code:
                             </label>
                             <div className='w-full flex items-center gap-3'>
@@ -281,8 +281,8 @@ function Deliver() {
                             </div>
                             <span className='text-[red] font-semibold'>{errors.promo_code ? errors.promo_code.message : ''}</span>
                         </div>
-                        <div className='flex items-start gap-3 flex-col col-start-1 col-end-3'>
-                            <label htmlFor="Address" className='font-bold text-lg' >
+                        <div className='flex items-start gap-3 flex-col max-md:gap-1 max-lg:col-span-3 max-md:col-span-2'>
+                            <label htmlFor="Address" className='font-bold text-lg max-md:text-sm' >
                                 Address:
                             </label>
                             <textarea name="Address" id="Address" placeholder='Enter Address' className={`border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] min-h-20 max-h-20 ${errors.address ? 'border-red-600 border-2' : 'border-gray-400 '}`}
@@ -292,22 +292,22 @@ function Deliver() {
                                 {errors.address ? errors.address.message : ''}
                             </span>
                         </div>
-                        <div className="rounded-lg border border-gray-400 p-4 flex items-start justify-start gap-3 w-full max-h-min">
-                            <div className="w-[50%]">
-                                <div className="flex items-center gap-4 text-gray-400 font-semibold">
+                        <div className="rounded-lg border border-gray-400 p-4 flex items-start justify-start gap-3 w-full max-h-min max-lg:col-span-3 max-md:col-span-2 max-sm:flex-col-reverse max-sm:text-center">
+                            <div className="w-[50%] max-sm:w-full ">
+                                <div className="flex items-center gap-4 text-gray-400 font-semibold max-sm:justify-center max-sm:w-full">
                                     <h1>Duration:</h1>
                                     <h1>{deliverInfo.duration || "0"} m</h1>
                                 </div>
-                                <div className="flex items-center gap-4 text-gray-400 font-semibold">
+                                <div className="flex items-center gap-4 text-gray-400 font-semibold max-sm:justify-center max-sm:w-full">
                                     <h1>Distance:</h1>
                                     <h1>{Number(deliverInfo.distance || 0).toFixed(1) || '0'} km</h1>
                                 </div>
-                                <div className="flex items-center gap-4 text-[#f67f20] font-bold text-xl mt-3">
+                                <div className="flex items-center gap-4 text-[#f67f20] font-bold text-xl mt-3 max-sm:justify-center max-sm:w-full">
                                     <h3>Tax:</h3>
                                     <h3>{deliverInfo.distance ? Number(deliverInfo.distance * 2 + 1.5 || 0).toFixed(2) : 0}$</h3>
                                 </div>
                             </div>
-                            <div>
+                            <div className="max-sm:w-full ">
                                 <h3 className="font-bold text-xl">Rules:</h3>
                                 <div className="mt-2 font-semibold text-gray-400">
                                     <p>Start = $1.50</p>
