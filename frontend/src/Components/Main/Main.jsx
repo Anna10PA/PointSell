@@ -202,24 +202,25 @@ function Main() {
 
     // ვარსკვლავების დაწერა
     async function sendStar(star, email, product) {
-        let res = await fetch('https://pointsell-4.onrender.com/vote', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                star: star,
-                email: email,
-                product: product
+        try {
+            let res = await fetch('https://pointsell-4.onrender.com/vote', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    star: star,
+                    email: email,
+                    product: product
+                })
             })
-        })
-        if (res.ok) {
-            alert('Vote')
-        }else {
-            alert('not working')
+            if (res.ok) {
+                location.reload()
+            }
+        } catch (e) {
+            console.error(e)
         }
-
     }
 
     // ჩატვირთვა
