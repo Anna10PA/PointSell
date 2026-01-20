@@ -9,7 +9,7 @@ function Warning({open, title, message, deleteFunction, user=null}) {
             <img src="/warning.jpg" alt="/warning.jpg" className='w-30' />
             <div className='text-center leading-10'>
                 <h1 className='font-bold text-xl'>{title}</h1>
-                <p className='text-gray-400'>{message}</p>
+                <p className='text-gray-400 leading-7'>{message}</p>
             </div>
             <div className='flex items-center gap-5'>
                 <button className={`h-10 bg-[#f67f20] rounded text-white font-bold px-10 duration-100 hover:bg-orange-400 cursor-pointer ${!user && location_name == '/main/costumers' ? 'hidden' : ''}`} onClick={deleteFunction}>

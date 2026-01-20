@@ -132,11 +132,11 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
 
 
   return (
-    <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative max-w-[70%] mx-5' >
-      <div className={`${allInfo.post !== null ? 'h-[600px] min-w-[450px] overflow-y-hidden rounded w-[750px]' : 'hidden'}`}>
+    <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative mx-5 max-md:flex-col' >
+      <div className={`${allInfo.post !== null ? 'max-h-[600px] h-full min-w-[150px] overflow-y-hidden rounded max-w-[450px] w-full max-md:max-h-[300px]' : 'hidden'}`}>
         <img src={allInfo.post} alt={allInfo.post} className='w-full h-full object-cover ' />
       </div>
-      <div className='h-[600px] w-[50%] flex flex-col items-start gap-5 justify-between'>
+      <div className='h-[600px] max-sm:h-min w-[50%] flex flex-col items-start gap-5 justify-between max-md:w-full'>
         <div className='flex items-center gap-3 w-full relative '>
           <img src={client.profileUrl} alt="" className='w-15 h-15 rounded-[50%]' />
           <div className='leading-4.5 w-full'>
@@ -150,8 +150,8 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
           }}></i>
         </div>
         <div className="max-h-[250px] w-full">
-          <p className='font-medium max-h-[170px] min-h-[60px] pb-3 overflow-auto w-full px-3'>{allInfo.title}</p>
-          <div className='flex items-center justify-between w-full text-gray-600 border-b border-gray-300 pb-3 text-2xl px-4 mt-1 relative pr-10'>
+          <p className='font-medium max-h-[170px] min-h-[60px] max-md:min-h-max pb-3 overflow-auto w-full px-3'>{allInfo.title}</p>
+          <div className='flex items-center justify-between w-full text-gray-600 border-b border-gray-300 pb-3 text-2xl px-4 mt-1 relative  pr-2'>
             <div className='flex items-center gap-2.5'>
               <i className={
                 `fa-heart cursor-pointer ${isLiked ? 'text-red-600 fa-solid' : 'text-gray-600 fa-regular'}
@@ -171,7 +171,7 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
             </div>
           </div>
         </div>
-        <div className='h-full flex items-center justify-start gap-3 flex-col  w-full relative overflow-auto   '>
+        <div className='h-full flex items-center justify-start gap-3 flex-col  w-full relative overflow-auto  max-md:items-start max-md:h-[14vh]'>
           {
             allComment.length > 0 ?
               allComment.map((item, index) => {

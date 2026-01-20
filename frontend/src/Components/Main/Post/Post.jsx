@@ -29,18 +29,18 @@ function Post() {
             allUsers={allUser}
             mode={openDetail} /> : null
       }
-      <main className="w-full flex flex-col px-10 py-5 gap-3 h-full">
-        <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
+      <main className="w-full flex flex-col px-10 py-5 gap-3 h-full max-sm:px-3">
+        <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] max-md:min-h-[7vh]">
           <h1 className="text-3xl font-bold">
             Posts
           </h1>
           <Link to='/main/add_post'>
-            <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser?.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
+            <button className={`text-lg text-[#F67F20] font-semibold cursor-pointer ${curentUser?.position == 'Manager' ? 'text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] max-sm:text-[16px] hover:text-white hover:py-2 rounded' : 'hidden'}`}>
               Add New Post
             </button>
           </Link>
         </header>
-        <section className="w-full h-[80vh] overflow-auto scroll-none grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))]  gap-5">
+        <section className="w-full h-[80vh] overflow-auto scroll-none grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] max-sm:h-[88vh]  gap-5">
           {
             allPost?.length > 0 ?
               allPost?.map((item, index) => {

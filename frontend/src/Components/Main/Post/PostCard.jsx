@@ -69,7 +69,7 @@ function PostCard({ info, sendInfo }) {
 
 
     return (
-        <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col justify-between items-start gap-4 max-w-[600px] max-lg:max-w-full pb-5'>
+        <div className='rounded-2xl border-gray-300 border px-5 py-4 flex flex-col justify-between items-start gap-4 max-w-[600px] max-lg:max-w-full pb-10 max-sm:pb-10 max-sm:px-3 max-sm:gap-1 max-sm:max-h-[530px]'>
             <div className='flex items-center gap-5 justify-between w-full'>
                 <div className='flex items-center gap-4'>
                     <img src={managerInfo?.profileUrl} alt={managerInfo?.profileUrl} className='w-12.5 h-12.5 object-cover rounded-[50%]' />
@@ -84,7 +84,7 @@ function PostCard({ info, sendInfo }) {
                     sendInfo("delete")
                 }}></i>
             </div>
-            <div className='h-full w-full flex flex-col items-start gap-5'>
+            <div className='h-full w-full flex flex-col items-start gap-5 '>
                 <div>
                     <h1 className={`font-medium ${info.post ? 'line-clamp-1' : ''}`}>
                         {info.title}
@@ -100,7 +100,7 @@ function PostCard({ info, sendInfo }) {
                     : <div className='h-full'></div>
                 }
             </div>
-            <div className='flex items-center justify-between w-full text-gray-600 text-[27px] px-3 mt-1'>
+            <div className='flex items-center justify-between w-full text-gray-600 text-[27px] px-3 mt-1 max-sm:text-[23px] max-sm:mt-3'>
                 <i className={
                     `fa-heart cursor-pointer ${isLiked ? 'text-red-600 fa-solid' : 'text-gray-600 fa-regular'}
                     active:scale-[0.8] duration-100`}
@@ -109,7 +109,7 @@ function PostCard({ info, sendInfo }) {
                     sendInfo("view")
                     view()
                 }}></i>
-                <h1 className='text-lg font-medium cursor-pointer'>
+                <h1 className='text-lg font-medium cursor-pointer max-sm:text-[16px]'>
                     {info.date === `${curentTime.getFullYear()}-${curentTime.getMonth() + 1}-${curentTime.getDate()}` ?
                         `${info.time.split(':')[0]}:${info.time.split(':')[1]}` :
                         curentTime.getFullYear() == info.date.split('-')[2] ?

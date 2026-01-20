@@ -57,11 +57,11 @@ function AllPost() {
         <main className='w-full flex items-center relative h-[98vh]'>
             <section className='w-full flex items-center justify-center flex-col gap-10 '>
                 <Link to='/main/posts'>
-                    <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100'>
+                    <button className='w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100 max-sm:left-2 max-sm:top-4'>
                         <i className="fa-solid fa-arrow-left"></i>
                     </button>
                 </Link>
-                <h1 className='text-3xl font-bold'>New <span className='text-[#F67F20]'>POST</span>!</h1>
+                <h1 className='text-3xl font-bold max-sm:text-[29px]'>New <span className='text-[#F67F20]'>POST</span>!</h1>
 
                 <form
                     onSubmit={handlePostSubmit}
