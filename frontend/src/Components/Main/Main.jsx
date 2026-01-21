@@ -26,9 +26,11 @@ import Setting from "./Settings/Setting.jsx"
 
 export let Info = createContext()
 
-function Main() {
-    const [_, setIsLoading] = useState(true)
 
+function Main() {
+    let navigate = useNavigate()
+    let [_, setIsLoading] = useState(true)
+    
     let [curentUser, setCurentUser] = useState(null)
     let [allProduct, setAllProduct] = useState(null)
     let [allPost, setAllPost] = useState(null)
