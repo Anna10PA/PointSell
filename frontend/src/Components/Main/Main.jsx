@@ -281,12 +281,12 @@ function Main() {
                 let data = await res.json()
                 setCurentUser(prev => ({ ...prev, count: data.count }))
                 Game()
-            } else {
-                navigate('/main/setting/password/verify')
-            }
+                return false
+            } else return true
 
         } catch (e) {
             console.error(e)
+            return false
         }
     }
 
