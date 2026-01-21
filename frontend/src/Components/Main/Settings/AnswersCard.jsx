@@ -5,7 +5,7 @@ function AnswersCard({ answer, getVerification, email, correctAnswer }) {
     let check = async () => {
         let isSuccess = await getVerification(email, (answer === correctAnswer))
         if (isSuccess && answer === correctAnswer) {
-            navigate('/main/setting/password/verify')
+            navigate('/main/setting/password/verify/reset_password')
         }
     }
 
