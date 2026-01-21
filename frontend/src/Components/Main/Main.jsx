@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import { useState, useEffect, createContext, useCallback } from "react"
 
 import Home from "./Home/Home"
@@ -227,6 +227,7 @@ function Main() {
 
     // თამაში პაროლის აღსადგენად
     let Game = useCallback(async () => {
+        setQuestion(null)
         try {
             let res = await fetch('https://opentdb.com/api.php?amount=1')
             let data = await res.json()
@@ -277,6 +278,9 @@ function Main() {
             if (!res.ok) {
                 let data = await res.json()
                 setCurentUser(prev => ({ ...prev, count: data.count }))
+                Game()
+            } else {
+                navigate('main/setting/password/verify/reset_password')
             }
 
         } catch (e) {
