@@ -4,6 +4,8 @@ from flask_cors import cross_origin
 from datetime import timedelta
 from flask_mail import Mail, Message
 from datetime import datetime
+from email.message import EmailMessage
+import smtplib
 import json
 import os
 import uuid
@@ -60,17 +62,19 @@ app.config.update(
 mail = Mail(app)
 
 def send_email(email, message_text):
+    msg = EmailMessage()
+    msg.set_content(message_text)
+    msg['Subject'] = 'Verification Code'
+    msg['From'] = 'puturidzeana0210@gmail.com'
+    msg['To'] = email
+
     try:
-        send_msg = Message(
-            subject="Verification Code",
-            sender=app.config['MAIL_USERNAME'],
-            recipients=[email],
-            body=message_text
-        )
-        mail.send(send_msg)
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as smtp:
+            smtp.login('puturidzeana0210@gmail.com', os.environ.get('Gmail_password'))
+            smtp.send_message(msg)
         return True
     except Exception as e:
-        print(f"Mail Error: {e}")
+        print(f"!!! REAL MAIL ERROR: {e}")
         return False
 
 
