@@ -4,8 +4,7 @@ import json
 from datetime import timedelta
 import os
 from email.message import EmailMessage
-import ssl
-import smtplib
+from flask_mail import Mail, Message
 from datetime import datetime
 import uuid
 import requests
@@ -49,26 +48,19 @@ my_password = os.environ.get('Gmail_password')
 
 
 # მეილზე გაგზავნის ფუნქცია
-import smtplib
-import ssl  # დაამატე ეს უსაფრთხოებისთვის
-from email.message import EmailMessage
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = my_gmail
+app.config['MAIL_PASSWORD'] = my_password
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+main = Mail(app)
 
-def send_email(user_email, text):
-    subject = "PointSell"
-    em = EmailMessage()
-    em['From'] = my_gmail
-    em['To'] = user_email
-    em['Subject'] = subject
-    em.set_content(text)
-
-    context = ssl.create_default_context()
-
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-            smtp.login(my_gmail, my_password)
-            smtp.send_message(em)
-    except Exception as e:
-        print(f"Backend Error: {e}")
+def send_email(email, message):
+    send_msg = Message(message, sender=my_gmail, recipients=[email])
+    send_msg.body = "PointSell"
+    main.send(send_msg)
+    return jsonify({'message': 'sucsessful'}), 200
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
@@ -689,7 +681,7 @@ def change_password():
                 "read": False
             }
             save_users(users)
-            # send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
+            send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
             return jsonify({'message': 'sucsessful!'}), 200
         
         else:
