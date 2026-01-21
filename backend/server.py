@@ -48,19 +48,19 @@ my_password = os.environ.get('Gmail_password')
 
 
 # მეილზე გაგზავნის ფუნქცია
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = my_gmail
-app.config['MAIL_PASSWORD'] = my_password
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-main = Mail(app)
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = my_gmail
+# app.config['MAIL_PASSWORD'] = my_password
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+# main = Mail(app)
 
-def send_email(email, message):
-    send_msg = Message(message, sender=my_gmail, recipients=[email])
-    send_msg.body = "PointSell"
-    main.send(send_msg)
-    return jsonify({'message': 'sucsessful'}), 200
+# def send_email(email, message):
+#     send_msg = Message(message, sender=my_gmail, recipients=[email])
+#     send_msg.body = "PointSell"
+#     main.send(send_msg)
+#     return jsonify({'message': 'sucsessful'}), 200
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
@@ -681,7 +681,7 @@ def change_password():
                 "read": False
             }
             save_users(users)
-            send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
+            # send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
             return jsonify({'message': 'sucsessful!'}), 200
         
         else:
@@ -1245,7 +1245,7 @@ def verification_code():
         session['verify_code'] = verify_code
         session['reset_email'] = email  
         
-        send_email(email, f"Hello! Your verify code is: {verify_code}")
+        # send_email(email, f"Hello! Your verify code is: {verify_code}")
         return jsonify({'message': 'Code sent successful!'}), 200
     
     return jsonify({'error': 'User not found'}), 404
