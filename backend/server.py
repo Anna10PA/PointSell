@@ -60,10 +60,11 @@ app.config.update(
 main = Mail(app)
 
 def send_email(email, message):
-    send_msg = Message(message, sender=my_gmail, recipients=[email])
-    send_msg.body = "PointSell"
-    main.send(send_msg)
-    return True
+    # send_msg = Message(message, sender=my_gmail, recipients=[email])
+    # # send_msg.body = "PointSell"
+    # main.send(send_msg)
+    print(email)
+    return "helllo"
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
