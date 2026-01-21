@@ -1,4 +1,5 @@
-flask
-flask-cors
-gunicorn
+Flask
+Flask-Cors
+Flask-Mail
 requests
+gunicorn
