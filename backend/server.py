@@ -1,15 +1,14 @@
 from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
-import json
-from datetime import timedelta
-import os
-from email.message import EmailMessage
+from flask_cors import cross_origin
 from flask_mail import Mail, Message
 from datetime import datetime
+from datetime import timedelta
+import json
+import os
 import uuid
 import requests
 import random
-
 
 
 app = Flask(__name__)
@@ -24,9 +23,8 @@ CORS(app, supports_credentials=True, origins=[
     "http://localhost:5173", 
     "https://pointsell.onrender.com",
     "https://pointsell-4.onrender.com" 
-], allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
-   methods=["GET", "POST"])
-
+], allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
+   methods=["GET", "POST", "OPTIONS"])
 
 
 Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
@@ -1259,8 +1257,11 @@ def verification_code():
 
 
 # პაროლის აღდგენა საიტიდან
-@app.post('/reset_password')
-def reset_password():
+@app.route('/verification_code', methods=['POST', 'OPTIONS'])
+@cross_origin(supports_credentials=True)
+def verification_code():
+    if request.method == 'OPTIONS':
+        return jsonify({'success': True}), 200
     if 'reset_email' not in session or 'verify_code' not in session:
         return jsonify({'error': 'Session expired'}), 400
     
