@@ -57,14 +57,21 @@ app.config.update(
     MAIL_USERNAME='puturidzeana0210@gmail.com',
     MAIL_PASSWORD=os.environ.get('Gmail_password')
 )
-main = Mail(app)
+mail = Mail(app)
 
-def send_email(email, message):
-    # send_msg = Message(message, sender=my_gmail, recipients=[email])
-    # # send_msg.body = "PointSell"
-    # main.send(send_msg)
-    print(email)
-    return "helllo"
+def send_email(email, message_text):
+    try:
+        send_msg = Message(
+            subject="Verification Code",
+            sender=app.config['MAIL_USERNAME'],
+            recipients=[email],
+            body=message_text
+        )
+        mail.send(send_msg)
+        return True
+    except Exception as e:
+        print(f"Mail Error: {e}")
+        return False
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
