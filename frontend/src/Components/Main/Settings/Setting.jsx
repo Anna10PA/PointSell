@@ -3,11 +3,11 @@ import { useContext } from 'react'
 
 import { Info } from '../Main'
 
+import ResetPassword from './ResetPassword'
 import PersonalInformation from './PersonalInformation'
 import EmployeeInformation from './EmployeeInformation'
 import Password from './Password'
 import GetCode from './GetCode'
-import ResetPassword from './ResetPassword'
 
 function Setting() {
     let location = useLocation()
