@@ -1245,7 +1245,7 @@ def verification_code():
         session['verify_code'] = verify_code
         session['reset_email'] = email  
         
-        # send_email(email, f"Hello! Your verify code is: {verify_code}")
+        send_email(email, f"Hello! Your verify code is: {verify_code}")
         return jsonify({'message': 'Code sent successful!'}), 200
     
     return jsonify({'error': 'User not found'}), 404
