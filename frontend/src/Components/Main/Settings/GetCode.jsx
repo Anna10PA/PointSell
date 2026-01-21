@@ -1,67 +1,58 @@
-import { useContext, useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import AnswersCard from './AnswersCard'
 import { Info } from '../Main'
+import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { get } from 'react-hook-form'
 
 function GetCode() {
-    let { curentUser } = useContext(Info)
-    let { register, handleSubmit, formState: { errors } } = useForm()
-    let [loading, setLoading] = useState(false)
-    let [error, setError] = useState("")
+    let { curentUser, Game, allAnswers, question, getVerification } = useContext(Info)
     let navigate = useNavigate()
+
+    useEffect(() => {
+        if (!question) {
+            Game()
+        }
+    }, [Game, question, curentUser])
 
     useEffect(() => {
         if (curentUser?.block) {
             navigate('/')
         }
     }, [curentUser])
-
-
-    let onVerifySubmit = async (data) => {
-        setLoading(true)
-        setError("")
-
-        try {
-            let res = await fetch('https://pointsell-4.onrender.com/reset_password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ 'code': data.code })
-            })
-
-            let result = await res.json()
-            setLoading(false)
-            if (res.ok) {
-                navigate('reset_password', {state: curentUser.email})
-            } else {
-                setError(result.error)
-            }
-            
-        } catch (e) {
-            console.error(e)
-        }
-    }
-
+    console.log(question)
     return (
-        <section className='w-full h-[56vh] flex flex-col items-start gap-10'>
-            <div >
+        <section className='w-full h-[56vh] flex flex-col items-start gap-15 '>
+            <div>
                 <h1 className='font-bold text-[27px]'>Verification</h1>
-                <p className='text-gray-400'>Check your email! You will get code. Enter a verify code.</p>
+                <p className='text-gray-400'>Answer the questions correctly! After thank you can change password!</p>
             </div>
-            <form className='flex items-start gap-5 flex-col w-full' onSubmit={handleSubmit(onVerifySubmit)} onChange={() => {
-                setError("")
-            }}>
-                <div className='flex items-end w-full gap-3'>
-                    <div className='flex flex-col items-start gap-2 w-full'>
-                        <label htmlFor="" className='font-bold'>Code</label>
-                        <input type="text" className='border border-gray-400 rounded-lg outline-[#f67f20] px-5 py-2 w-full' placeholder='Enter a Verify code' {...register('code', {
-                            required: 'Enter Verify Code'
-                        })}
-                        />
+            <form className='flex items-end gap-5 flex-col w-full relative' >
+                <h1 className='font-semibold text-gray-400'>Mistake: <span className={`${(curentUser?.count || 0) > 0 ? 'text-[red]' : ''}`}>{curentUser?.count || 0}</span> / 3</h1>
+                <h1 className='text-center font-bold text-2xl w-full'>{question?.question}</h1>
+                <div className='w-full flex items-center justify-between'>
+                    <div className='text-white px-7 rounded py-3 text-center w-max font-bold text-sm tracking-[1px] bg-[#f67f20]'>
+                        {question?.category}
                     </div>
-                    <button type='submit' disabled={loading} className='bg-[#f67f20] font-bold text-white px-7 py-2 text-md rounded-lg cursor-pointer duration-200 hover:bg-orange-400'>Submit</button>
+                    <div className={`${question?.difficulty.toLowerCase() === 'easy' ? 'bg-[#009700]' :
+                        question?.difficulty.toLowerCase() === 'medium' ? 'bg-[#f67f20]' :
+                            question?.difficulty.toLowerCase() === 'hard' ? 'bg-[red]' :
+                                ''} text-white px-7 rounded py-3 text-center w-max font-bold text-sm tracking-[1px]`}>
+                        {question?.difficulty[0].toUpperCase() + question?.difficulty.slice(1)}
+                    </div>
                 </div>
-                <span className='text-red-600 font-semibold'>{error ? error : errors?.code ? errors.code.message : ''}</span>
+                <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] w-full justify-items-center gap-2'>
+                    {
+                        allAnswers?.map((item, index) => {
+                            return <AnswersCard 
+                            answer={item} 
+                            key={index}
+                            getVerification={getVerification}
+                            email={curentUser?.emial}
+                            correctAnswer={question?.correct_answer}
+                            />
+                        })
+                    }
+                </div>
             </form>
         </section>
     )

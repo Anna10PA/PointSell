@@ -1,17 +1,11 @@
 from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
-from flask_cors import cross_origin
 from datetime import timedelta
-from flask_mail import Mail, Message
 from datetime import datetime
-from email.message import EmailMessage
-import smtplib
 import json
 import os
 import uuid
 import requests
-import random
-
 
 
 app = Flask(__name__)
@@ -49,33 +43,6 @@ All_message = 'Message'
 my_gmail = 'puturidzeana0210@gmail.com'
 my_password = os.environ.get('Gmail_password')  
 
-
-# მეილზე გაგზავნის ფუნქცია
-app.config.update(
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=465,
-    MAIL_USE_TLS=False,
-    MAIL_USE_SSL=True,
-    MAIL_USERNAME='puturidzeana0210@gmail.com',
-    MAIL_PASSWORD=os.environ.get('Gmail_password')
-)
-mail = Mail(app)
-
-def send_email(email, message_text):
-    msg = EmailMessage()
-    msg.set_content(message_text)
-    msg['Subject'] = 'Verification Code'
-    msg['From'] = 'puturidzeana0210@gmail.com'
-    msg['To'] = email
-
-    try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=10) as smtp:
-            smtp.login('puturidzeana0210@gmail.com', os.environ.get('Gmail_password'))
-            smtp.send_message(msg)
-        return True
-    except Exception as e:
-        print(f"!!! REAL MAIL ERROR: {e}")
-        return False
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
@@ -487,7 +454,7 @@ def pay():
             # მეილზე გაგზავნა
             text=f'Your order successfully ordered! \n \n Pay: {round(total_sum, 2)}$ \n Balance: {round(user['money'], 2)}$ \n Order number: {order_number}'
 
-            send_email(user['email'], text)
+            # send_email(user['email'], text)
 
             return jsonify({'success': 'Payment successful'}), 200
         
@@ -551,7 +518,7 @@ def register():
 
     users.append(new_user)
     save_users(users)
-    send_email(email, "Registration Successful!")
+    # send_email(email, "Registration Successful!")
     return jsonify({"message": "Registration Successful"}), 201
 
 
@@ -675,6 +642,40 @@ def google_login():
         return jsonify({"error": "Internal server error"}), 500
 
 
+# ვერიფიკაცია
+def verification():
+    if 'email' not in session:
+        return jsonify({"error": 'Please log in'}), 401
+    
+    data = request.get_json()
+    email = data.get('email')
+    isCorrect = data.get('isCorrect')
+
+    users = check_users()
+    user = next((u for u in users if u['email'] == email), None)
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    if user.get('block'):
+        return jsonify({"error": 'User is already blocked'}), 403
+
+    if isCorrect:
+        user['count'] = 0 
+        save_users(users)
+        return jsonify({'message': 'verify!'}), 200
+    else:
+        user['count'] = user.get('count', 0) + 1
+        
+        if user['count'] >= 3:
+            user['block'] = True
+            save_users(users)
+            return jsonify({'error': 'User blocked due to too many attempts'}), 403
+        
+        save_users(users)
+        return jsonify({"error": 'Wrong answer'}), 400
+    
+
 # პაროლის შეცვლა
 @app.post('/change_password')
 def change_password():
@@ -696,7 +697,7 @@ def change_password():
                 "read": False
             }
             save_users(users)
-            send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
+            # send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
             return jsonify({'message': 'sucsessful!'}), 200
         
         else:
@@ -1240,44 +1241,6 @@ def block_user():
         return jsonify({'message': 'sucsessful!'}), 200
     
     return jsonify({'error': 'user not found'}), 404
-
-
-# სავერიფიკაციო კოდის გაგზავნა/შედგენა
-@app.route('/verification_code', methods=['POST', 'OPTIONS'])
-@cross_origin(supports_credentials=True)
-def verification_code():
-    if request.method == 'OPTIONS':
-        return jsonify({'status': 'ok'}), 200
-
-    try:
-        data = request.get_json()
-        if not data:
-            return jsonify({'error': 'No data provided'}), 400
-            
-        email = data.get('email')
-        users = check_users()
-        user = next((u for u in users if u['email'] == email), None)
-        
-        if user:
-            if user.get('block'):
-                return jsonify({'error': 'Account is blocked'}), 403
-
-            verify_code = str(random.randint(1000000, 9999999))
-            
-            session['verify_code'] = verify_code
-            session['reset_email'] = email  
-            session.modified = True
-            
-            success = send_email(email, f"Hello! Your verify code is: {verify_code}")
-            if success:
-                return jsonify({'message': 'Code sent successful!'}), 200
-            else:
-                return jsonify({'error': 'Failed to send email'}), 500
-        
-        return jsonify({'error': 'User not found'}), 404
-    except Exception as e:
-        print(f"Server Error: {e}")
-        return jsonify({'error': 'Internal Server Error'}), 500
 
 
 # პაროლის აღდგენა საიტიდან

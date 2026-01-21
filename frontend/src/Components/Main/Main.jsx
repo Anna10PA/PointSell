@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom"
-import { useState, useEffect, createContext } from "react"
+import { useState, useEffect, createContext, useCallback } from "react"
 
 import Home from "./Home/Home"
 import OrderType from "./Home/OrderType"
@@ -35,6 +35,8 @@ function Main() {
     let [allUser, setAllUser] = useState(null)
     let [managerInfo, setManagerInfo] = useState(null)
     let [friend, setFriends] = useState([])
+    let [question, setQuestion] = useState(null)
+    let [allAnswers, setAllAnswers] = useState([])
 
 
     // ამჟამინდელი მომხმარებლის ინფორმაცია
@@ -223,6 +225,67 @@ function Main() {
         }
     }
 
+    // თამაში პაროლის აღსადგენად
+    let Game = useCallback(async () => {
+        try {
+            let res = await fetch('https://opentdb.com/api.php?amount=1')
+            let data = await res.json()
+
+            if (data.results && data.results.length > 0) {
+                let quest = data.results[0]
+                setQuestion(quest)
+                let answers = [...quest.incorrect_answers, quest.correct_answer]
+                let ress = []
+                while (ress.length < answers.length) {
+                    let index = Math.floor(Math.random() * answers.length)
+                    if (!ress.includes(answers[index])) {
+                        ress.push(answers[index])
+                    }
+                    index = Math.floor(Math.random() * answers.length)
+                }
+                setAllAnswers(ress)
+            }
+        } catch (err) {
+            console.error(err)
+            setQuestion({
+                question: "What is the capital of Georgia",
+                correct_answer: "Tbilisi",
+                incorrect_answers: [
+                    "Kutaisi",
+                    "Borjomi",
+                    "Batumi"
+                ]
+            })
+        }
+    }, [])
+
+
+    // ვერიფიკაცია თამაშის შედეგად
+    async function getVerification(email, isTrue) {
+        try {
+            let res = await fetch('https://pointsell-4.onrender.com/verification', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    isCorrect: isTrue
+                })
+            })
+            if (res.ok) {
+                alert('it works')
+            }else {
+                alert('not work')
+            }
+
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -254,7 +317,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification }}>
                 <Navigation />
                 <Routes>
                     <Route path='/home' element={<Home />} />
