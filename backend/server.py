@@ -22,8 +22,10 @@ app.secret_key = os.environ.get('Gmail_password')
 
 CORS(app, supports_credentials=True, origins=[
     "http://localhost:5173", 
-    "https://pointsell.onrender.com"
-], expose_headers=["Content-Type", "Authorization"])
+    "https://pointsell.onrender.com",
+    "https://pointsell-4.onrender.com" 
+], allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Credentials"],
+   methods=["GET", "POST"])
 
 
 
