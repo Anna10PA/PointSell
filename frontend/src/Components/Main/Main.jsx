@@ -282,7 +282,7 @@ function Main() {
                 setCurentUser(prev => ({ ...prev, count: data.count }))
                 Game()
             } else {
-                navigate('main/setting/password/verify/reset_password')
+                navigate('/main/setting/password/verify')
             }
 
         } catch (e) {
