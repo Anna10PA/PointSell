@@ -47,7 +47,7 @@ function GetCode() {
                             answer={item} 
                             key={index}
                             getVerification={getVerification}
-                            email={curentUser?.emial}
+                            email={curentUser?.email}
                             correctAnswer={question?.correct_answer}
                             />
                         })
