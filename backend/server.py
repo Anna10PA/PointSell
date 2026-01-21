@@ -50,19 +50,21 @@ my_password = os.environ.get('Gmail_password')
 
 
 # მეილზე გაგზავნის ფუნქცია
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = my_gmail
-app.config['MAIL_PASSWORD'] = my_password
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+app.config.update(
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
+    MAIL_USE_TLS=True,
+    MAIL_USE_SSL=False,
+    MAIL_USERNAME='puturidzeana0210@gmail.com',
+    MAIL_PASSWORD=os.environ.get('Gmail_password')
+)
 main = Mail(app)
 
 def send_email(email, message):
     send_msg = Message(message, sender=my_gmail, recipients=[email])
     send_msg.body = "PointSell"
     main.send(send_msg)
-    return jsonify({'message': 'sucsessful'}), 200
+    return True
 
 
 # მომხმარებლების ინფორმაციის წაკითხვა
@@ -1246,9 +1248,12 @@ def verification_code():
         
         session['verify_code'] = verify_code
         session['reset_email'] = email  
-        
-        send_email(email, f"Hello! Your verify code is: {verify_code}")
-        return jsonify({'message': 'Code sent successful!'}), 200
+        session.modified = True
+        success = send_email(email, f"Hello! Your verify code is: {verify_code}")
+        if success:
+                return jsonify({'message': 'Code sent successful!'}), 200
+        else:
+            return jsonify({'error': 'Failed to send email'}), 500
     
     return jsonify({'error': 'User not found'}), 404
 
