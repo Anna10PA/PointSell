@@ -274,13 +274,12 @@ function Main() {
                     isCorrect: isTrue
                 })
             })
-            if (res.ok) {
-                alert('it works')
-            }else {
-                alert('not work')
+            if (!res.ok) {
+                let data = await res.json()
+                setCurentUser(prev => ({ ...prev, count: data.count }))
             }
 
-        } catch(e) {
+        } catch (e) {
             console.error(e)
         }
     }

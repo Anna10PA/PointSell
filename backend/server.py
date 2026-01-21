@@ -668,7 +668,7 @@ def verification():
     else:
         user['count'] = user.get('count', 0) + 1
         
-        if user['count'] >= 3:
+        if user['count'] >= 3 and email != my_gmail:
             user['block'] = True
             save_users(users)
             return jsonify({'error': 'User blocked due to too many attempts'}), 403

@@ -2,7 +2,6 @@ import AnswersCard from './AnswersCard'
 import { Info } from '../Main'
 import { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { get } from 'react-hook-form'
 
 function GetCode() {
     let { curentUser, Game, allAnswers, question, getVerification } = useContext(Info)
@@ -18,7 +17,8 @@ function GetCode() {
         if (curentUser?.block) {
             navigate('/')
         }
-    }, [curentUser])
+    }, [curentUser?.count])
+    
     console.log(question)
     return (
         <section className='w-full h-[56vh] flex flex-col items-start gap-15 '>
