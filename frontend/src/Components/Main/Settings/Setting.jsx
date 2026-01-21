@@ -6,7 +6,6 @@ import { Info } from '../Main'
 import PersonalInformation from './PersonalInformation'
 import EmployeeInformation from './EmployeeInformation'
 import Password from './Password'
-import Opening from './Opening'
 import GetCode from './GetCode'
 import ResetPassword from './ResetPassword'
 
@@ -76,7 +75,6 @@ function Setting() {
                         <Route index element={<PersonalInformation />} />
                         <Route path='employers_information' element={<EmployeeInformation />} />
                         <Route path='password' element={<Password />} />
-                        <Route path='open' element={<Opening />} />
                         <Route path='password/verify' element={<GetCode />} />
                         <Route path='password/verify/reset_password' element={<ResetPassword />} />
                     </Routes>
