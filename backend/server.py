@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
 from flask_cors import cross_origin
+from datetime import timedelta
 from flask_mail import Mail, Message
 from datetime import datetime
-from datetime import timedelta
 import json
 import os
 import uuid
 import requests
 import random
+
 
 
 app = Flask(__name__)
@@ -1230,8 +1231,11 @@ def block_user():
 
 
 # სავერიფიკაციო კოდის გაგზავნა/შედგენა
-@app.post('/verification_code')
+@app.route('/verification_code', methods=['POST', 'OPTIONS'])
+@cross_origin(supports_credentials=True)
 def verification_code():
+    if request.method == 'OPTIONS':
+        return jsonify({'status': 'ok'}), 200
     data = request.get_json()
     email = data.get('email')
 
@@ -1257,11 +1261,8 @@ def verification_code():
 
 
 # პაროლის აღდგენა საიტიდან
-@app.route('/verification_code', methods=['POST', 'OPTIONS'])
-@cross_origin(supports_credentials=True)
-def verification_code():
-    if request.method == 'OPTIONS':
-        return jsonify({'success': True}), 200
+@app.post('/reset_password')
+def reset_password():
     if 'reset_email' not in session or 'verify_code' not in session:
         return jsonify({'error': 'Session expired'}), 400
     
