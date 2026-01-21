@@ -643,6 +643,7 @@ def google_login():
 
 
 # ვერიფიკაცია
+@app.post('/verification')
 def verification():
     if 'email' not in session:
         return jsonify({"error": 'Please log in'}), 401
