@@ -9,22 +9,26 @@ import requests
 
 
 app = Flask(__name__)
+
 app.config.update(
     SESSION_COOKIE_SAMESITE='None',
     SESSION_COOKIE_SECURE=True,
     PERMANENT_SESSION_LIFETIME=timedelta(days=5)
 )
-app.secret_key = os.environ.get('Gmail_password')
 
-CORS(app, supports_credentials=True, origins=[
-    "http://localhost:5173", 
-    "https://pointsell.onrender.com",
-    "https://pointsell-4.onrender.com" 
-], allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
-   methods=["GET", "POST", "OPTIONS"])
+CORS(app, 
+     supports_credentials=True, 
+     origins=["https://pointsell.onrender.com", "http://localhost:5173"],
+     allow_headers=["*"], 
+     methods=["GET", "POST", "OPTIONS"])
+
 
 
 Google_Client_Id = '521401976640-a5pvvid5j8odcrvk0cbulg3ng1tf9r4e.apps.googleusercontent.com'
+my_gmail = 'puturidzeana0210@gmail.com'
+
+my_password = os.environ.get('Gmail_password')  
+app.secret_key = os.environ.get('Gmail_password')
 
 
 image_folders = 'images'
@@ -38,10 +42,6 @@ All_product = "product.json"
 All_post = "posts.json"
 All_orders = 'orders.json'
 All_message = 'Message'
-
-
-my_gmail = 'puturidzeana0210@gmail.com'
-my_password = os.environ.get('Gmail_password')  
 
 
 
