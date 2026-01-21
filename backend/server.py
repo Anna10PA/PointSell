@@ -1236,28 +1236,36 @@ def block_user():
 def verification_code():
     if request.method == 'OPTIONS':
         return jsonify({'status': 'ok'}), 200
-    data = request.get_json()
-    email = data.get('email')
 
-    users = check_users()
-    user = next((u for u in users if u['email'] == email), None)
-    
-    if user:
-        if user.get('block'):
-            return jsonify({'error': 'Account is blocked'}), 403
-
-        verify_code = str(random.randint(1000000, 9999999))
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+            
+        email = data.get('email')
+        users = check_users()
+        user = next((u for u in users if u['email'] == email), None)
         
-        session['verify_code'] = verify_code
-        session['reset_email'] = email  
-        session.modified = True
-        success = send_email(email, f"Hello! Your verify code is: {verify_code}")
-        if success:
+        if user:
+            if user.get('block'):
+                return jsonify({'error': 'Account is blocked'}), 403
+
+            verify_code = str(random.randint(1000000, 9999999))
+            
+            session['verify_code'] = verify_code
+            session['reset_email'] = email  
+            session.modified = True
+            
+            success = send_email(email, f"Hello! Your verify code is: {verify_code}")
+            if success:
                 return jsonify({'message': 'Code sent successful!'}), 200
-        else:
-            return jsonify({'error': 'Failed to send email'}), 500
-    
-    return jsonify({'error': 'User not found'}), 404
+            else:
+                return jsonify({'error': 'Failed to send email'}), 500
+        
+        return jsonify({'error': 'User not found'}), 404
+    except Exception as e:
+        print(f"Server Error: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
 
 
 # პაროლის აღდგენა საიტიდან
