@@ -166,25 +166,24 @@ function PersonalInformation() {
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Address</label>
-                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Address' disabled={disabled} {...register('address', {
-                                required: (curentUser?.position === 'Manager' || curentUser?.position === 'Worker')
-                                    ? "Enter Your Address"
-                                    : false
-                            }
-                            )} />
+                            <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Address' disabled={disabled} {...register('address')}
+                            />
                             <span className='text-red-600 font-semibold'>{errors?.address ? errors?.address?.message : ''}</span>
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Phone Number</label>
                             <input type="text" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' placeholder='Enter Phone' disabled={disabled} {...register('phone', {
                                 validate: (data) => {
-                                    for (let i of data) {
-                                        if (!'0123456789'.includes(i)) {
-                                            return 'Must be number'
+                                    if (data.trim() !== '') {
+                                        for (let i of data) {
+                                            if (!'0123456789'.includes(i)) {
+                                                return 'Must be number'
+                                            }
                                         }
-                                    }
-                                    if (data.length !== 9 || data[0] != 5) {
-                                        return 'Must Have 9 Symbol and start number 5'
+                                        if (data.length !== 9 || data[0] != 5) {
+                                            return 'Must Have 9 Symbol and start number 5'
+                                        }
+                                        return true
                                     }
                                     return true
                                 }
@@ -206,14 +205,14 @@ function PersonalInformation() {
                 </div>
                 <div className='w-full min-h-[60vh] overflow-auto rounded-xl relative p-4'>
                     <table className="w-full border-collapse h-[40vh]">
-                    <thead className='w-full flex justify-center items-center sticky top-0 bg-white'>
-                        <tr className='w-full'>
-                            <th className='w-full flex items-center justify-center'>
-                                <h2 className='font-bold text-2xl text-center'>Friends List</h2>
-                                <h3 className='absolute right-3 text-gray-400'>Found: ({friend?.length})</h3>
-                            </th>
-                        </tr>
-                    </thead>
+                        <thead className='w-full flex justify-center items-center sticky top-0 bg-white'>
+                            <tr className='w-full'>
+                                <th className='w-full flex items-center justify-center'>
+                                    <h2 className='font-bold text-2xl text-center'>Friends List</h2>
+                                    <h3 className='absolute right-3 text-gray-400'>Found: ({friend?.length})</h3>
+                                </th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {friend?.length > 0 ? (
                                 friend.map((item, index) => (

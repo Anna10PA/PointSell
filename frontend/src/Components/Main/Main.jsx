@@ -30,7 +30,7 @@ export let Info = createContext()
 function Main() {
     let navigate = useNavigate()
     let [_, setIsLoading] = useState(true)
-    
+
     let [curentUser, setCurentUser] = useState(null)
     let [allProduct, setAllProduct] = useState(null)
     let [allPost, setAllPost] = useState(null)
@@ -229,37 +229,44 @@ function Main() {
 
     // თამაში პაროლის აღსადგენად
     let Game = useCallback(async () => {
-        setQuestion(null)
-        try {
-            let res = await fetch('https://opentdb.com/api.php?amount=1')
-            let data = await res.json()
 
-            if (data.results && data.results.length > 0) {
-                let quest = data.results[0]
-                setQuestion(quest)
-                let answers = [...quest.incorrect_answers, quest.correct_answer]
-                let ress = []
-                while (ress.length < answers.length) {
-                    let index = Math.floor(Math.random() * answers.length)
-                    if (!ress.includes(answers[index])) {
-                        ress.push(answers[index])
-                    }
-                    index = Math.floor(Math.random() * answers.length)
-                }
-                setAllAnswers(ress)
+        setQuestion(null)
+        setAllAnswers([])
+
+        let mainQuestion = {
+            question: "What is the capital of Georgia",
+            correctAnswer: "Tbilisi",
+            difficulty: 'Easy',
+            category: 'Georgaphy',
+            incorrectAnswers: ["Kutaisi", "Borjomi", "Batumi"]
+        }
+
+        let quest
+        try {
+            let res = await fetch('https://the-trivia-api.com/v2/questions')
+            let data = await res.json()
+            console.log(data)
+            if (data && data.length > 0) {
+                quest = data[0]
+            } else {
+                quest = mainQuestion
             }
         } catch (err) {
             console.error(err)
-            setQuestion({
-                question: "What is the capital of Georgia",
-                correct_answer: "Tbilisi",
-                incorrect_answers: [
-                    "Kutaisi",
-                    "Borjomi",
-                    "Batumi"
-                ]
-            })
+            quest = mainQuestion
         }
+
+        let answers = [...quest?.incorrectAnswers, quest?.correctAnswer]
+        let ress = []
+
+        while (ress.length < answers.length) {
+            let index = Math.floor(Math.random() * answers.length)
+            if (!ress.includes(answers[index])) {
+                ress.push(answers[index])
+            }
+        }
+        setQuestion(quest)
+        setAllAnswers(ress)
     }, [])
 
 
@@ -279,11 +286,16 @@ function Main() {
             })
             if (!res.ok) {
                 let data = await res.json()
-                setCurentUser(prev => ({ ...prev, count: data.count }))
-                Game()
-                location.reload()
+                setCurentUser(valu => {
+                    let newCount = (data.count !== undefined) ? data.count : (valu.count + 1)
+                    return { ...valu, count: newCount }
+                }
+                )
+                await Game()
                 return false
-            } else return true
+            } else {
+                return true
+            }
 
         } catch (e) {
             console.error(e)
