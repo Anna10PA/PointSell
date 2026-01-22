@@ -691,12 +691,12 @@ def change_password():
 
         if user:
             user['password'] = password
-            user['notification'] = {
+            user['notification'].insert(0, {
                 "date": current_time.split()[0],
                 "time": current_time.split()[1],
                 "message": "Password Change Successfully",
                 "read": False
-            }
+            })
             save_users(users)
             # send_email(user['email'], "Password Change Successfully! Thank you for choosing our restaurant!")
             return jsonify({'message': 'sucsessful!'}), 200
