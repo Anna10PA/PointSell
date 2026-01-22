@@ -10,7 +10,7 @@ function Item({ image, name, info2, info3, info4, price, func, hasBlock }) {
     return (
         <tr>
             <td className='flex items-center gap-3 px-5 py-3 border border-gray-100'>
-                <img src={image ? image : 'https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg'} alt={image ? image : 'https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg'} className='h-15 w-15 object-cover rounded-xl' />
+                <img src={image ? image : 'https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg'} alt={image ? image : 'https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg'} className='h-15 max-w-15 w-full object-cover rounded-xl' />
                 <h1 className='font-bold'>{name ? name : 'Unknown'}</h1>
             </td>
             <td className='border border-gray-200 px-5 text-center text-green-500 font-bold'>
@@ -57,8 +57,8 @@ function Item({ image, name, info2, info3, info4, price, func, hasBlock }) {
                                 </>
                         }
                     </div>
-                    <div className={`flex items-center gap-2 text-[#F67F20] duration-150 hover:bg-orange-400 hover:text-white px-3 py-2 rounded cursor-pointer `} onClick={() => {
-                        func(info4 !== 'puturidzeana0210@gmail.com' ? info4 : null, !info4.includes('@') ? 'delete_product' : 'delete_user')
+                    <div className={`flex items-center gap-2 text-[#F67F20] duration-150 hover:bg-orange-400 hover:text-white px-3 py-2 rounded cursor-pointer ${curentPage === '/main/costumers' ? 'hidden' : 'black'}`} onClick={() => {
+                        func(!info4.includes('@') ? 'delete_product' : '')
                     }}>
                         <i className="fa-solid fa-trash"></i>
                         <span className='font-bold' >

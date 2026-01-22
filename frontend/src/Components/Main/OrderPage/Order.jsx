@@ -46,19 +46,19 @@ function Order() {
 
     return (
         <>
-            <main className="w-full h-full flex items-start px-10 py-5 gap-10 ">
-                <section className="w-[50%]">
+            <main className="w-full h-full flex items-start px-10 py-5 gap-10 relative max-sm:px-3 max-sm:py-2">
+                <section className={`w-[50%] max-lg:w-[90%] max-lg:absolute max-lg:z-60 bg-white max-lg:${curentOrd ? 'hidden' : 'block'}`}>
                     <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
-                        <h1 className="text-3xl font-bold">
+                        <h1 className="text-3xl font-bold max-md:text-[29px]">
                             Pending Orders
                         </h1>
                     </header>
                     <section className="w-full flex items-start">
                         <div className="border rounded-xl border-gray-400 w-full">
-                            <h1 className="font-bold text-2xl pb-5 border-b border-gray-400 p-5">
+                            <h1 className="font-bold text-2xl border-b border-gray-400 p-5 max-md:p-4 max-md:text-[17px]">
                                 All Orders
                             </h1>
-                            <div className="p-5 h-[70vh] overflow-auto flex flex-col items-start gap-3">
+                            <div className="p-5 h-[70vh] overflow-auto flex flex-col items-start gap-3 max-md:p-2">
                                 {
                                     orders.length > 0 ?
                                         orders.map((item, index) => {
@@ -79,13 +79,13 @@ function Order() {
                         </div>
                     </section>
                 </section>
-                <section className="w-[50%]">
+                <section className={`w-[50%] max-lg:${curentOrd ? 'block max-lg:w-full max-lg:z-100' : 'hidden'} bg-white`}>
                     <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] border-b border-gray-400">
-                        <h2 className="text-3xl font-bold">
+                        <h2 className="text-3xl font-bold max-md:text-[25px]">
                             {curentOrd ? `Order #${curentOrd}` : ''}
                         </h2>
-                        <i className={` ${curentOrd ? 'fa-solid fa-xmark text-2xl cursor-pointer' : 'hidden'}`} onClick={()=> {
-                        setCurentOrd()
+                        <i className={` ${curentOrd ? 'fa-solid fa-xmark text-2xl cursor-pointer' : 'hidden'}`} onClick={() => {
+                            setCurentOrd()
                         }}></i>
                     </header>
                     <div className={`w-full py-5 ${!curentOrd ? 'flex items-center justify-center' : ''}`}>
@@ -93,21 +93,21 @@ function Order() {
                             curentOrd ?
                                 <div className="h-full flex flex-col items-start w-full gap-4 mt-2">
                                     <h1 className="font-bold text-xl">Details</h1>
-                                    <div className="flex items-start justify-between w-full mt-3">
-                                        <div className="flex items-center flex-col gap-1">
-                                            <h1 className="font-semibold text-gray-400 text-lg">Order</h1>
+                                    <div className="flex flex-wrap justify-between items-center w-full gap-5 mt-3 max-md:mt-0">
+                                        <div className="flex items-center flex-col gap-1 min-w-max">
+                                            <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Order</h1>
                                             <h2 className="font-bold text-[16px]">{chosenOrd?.type}</h2>
                                         </div>
-                                        <div className="flex items-center flex-col gap-1">
-                                            <h1 className="font-semibold text-gray-400 text-lg">Costumer</h1>
+                                        <div className="flex items-center flex-col gap-1 min-w-max">
+                                            <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Costumer</h1>
                                             <h2 className="font-bold">{chosenOrd?.name}</h2>
                                         </div>
-                                        <div className="flex items-center flex-col gap-1">
-                                            <h1 className="font-semibold text-gray-400 text-lg">{chosenOrd?.address ? 'Address' : 'Table №'}</h1>
+                                        <div className="flex items-center flex-col gap-1 min-w-max">
+                                            <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">{chosenOrd?.address ? 'Address' : 'Table №'}</h1>
                                             <h2 className="font-bold">{chosenOrd?.address ? chosenOrd?.address : chosenOrd?.table}</h2>
                                         </div>
-                                        <div className="flex items-center flex-col gap-1">
-                                            <h1 className="font-semibold text-gray-400 text-lg">Time</h1>
+                                        <div className="flex items-center flex-col gap-1 min-w-max">
+                                            <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Time</h1>
                                             <h2 className="font-bold">{chosenOrd?.ready_time}m</h2>
                                         </div>
                                     </div>

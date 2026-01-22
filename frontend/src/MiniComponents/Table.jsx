@@ -6,13 +6,13 @@ function Table({col1, col2, col3, col4, col5, ApiInfo, func}) {
             <table className="w-full border-collapse rounded-2xl table-auto">
                 <thead className="sticky top-0 bg-white ">
                     <tr className="text-gray-400 text-lg h-15 ">
-                        <th className="border border-gray-200 font-semibold">
+                        <th className="border border-gray-200 font-semibold ">
                             {col1}
                         </th>
-                        <th className="border border-gray-200 font-semibold">
+                        <th className="border border-gray-200 font-semibold ">
                             {col2}
                         </th>
-                        <th className="border border-gray-200 font-semibold">
+                        <th className="border border-gray-200 font-semibold ">
                             {col3}
                         </th>
                         <th className="border border-gray-200 font-semibold px-4">

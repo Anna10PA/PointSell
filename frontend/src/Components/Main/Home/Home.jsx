@@ -149,16 +149,16 @@ function Home() {
                     <div className="flex items-center w-[50%] justify-end">
                         <form className={`relative border border-[#bbb] rounded-4xl bg-white duration-300 overflow-hidden ${searchOpen
                                 ? 'max-sm:w-full max-sm:absolute max-sm:right-0 z-40'
-                                : 'max-sm:w-10 max-sm:h-10 w-full max-w-[500px]'}`}>
+                                : 'max-sm:w-10 max-sm:h-10 w-full max-w-[500px] max-sm:flex max-sm:items-center max-sm:justify-center'}`}>
 
                             <input
                                 type="text"
                                 placeholder="Search Anything Here"
-                                className={`w-full outline-0 px-5 py-2 ${!searchOpen && 'max-sm:opacity-0'}`}
+                                className={`w-full outline-0 px-5 py-2 ${!searchOpen}`}
                                 {...register('product')}
                             />
 
-                            <i className={`fa-solid fa-magnifying-glass absolute right-5 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3 `}
+                            <i className={`fa-solid fa-magnifying-glass absolute right-5 max-sm:right-3 bottom-1 text-[#bbb] py-4 h-full bg-white pl-3 `}
                                 onClick={() => {
                                     if (window.innerWidth < 768) {
                                         setSearchOpen(!searchOpen)
