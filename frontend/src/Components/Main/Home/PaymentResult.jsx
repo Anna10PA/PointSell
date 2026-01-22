@@ -27,7 +27,7 @@ function PaymentResult() {
                     isPay ?
                         <p className="text-gray-400 text-center max-md:text-sm">
                             Your Order Number Is <span className="text-gray-500 font-bold">
-                                {order.toUpperCase()}
+                                {order?.toUpperCase()}
                             </span>
                             , Thanks for choice our Restaurant!
                         </p> : <p className="text-gray-400 text-center  max-md:text-sm">
