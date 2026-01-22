@@ -281,6 +281,7 @@ function Main() {
                 let data = await res.json()
                 setCurentUser(prev => ({ ...prev, count: data.count }))
                 Game()
+                location.reload()
                 return false
             } else return true
 
