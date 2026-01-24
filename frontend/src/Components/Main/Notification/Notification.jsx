@@ -17,10 +17,10 @@ function Notification() {
 
     return (
         <>
-            <main className="w-full px-10 py-5 h-full">
-                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
-                    <h1 className="text-3xl font-bold">Notification</h1>
-                    <button className="text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded" onClick={readAllNotification}>Mark All As Read</button>
+            <main className="w-full px-10 py-5 h-full max-sm:px-3 max-sm:py-2 ">
+                <header className="flex items-center justify-between w-full gap-5 max-sm:gap-2 min-h-[10vh] ">
+                    <h1 className="text-3xl font-bold max-sm:text-[25px]">Notification</h1>
+                    <button className="text-lg text-[#F67F20] font-semibold cursor-pointer px-5 duration-100 hover:bg-[#F67F20] hover:text-white hover:py-2 rounded max-sm:px-2 max-sm:text-sm" onClick={readAllNotification}>Mark All As Read</button>
                 </header>
                 <section className="border-gray-300 rounded-2xl border  overflow-auto mt-3 h-[82vh]" >
                     {

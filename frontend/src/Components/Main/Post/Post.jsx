@@ -31,7 +31,7 @@ function Post() {
       }
       <main className="w-full flex flex-col px-10 py-5 gap-3 h-full max-sm:px-3">
         <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] max-md:min-h-[7vh]">
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-3xl font-bold max-sm:text-[25px]">
             Posts
           </h1>
           <Link to='/main/add_post'>

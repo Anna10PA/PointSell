@@ -146,9 +146,11 @@ function Chat({ user }) {
                             delete_message={delete_message}
                         />
                     }) :
-                        <video autoPlay muted loop>
-                            <source src='/dog_3.mp4' type="video/mp4" />
-                        </video>
+                        <div className="w-full h-full flex items-center justify-center">
+                            <video autoPlay muted loop className="w-[30%]">
+                                <source src='/dog_3.mp4' type="video/mp4" />
+                            </video>
+                        </div>
                 }
             </section>
             <form className="w-full relative" onSubmit={handleSubmit(sendNewMessage)}>

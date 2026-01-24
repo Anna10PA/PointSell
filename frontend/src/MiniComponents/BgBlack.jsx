@@ -68,12 +68,14 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
 
   return (
     <div className="w-full h-full absolute z-90 bg-[rgba(0,0,0,0.77)] flex items-center justify-center max-md:p-3 ">
-      {curentLocation == '/main/home' && currentMonth == 11 || curentLocation == '/main/home' && currentMonth == 0?
-        <div className="w-full h-full flex items-center justify-center flex-col relative max-md:justify-end">
-          <img src="/nagdi santa.png" className="w-[250px] absolute top-4 left-[32%] max-md:left-[10%] max-md:-top-8.5 z-20" alt="" />
-          <FoodDetail
-            allInfo={allInfo}
-            open={open} />
+      {curentLocation == '/main/home' && currentMonth == 11 || curentLocation == '/main/home' && currentMonth == 0 ?
+        <div className='flex items-start justify-center w-full h-full  max-md:items-end'>
+          <div className="w-max h-max flex items-center max-md:justify-end justify-start flex-col relative ">
+            <img src="/nagdi santa.png" className="w-[250px] relative -bottom-25 -left-[10%] max-md:left-[5%] max-md:top-25 z-20" alt="" />
+            <FoodDetail
+              allInfo={allInfo}
+              open={open} />
+          </div>
         </div>
         : curentLocation == '/main/home' && curentLocation !== 11 ?
           <FoodDetail
@@ -101,19 +103,11 @@ function BgBlack({ allInfo, open, client, curentUser, mode, allUsers }) {
                   message={'Are you sure, You want delete this Product?'}
                   deleteFunction={deleteProduct}
                 />
-                : curentLocation === '/main/costumers' && mode === 'delete_user' ?
-                  <Warning
-                    open={open}
-                    title={'Delete This User?'}
-                    message={'Are you sure, You want delete this user?'}
-                    deleteFunction={deleteUser}
-                    user={allInfo}
-                  />
-                  : curentLocation === '/main/order/deliver' || curentLocation === '/main/order/table' ?
-                    <div>
-                      <h2 className='text-white text-4xl font-extrabold tracking-[1px] text-center'>Payment In Progress . . .</h2>
-                    </div>
-                    : null
+                : curentLocation === '/main/order/deliver' || curentLocation === '/main/order/table' ?
+                  <div>
+                    <h2 className='text-white text-4xl font-extrabold tracking-[1px] text-center'>Payment In Progress . . .</h2>
+                  </div>
+                  : null
 
       }
     </div>

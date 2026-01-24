@@ -49,7 +49,7 @@ function Order() {
             <main className="w-full h-full flex items-start px-10 py-5 gap-10 relative max-sm:px-3 max-sm:py-2">
                 <section className={`w-[50%] max-lg:w-[90%] max-lg:absolute max-lg:z-60 bg-white max-lg:${curentOrd ? 'hidden' : 'block'}`}>
                     <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
-                        <h1 className="text-3xl font-bold max-md:text-[29px]">
+                        <h1 className="text-3xl font-bold max-sm:text-[25px]">
                             Pending Orders
                         </h1>
                     </header>

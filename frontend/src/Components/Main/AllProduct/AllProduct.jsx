@@ -24,11 +24,11 @@ function AllProduct() {
                         allInfo={itm}
                         mode={openDetail} /> : null
             }
-            <main className="w-full h-[98vh] flex flex-col px-10 py-5 gap-5">
+            <main className="w-full h-[98vh] flex flex-col px-10 py-5 gap-5 max-sm:px-3 max-sm:py-2 max-sm:gap-2">
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh]">
-                    <h1 className="text-3xl font-bold">Product</h1>
+                    <h1 className="text-3xl font-bold max-md:text-2xl">Product</h1>
                     <Link to='/main/add_product'>
-                        <button className="text-lg bg-[#F67F20] font-semibold cursor-pointer px-5 text-white py-2 rounded duration-100 hover:bg-orange-400">+ Add Product</button>
+                        <button className="text-lg bg-[#F67F20] font-semibold cursor-pointer px-5 text-white py-2 rounded duration-100 hover:bg-orange-400 max-sm:px-3 max-sm:text-[15px]">+ Add Product</button>
                     </Link>
                 </header>
                 {

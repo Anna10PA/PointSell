@@ -133,10 +133,10 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
 
   return (
     <div className='bg-white flex items-start gap-3 px-5 rounded-2xl py-4 relative mx-5 max-md:flex-col' >
-      <div className={`${allInfo.post !== null ? 'max-h-[600px] h-full min-w-[150px] overflow-y-hidden rounded max-w-[450px] w-full max-md:max-h-[300px]' : 'hidden'}`}>
+      <div className={`${allInfo.post !== null ? 'max-h-[600px] h-full min-w-[150px] overflow-y-hidden rounded max-w-[450px] w-full max-md:max-h-[300px] max-md:hidden' : 'hidden'}`}>
         <img src={allInfo.post} alt={allInfo.post} className='w-full h-full object-cover ' />
       </div>
-      <div className='h-[600px] max-sm:h-min w-[50%] flex flex-col items-start gap-5 justify-between max-md:w-full'>
+      <div className='h-[600px]  flex flex-col items-start gap-2 justify-between max-md:w-full'>
         <div className='flex items-center gap-3 w-full relative '>
           <img src={client.profileUrl} alt="" className='w-15 h-15 rounded-[50%]' />
           <div className='leading-4.5 w-full'>
@@ -148,6 +148,9 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
           <i className="fa-solid fa-xmark absolute top-1 right-3 text-2xl cursor-pointer" onClick={() => {
             open(false)
           }}></i>
+        </div>
+        <div className={`${allInfo.post !== null ? 'max-h-[600px] md:hidden h-full min-w-[150px] overflow-y-hidden rounded max-w-[450px] w-full ' : 'hidden'}`}>
+          <img src={allInfo.post} alt={allInfo.post} className='w-full h-full object-cover ' />
         </div>
         <div className="max-h-[250px] w-full">
           <p className='font-medium max-h-[170px] min-h-[60px] max-md:min-h-max pb-3 overflow-auto w-full px-3'>{allInfo.title}</p>
@@ -171,7 +174,7 @@ function PostDetail({ allInfo, open, client, curentUser, allUsers }) {
             </div>
           </div>
         </div>
-        <div className='h-full flex items-center justify-start gap-3 flex-col  w-full relative overflow-auto  max-md:items-start max-md:h-[14vh]'>
+        <div className='h-full flex items-center justify-start gap-3 flex-col  w-full relative overflow-auto  max-md:items-start max-md:h-[39vh]'>
           {
             allComment.length > 0 ?
               allComment.map((item, index) => {
