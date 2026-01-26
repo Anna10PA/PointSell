@@ -17,21 +17,23 @@ function Messages() {
 
     return (
         <main className="w-full flex items-start gap-5">
-            <section className="w-[48%] h-[95vh] flex flex-col px-10 py-5 gap-5">
+            <section className={`w-[48%] h-[95vh] flex flex-col px-10 py-5 gap-5 max-lg:w-full max-sm:px-3 max-sm:py-2 max-sm:gap-0 ${user2Email ? 'max-lg:hidden max-lg:-z-20' : 'z-20'}`}>
                 <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] ">
-                    <h1 className="text-3xl font-bold">Messsages</h1>
+                    <h1 className="text-3xl font-bold max-sm:text-[25px]">Messsages</h1>
                     <div className="flex items-center gap-5">
-                        <button className="px-5 py-3 rounded text-[#f67f20] bg-white hover:text-white hover:bg-[#f67f20] font-bold cursor-pointer duration-200" onClick={() => {
+                        <button className="px-5 py-3 rounded text-[#f67f20] bg-white hover:text-white hover:bg-[#f67f20] font-bold cursor-pointer duration-200 max-sm:px-2" onClick={() => {
                             navigate('/main/search_friend')
-                        }}>Add Friend</button>
-                        <button className="px-5 py-3 rounded text-[#f67f20] bg-white hover:text-white hover:bg-[#f67f20] font-bold cursor-pointer duration-200" onClick={() => {
+                        }}>
+                            <i className="fa-solid fa-user-plus"></i>
+                        </button>
+                        <button className="px-5 py-3 rounded text-[#f67f20] bg-white hover:text-white hover:bg-[#f67f20] font-bold cursor-pointer duration-200 max-sm:px-2" onClick={() => {
                             navigate('/main/requests')
-                        }}>Request</button>
+                        }}><i className="fa-solid fa-user-group"></i></button>
                     </div>
                 </header>
                 <section className='border relative border-gray-300 rounded-xl h-full'>
-                    <h2 className='font-bold text-gray-400 tracking-[0.5px] sticky top-0 right-0 bg-white px-5 py-4 pb-2'>Personal</h2>
-                    <div className='w-full h-full px-5 py-4 pt-0 overflow-auto'>
+                    <h2 className='font-bold text-gray-400 tracking-[0.5px] sticky top-0 right-0 bg-white px-5 py-4 pb-2 max-sm:px-3 max-sm:py-3'>Personal</h2>
+                    <div className='w-full px-5 py-4 pt-0 overflow-auto max-sm:px-2 max-sm:py-0'>
                         {
                             friend?.map((item, index) => {
                                 return <MessageNotification
@@ -50,8 +52,8 @@ function Messages() {
             </section>
             {
                 user2Email ?
-                    <Chat user={user2Info} /> :
-                    <section className="h-[80vh] w-[48%] flex items-center text-xl justify-center text-gray-400">
+                    <Chat user={user2Info} set2UserInfo={set2Email} /> :
+                    <section className="h-[80vh] w-[48%] flex items-center text-xl justify-center text-gray-400 max-lg:hidden">
                         <h1>No Chat History Available</h1>
                     </section>
             }

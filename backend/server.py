@@ -1294,6 +1294,7 @@ def log_out():
         session['is_login'] = False
         user = None
         save_users(users)
+        session.clear()
         return jsonify({'message': 'log out successful!'}), 200
 
     return jsonify({'error': 'user is not found'}), 404

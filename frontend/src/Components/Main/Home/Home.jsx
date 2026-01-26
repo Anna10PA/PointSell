@@ -6,10 +6,13 @@ import BgBlack from "../../../MiniComponents/BgBlack"
 import CartCard from "./CartCard"
 import { Info } from "../Main"
 import FoodStar from "./FoodStar"
+import HappyBirthday from "./HappyBirthday"
 
 
 function Home() {
     let { curentUser, getCurentUser, allProduct, getAllProduct, postReadNotification } = useContext(Info)
+    let date = new Date()
+    let currentDate = `${(date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)}-${(date.getDate())}`
 
     let navigate = useNavigate()
     let { register, watch } = useForm({
@@ -27,6 +30,7 @@ function Home() {
     let [searchOpen, setSearchOpen] = useState(false)
     let [openCart, setOpenCart] = useState(false)
     let [openStar, setOpenStar] = useState(false)
+    let [openHBdayCard, setOpenHBdayCard] = useState(false)
 
 
     // შავი გვერდი
@@ -60,6 +64,12 @@ function Home() {
             console.error(error)
         }
     }
+
+    useEffect(() => {
+        if (curentUser?.date && currentDate == [curentUser?.date.split('-')[1], curentUser?.date.split('-')[2]].join('-')) {
+            setOpenHBdayCard(true)
+        }
+    }, [curentUser])
 
 
     // გადასახადის გამოთვლა
@@ -125,6 +135,7 @@ function Home() {
     }
 
 
+    // ბოლო შეტყობინების წაკითხვა
     let notificatinClick = async (e) => {
         e.preventDefault()
         await postReadNotification('1')
@@ -132,12 +143,16 @@ function Home() {
     }
 
 
+
+
     return (
         <>
             {openDetail ?
                 <BgBlack allInfo={foodInfo} open={setOpenDetail} /> :
                 openStar ?
-                    <FoodStar id={openStar} close={setOpenStar}/> : null
+                    <FoodStar id={openStar} close={setOpenStar} /> :
+                    openHBdayCard ?
+                        <HappyBirthday close={setOpenHBdayCard} user={curentUser?.name || curentUser?.email} /> : null
 
             }
 
@@ -148,8 +163,8 @@ function Home() {
                     </h1>
                     <div className="flex items-center w-[50%] justify-end">
                         <form className={`relative border border-[#bbb] rounded-4xl bg-white duration-300 overflow-hidden ${searchOpen
-                                ? 'max-sm:w-full max-sm:absolute max-sm:right-0 z-40'
-                                : 'max-sm:w-10 max-sm:h-10 w-full max-w-[500px] max-sm:flex max-sm:items-center max-sm:justify-center'}`}>
+                            ? 'max-sm:w-full max-sm:absolute max-sm:right-0 z-40'
+                            : 'max-sm:w-10 max-sm:h-10 w-full max-w-[500px] max-sm:flex max-sm:items-center max-sm:justify-center'}`}>
 
                             <input
                                 type="text"
