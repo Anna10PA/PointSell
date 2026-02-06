@@ -6,9 +6,9 @@ function EmployeeInformation() {
   let { allUser } = useContext(Info)
 
   return (
-    <section className='w-full h-[75vh] flex flex-col items-start gap-10 max-sm:h-screen'>
+    <section className='w-full h-[75vh] flex flex-col items-start gap-10 max-sm:h-screen max-sm:mt-5'>
       <div className='leading-10 min-h-[10vh] flex flex-col items-start gap-3'>
-        <h1 className='font-bold text-[27px] max-sm:text-xl'>Employee Infromation</h1>
+        <h1 className='font-bold text-[27px] max-sm:text-xl max-sm:text-5'>Employee Infromation</h1>
         <p className='text-gray-400 max-sm:leading-5'>Information about all employed at the restaurant.</p>
       </div>
       <section className='h-full w-full overflow-auto relative'>

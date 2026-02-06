@@ -8,10 +8,10 @@ function ResetPassword() {
     let { curentUser, resetPassword } = useContext(Info)
 
     return (
-        <section className='w-full h-[56vh] flex flex-col items-start gap-10'>
+        <section className='w-full h-[56vh] flex flex-col items-start gap-10 max-sm:min-h-[60vh] max-sm:mt-10'>
             <div >
-                <h1 className='font-bold text-[27px]'>Reset Password</h1>
-                <p className='text-gray-400'>Verification successful! Enter a new password</p>
+                <h1 className='font-bold text-[27px] max-sm:text-[20px]'>Reset Password</h1>
+                <p className='text-gray-400 max-sm:text-sm'>Verification successful! Enter a new password</p>
             </div>
             <form onSubmit={handleSubmit((data) => {
                 resetPassword(curentUser?.email, data?.new_password)
@@ -30,7 +30,7 @@ function ResetPassword() {
                             }
                             return 'Must Contain Number'
                         }
-                    })} className={`border outline-[#f67f20] px-4 py-3 rounded-lg w-full ${errors.new_password ? 'border-red-600' : 'border-gray-400'}`} placeholder='Enter New Password' />
+                    })} className={`border outline-[#f67f20] max-sm:text-sm px-4 py-3 rounded-lg w-full ${errors.new_password ? 'border-red-600' : 'border-gray-400'}`} placeholder='Enter New Password' />
                     <span className='text-red-600 font-semibold'>{errors?.new_password ? errors?.new_password.message : ''}</span>
                 </div>
                 <div className='w-full flex flex-col gap-2 items-start'>
@@ -43,7 +43,7 @@ function ResetPassword() {
                             }
                             return true
                         }
-                    })} className={`border outline-[#f67f20] px-4 py-3 rounded-lg w-full ${errors.confirm_password ? 'border-red-600' : 'border-gray-400'}`} placeholder='Confirm Password' />
+                    })} className={`border outline-[#f67f20] max-sm:text-sm px-4 py-3 rounded-lg w-full ${errors.confirm_password ? 'border-red-600' : 'border-gray-400'}`} placeholder='Confirm Password' />
                     <span className='text-red-600 font-semibold'>{errors.confirm_password ? errors.confirm_password.message : ''}</span>
                 </div>
                 <button className='w-full bg-[#f67f20] text-white px-10 py-3 rounded text-md font-bold cursor-pointer duration-100 hover:bg-orange-400' type='submit'>Submit</button>

@@ -21,16 +21,16 @@ function GetCode() {
     
     console.log(question)
     return (
-        <section className='w-full h-[56vh] flex flex-col items-start gap-15 '>
+        <section className='w-full h-[56vh] flex flex-col items-start gap-15 max-sm:min-h-screen'>
             <div>
                 <h1 className='font-bold text-[27px] max-sm:text-[20px]'>Verification</h1>
                 <p className='text-gray-400 max-sm:text-sm'>Answer the questions correctly! After thank you can change password!</p>
             </div>
             <form className='flex items-end gap-5 flex-col w-full relative' >
                 <h1 className='font-semibold text-gray-400'>Mistake: <span className={`${(curentUser?.count) > 0 ? 'text-[red]' : ''}`}>{curentUser?.count || 0}</span> / 3</h1>
-                <h1 className='text-center font-bold text-2xl w-full'>{question?.question?.text}</h1>
+                <h1 className='text-center font-bold text-2xl w-full max-sm:text-lg'>{question?.question?.text}</h1>
                 <div className='w-full flex items-center justify-between'>
-                    <div className='text-white px-7 rounded py-3 text-center w-max font-bold text-sm tracking-[1px] bg-[#f67f20]'>
+                    <div className='text-white px-7 rounded py-3 max-sm:px-4 text-center w-max font-bold text-sm tracking-[1px] bg-[#f67f20]'>
                         {question?.category}
                     </div>
                     <div className={`${question?.difficulty?.toLowerCase() === 'easy' ? 'bg-[#009700]' :
@@ -40,7 +40,7 @@ function GetCode() {
                         {(question?.difficulty[0] || '').toUpperCase() + (question?.difficulty || '').slice(1)}
                     </div>
                 </div>
-                <div className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] w-full justify-items-center gap-2'>
+                <div className='grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] w-full justify-items-center gap-2'>
                     {
                         allAnswers?.map((item, index) => {
                             return <AnswersCard 
