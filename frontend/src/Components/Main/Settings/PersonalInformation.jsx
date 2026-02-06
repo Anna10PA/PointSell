@@ -139,8 +139,8 @@ function PersonalInformation() {
                             })
                         })
 
-                        if (res.ok) {
-                            alert('Work!')
+                        if (!res.ok) {
+                           console.error(res.error) 
                         }
                     })}>
                         <div className='flex flex-col gap-3 w-full'>
