@@ -12,7 +12,7 @@ function NotificationCard({time, message, date, read}) {
                 <h1 className={`${read ? 'font-semibold text-gray-400' : 'font-bold  text-black'} text-lg max-sm:text-[12px]  w-full`}>
                     {message}
                 </h1>
-                <h2 className={`font-normal ${read ? 'text-gray-400' : 'text-black max-sm:text-sm'}`}>
+                <h2 className={`font-normal max-sm:text-[10px] ${read ? 'text-gray-400' : 'text-black'}`}>
                     {curent !== date ? String(messageTime).split(' ')[2] + ' '+ String(messageTime).split(' ')[1] + ' '+ (String(messageTime).split(' ')[3] == new Date().getFullYear() ? '' : String(messageTime).split(' ')[3]) : Number(time.split(':')[0]) >= 12 && Number(time.split(':')[1]) > 0? `${Number(time.split(':')[0]) != 12 ? Number(time.split(':')[0]) - 12 : 12}:${time.split(':')[1]} P.M` : `${time.split(':')[0]}:${time.split(':')[1]} A.M`}
                 </h2>
             </div>

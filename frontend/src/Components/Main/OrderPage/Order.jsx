@@ -58,7 +58,7 @@ function Order() {
                             <h1 className="font-bold text-2xl border-b border-gray-400 p-5 max-md:p-4 max-md:text-[17px]">
                                 All Orders
                             </h1>
-                            <div className="p-5 h-[70vh] overflow-auto flex flex-col items-start gap-3 max-md:p-2">
+                            <div className="p-5 h-[70vh] overflow-auto flex flex-col items-start gap-3 max-md:p-2 max-sm:h-[80vh]">
                                 {
                                     orders.length > 0 ?
                                         orders.map((item, index) => {
@@ -73,7 +73,7 @@ function Order() {
                                                 show={curentOrd || false}
                                             />
                                         })
-                                        : <h1 className="text-center font-semibold text-gray-400">No order yet</h1>
+                                        : <h1 className="text-center font-semibold text-gray-400 max-sm:text-sm">No order yet</h1>
                                 }
                             </div>
                         </div>

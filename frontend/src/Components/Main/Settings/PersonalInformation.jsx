@@ -64,42 +64,40 @@ function PersonalInformation() {
     return (
         <section>
             <div className='min-h-[12vh]'>
-                <div className='leading-10'>
-                    <h1 className='text-[27px] font-bold'>Personal Information</h1>
-                    <p className='text-gray-400'>Detailed information about you that only you can see.</p>
+                <div className='leading-10 max-sm:leading-15'>
+                    <h1 className='text-[27px] font-bold max-sm:text-[20px]'>Personal Information</h1>
+                    <p className='text-gray-400 leading-5 max-sm:text-sm max-sm:leading-4'>Detailed information about you that only you can see.</p>
                 </div>
             </div>
             <section className='h-[65vh] w-full flex flex-col gap-20 items-start overflow-auto py-6'>
-                <div className='w-full h-[65vh] flex items-center flex-col gap-3 justify-center'>
+                <div className='w-full h-[65vh] flex items-center flex-col gap-3 justify-center max-sm:min-h-screen'>
                     <h2 className='font-bold text-2xl text-center w-full'>Card Info</h2>
-                    <div className='w-full grid grid-cols-2 justify-items-center items-center'>
-                        <div className='w-max px-10 flex items-center flex-col justify-center gap-3 h-75'>
-                            <div className="group w-[210px] h-35 ">
-                                <div className={`relative w-full h-full duration-500 transform-3d ${view ? 'transform-[rotateY(180deg)]' : ''}`}>
-
+                    <div className='w-full grid grid-cols-2 justify-items-center items-center flex-wrap max-xl:grid-cols-1 max-sm:gap-10'>
+                        <div className='w-max px-10 flex items-center flex-col justify-center gap-3 h-75 max-sm:h-max max-sm:py-5'>
+                            <div className="group w-[210px] h-35 max-sm:min-w-[150px] max-sm:w-full">
+                                <div className={`relative w-full h-full max-sm:w-[180px] duration-500 transform-3d ${view ? 'transform-[rotateY(180deg)]' : ''}`}>
                                     <div className="absolute ">
                                         <img src="/card_2.jpg" alt="card" className='w-full h-full rounded-xl object-cover' />
                                     </div>
 
                                     <div className="absolute h-full w-full rounded-xl bg-[#D77723] flex items-center justify-center transform-[rotateY(180deg)] backface-hidden hover:bg-[#f67f20] duration-200">
-                                        <h1 className='text-white font-bold text-3xl'>${curentUser?.money?.toFixed(2)}</h1>
+                                        <h1 className='text-white font-bold text-3xl'>${curentUser?.money?.toFixed(2) || 0.00}</h1>
                                     </div>
-
                                 </div>
                             </div>
                             <button
-                                className={`hover:bg-[#f67f20] hover:text-white hover:border-none px-7 py-2 rounded cursor-pointer border border-gray-400 font-bold text-md duration-200 active:scale-95`}
+                                className={`hover:bg-[#f67f20] hover:text-white hover:border-none px-7 py-2 rounded cursor-pointer border border-gray-400 font-bold text-md duration-200 active:scale-95 max-sm:px-5 max-sm:py-1 max-sm:text-sm`}
                                 onClick={() => setView(!view)}
                             >
                                 {view ? "Hide Balance" : "View Balance"}
                             </button>
                         </div>
                         <div className='flex items-center gap-3 flex-col'>
-                            <div className='h-20 w-20 rounded-[50%] bg-[#f67f20] flex items-center justify-center text-white font-bold text-3xl'>
+                            <div className='h-20 w-20 rounded-[50%] bg-[#f67f20] flex items-center justify-center text-white font-bold text-3xl max-sm:text-2xl  max-sm:h-15 max-sm:w-15'>
                                 <h1>{curentUser?.visit?.length}</h1>
                             </div>
                             <p className='text-gray-400'>Visit our website everyday and receive Gifts!</p>
-                            <div className='flex items-center gap-3'>
+                            <div className='flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start'>
                                 {
                                     getNext7Day(time).map((item, index) => {
                                         let result = item.split('-')[2] % 3 === 0 && index !== 0 ? '🎁' : index === 0 ? 'Used' : curentUser?.position === 'Customer' ? '$100' : curentUser?.position === 'Worker' ? '$300' : curentUser?.position === 'Manager' ? '$500' : null
@@ -113,9 +111,9 @@ function PersonalInformation() {
                             </div>
                         </div>
                     </div>
-                    <div className='flex items-center justify-around w-full '>
+                    <div className='flex items-center justify-around w-full gap-5 flex-wrap max-sm:gap-2'>
                         <h1 className='font-semibold text-gray-400'>
-                            Spent: ${curentUser?.spent}
+                            Spent: ${curentUser?.spent || (0).toFixed(2)}
                         </h1>
                         <h1 className='font-semibold text-gray-400'>
                             Registration Date: {registerDay ? String(registerDay).split(' ').slice(1, 4).join(" ") : null}
@@ -125,7 +123,7 @@ function PersonalInformation() {
                         </h1>
                     </div>
                 </div>
-                <div className='w-full h-[60vh]'>
+                <div className='w-full h-[60vh] max-sm:min-h-screen'>
                     <h2 className='font-bold text-2xl text-center'>Accaunt Info</h2>
                     <form className='w-full grid py-10 grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6 justify-items-center items-center' onSubmit={handleSubmit(async (data) => {
                         let res = await fetch('https://pointsell-4.onrender.com/change_user_info', {
@@ -203,13 +201,13 @@ function PersonalInformation() {
                         </button>
                     </form>
                 </div>
-                <div className='w-full min-h-[60vh] overflow-auto rounded-xl relative p-4'>
+                <div className='w-full min-h-[60vh] overflow-auto rounded-xl relative p-4 max-sm:min-h-[60vh]'>
                     <table className="w-full border-collapse h-[40vh]">
                         <thead className='w-full flex justify-center items-center sticky top-0 bg-white'>
                             <tr className='w-full'>
-                                <th className='w-full flex items-center justify-center'>
-                                    <h2 className='font-bold text-2xl text-center'>Friends List</h2>
-                                    <h3 className='absolute right-3 text-gray-400'>Found: ({friend?.length})</h3>
+                                <th className='w-full flex items-center justify-center gap-4 max-sm:justify-between'>
+                                    <h2 className='font-bold text-2xl text-center max-sm:text-[20px]'>Friends List</h2>
+                                    <h3 className='absolute right-3 text-gray-400 max-sm:text-sm'>Found: ({friend?.length})</h3>
                                 </th>
                             </tr>
                         </thead>

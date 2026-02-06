@@ -23,8 +23,8 @@ function GetCode() {
     return (
         <section className='w-full h-[56vh] flex flex-col items-start gap-15 '>
             <div>
-                <h1 className='font-bold text-[27px]'>Verification</h1>
-                <p className='text-gray-400'>Answer the questions correctly! After thank you can change password!</p>
+                <h1 className='font-bold text-[27px] max-sm:text-[20px]'>Verification</h1>
+                <p className='text-gray-400 max-sm:text-sm'>Answer the questions correctly! After thank you can change password!</p>
             </div>
             <form className='flex items-end gap-5 flex-col w-full relative' >
                 <h1 className='font-semibold text-gray-400'>Mistake: <span className={`${(curentUser?.count) > 0 ? 'text-[red]' : ''}`}>{curentUser?.count || 0}</span> / 3</h1>

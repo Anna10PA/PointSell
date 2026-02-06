@@ -30,47 +30,47 @@ function Setting() {
     }
 
     return (
-        <main className="w-full h-[98vh] flex flex-col px-10 py-5">
+        <main className="w-full h-[98vh] flex flex-col px-10 py-5 max-sm:px-3 max-sm:py-2">
             <header className="flex items-center justify-between gap-5 min-h-[10vh]">
-                <h1 className="text-3xl font-bold">Setting</h1>
+                <h1 className="text-3xl font-bold max-sm:text-[25px]">Setting</h1>
             </header>
-            <section className='w-full flex items-start gap-5'>
-                <section className='border border-gray-300 rounded-lg h-full p-5 flex flex-col items-start gap-9 w-[40%]'>
-                    <div className='flex items-center justify-center flex-col gap-3 border-b h-[33vh] border-gray-300 w-full '>
-                        <div className='w-35 h-35 relative '>
+            <section className='w-full flex items-start gap-5 max-lg:flex-col overflow-auto '>
+                <section className='border border-gray-300 rounded-lg h-full p-5 flex flex-col items-start gap-9 w-[40%] max-lg:w-full max-lg:h-screen max-sm:p-2'>
+                    <div className='flex items-center justify-center flex-col gap-3 border-b h-[33vh] border-gray-300 w-full'>
+                        <div className='w-35 h-35 relative'>
                             <img src="https://i.pinimg.com/736x/3d/39/c3/3d39c364105ac84dfc91b6f367259f1a.jpg" className='w-full h-full object-cover rounded-[50%]' alt="" />
                             <div className='w-10 h-10 flex items-center justify-center bg-[#f67f20] rounded-[50%] text-white absolute top-2 -right-1 border-3 border-white'>
                                 <i className="fa-solid fa-pen"></i>
                             </div>
                         </div>
                         <div className='text-center'>
-                            <h1 className='font-bold text-2xl'>{curentUser?.name || curentUser?.email.split('@')[0]}</h1>
-                            <p className='font-semibold text-gray-400'>{curentUser?.position}</p>
+                            <h1 className='font-bold text-2xl max-sm:text-xl'>{curentUser?.name || curentUser?.email.split('@')[0]}</h1>
+                            <p className='font-semibold text-gray-400 max-sm:text-sm'>{curentUser?.position}</p>
                         </div>
                     </div>
-                    <div className='w-full flex flex-col items-start gap-4'>
+                    <div className='w-full flex flex-col items-start gap-4 max-sm:gap-3'>
                         <Link to="/main/setting" className="w-full">
                             <div className={`flex items-center justify-between border px-5 py-3 rounded cursor-pointer  hover:bg-gray-10 ${locationName == '/main/setting' ? 'border-[#f67f20] bg-[#f67f20] text-white' : 'border-gray-300'}`}>
-                                <h1 className='font-bold'>Personal Information</h1>
+                                <h1 className='font-bold max-sm:text-[14px]'>Personal Information</h1>
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
                         </Link>
                         <Link to="/main/setting/employers_information" className="w-full">
                             <div className={`flex items-center justify-between border px-5 py-3 rounded cursor-pointer  hover:bg-gray-10 ${locationName == '/main/setting/employers_information' ? 'border-[#f67f20] bg-[#f67f20] text-white' : 'border-gray-300'}`}>
-                                <h1 className='font-bold'>Employee Information</h1>
+                                <h1 className='font-bold max-sm:text-[14px]'>Employee Information</h1>
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
                         </Link>
                         <Link to="/main/setting/password" className="w-full">
                             <div className={`flex items-center justify-between border px-5 py-3 rounded cursor-pointer  hover:bg-gray-10 ${locationName === '/main/setting/password' || locationName === '/main/setting/password/verify' || locationName === '/main/setting/password/verify/reset_password' ? 'border-[#f67f20] bg-[#f67f20] text-white' : 'border-gray-300'}`}>
-                                <h1 className='font-bold'>Password</h1>
+                                <h1 className='font-bold max-sm:text-[14px]'>Password</h1>
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>
                         </Link>
-                        <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 hover:bg-[#f67f20] hover:text-white cursor-pointer rounded' onClick={log_out}>Log out</button>
+                        <button className='px-5 py-3 text-[#f67f20] font-bold text-lg duration-100 max-sm:text-[14px] hover:bg-[#f67f20] hover:text-white cursor-pointer rounded' onClick={log_out}>Log out</button>
                     </div>
                 </section>
-                <section className='w-[60%]'>
+                <section className='w-[60%] max-lg:w-full'>
                     <Routes>
                         <Route index element={<PersonalInformation />} />
                         <Route path='employers_information' element={<EmployeeInformation />} />
