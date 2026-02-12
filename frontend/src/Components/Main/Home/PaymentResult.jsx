@@ -11,6 +11,7 @@ function PaymentResult() {
             <main className="w-full h-screen flex justify-center relative flex-col items-center px-3">
                 <div className="w-10 h-10 bg-[#F67F20] text-white rounded-[50%] absolute top-8 left-10 cursor-pointer hover:bg-orange-400 duratuion-100 flex items-center justify-center max-md:text-center max-sm:left-2 max-sm:top-4" onClick={()=> {
                     navigate('/main/home')
+                    window.location.reload()
                 }}>
                     <i className="fa-solid fa-angle-left"></i>
                 </div>

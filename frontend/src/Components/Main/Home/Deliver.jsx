@@ -222,7 +222,7 @@ function Deliver() {
                                         required: 'Enter fullname',
                                         validate: (element) => {
                                             for (let i of element) {
-                                                if (!'qwertyuiopasdfghjklzxcvbnm '.includes(i.toLowerCase())) {
+                                                if (!'qwertyuiopasdfghjklzxcvbnmქწერტყუიოპასდფგჰჯკლზხცვბნმჭღთშძჩ '.includes(i.toLowerCase())) {
                                                     return 'Must be text'
                                                 }
                                             }
