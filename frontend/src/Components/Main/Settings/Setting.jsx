@@ -51,9 +51,6 @@ function Setting() {
             let res = await fetch('https://pointsell-4.onrender.com/change_profile', {
                 method: 'POST',
                 credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: formData
             })
 
@@ -70,7 +67,7 @@ function Setting() {
         if (file) {
             let url = URL.createObjectURL(file)
             setCurrentImage(url)
-            change(url)
+            change(file)
         }
     }
 
