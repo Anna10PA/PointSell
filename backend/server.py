@@ -600,7 +600,7 @@ def google_login():
                     "message": "Welcome!", 
                     "read": False
                 }],
-                "visit": current_time.split()[0],
+                "visit": [current_time.split()[0]],
                 "friends": [],
                 "friend_request": [],
                 "curent_cart": {
