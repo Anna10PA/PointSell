@@ -1313,7 +1313,7 @@ def change_profile():
 
     email = session['email']
     all_user = check_users()
-    user = next((u for u in all_user if u == email), None)
+    user = next((u for u in all_user if u['email'] == email), None)
 
     if image_file and image_file.filename != '':
         extension = image_file.filename.split('.')[-1] 
