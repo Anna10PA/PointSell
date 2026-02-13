@@ -1300,6 +1300,45 @@ def log_out():
     return jsonify({'error': 'user is not found'}), 404
 
 
+# პროფილის სურათის განახლება / ატვირთვა 
+@app.post('/change_profile')
+def change_profile():
+    if 'email' not in session:
+        return jsonify({'error', 'user not found'}), 404
+    
+    current_time = str(datetime.now())
+
+    image_file = request.files.get('image')
+    image_url = None
+
+    email = session['email']
+    all_user = check_users()
+    user = next((u for u in all_user if u == email), None)
+
+    if image_file and image_file.filename != '':
+        extension = image_file.filename.split('.')[-1] 
+        new_filename = f"{uuid.uuid4()}.{extension}" 
+        path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+        image_file.save(path)
+        image_url = f"https://pointsell-4.onrender.com/images/{new_filename}"
+        
+        if user:
+            user['profileUrl'] = image_url
+            user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"Your profile has been successfully updated.",
+                "read": False
+            })
+            save_users(all_user)
+            return jsonify({"message": "change profile successfully"}), 200
+        
+        else:
+            return jsonify({"error": 'user not found'}), 404
+    else:
+        return jsonify({'error': 'image not found'}), 404
+    
+
 @app.get("/")
 def home():
     all_users = check_users()
