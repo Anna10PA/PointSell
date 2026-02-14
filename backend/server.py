@@ -1339,6 +1339,45 @@ def change_profile():
         return jsonify({'error': 'image not found'}), 404
     
 
+# ჩატში სურათის გაგზავნა
+@app.post('/send_image')
+def send_image():
+    if 'email' not in session:
+        return jsonify({'error': 'user is not found'}), 404
+    
+    current_time = str(datetime.now())
+
+    email = session['email']
+    email_2 = request.form.get('email_2')
+    image = request.files.get('image')
+
+    all_user = check_users()
+    user = next((u for u in all_user if u['email'] == email), None)
+    user_2 = next((u for u in all_user if u['email'] == email_2 ), None)
+
+    if image:
+        extension = image.filename.split('.')[-1] 
+        new_filename = f"{uuid.uuid4()}.{extension}" 
+        path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+        image.save(path)
+        image_url = f"https://pointsell-4.onrender.com/images/{new_filename}"
+
+        if user and user_2:
+            file_name = "_".join(sorted([email, email_2]))
+            new_message = {
+                "sender": session['email'],
+                "message": None,
+                "image": image_url,
+                "date": current_time,
+                "read": False
+            }
+            
+            messages(file_name, new_message)
+            return jsonify({'message': 'successfully'}), 200
+        return jsonify({'error': 'user not found'}), 404
+    return jsonify({'error': 'image not found'}), 404
+
+
 @app.get("/")
 def home():
     all_users = check_users()

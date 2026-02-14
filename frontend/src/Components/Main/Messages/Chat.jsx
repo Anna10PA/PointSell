@@ -1,13 +1,13 @@
-import { useEffect, useState, useRef, useContext, useCallback } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import MessageCard from "./MessageCard"
 import { useForm } from "react-hook-form"
-import { Info } from "../Main"
 
 function Chat({ user, set2UserInfo }) {
     let [message, setMessages] = useState([])
     let { register, handleSubmit, watch, reset } = useForm()
     let value = watch('message')
     let chat = useRef(null)
+    let input = useRef(null)
 
     // მესიჯების წამოღება
     useEffect(() => {
@@ -80,7 +80,7 @@ function Chat({ user, set2UserInfo }) {
 
 
     // მესიჯების ავტომატური განახლება
-    const readMessage = useCallback(async () => {
+    let readMessage = useCallback(async () => {
         if (!user?.email) return
 
         try {
@@ -96,9 +96,10 @@ function Chat({ user, set2UserInfo }) {
                 setMessages(data)
             }
         } catch (error) {
-            console.error("Fetch error:", error)
+            console.error(error)
         }
     }, [user?.email])
+
 
     useEffect(() => {
         readMessage()
@@ -111,12 +112,37 @@ function Chat({ user, set2UserInfo }) {
     }, [user?.email, readMessage])
 
 
+    // სურათის გაგზავნა
+    let sendImage = async (file) => {
+        if (!file) return
+
+        let data = new FormData()
+        data.append('image', file)
+        data.append('email_2', user?.email)
+
+        try {
+            let res = await fetch('https://pointsell-4.onrender.com/send_image', {
+                method: 'POST',
+                credentials: 'include',
+                body: data
+            })
+
+            if (res.ok) {
+                readMessage()
+                input.current.value = ''
+            }
+
+
+        } catch (e) {
+            console.error(e)
+        }
+    }
     return (
         <section className={`w-[47%] h-[73vh] ${user?.email ? 'max-lg:w-full max-lg:px-10 max-sm:px-3' : 'hidden -z-20'}`}>
             <header className="w-full flex items-center justify-between py-5 border-b border-gray-300">
                 <div className="flex items-center gap-3 max-sm:gap-2">
                     <div className="lg:hidden">
-                        <i className="fa-solid fa-chevron-left text-2xl cursor-pointer duration-100 hover:text-[#f67f20] max-sm:text-[20px]" onClick={()=> {
+                        <i className="fa-solid fa-chevron-left text-2xl cursor-pointer duration-100 hover:text-[#f67f20] max-sm:text-[20px]" onClick={() => {
                             set2UserInfo(null)
                         }}></i>
                     </div>
@@ -148,21 +174,34 @@ function Chat({ user, set2UserInfo }) {
                             time={item.date}
                             image={user?.profileUrl}
                             active={user?.active}
+                            sended_image={item?.image}
                             delete_message={delete_message}
                         />
                     }) :
                         <div className="w-full h-full flex items-center justify-center">
-                            <video autoPlay muted loop className="w-[50%]">
+                            <video autoPlay muted loop className="w-[30%]">
                                 <source src='/dog_3.mp4' type="video/mp4" />
                             </video>
                         </div>
                 }
             </section>
-            <form className="w-full relative" onSubmit={handleSubmit(sendNewMessage)}>
-                <div className="w-10 h-10 hover:bg-[#f67f20] rounded-[50%] text-[#f67f20] cursor-pointer hover:text-white duration-200 flex items-center justify-center absolute top-1 left-1">
-                    <i className="fa-solid fa-dice"></i>
+            <form className="w-full relative flex items-center gap-3" onSubmit={handleSubmit(sendNewMessage)}>
+                <i className="fa-solid fa-dice"></i>
+                <div className="w-10 h-10 hover:text-[#f67f20] rounded-[50%] text-gray-400 cursor-pointer duration-200 flex items-center justify-center absolute top-1 left-9">
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <input type="file"
+                            accept="image/*"
+                            className="w-full h-full opacity-0 absolute"
+                            ref={input}
+                            onChange={(e) => {
+                                sendImage(e.target.files[0])
+                            }}
+                        />
+                        <i className="fa-solid fa-image"></i>
+                    </div>
                 </div>
-                <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-12 py-3 outline-[#f67f20] border border-gray-300" {...register('message')} />
+
+                <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-12 py-3 outline-[#f67f20] border border-gray-300 peer" {...register('message')} />
                 <button className="w-10 h-10 bg-[#f67f20] rounded-[50%] text-white flex items-center justify-center absolute top-1 right-1 cursor-pointer disabled:opacity-50 disabled:cursor-text" disabled={!value || value.trim() === ''}>
                     <i className="fa-solid fa-paper-plane"></i>
                 </button>
