@@ -1358,29 +1358,44 @@ def send_image():
     user = next((u for u in all_user if u['email'] == email), None)
     user_2 = next((u for u in all_user if u['email'] == email_2 ), None)
 
-    if image:
-        extension = image.filename.split('.')[-1] 
-        new_filename = f"{uuid.uuid4()}.{extension}" 
-        path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
-        image.save(path)
-        image_url = f"https://pointsell-4.onrender.com/images/{new_filename}"
+    if not image:
+        return jsonify({'error': 'No image uploaded'}), 400
 
-        if user and user_2:
-            file_name = "_".join(sorted([email, email_2]))
-            new_message = {
-                "sender": session['email'],
-                "message": None,
-                "image": image_url,
-                "date": current_time,
-                "read": False
-            }
+    extension = image.filename.split('.')[-1] 
+    new_filename = f"{uuid.uuid4()}.{extension}" 
+    path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
+    image.save(path)
+    image_url = f"https://pointsell-4.onrender.com/images/{new_filename}"
+
+    file_name = "_".join(sorted([email, email_2]))
+    file_path = os.path.join(All_message, f"{file_name}.json")
+
+    new_message = {
+        "sender": email,
+        "message": None,
+        "image": image_url,
+        "date": current_time,
+        "read": False
+    }
+
+    try:
+        history = []
+        if os.path.exists(file_path):
+            with open(file_path, 'r', encoding='utf-8') as file:
+                try:
+                    history = json.load(file)
+                except:
+                    history = []
+
+        history.append(new_message)
+
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(history, file, indent=4, ensure_ascii=False)
             
-            messages(file_name, new_message)
-            return jsonify({'message': 'successfully'}), 200
-        
-        return jsonify({'error': 'user not found'}), 404
-    
-    return jsonify({'error': 'image not found'}), 404
+        return jsonify({'message': 'successfully', 'data': new_message}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.get("/")
