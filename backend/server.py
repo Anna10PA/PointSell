@@ -1003,7 +1003,6 @@ def send_new_message():
     message = data['message']
     friend_email = data['email']
     sender_email = session['email']
-    print('This is Password', os.environ.get('Gmail_password'))
 
     file_name = '_'.join(sorted([friend_email, sender_email]))
     file_path = os.path.join(All_message, f"{file_name}.json")
@@ -1011,6 +1010,7 @@ def send_new_message():
     new_message = {
         "sender": session['email'],
         "message": message,
+        "image": None,
         "date": current_time,
         "read": False
     }

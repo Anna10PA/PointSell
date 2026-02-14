@@ -24,8 +24,7 @@ function MessageCard({ sender, time, message, delete_message, sended_image }) {
                             message ?
                                 <p className="wrap-break-word leading-tight max-w-80">{message}</p>
                                 : sended_image ? 
-                                console.log(sended_image || 'none')
-                                // <img src={`${sended_image}`} alt="image" className="rounded"/>
+                                <img src={`${sended_image}`} alt="image" className="rounded"/>
                                 : null
                         }
                     </div>
