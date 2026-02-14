@@ -78,14 +78,17 @@ def save_users(users):
 def messages(file_name, message):
     address = f'{All_message}/{file_name}'
     
+    content = []
     if os.path.exists(address):
-        with open(address, 'w', encoding='utf-8') as file:
-            json.dump(message, file, indent=4, ensure_ascii=False)
-    else:
-        context = [] 
-        with open(address, 'w', encoding='utf-8') as file:
-            json.dump(context, file, indent=4)
-        return context
+        with open(address, 'r', encoding='utf-8') as file:
+            try:
+                content = json.load(file)
+            except:
+                content = []
+
+    content.append(message)
+    with open(address, 'w', encoding='utf-8') as file:
+        json.dump(content, file, indent=4, ensure_ascii=False)
 
 
 # პოსტების შენახვა
@@ -1374,7 +1377,9 @@ def send_image():
             
             messages(file_name, new_message)
             return jsonify({'message': 'successfully'}), 200
+        
         return jsonify({'error': 'user not found'}), 404
+    
     return jsonify({'error': 'image not found'}), 404
 
 

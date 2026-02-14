@@ -130,6 +130,7 @@ function Chat({ user, set2UserInfo }) {
             if (res.ok) {
                 readMessage()
                 input.current.value = ''
+                console.log('work')
             }
 
 

@@ -1,5 +1,5 @@
 import { Info } from "../Main"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
 function MessageCard({ sender, time, message, delete_message, sended_image }) {
     let msgDate = new Date(time)
@@ -24,7 +24,8 @@ function MessageCard({ sender, time, message, delete_message, sended_image }) {
                             message ?
                                 <p className="wrap-break-word leading-tight max-w-80">{message}</p>
                                 : sended_image ? 
-                                <img src={sended_image} alt="image" className="w-150 h-100 object-cover rounded"/>
+                                console.log(sended_image || 'none')
+                                // <img src={`${sended_image}`} alt="image" className="rounded"/>
                                 : null
                         }
                     </div>
