@@ -19,12 +19,12 @@ function MessageCard({ sender, time, message, delete_message, sended_image }) {
                     }}></i>
                 </div>
                 <div className={`flex flex-col gap-1 ${curentUser?.email == sender ? 'items-end' : 'items-start'}`}>
-                    <div className={`min-w-max max-w-80 font-semibold relative h-max flex flex-col px-5 py-3 ${curentUser?.email == sender ? 'bg-[#f67f20] items-end rounded-[15px_15px_5px_15px] text-white ' : 'bg-gray-200 rounded-[15px_15px_15px_5px] items-start'}`}>
+                    <div className={` max-w-80 font-semibold relative h-max flex flex-col px-5 py-3 ${curentUser?.email == sender ? 'bg-[#f67f20] items-end rounded-[15px_15px_5px_15px] text-white ' : 'bg-gray-200 rounded-[15px_15px_15px_5px] items-start'} ${sended_image ? 'p-0' : ""} `}>
                         {
                             message ?
                                 <p className="wrap-break-word leading-tight max-w-80">{message}</p>
                                 : sended_image ? 
-                                <img src={`${sended_image}`} alt="image" className="rounded"/>
+                                <img src={`${sended_image}`} alt="image" className="rounded max-w-100 w-full max-sm:max-w-40 "/>
                                 : null
                         }
                     </div>
