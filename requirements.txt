@@ -4,3 +4,5 @@ Flask-Mail
 requests
 gunicorn
 flask_cors
+flask-socketio
+eventlet
