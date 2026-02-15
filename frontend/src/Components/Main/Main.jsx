@@ -15,6 +15,7 @@ import AddPost from "./Post/AddPost"
 
 import Messages from "./Messages/Messages.jsx"
 import SearchFriend from "./Messages/SearchFriend.jsx"
+import Calling from "./Messages/Calling.jsx"
 
 import Notification from './Notification/Notification.jsx'
 import Navigation from "../../MiniComponents/Navigation"
@@ -355,6 +356,7 @@ function Main() {
                     <Route path='/order/table/payment' element={<PaymentResult />} />
                     <Route path='/orders' element={<Order />} />
                     <Route path='/setting/*' element={<Setting />} />
+                    <Route path='/calling' element={<Calling />}/>
                 </Routes>
             </Info.Provider>
         </div >

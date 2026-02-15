@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, session, send_from_directory
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_cors import CORS
 from datetime import timedelta
 from datetime import datetime
@@ -44,7 +45,59 @@ All_orders = 'orders.json'
 All_message = 'Message'
 
 
+socketio = SocketIO(app, cors_allowed_origins=["https://pointsell.onrender.com", "http://localhost:5173"], manage_session=True)
 
+online_users = {}
+
+@socketio.on('connect')
+def handle_connect():
+    user_email = session.get('email')
+    if user_email:
+        online_users[request.sid] = user_email
+        join_room(user_email)
+        print(f"User {user_email} connected with SID {request.sid}")
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    user_email = online_users.pop(request.sid, None)
+    if user_email:
+        leave_room(user_email)
+
+
+@socketio.on('video-offer')
+def handle_video_offer(data):
+    target_email = data['to']
+    emit('video-offer', {
+        'from': session.get('email'),
+        'offer': data['offer'],
+        'callerData': data.get('callerData')
+    }, to=target_email)
+
+
+@socketio.on('video-answer')
+def handle_video_answer(data):
+    target_email = data['to']
+    emit('video-answer', {
+        'from': session.get('email'),
+        'answer': data['answer']
+    }, to=target_email)
+
+
+@socketio.on('new-ice-candidate')
+def handle_new_ice_candidate(data):
+    target_email = data['to']
+    emit('new-ice-candidate', {
+        'from': session.get('email'),
+        'candidate': data['candidate']
+    }, to=target_email)
+
+
+@socketio.on('end-call')
+def handle_end_call(data):
+    target_email = data['to']
+    emit('call-ended', to=target_email)
+
+    
 # მომხმარებლების ინფორმაციის წაკითხვა
 def check_users():
     if not os.path.exists(All_user):
