@@ -7,6 +7,8 @@ import json
 import os
 import uuid
 import requests
+import eventlet
+eventlet.monkey_patch()
 
 
 app = Flask(__name__)
@@ -97,7 +99,7 @@ def handle_end_call(data):
     target_email = data['to']
     emit('call-ended', to=target_email)
 
-    
+
 # მომხმარებლების ინფორმაციის წაკითხვა
 def check_users():
     if not os.path.exists(All_user):
