@@ -22,7 +22,6 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
             })
         })
         if (res.ok) {
-            alert('work')
             getAllUser()
         }
 
@@ -41,9 +40,6 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
                 type: type
             })
         })
-        if (res.ok) {
-            alert('WORK')
-        }
     }
 
     useEffect(() => {
