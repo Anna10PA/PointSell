@@ -678,6 +678,7 @@ def google_login():
             return jsonify({'error': 'Account is blocked'}), 403
 
         else:
+            user['active'] = True
             if current_time.split()[0] not in user.get('visit', []):
                 bonus = 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
                 user['money'] += bonus
@@ -688,7 +689,6 @@ def google_login():
                     "message": f"Daily Bonus ${bonus}!", 
                     "read": False
                 })
-                user['active'] = True
 
         save_users(users)
         session.clear() 
