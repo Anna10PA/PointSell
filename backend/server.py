@@ -610,7 +610,7 @@ def login():
                 "read": False,
                 'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
             }),
-            save_users(users)
+        save_users(users)
 
         return jsonify({'message': 'Login successful!'}), 200
     
