@@ -599,6 +599,8 @@ def login():
     if user and not user['block']:
         session['email'] = email
         session['is_login'] = True
+        user["active"] = True
+        
         if current_time.split()[0] not in user['visit']:
             user['visit'].append(current_time.split()[0])
             user['money'] += 100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500
@@ -608,7 +610,6 @@ def login():
                 "read": False,
                 'message': f'Daily Gift! You have been credited with ${100 if user['position'] == 'Customer' else 300 if user['position'] == 'Worker' else 500}'
             }),
-            user["active"] = True
             save_users(users)
 
         return jsonify({'message': 'Login successful!'}), 200
@@ -1410,8 +1411,6 @@ def send_image():
     image = request.files.get('image')
 
     all_user = check_users()
-    user = next((u for u in all_user if u['email'] == email), None)
-    user_2 = next((u for u in all_user if u['email'] == email_2 ), None)
 
     if not image:
         return jsonify({'error': 'No image uploaded'}), 400

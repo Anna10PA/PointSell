@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef, useCallback, useContext } from "react"
 import MessageCard from "./MessageCard"
+
+import { useEffect, useState, useRef, useCallback, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { io } from "socket.io-client"
@@ -65,8 +66,6 @@ function Chat({ user, set2UserInfo }) {
         })
         if (res.ok) {
             setMessages(prev => prev.filter(messg => !(messg.date === time && messg.message === msg)))
-        } else {
-            alert('ver waishala')
         }
     }
 
@@ -75,7 +74,7 @@ function Chat({ user, set2UserInfo }) {
         if (chat.current) chat.current.scrollTop = chat.current.scrollHeight
     }, [message])
 
-    
+
     // მესიჯების ავტომატური განახლება
     let readMessage = useCallback(async () => {
         if (!user?.email) return
@@ -172,7 +171,7 @@ function Chat({ user, set2UserInfo }) {
                             Navigate('/main/calling', {
                                 state: {
                                     secondUser: user,
-                                    camera: true, 
+                                    camera: true,
                                     isCaller: true,
                                     user: curentUser
                                 }
@@ -202,11 +201,13 @@ function Chat({ user, set2UserInfo }) {
                     </div>}
             </section>
             <form className="w-full relative flex items-center gap-3" onSubmit={handleSubmit(sendNewMessage)}>
-                <i className="fa-solid fa-dice"></i>
-                <div className="w-10 h-10 hover:text-[#f67f20] rounded-[50%] text-gray-400 cursor-pointer duration-200 flex items-center justify-center absolute top-1 left-9">
-                    <div className="relative w-full h-full flex items-center justify-center">
-                        <input type="file" accept="image/*" className="w-full h-full opacity-0 absolute" ref={input} onChange={(e) => { sendImage(e.target.files[0]) }} />
-                        <i className="fa-solid fa-image"></i>
+                <i className="fa-solid fa-dice text-xl text-gray-400 cursor-pointer duration-200 hover:text-[#f67f20]" onClick={() => {
+                    Navigate('/main/conditions')
+                }}></i>
+                <div className="w-10 h-10 hover:text-[#f67f20] rounded-[50%] text-gray-400 cursor-pointer duration-200 flex items-center justify-center absolute top-1 left-10">
+                    <div className="relative w-full h-full flex items-center justify-center cursor-pointer">
+                        <input type="file" accept="image/*" className="w-full h-full opacity-0 absolute cursor-pointer" ref={input} onChange={(e) => { sendImage(e.target.files[0]) }} />
+                        <i className="fa-solid fa-image cursor-pointer"></i>
                     </div>
                 </div>
                 <input type="text" placeholder="Write Message..." className="w-full rounded-3xl px-12 py-3 outline-[#f67f20] border border-gray-300 peer" {...register('message')} />
