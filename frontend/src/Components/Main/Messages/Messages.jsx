@@ -35,17 +35,21 @@ function Messages() {
                     <h2 className='font-bold text-gray-400 tracking-[0.5px] sticky top-0 right-0 bg-white px-5 py-4 pb-2 max-sm:px-3 max-sm:py-3'>Personal</h2>
                     <div className='w-full px-5 py-4 pt-0 overflow-auto max-sm:px-2 max-sm:py-0'>
                         {
-                            friend?.map((item, index) => {
-                                return <MessageNotification
-                                    user={set2Email}
-                                    image={item.profileUrl}
-                                    name={item.name || item.email.split('@')[0]}
-                                    email={item.email}
-                                    myEmail={curentUser?.email}
-                                    active={item.active}
-                                    key={index}
-                                />
-                            })
+                            friend?.length > 0 ?
+                                friend?.map((item, index) => {
+                                    return <MessageNotification
+                                        user={set2Email}
+                                        image={item.profileUrl}
+                                        name={item.name || item.email.split('@')[0]}
+                                        email={item.email}
+                                        myEmail={curentUser?.email}
+                                        active={item.active}
+                                        key={index}
+                                    />
+                                })
+                                : <div className="flex h-[60vh] items-center justify-center font-semibold text-gray-400">
+                                    <h3 className="">Friend(s) not found</h3>
+                                </div>
                         }
                     </div>
                 </section>

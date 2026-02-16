@@ -65,8 +65,9 @@ function Home() {
         }
     }
 
+    // დაბადების დღის მილოცვა
     useEffect(() => {
-        if (curentUser?.date && currentDate == [curentUser?.date.split('-')[1], curentUser?.date.split('-')[2]].join('-')) {
+        if ((curentUser?.date && currentDate == ([curentUser?.date.split('-')[1], curentUser?.date.split('-')[2]].join('-'))) && !curentUser?.visit?.includes(currentDate)) {
             setOpenHBdayCard(true)
         }
     }, [curentUser])
@@ -152,7 +153,7 @@ function Home() {
                 openStar ?
                     <FoodStar id={openStar} close={setOpenStar} /> :
                     openHBdayCard ?
-                        <HappyBirthday close={setOpenHBdayCard} user={curentUser?.name || curentUser?.email} /> : null
+                        <HappyBirthday close={setOpenHBdayCard} user={curentUser?.name || curentUser?.email} year={curentUser?.date?.split('-')[0]}/> : null
 
             }
 

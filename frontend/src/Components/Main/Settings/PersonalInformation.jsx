@@ -20,7 +20,6 @@ function PersonalInformation() {
             email: curentUser?.email,
             phone: curentUser?.phone,
             address: curentUser?.address,
-            birthday: curentUser?.birthday,
             date: curentUser?.date
         }
     })
@@ -190,7 +189,15 @@ function PersonalInformation() {
                         </div>
                         <div className='flex flex-col gap-3 w-full'>
                             <label htmlFor="" className='font-bold'>Birthday</label>
-                            <input type="date" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('date')} />
+                            <input type="date" className='border border-gray-400 outline-[#f67f20] rounded-lg px-5 py-3 disabled:text-gray-400' disabled={disabled} {...register('date', {
+                                validate: (e) => {
+                                    if (!e) return true
+                                    else if (Number(String(e).split('-')[0]) >= ((new Date().getFullYear()) - 10)) {
+                                        return "User must be more then 10 years old"
+                                    }
+                                    return true
+                                }
+                            })} />
                             <span className='text-red-600'>{errors.date ? errors.date.message : ''}</span>
                         </div>
                         <button

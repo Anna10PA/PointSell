@@ -1,1 +1,15 @@
-@import 'tailwindcss'
+@import 'tailwindcss';
+
+
+@keyframes giftAnimation {
+    0%, 100% {
+        transform: translateY(-30px)
+    }
+    50% {
+        transform: translateY(0px)
+    }
+}
+
+#gift {
+    animation: 10s giftAnimation alternate infinite ease-in
+}

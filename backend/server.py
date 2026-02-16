@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify, session, send_from_directory
 from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_cors import CORS
-from datetime import timedelta
-from datetime import datetime
+from datetime import timedelta, datetime
 import json
 import os
 import uuid
@@ -438,7 +437,7 @@ def pay():
     if 'email' not in session:
         return jsonify({'error': 'user is not logged'}), 401
     
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
     data = request.get_json()
     users = check_users()
     all_products = check_products()
@@ -525,7 +524,8 @@ def pay():
 # რეგისტრაცია
 @app.post("/register")
 def register():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
+
     data = request.get_json()
     if not data:
         return jsonify({"error": "No data received"}), 400
@@ -584,7 +584,7 @@ def register():
 @app.post('/login')
 def login():
     data = request.get_json()
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     if not data:
         return jsonify({'error': 'no data'}), 400
@@ -623,7 +623,7 @@ def login():
 # შესვლა Google-ით
 @app.post('/google_login')
 def google_login():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
     
     data = request.get_json()
     token = data.get('token') 
@@ -689,7 +689,7 @@ def google_login():
                     "message": f"Daily Bonus ${bonus}!", 
                     "read": False
                 })
-
+            
         save_users(users)
         session.clear() 
         session['email'] = email
@@ -739,7 +739,7 @@ def verification():
 # პაროლის შეცვლა
 @app.post('/change_password')
 def change_password():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
     data = request.get_json()
     email = data["email"]
     password = data['password']
@@ -770,7 +770,7 @@ def change_password():
 # მომხმარებლის მონაცემების შეცვლა
 @app.post('/change_user_info')
 def change_user_info():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
     data = request.get_json()
     email = data['email']
     address = data['address']
@@ -901,7 +901,7 @@ def current_user():
 # მეგობრების დამატება / წაშლა
 @app.post('/friends_delete_or_add')
 def friends_delete_or_add():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     if 'email' not in session:
         return jsonify({'error': 'user is not logged'}), 401
@@ -962,7 +962,7 @@ def friends_delete_or_add():
 # მეგობრობის მოთხოვნის დასტური / უარყოფა 
 @app.post('/delete_or_confirm')
 def delete_or_confirm():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     if 'email' not in session:
         return jsonify({'error': 'user is not logged'}), 401
@@ -1050,7 +1050,7 @@ def read_user_messages():
 # მესიჯების გაგზავნა
 @app.post('/send_new_message')
 def send_new_message():
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     if 'email' not in session:
         return jsonify({'error': 'user is logged'}), 401 
@@ -1365,7 +1365,7 @@ def change_profile():
     if 'email' not in session:
         return jsonify({'error', 'user not found'}), 404
     
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     image_file = request.files.get('image')
     image_url = None
@@ -1404,13 +1404,12 @@ def send_image():
     if 'email' not in session:
         return jsonify({'error': 'user is not found'}), 404
     
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     email = session['email']
     email_2 = request.form.get('email_2')
     image = request.files.get('image')
 
-    all_user = check_users()
 
     if not image:
         return jsonify({'error': 'No image uploaded'}), 400
