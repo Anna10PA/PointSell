@@ -12,7 +12,7 @@ function Table() {
     })
     let [deliverInfo, setDeliverInfo] = useState({ distance: 0, duration: 0 })
     let navigate = useNavigate()
-    let promoCode = 'HelloUser2009'
+    let promoCode = 'mekhinkleMario'
     let [openMessage, setOpenMessage] = useState(false)
     let [gotDisc, setGotDisc] = useState(false)
     let [submit, setSubmit] = useState(false)
