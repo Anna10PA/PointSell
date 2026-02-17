@@ -381,7 +381,7 @@ function Main() {
                             <button
                                 onClick={() => {
                                     ringtone.pause()
-                                    navigate('/calling', {
+                                    navigate('/main/calling', {
                                         state: {
                                             secondUser: incomingCall.callerData,
                                             isCaller: false,
