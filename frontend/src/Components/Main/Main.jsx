@@ -351,7 +351,7 @@ function Main() {
     let answerCall = (incomingCall) => {
         ringtone.pause()
         ringtone.currentTime = 0
-        navigate('/calling', {
+        navigate('/main/calling', {
             state: {
                 secondUser: incomingCall.callerData,
                 isCaller: false,
@@ -396,31 +396,32 @@ function Main() {
         <div className="w-full flex items-start h-screen">
             <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification }}>
                 <Navigation />
-                {incomingCall && (
-                    <div className="w-full h-full flex items-center justify-center absolute z-90">
-                        <div className="bg-black/80 flex flex-col items-center justify-center text-white p-5 text-center">
-                            <div className="w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden mb-4 animate-pulse">
-                                <img src={incomingCall.callerData?.profileUrl || '/https://i.pinimg.com/736x/f2/bd/7a/f2bd7a85270d86e83238c9d727ceee89.jpg'} className="w-full h-full object-cover" />
-                            </div>
-                            <h2 className="text-2xl font-bold">{incomingCall.callerData?.name} Calling you</h2>
-                            <div className="flex gap-10 mt-12">
-                                <button onClick={() => answerCall(incomingCall)} className="bg-green-500 ...">
-                                    <i className="fa-solid fa-phone"></i>
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        socket.emit('end-call', { to: incomingCall.callerData?.email })
-                                        setIncomingCall(null)
-                                        ringtone.pause()
-                                    }}
-                                    className="bg-red-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl hover:scale-110 transition-transform"
-                                >
-                                    <i className="fa-solid fa-phone-slash"></i>
-                                </button>
+                {
+                    incomingCall && (
+                        <div className="w-full h-full flex items-center justify-center absolute z-90">
+                            <div className="bg-black/80 flex flex-col items-center justify-center text-white p-5 text-center">
+                                <div className="w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden mb-4 animate-pulse">
+                                    <img src={incomingCall.callerData?.profileUrl || '/https://i.pinimg.com/736x/f2/bd/7a/f2bd7a85270d86e83238c9d727ceee89.jpg'} className="w-full h-full object-cover" />
+                                </div>
+                                <h2 className="text-2xl font-bold">{incomingCall.callerData?.name} Calling you</h2>
+                                <div className="flex gap-10 mt-12">
+                                    <button onClick={() => answerCall(incomingCall)} className="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl hover:scale-110 transition-transform">
+                                        <i className="fa-solid fa-phone"></i>
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            socket.emit('end-call', { to: incomingCall.callerData?.email })
+                                            setIncomingCall(null)
+                                            ringtone.pause()
+                                        }}
+                                        className="bg-red-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl hover:scale-110 transition-transform"
+                                    >
+                                        <i className="fa-solid fa-phone-slash"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 <Routes>
                     <Route path='/home' element={<Home />} />
                     <Route path="/notification" element={<Notification />} />
