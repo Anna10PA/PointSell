@@ -319,6 +319,8 @@ function Main() {
     // დარეკვა
     useEffect(() => {
         socket.on('video-offer', (data) => {
+            if (data.callerData?.email === curentUser?.email) return 
+
             setIncomingCall(data)
             ringtone.play().catch(e => console.error(e))
         })
@@ -333,7 +335,7 @@ function Main() {
             socket.off('video-offer')
             socket.off('call-ended')
         }
-    }, [])
+    }, [curentUser])
 
 
     // ჩატვირთვა
