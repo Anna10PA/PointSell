@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom"
-import { useState, useEffect, createContext, useCallback } from "react"
+import { useState, useEffect, createContext, useCallback, useMemo } from "react"
 import { io } from "socket.io-client"
 
 import Home from "./Home/Home"
@@ -49,8 +49,13 @@ function Main() {
     let [question, setQuestion] = useState(null)
     let [allAnswers, setAllAnswers] = useState([])
     let [incomingCall, setIncomingCall] = useState(null)
-    let ringtone = new Audio("/iphone-11-pro.mp3")
-    ringtone.loop = true
+
+
+    let ringtone = useMemo(() => {
+        const audio = new Audio("/iphone-11-pro.mp3")
+        audio.loop = true
+        return audio
+    }, [])
 
 
     // ამჟამინდელი მომხმარებლის ინფორმაცია
@@ -318,24 +323,44 @@ function Main() {
 
     // დარეკვა
     useEffect(() => {
-        socket.on('video-offer', (data) => {
+        if (!socket) return
+
+        const handleOffer = (data) => {
             if (data.callerData?.email === curentUser?.email) return
 
             setIncomingCall(data)
             ringtone.play().catch(e => console.error(e))
-        })
+        }
 
-        socket.on('call-ended', () => {
+        const handleCallEnd = () => {
             setIncomingCall(null)
             ringtone.pause()
             ringtone.currentTime = 0
-        })
+        }
+
+        socket.on('video-offer', handleOffer)
+        socket.on('call-ended', handleCallEnd)
 
         return () => {
-            socket.off('video-offer')
-            socket.off('call-ended')
+            socket.off('video-offer', handleOffer)
+            socket.off('call-ended', handleCallEnd)
+            ringtone.pause()
         }
-    }, [curentUser])
+    }, [curentUser, ringtone])
+
+    let answerCall = (incomingCall) => {
+        ringtone.pause()
+        ringtone.currentTime = 0
+        navigate('/calling', {
+            state: {
+                secondUser: incomingCall.callerData,
+                isCaller: false,
+                incomingOffer: incomingCall.offer,
+                camera: true
+            }
+        })
+        setIncomingCall(null)
+    }
 
 
     // ჩატვირთვა
@@ -372,32 +397,16 @@ function Main() {
             <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification }}>
                 <Navigation />
                 {incomingCall && (
-                    <div className="w-full h-full flex items-center justify-center">
-                        <div className="z-70 bg-black/80 flex flex-col items-center justify-center text-white p-5 text-center">
+                    <div className="w-full h-full flex items-center justify-center absolute z-90">
+                        <div className="bg-black/80 flex flex-col items-center justify-center text-white p-5 text-center">
                             <div className="w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden mb-4 animate-pulse">
                                 <img src={incomingCall.callerData?.profileUrl || '/https://i.pinimg.com/736x/f2/bd/7a/f2bd7a85270d86e83238c9d727ceee89.jpg'} className="w-full h-full object-cover" />
                             </div>
                             <h2 className="text-2xl font-bold">{incomingCall.callerData?.name} Calling you</h2>
                             <div className="flex gap-10 mt-12">
-                                <button
-                                    onClick={() => {
-                                        ringtone.pause()
-                                        navigate('/main/calling', {
-                                            state: {
-                                                secondUser: incomingCall.callerData,
-                                                isCaller: false,
-                                                incomingOffer: incomingCall.offer,
-                                                camera: true
-                                            }
-                                        })
-                                        setIncomingCall(null)
-                                    }}
-                                    className="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl hover:scale-110 transition-transform"
-                                >
+                                <button onClick={() => answerCall(incomingCall)} className="bg-green-500 ...">
                                     <i className="fa-solid fa-phone"></i>
                                 </button>
-
-                                {/* გათიშვა */}
                                 <button
                                     onClick={() => {
                                         socket.emit('end-call', { to: incomingCall.callerData?.email })
