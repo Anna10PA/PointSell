@@ -399,7 +399,7 @@ function Main() {
                 {
                     incomingCall && (
                         <div className="w-full h-full flex items-center justify-center absolute z-90">
-                            <div className="bg-black/80 flex flex-col items-center justify-center text-white p-5 text-center">
+                            <div className="bg-black/80 flex flex-col items-center rounded py-7 justify-center text-white p-5 text-center">
                                 <div className="w-24 h-24 rounded-full border-4 border-orange-500 overflow-hidden mb-4 animate-pulse">
                                     <img src={incomingCall.callerData?.profileUrl || '/https://i.pinimg.com/736x/f2/bd/7a/f2bd7a85270d86e83238c9d727ceee89.jpg'} className="w-full h-full object-cover" />
                                 </div>
