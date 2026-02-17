@@ -44,6 +44,7 @@ All_product = "product.json"
 All_post = "posts.json"
 All_orders = 'orders.json'
 All_message = 'Message'
+All_candidats = 'job_candidats.json'
 
 
 socketio = SocketIO(app, cors_allowed_origins=["https://pointsell.onrender.com", "http://localhost:5173"], manage_session=True)
@@ -1449,6 +1450,53 @@ def send_image():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+# სამსახურის დაწყება (განცხადების დაწერა)
+@app.post('/start_work')
+def start_work():
+    if 'email' not in session:
+        return jsonify({"error": 'user not found'}), 401
+    
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
+
+    data = request.get_json()
+    email = data.get('email')
+    text = data.get('text')
+
+    all_user = check_users()
+    user = next((u for u in all_user if u['email'] == email), None)
+    
+    if user and text:
+        new_cand = {
+            "user": user['name'] or user['email'],
+            "time": current_time,
+            "text": text
+        }
+
+        cand_list = []
+        with open(All_candidats, "r", encoding="utf-8") as file:
+            lst = json.load(file)
+            cand_list = lst if type(lst) == list else []
+
+        cand_list.append(new_cand)
+
+        with open(All_candidats, "w", encoding="utf-8") as file:
+            json.dump(cand_list, file, indent=4, ensure_ascii=False)
+
+        return jsonify({"message": 'work'}), 200
+    else:
+        return jsonify({"error": 'not found'}), 404
+
+
+@app.get('/candidats')
+def candidats():
+    if 'email' not in session:
+        return jsonify({'error': 'user not found'}), 404
+    
+    with open(All_candidats, "r", encoding="utf-8") as file:
+        info = json.load(file)
+        return jsonify(info)
 
 
 @app.get("/")

@@ -54,6 +54,9 @@ function Navigation() {
                 <Link to='/main/notification'>
                     <i className={`fa-solid fa-bell hover:text-[#F67F20] ${locationName === '/main/notification' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
+                <Link to='/main/work'>
+                    <i class={`fa-solid fa-briefcase hover:text-[#F67F20] ${locationName === '/main/work' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                </Link>
                 {
                     curentUser.position === "Manager" ?
                         <Link to='/main/costumers'>
@@ -71,5 +74,4 @@ function Navigation() {
         </nav>
     )
 }
-// /main/setting/password/verify/reset_password
 export default Navigation
