@@ -18,9 +18,11 @@ function Calling() {
     let remoteVideo = useRef()
     let peerConnection = useRef()
     let localStream = useRef()
-    
+
     let [cameraOn, setCameraOn] = useState(camera)
     let [micOn, setMicOn] = useState(true)
+
+    let outgoingTone = useRef(new Audio("/calling-someone.mp3"))
 
 
     // ზარის გათიშვის ფუნქცია
@@ -57,6 +59,41 @@ function Calling() {
         }
     }
 
+
+    // 
+    useEffect(() => {
+        if (!secondUser) return
+
+        if (isCaller) {
+            outgoingTone.current.loop = true;
+            outgoingTone.current.play().catch(e => console.log("Audio play deferred", e));
+        }
+
+
+        socket.on('video-answer', async (data) => {
+            outgoingTone.current.pause()
+            outgoingTone.current.currentTime = 0
+
+            if (peerConnection.current && peerConnection.current.signalingState !== "closed") {
+                await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data.answer))
+            }
+        })
+
+        socket.on('call-ended', () => {
+            outgoingTone.current.pause()
+            if (localStream.current) localStream.current.getTracks().forEach(track => track.stop())
+            navigate(-1)
+        })
+
+        return () => {
+            outgoingTone.current.pause()
+            outgoingTone.current.currentTime = 0
+            socket.off('video-answer')
+            socket.off('call-ended')
+        }
+    }, [secondUser, isCaller, incomingOffer])
+
+    // 
     useEffect(() => {
         if (!secondUser) return
 
@@ -135,14 +172,14 @@ function Calling() {
 
             <div className="flex gap-10 w-full h-[70vh] px-10 relative z-10 max-lg:flex-col max-lg:gap-3 max-md:px-5 max-sm:px-2" >
                 <div className="w-1/2 h-full rounded-3xl border-2 border-[#f67f20] bg-cover bg-center bg-no-repeat relative overflow-hidden bg-gray-800 shadow-2xl max-lg:w-full max-lg:h-[80vh]"
-                     style={{ backgroundImage: `url(${curentUser?.profileUrl})` }}>
-                    <video ref={localVideo} autoPlay muted playsInline 
+                    style={{ backgroundImage: `url(${curentUser?.profileUrl})` }}>
+                    <video ref={localVideo} autoPlay muted playsInline
                         className={`w-full h-full object-cover transition-opacity duration-500 ${cameraOn ? 'opacity-100' : 'opacity-0'}`} />
                 </div>
 
                 <div className="w-1/2 h-full rounded-3xl border-2 border-gray-600 bg-cover bg-center bg-no-repeat relative overflow-hidden bg-gray-800 shadow-2xl max-lg:w-full max-lg:h-[80vh]"
-                     style={{ backgroundImage: `url(${secondUser?.profileUrl})` }}>
-                    <video ref={remoteVideo} autoPlay playsInline 
+                    style={{ backgroundImage: `url(${secondUser?.profileUrl})` }}>
+                    <video ref={remoteVideo} autoPlay playsInline
                         className="w-full h-full object-cover" />
                 </div>
             </div>
@@ -151,7 +188,7 @@ function Calling() {
                 <button onClick={Mic} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${micOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white'}`}>
                     <i className={`fa-solid ${micOn ? 'fa-microphone' : 'fa-microphone-slash'}`}></i>
                 </button>
-                
+
                 <button onClick={endCall} className="bg-red-600 text-white w-20 h-20 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110 duration-200">
                     <i className="fa-solid fa-phone-slash text-2xl"></i>
                 </button>

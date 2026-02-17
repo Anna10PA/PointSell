@@ -8,6 +8,7 @@ function Order() {
     let [curentOrd, setCurentOrd] = useState(null)
     let [chosenOrd, setChosenOrd] = useState(null)
     let { allProduct, curentUser } = useContext(Info)
+    let [time, setTime] = useState(0)
 
 
     // შეკვეთების წამოღება
@@ -43,6 +44,17 @@ function Order() {
         setChosenOrd(found)
     }, [curentOrd, orders])
 
+
+    // თაიმერის ფუნქცია
+    useEffect(() => {
+        if (time <= 0) return
+
+        let timer = setInterval(() => {
+            setTime((prevTime) => prevTime - 1)
+        }, 1000)
+
+        return () => clearInterval(timer)
+    }, [time])
 
     return (
         <>
@@ -112,7 +124,7 @@ function Order() {
                                         </div>
                                     </div>
                                     <h1 className="font-bold text-xl mt-5">Orders</h1>
-                                    <div className="flex flex-col gap-3 items-start w-full overflow-auto h-[50vh]">
+                                    <div className={`flex flex-col gap-3 items-start w-full overflow-auto h-[32vh]`}>
                                         {
                                             (chosenOrd?.cart || []).map((item, index) => {
                                                 let product = allProduct.find(elem => elem.Id === item.Id)
@@ -128,7 +140,9 @@ function Order() {
                                             })
                                         }
                                     </div>
-
+                                    <div>
+                                        <button></button>
+                                    </div>
                                 </div>
                                 : <h1 className="text-center text-gray-400 font-semibold text-lg">No Order Details</h1>
                         }

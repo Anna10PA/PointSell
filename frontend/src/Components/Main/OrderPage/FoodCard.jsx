@@ -12,7 +12,6 @@ function FoodCard({ image, name, price, count }) {
             X {count}
           </h2>
         </div>
-
       </div>
       <h1 className='text-xl font-bold text-[#f67f20] max-sm:text-sm'>${(price * count).toFixed(2)}</h1>
     </div>

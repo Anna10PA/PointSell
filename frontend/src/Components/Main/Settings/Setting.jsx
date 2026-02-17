@@ -106,7 +106,7 @@ function Setting() {
                             </div>
                         </Link>
                         <Link to="/main/setting/employers_information" className="w-full">
-                            <div className={`flex items-center justify-between border px-5 py-3 rounded cursor-pointer  hover:bg-gray-10 ${locationName == '/main/setting/employers_information' ? 'border-[#f67f20] bg-[#f67f20] text-white' : 'border-gray-300'}`}>
+                            <div className={`flex items-center justify-between border px-5 py-3 rounded cursor-pointer  hover:bg-gray-10 ${locationName == '/main/setting/employers_information' ? 'border-[#f67f20] bg-[#f67f20] text-white' : 'border-gray-300'} `}>
                                 <h1 className='font-bold max-sm:text-[14px]'>Employee Information</h1>
                                 <i className="fa-solid fa-angle-right"></i>
                             </div>

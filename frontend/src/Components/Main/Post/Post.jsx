@@ -40,7 +40,7 @@ function Post() {
             </button>
           </Link>
         </header>
-        <section className="w-full h-[80vh] overflow-auto scroll-none grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] max-sm:h-[88vh]  gap-5">
+        <section className="w-full h-[80vh] overflow-auto scroll-none grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] max-sm:h-[88vh]  gap-5">
           {
             allPost?.length > 0 ?
               allPost?.map((item, index) => {

@@ -144,8 +144,6 @@ function Home() {
     }
 
 
-
-
     return (
         <>
             {openDetail ?
@@ -158,7 +156,7 @@ function Home() {
             }
 
             <main className="w-full h-full flex flex-col px-10 py-5 gap-5 max-sm:px-3 max-sm:py-2 max-sm:gap-2 relative">
-                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] ">
+                <header className="flex items-center justify-between w-full gap-5 min-h-[10vh] max-sm:gap-2 ">
                     <h1 className="text-3xl font-bold max-sm:text-[29px]">
                         Point<span className="text-[#F67F20]">sell</span>
                     </h1>
@@ -183,7 +181,7 @@ function Home() {
                             </i>
                         </form>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 max-sm:gap-1">
                         <Link to='/main/notification'>
                             <div className="min-w-12 min-h-12 max-sm:min-h-10 max-sm:min-w-10 max-sm:text-sm bg-[#F67F20] rounded-[50%] flex items-center justify-center text-white text-lg cursor-pointer hover:bg-amber-600 duration-100 relative" onClick={(e) => {
                                 notificatinClick(e)
@@ -211,7 +209,7 @@ function Home() {
                 {/* მენიუ */}
                 <section className="flex flex-col gap-4">
                     <h2 className="font-bold text-xl bg-white w-full max-sm:text-[18px]">Special Menu For You</h2>
-                    <section className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh] max-sm:max-h-[80vh]">
+                    <section className="grid max-sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh] max-sm:max-h-[80vh]">
                         {
                             filteredProducts?.length !== 0 ?
                                 filteredProducts?.map((e, index) => {

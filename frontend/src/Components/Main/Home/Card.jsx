@@ -48,7 +48,7 @@ function Card({ img, title, price, desc, star, allInfo, discount, id, update, st
             </div>
             <p className="text-gray-400">{desc}</p>
             <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 text-lg" onClick={()=> {
+                <div className="flex items-center gap-3 text-lg cursor-pointer duration-100 hover:text-orange-400" onClick={()=> {
                     starOpen(id)
                 }}>
                     <i className="fa-solid fa-star text-[#F67F20]"></i>
