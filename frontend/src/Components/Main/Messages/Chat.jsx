@@ -93,25 +93,6 @@ function Chat({ user, set2UserInfo }) {
     }, [user?.email])
 
 
-    // ზარის გამოჩენა
-    useEffect(() => {
-        let onVideoOffer = (data) => {
-            Navigate('/main/calling', {
-                state: {
-                    secondUser: data.callerData,
-                    isCaller: false,
-                    incomingOffer: data.offer,
-                    camera: true,
-                    user: curentUser
-                }
-            })
-        }
-
-        socket.on('video-offer', onVideoOffer)
-        return () => socket.off('video-offer', onVideoOffer)
-
-    }, [Navigate, curentUser])
-
     useEffect(() => {
         readMessage()
         let interval = setInterval(() => { readMessage() }, 3000)
