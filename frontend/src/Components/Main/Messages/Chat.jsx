@@ -93,8 +93,9 @@ function Chat({ user, set2UserInfo }) {
     }, [user?.email])
 
 
+    // ზარის გამოჩენა
     useEffect(() => {
-        const onVideoOffer = (data) => {
+        let onVideoOffer = (data) => {
             Navigate('/main/calling', {
                 state: {
                     secondUser: data.callerData,
@@ -124,6 +125,7 @@ function Chat({ user, set2UserInfo }) {
         let data = new FormData()
         data.append('image', file)
         data.append('email_2', user?.email)
+        
         try {
             let res = await fetch('https://pointsell-4.onrender.com/send_image', {
                 method: 'POST',
@@ -201,7 +203,7 @@ function Chat({ user, set2UserInfo }) {
                     </div>}
             </section>
             <form className="w-full relative flex items-center gap-3" onSubmit={handleSubmit(sendNewMessage)}>
-               
+
                 <div className="w-10 h-10 hover:text-[#f67f20] rounded-[50%] text-gray-400 cursor-pointer duration-200 flex items-center justify-center absolute top-1 left-10">
                     <div className="relative w-full h-full flex items-center justify-center cursor-pointer">
                         <input type="file" accept="image/*" className="w-full h-full opacity-0 absolute cursor-pointer" ref={input} onChange={(e) => { sendImage(e.target.files[0]) }} />

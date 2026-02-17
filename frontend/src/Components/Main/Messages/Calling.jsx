@@ -27,7 +27,7 @@ function Calling() {
     let endCall = () => {
         socket.emit('end-call', { to: secondUser?.email })
         if (localStream.current) {
-            localStream.current.getTracks().forEach(track => track.stop())
+            localStream.current.getTracks().forEach(i => i.stop())
         }
         if (peerConnection.current) {
             peerConnection.current.close()
@@ -35,19 +35,23 @@ function Calling() {
         navigate(-1)
     }
 
-    const toggleCamera = () => {
+
+    // კამერის გათიშვა
+    let Camera = () => {
         if (localStream.current) {
-            localStream.current.getVideoTracks().forEach(track => {
-                track.enabled = !cameraOn
+            localStream.current.getVideoTracks().forEach(i => {
+                i.enabled = !cameraOn
             })
             setCameraOn(!cameraOn)
         }
     }
 
-    const toggleMic = () => {
+
+    // მიკროფონის გათიშვა
+    let Mic = () => {
         if (localStream.current) {
-            localStream.current.getAudioTracks().forEach(track => {
-                track.enabled = !micOn
+            localStream.current.getAudioTracks().forEach(i => {
+                i.enabled = !micOn
             })
             setMicOn(!micOn)
         }
@@ -126,25 +130,25 @@ function Calling() {
     }, [secondUser, isCaller, incomingOffer, curentUser, navigate, camera])
 
     return (
-        <div className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden gap-3">
-            <h2 className="text-black text-2xl font-bold z-20">Calling: {secondUser?.name}</h2>
+        <div className="w-full h-screen flex flex-col items-center justify-between relative overflow-hidden gap-3 ">
+            <h2 className="text-black text-2xl font-bold z-20 max-md:text-xl pt-5">Calling: {secondUser?.name}</h2>
 
-            <div className="flex gap-10 w-full h-[70vh] px-10 relative z-10">
-                <div className="w-1/2 h-full rounded-3xl border-2 border-[#f67f20] bg-cover bg-center bg-no-repeat relative overflow-hidden bg-gray-800 shadow-2xl"
+            <div className="flex gap-10 w-full h-[70vh] px-10 relative z-10 max-lg:flex-col max-lg:gap-3 max-md:px-5 max-sm:px-2" >
+                <div className="w-1/2 h-full rounded-3xl border-2 border-[#f67f20] bg-cover bg-center bg-no-repeat relative overflow-hidden bg-gray-800 shadow-2xl max-lg:w-full max-lg:h-[80vh]"
                      style={{ backgroundImage: `url(${curentUser?.profileUrl})` }}>
                     <video ref={localVideo} autoPlay muted playsInline 
                         className={`w-full h-full object-cover transition-opacity duration-500 ${cameraOn ? 'opacity-100' : 'opacity-0'}`} />
                 </div>
 
-                <div className="w-1/2 h-full rounded-3xl border-2 border-gray-600 bg-cover bg-center bg-no-repeat relative overflow-hidden bg-gray-800 shadow-2xl"
+                <div className="w-1/2 h-full rounded-3xl border-2 border-gray-600 bg-cover bg-center bg-no-repeat relative overflow-hidden bg-gray-800 shadow-2xl max-lg:w-full max-lg:h-[80vh]"
                      style={{ backgroundImage: `url(${secondUser?.profileUrl})` }}>
                     <video ref={remoteVideo} autoPlay playsInline 
                         className="w-full h-full object-cover" />
                 </div>
             </div>
 
-            <div className='mt-10 flex items-center gap-8 z-20'>
-                <button onClick={toggleMic} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${micOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white animate-pulse'}`}>
+            <div className='mt-10 flex items-center gap-8 z-20 max-lg:mt-3 pb-5'>
+                <button onClick={Mic} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${micOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white animate-pulse'}`}>
                     <i className={`fa-solid ${micOn ? 'fa-microphone' : 'fa-microphone-slash'}`}></i>
                 </button>
                 
@@ -152,7 +156,7 @@ function Calling() {
                     <i className="fa-solid fa-phone-slash text-2xl"></i>
                 </button>
 
-                <button onClick={toggleCamera} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${cameraOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white'}`}>
+                <button onClick={Camera} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${cameraOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white'}`}>
                     <i className={`fa-solid ${cameraOn ? 'fa-video' : 'fa-video-slash'}`}></i>
                 </button>
             </div>

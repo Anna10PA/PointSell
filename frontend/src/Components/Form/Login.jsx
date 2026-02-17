@@ -96,9 +96,9 @@ function Login() {
           </div>
           <p className='text-[red] font-semibold'>{errors.password ? errors.password.message : ''}</p>
         </div>
-        <Link to='/forgot password' className='font-semibold max-md:text-[15px] leading-5 text-[#F67F20] text-right w-full'>
+        {/* <Link to='/forgot password' className='font-semibold max-md:text-[15px] leading-5 text-[#F67F20] text-right w-full'>
           <h2 >Forgot password?</h2>
-        </Link>
+        </Link> */}
         <button className='bg-[#F67F20] text-white font-bold px-5 rounded w-full py-2.5 cursor-pointer duration-200 hover:bg-orange-500'>Login</button>
       </form>
       <h1 className={`${message ? 'bg-[red] px-7 py-2 text-white font-bold tracking-[1px] rounded' : 'hidden'}`}>{message}</h1>
