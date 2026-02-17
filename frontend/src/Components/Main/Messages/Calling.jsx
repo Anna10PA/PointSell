@@ -148,11 +148,11 @@ function Calling() {
             </div>
 
             <div className='mt-10 flex items-center gap-8 z-20 max-lg:mt-3 pb-5'>
-                <button onClick={Mic} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${micOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white animate-pulse'}`}>
+                <button onClick={Mic} className={`w-16 h-16 rounded-full flex items-center justify-center text-xl transition-all ${micOn ? 'bg-gray-700 text-white' : 'bg-red-500 text-white'}`}>
                     <i className={`fa-solid ${micOn ? 'fa-microphone' : 'fa-microphone-slash'}`}></i>
                 </button>
                 
-                <button onClick={endCall} className="bg-red-600 text-white w-20 h-20 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110 duration-200 shadow-xl">
+                <button onClick={endCall} className="bg-red-600 text-white w-20 h-20 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110 duration-200">
                     <i className="fa-solid fa-phone-slash text-2xl"></i>
                 </button>
 
