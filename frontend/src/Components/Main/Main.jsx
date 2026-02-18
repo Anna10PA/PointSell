@@ -49,6 +49,7 @@ function Main() {
     let [question, setQuestion] = useState(null)
     let [allAnswers, setAllAnswers] = useState([])
     let [incomingCall, setIncomingCall] = useState(null)
+    let [cands, setCands] = useState([])
 
 
     let ringtone = useMemo(() => {
@@ -321,6 +322,20 @@ function Main() {
     }
 
 
+    // კანდიდატების ნახვა
+    let candidats = async () => {
+        let res = await fetch('https://pointsell-4.onrender.com/candidats', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        if (res.ok) {
+            let result = await res.json()
+            setCands(result)
+            console.log(result)
+        }
+    }
+
+
     // დარეკვა
     useEffect(() => {
         if (!socket) return
@@ -377,6 +392,9 @@ function Main() {
                 getManagerInfo(),
             ])
             setIsLoading(false)
+            if (curentUser?.position !== "Costomer") {
+                candidats()
+            }
         }
         loadAllFunc()
     }, [])
@@ -395,7 +413,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats}}>
                 <Navigation />
                 {
                     incomingCall && (

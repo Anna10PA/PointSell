@@ -209,7 +209,7 @@ function Home() {
                 {/* მენიუ */}
                 <section className="flex flex-col gap-4">
                     <h2 className="font-bold text-xl bg-white w-full max-sm:text-[18px]">Special Menu For You</h2>
-                    <section className="grid max-sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh] max-sm:max-h-[80vh]">
+                    <section className="grid max-sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-5 h-full overflow-auto justify-items-center max-h-[75vh] max-sm:max-h-[80vh]">
                         {
                             filteredProducts?.length !== 0 ?
                                 filteredProducts?.map((e, index) => {

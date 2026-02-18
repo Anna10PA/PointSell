@@ -1452,7 +1452,6 @@ def send_image():
         return jsonify({'error': str(e)}), 500
 
 
-
 # სამსახურის დაწყება (განცხადების დაწერა)
 @app.post('/start_work')
 def start_work():
@@ -1467,6 +1466,7 @@ def start_work():
 
     all_user = check_users()
     user = next((u for u in all_user if u['email'] == email), None)
+    manager = next((u for u in all_user if u['position'] == 'Manager'))
     
     if user and text:
         new_cand = {
@@ -1475,6 +1475,20 @@ def start_work():
             "text": text
         }
 
+        user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"You have successfully completed the application. We will review your application and notify you of the response.",
+                "read": False
+        })
+
+        manager['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"{email} filled out an application to start work. check it!",
+                "read": False
+        })
+
         cand_list = []
         with open(All_candidats, "r", encoding="utf-8") as file:
             lst = json.load(file)
@@ -1482,6 +1496,7 @@ def start_work():
 
         cand_list.append(new_cand)
 
+        save_users(all_user)
         with open(All_candidats, "w", encoding="utf-8") as file:
             json.dump(cand_list, file, indent=4, ensure_ascii=False)
 
@@ -1504,7 +1519,7 @@ def candidats():
 def home():
     all_users = check_users()
     all_product = check_products()
-    
+
     return jsonify([all_users, all_product])
 
 
