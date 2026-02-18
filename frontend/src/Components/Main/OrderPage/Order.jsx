@@ -105,18 +105,18 @@ function Order() {
                             curentOrd ?
                                 <div className="h-full flex flex-col items-start w-full gap-4 mt-2">
                                     <h1 className="font-bold text-xl">Details</h1>
-                                    <div className="flex flex-wrap justify-between items-center w-full gap-5 mt-3 max-md:mt-0">
+                                    <div className="flex flex-wrap justify-between items-start w-full gap-5 mt-3 max-md:mt-0">
                                         <div className="flex items-center flex-col gap-1 min-w-max">
                                             <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Order</h1>
                                             <h2 className="font-bold text-[16px]">{chosenOrd?.type}</h2>
                                         </div>
                                         <div className="flex items-center flex-col gap-1 min-w-max">
                                             <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Costumer</h1>
-                                            <h2 className="font-bold">{chosenOrd?.name}</h2>
+                                            <h2 className="font-bold max-w-50">{chosenOrd?.name}</h2>
                                         </div>
                                         <div className="flex items-center flex-col gap-1 min-w-max">
                                             <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">{chosenOrd?.address ? 'Address' : 'Table №'}</h1>
-                                            <h2 className="font-bold">{chosenOrd?.address ? chosenOrd?.address : chosenOrd?.table}</h2>
+                                            <h2 className="font-bold max-w-45">{chosenOrd?.address ? chosenOrd?.address : chosenOrd?.table}</h2>
                                         </div>
                                         <div className="flex items-center flex-col gap-1 min-w-max">
                                             <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Time</h1>
@@ -141,7 +141,7 @@ function Order() {
                                         }
                                     </div>
                                     <div>
-                                        <button></button>
+                                        <button>click</button>
                                     </div>
                                 </div>
                                 : <h1 className="text-center text-gray-400 font-semibold text-lg">No Order Details</h1>

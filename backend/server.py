@@ -1452,6 +1452,7 @@ def send_image():
         return jsonify({'error': str(e)}), 500
 
 
+
 # სამსახურის დაწყება (განცხადების დაწერა)
 @app.post('/start_work')
 def start_work():
@@ -1503,6 +1504,7 @@ def candidats():
 def home():
     all_users = check_users()
     all_product = check_products()
+    
     return jsonify([all_users, all_product])
 
 
