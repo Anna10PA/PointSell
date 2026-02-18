@@ -7,7 +7,7 @@ import BgBlack from "../../../MiniComponents/BgBlack"
 
 function Deliver() {
     let [curentUser, setCurentUser] = useState(null)
-    let { register, handleSubmit, reset, formState: { errors }, watch } = useForm({
+    let { register, handleSubmit, reset, formState: { errors }, watch, setValue } = useForm({
         mode: "onBlur"
     })
     let [deliverInfo, setDeliverInfo] = useState({ distance: 0, duration: 0 })
@@ -16,6 +16,30 @@ function Deliver() {
     let [openMessage, setOpenMessage] = useState(false)
     let [gotDisc, setGotDisc] = useState(false)
     let [submit, setSubmit] = useState(false)
+    let [addressError, setAddressError] = useState('')
+
+
+    // გადახდა
+    let promoCodeInput = watch('promo_code')
+    let subtotal = Number(curentUser?.curent_cart?.sum?.subtotal) || 0
+    let change = Number(curentUser?.curent_cart?.sum?.change) || 0
+    let tax = deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5) : 1.5
+    let baseDiscount = Number(curentUser?.curent_cart?.sum?.discount) || 0
+
+    let sum = subtotal + change + tax - baseDiscount
+    let discountValue = promoCodeInput === promoCode ? (sum * 0.95) : baseDiscount
+
+
+    // ფასდაკლება 
+    useEffect(() => {
+        if (promoCodeInput === promoCode) {
+            setOpenMessage(true)
+            setGotDisc(true)
+        } else {
+            setOpenMessage(false)
+            setGotDisc(false)
+        }
+    }, [promoCodeInput])
 
 
     // ნომრის შემოწმება
@@ -103,26 +127,40 @@ function Deliver() {
     }
 
 
-    // გადახდა
-    let promoCodeInput = watch('promo_code')
-    let subtotal = Number(curentUser?.curent_cart?.sum?.subtotal) || 0
-    let change = Number(curentUser?.curent_cart?.sum?.change) || 0
-    let tax = deliverInfo.distance ? (deliverInfo.distance * 2 + 1.5) : 1.5
-    let baseDiscount = Number(curentUser?.curent_cart?.sum?.discount) || 0
+    // მისამართის ტექსტად გარდაქმნა 
+    let showLocation = async (pos) => {
+        let lat = pos.coords.latitude
+        let lon = pos.coords.longitude
 
-    let sum = subtotal + change + tax - baseDiscount
-    let discountValue = promoCodeInput === promoCode ? (sum * 0.95) : baseDiscount
+        try {
+            let res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
+            let data = await res.json()
 
-    useEffect(() => {
-        if (promoCodeInput === promoCode) {
-            setOpenMessage(true)
-            setGotDisc(true)
-        } else {
-            setOpenMessage(false)
-            setGotDisc(false)
+            let address = data.display_name
+
+            setValue('address', address, { shouldValidate: true })
+            taxCount(address)
+
+        } catch (error) {
+            console.error(error)
         }
-    }, [promoCodeInput])
+    }
 
+
+    // ლოკაციის მიღება
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showLocation, ()=> {
+                console.error('something went wrong')
+            })
+        } else {
+            console.error('you can not use location')
+            setAddressError('something went wrong')
+        }
+    }
+
+
+    // submit
     let onSubmit = async (data) => {
         if (submit) return
 
@@ -288,9 +326,15 @@ function Deliver() {
                             <textarea name="Address" id="Address" placeholder='Enter Address' className={`border rounded-lg px-4 py-2.5 w-full outline-[#f67f20] min-h-20 max-h-20 ${errors.address ? 'border-red-600 border-2' : 'border-gray-400 '}`}
                                 {...register('address', { required: 'Enter Address' })}
                                 onBlur={(e) => taxCount(e.target.value)}></textarea>
-                            <span className='text-[red] font-semibold'>
-                                {errors.address ? errors.address.message : ''}
-                            </span>
+                            <div className="w-full flex items-center justify-between">
+                                <span className='text-[red] font-semibold'>
+                                    {errors.address ? errors.address.message : addressError}
+                                </span>
+                                <button className="bg-[#f67f20] text-white px-3 py-1.5 rounded duration-100 hover:bg-orange-400 font-semibold cursor-pointer"
+                                    onClick={getLocation}
+                                    type="button"
+                                >Your Current location</button>
+                            </div>
                         </div>
                         <div className="rounded-lg border border-gray-400 p-4 flex items-start justify-start gap-3 w-full max-h-min max-lg:col-span-3 max-md:col-span-2 max-sm:flex-col-reverse max-sm:text-center">
                             <div className="w-[50%] max-sm:w-full ">
