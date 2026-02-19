@@ -1470,7 +1470,7 @@ def start_work():
     
     if user and text:
         new_cand = {
-            "user": user['name'] or user['email'],
+            "user": user['email'],
             "time": current_time,
             "text": text
         }
@@ -1505,6 +1505,45 @@ def start_work():
         return jsonify({"error": 'not found'}), 404
 
 
+# დასტური დასაქმებაზე / უარყოფა
+@app.post('/answer')
+def answer():
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
+
+    if 'email' not in session:
+        return jsonify({'error': 'user is not found'}), 401
+    
+    data = request.get_json()
+    answer = data['answer']
+    email = data['email']
+    all_user = check_users()
+    user = next((u for u in all_user if u['email'] == email), None)
+
+    if user:
+        if answer:
+            user['position'] = 'Worker'
+            user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"Congratulations, you have been hired",
+                "read": False
+            })
+        else:
+            user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"Unfortunately, you didn't pass the interview. Try again another time",
+                "read": False
+            })
+            
+        save_users(all_user)
+        return jsonify({'message': 'save '}), 200
+    
+    else:
+        return jsonify({'error': 'user not found'}), 404
+
+
+# კანდიდატების წაკითხვა
 @app.get('/candidats')
 def candidats():
     if 'email' not in session:

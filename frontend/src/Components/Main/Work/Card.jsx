@@ -1,6 +1,9 @@
-import React from 'react'
+import { useContext } from "react"
+import { Info } from "../Main"
 
 function Card({ user, text, time }) {
+  let { answer } = useContext(Info)
+
   return (
     <div className='bg-gray-100 px-7 py-5 rounded-2xl flex flex-col items-start gap-5 border border-gray-200'>
       <div className='flex items-center justify-between w-full'>
@@ -10,11 +13,15 @@ function Card({ user, text, time }) {
       <p className='text-gray-400 font-semibold'>{text}</p>
       <div className='w-full flex items-center justify-between'>
         <div className='flex items-center gap-5'>
-          <button className='px-5 py-2 rounded bg-[#f67f20] flex items-center gap-3 justify-center text-white font-bold tracking-wide duration-100 hover:bg-orange-400 cursor-pointer'>
+          <button className='px-5 py-2 rounded bg-[#f67f20] flex items-center gap-3 justify-center text-white font-bold tracking-wide duration-100 hover:bg-orange-400 cursor-pointer' onClick={()=> {
+            answer(true, user)
+          }}>
             <i className="fa-solid fa-check"></i>
             Accept
           </button>
-          <button className='px-5 py-2 rounded bg-[#f62020] flex items-center gap-3 justify-center text-white font-bold tracking-wide duration-100 hover:bg-red-500 cursor-pointer'>
+          <button className='px-5 py-2 rounded bg-[#f62020] flex items-center gap-3 justify-center text-white font-bold tracking-wide duration-100 hover:bg-red-500 cursor-pointer' onClick={()=> {
+            answer(false, user)
+          }}>
             <i className="fa-solid fa-xmark"></i>
             Reject
           </button>

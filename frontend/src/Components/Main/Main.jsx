@@ -331,7 +331,6 @@ function Main() {
         if (res.ok) {
             let result = await res.json()
             setCands(result)
-            console.log(result)
         }
     }
 
@@ -364,6 +363,7 @@ function Main() {
     }, [curentUser, ringtone])
 
 
+    // პასუცის გაცემა დარეკვაზე
     let answerCall = (incomingCall) => {
         ringtone.pause()
         ringtone.currentTime = 0
@@ -376,6 +376,22 @@ function Main() {
             }
         })
         setIncomingCall(null)
+    }
+
+
+    // სამუშაო მოთხოვნის პასუხი
+    let answer = async (ans, email) => {
+        let res = await fetch('https://pointsell-4.onrender.com/answer', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                answer: ans
+            })
+        })
     }
 
 
@@ -413,7 +429,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats}}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer }}>
                 <Navigation />
                 {
                     incomingCall && (
