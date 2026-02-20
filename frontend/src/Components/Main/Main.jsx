@@ -20,6 +20,7 @@ import Calling from "./Messages/Calling.jsx"
 import Permision from "./Messages/Permision.jsx"
 
 import Work from "./Work/Work.jsx"
+import SendAnswer from "./Work/SendAnswer.jsx"
 
 import Notification from './Notification/Notification.jsx'
 import Navigation from "../../MiniComponents/Navigation"
@@ -478,6 +479,7 @@ function Main() {
                     <Route path='/calling' element={<Calling />} />
                     <Route path='/conditions' element={<Permision />} />
                     <Route path='/work' element={<Work />} />
+                    <Route path='/answer' element={<SendAnswer />} />
                 </Routes>
             </Info.Provider>
         </div >

@@ -55,7 +55,7 @@ function Navigation() {
                     <i className={`fa-solid fa-bell hover:text-[#F67F20] ${locationName === '/main/notification' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 <Link to='/main/work'>
-                    <i class={`fa-solid fa-briefcase hover:text-[#F67F20] ${locationName === '/main/work' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
+                    <i className={`fa-solid fa-briefcase hover:text-[#F67F20] ${locationName === '/main/work' ? ' text-[#F67F20] ' : 'text-[#BBBBBB]'}`}></i>
                 </Link>
                 {
                     curentUser.position === "Manager" ?

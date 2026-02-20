@@ -2,13 +2,15 @@ import { Info } from "../Main"
 import { useContext, useEffect, useState } from "react"
 import Card from "./Card"
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 function Work() {
     let { curentUser, cands, candidats } = useContext(Info)
     let [value, setValue] = useState(0)
     let { handleSubmit, register } = useForm()
+    let navigate = useNavigate()
 
-    useEffect(()=> {
+    useEffect(() => {
         candidats()
     }, [])
 
@@ -17,7 +19,7 @@ function Work() {
     let startWork = async (info) => {
         let res = await fetch('https://pointsell-4.onrender.com/start_work', {
             method: 'POST',
-            credentials: 'include',
+            // credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -26,10 +28,11 @@ function Work() {
                 text: info.text
             })
         })
-        if (res.ok) {
-            alert('work')
+        if (!res.ok) {
+            let result = await res.json()
+            console.error(result)
         } else {
-            console.error('something went wrong')
+            navigate('/main/answer')
         }
     }
 
@@ -54,17 +57,17 @@ function Work() {
                                 cands?.length > 0 ?
                                     cands?.map((item, index) => {
                                         console.log(item)
-                                        return <Card 
-                                        key={index}
-                                        user={item.user}
-                                        text={item.text}
-                                        time={item.time}
+                                        return <Card
+                                            key={index}
+                                            user={item.user}
+                                            text={item.text}
+                                            time={item.time}
                                         />
                                     })
-                                    : 
-                                <div className="w-full h-full flex items-center justify-center">
-                                    <h1 className="text-gray-400 font-semibold text-xl">There are no candidates</h1>
-                                </div>
+                                    :
+                                    <div className="w-full h-full flex items-center justify-center">
+                                        <h1 className="text-gray-400 font-semibold text-xl">There are no candidates</h1>
+                                    </div>
                             }
                         </div>
 
