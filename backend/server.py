@@ -1455,14 +1455,15 @@ def send_image():
 # სამსახურის დაწყება (განცხადების დაწერა)
 @app.post('/start_work')
 def start_work():
-    if 'email' not in session:
-        return jsonify({"error": 'user not found'}), 401
-    
     current_time = str(datetime.utcnow() + timedelta(hours=4))
 
     data = request.get_json()
     email = data.get('email')
     text = data.get('text')
+    
+    if not email:
+        return jsonify({"error": 'user not found'}), 401
+
 
     all_user = check_users()
     user = next((u for u in all_user if u['email'] == email), None)

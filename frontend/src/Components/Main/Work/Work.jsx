@@ -19,7 +19,7 @@ function Work() {
     let startWork = async (info) => {
         let res = await fetch('https://pointsell-4.onrender.com/start_work', {
             method: 'POST',
-            // credentials: 'include',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
