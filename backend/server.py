@@ -314,6 +314,14 @@ def check_products():
         return json.load(file)
 
 
+# შეკვეთების ნახვა
+def check_orders():
+    if not os.path.exists(All_orders):
+        return []
+    with open(All_orders, 'r', encoding='utf-8') as file:
+        return json.load(file)
+
+
 # პროდუქტის კალათაში დამატება 
 @app.post('/user_cart')
 def cart():
@@ -1608,8 +1616,9 @@ def candidats():
 def home():
     all_users = check_users()
     all_product = check_products()
+    all_orders = check_orders()
 
-    return jsonify([all_users, all_product, All_orders, All_candidats])
+    return jsonify([all_users, all_product, all_orders])
 
 
 if __name__ == '__main__':
