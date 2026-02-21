@@ -430,16 +430,28 @@ function Main() {
 
     // საჭმლის მომხადების დაწყება
     let startCooking = async (order) => {
-        let res = await fetch('https://pointsell-4.onrender.com/start_cooking', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                orderId: order,
+        try {
+            let res = await fetch('https://pointsell-4.onrender.com/start_cooking', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    orderId: order,
+                })
+
             })
-        })
+            if (res.ok) {
+                await getOrders()
+            } else {
+                let errorData = await res.json()
+                console.log(errorData)
+            }
+
+        } catch (e) {
+            console.error(e)
+        }
     }
 
 
