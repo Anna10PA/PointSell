@@ -51,6 +51,7 @@ function Main() {
     let [allAnswers, setAllAnswers] = useState([])
     let [incomingCall, setIncomingCall] = useState(null)
     let [cands, setCands] = useState([])
+    let [orders, setOrders] = useState([])
 
 
     let ringtone = useMemo(() => {
@@ -126,6 +127,24 @@ function Main() {
             console.error(e)
         }
     }
+
+
+    // ყველა შეკვეთა
+    let getOrders = async () => {
+        try {
+            let res = await fetch('https://pointsell-4.onrender.com/orders', {
+                method: 'GET',
+                credentials: 'include'
+            })
+            if (res.ok) {
+                let result = await res.json()
+                setOrders(result.filter((item) => !item.isReady))
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    getOrders()
 
 
     // ჩემი / მენეჯერის ინფორმაცია
@@ -492,7 +511,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer, fired, cooking, startCooking }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer, fired, cooking, startCooking, orders }}>
                 <Navigation />
                 {
                     incomingCall && (
