@@ -2,11 +2,11 @@ import { useEffect, useState, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { Info } from "../Components/Main/Main"
 
-function User({ name, email, image, sender = [], myEmail = '' }) {
+function User({ name, email, image, sender = [], myEmail = '', position}) {
     let location = useLocation()
     let locationName = location.pathname
     let [friendList, setFriendList] = useState([])
-    let { getAllUser } = useContext(Info)
+    let { getAllUser, curentUser } = useContext(Info)
 
 
     // მეგობრობის გაგზავნა / წაშლა
@@ -53,7 +53,7 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
             <td className={`flex items-center gap-3 border-b border-gray-300 p-2 ${locationName == '/main/search_friend' || locationName == '/main/requests' ? ' w-2/5  max-md:items-start max-md:w-4/5' : 'w-1/2'} max-lg:gap-2`}>
                 <img src={image} alt="" className="w-16 h-16 rounded-lg object-cover max-lg:w-12 max-lg:h-12" />
                 <div className="w-full flex items-start flex-col gap-3 max-lg:gap-2 max-md:gap-1">
-                    <h1 className="font-bold text-md wrap-break-word whitespace-normal max-lg:text-[14px]">{name}</h1>
+                    <h1 className="font-bold text-md wrap-break-word whitespace-normal max-lg:text-[14px]">{name || email.split('@')[0] || 'Unknown'}</h1>
                     <h1 className="wrap-break-word whitespace-normal w-full max-lg:text-[14px] md:hidden font-semibold text-gray-400 max-[500px]:text-[12px]! max-[500px]:w-[150px]! max-[500px]:truncate">
                         {email}
                     </h1>
@@ -93,6 +93,9 @@ function User({ name, email, image, sender = [], myEmail = '' }) {
                 }}>
                     <i className="fa-solid fa-check"></i>
                 </button>
+            </td>
+            <td className={`${locationName === '/main/setting/employers_information' ? 'flex items-center gap-3 border-b border-gray-300  p-2 w-1/5 pr-2  font-semibold max-[500px]:gap-1' : 'hidden'}`}>
+                <button className={`text-white bg-red-600 px-5 py-2 rounded duration-100 hover:bg-red-700 cursor-pointer disabled:bg-gray-300`} disabled={position === 'Manager' || curentUser?.position === 'Worker'}>Fired</button>
             </td>
         </tr >
     )

@@ -22,8 +22,7 @@ function SearchFriend() {
 
         if (location_name === '/main/requests') {
             let requests = allUser.filter(user =>
-                curentUser.friend_request?.includes(user.email)
-            )
+                curentUser.friend_request?.includes(user.email))
             setFoundUsers(requests)
         } else {
             if (searchEmail && searchEmail.trim() !== '') {

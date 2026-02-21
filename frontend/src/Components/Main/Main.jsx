@@ -246,7 +246,7 @@ function Main() {
         }
     }
 
-    
+
     // თამაში პაროლის აღსადგენად
     let Game = useCallback(async () => {
 
@@ -413,6 +413,9 @@ function Main() {
             if (curentUser?.position !== "Costomer") {
                 candidats()
             }
+            setInterval(() => {
+                getCurentUser()
+            }, 1500)
         }
         loadAllFunc()
     }, [])

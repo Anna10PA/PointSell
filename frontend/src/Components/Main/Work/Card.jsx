@@ -5,7 +5,7 @@ function Card({ user, text, time }) {
   let { answer } = useContext(Info)
 
   return (
-    <div className='bg-gray-100 px-7 py-5 rounded-2xl flex flex-col items-start gap-5 border border-gray-200'>
+    <div className='bg-gray-100 px-7 py-5 rounded-2xl w-full flex flex-col items-start gap-5 border border-gray-200'>
       <div className='flex items-center justify-between w-full'>
         <h1 className='text-gray-500 text-xl font-bold'>{user}</h1>
         <p className='text-gray-500 font-semibold'>{(String(new Date(time.split(' ')[0])).split(' ').slice(1, 4)).join(' ')}</p>

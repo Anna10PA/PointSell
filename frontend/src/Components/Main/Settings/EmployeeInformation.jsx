@@ -22,12 +22,13 @@ function EmployeeInformation() {
           <tbody className="w-full mt-15">
             {
               allUser?.filter((user) => {
-                return user.position === 'Worker'
+                return user.position === 'Worker' || user.position === 'Manager'
               }).map((item, index) => {
                 return <User
                   image={item?.profileUrl}
                   name={item?.name}
                   email={item?.email}
+                  position={item?.position }
                   key={index} />
               })
             }

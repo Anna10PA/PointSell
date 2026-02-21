@@ -14,7 +14,7 @@ function Work() {
         candidats()
         let interval = setInterval(() => {
             candidats()
-        }, 3000)
+        }, 1500)
 
         return () => clearInterval(interval)
     }, [])
@@ -57,7 +57,7 @@ function Work() {
                             }}></textarea>
                             <button type="submit" disabled={value.length === 0} className="bg-[#f67f20] text-white px-5 py-3 rounded font-bold disabled:bg-gray-400 cursor-pointer disabled:cursor-default duration-100 hover:bg-orange-400">Submit</button>
                         </form> :
-                        <div className="w-full h-[70vh]">
+                        <div className="w-full h-[70vh] flex flex-col items-start gap-5">
                             {
                                 cands?.length > 0 ?
                                     cands?.map((item, index) => {
