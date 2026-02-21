@@ -500,7 +500,8 @@ def pay():
                 "name": name,
                 "address": address,
                 "table": table,
-                "ready_time": sum_time
+                "ready_time": sum_time,
+                "start": False
             }
             orders(new_order)
 
@@ -1610,6 +1611,47 @@ def candidats():
     with open(All_candidats, "r", encoding="utf-8") as file:
         info = json.load(file)
         return jsonify(info)
+
+
+# საჭმლის მომზადება
+@app.post('/cooking')
+def cooking():
+    if 'email' not in session:
+        return jsonify({"error": 'user not found'}), 401
+    
+    data = request.get_json()
+    orderId = data['orderId']
+    orderTime = data['time']
+
+    all_orders = check_orders()
+    order = next((o for o in all_orders if o['order'] == orderId), None)
+
+    if order:
+        order['ready_time'] = orderTime
+        orders(order)
+        return jsonify({'message': 'change'}), 200
+    
+    return jsonify({'error': 'something went wrong'}), 404
+
+
+# საჭმლის მომზადების დაწყება
+@app.post('/start_cooking')
+def cooking():
+    if 'email' not in session:
+        return jsonify({"error": 'user not found'}), 401
+    
+    data = request.get_json()
+    orderId = data['orderId']
+
+    all_orders = check_orders()
+    order = next((o for o in all_orders if o['order'] == orderId), None)
+
+    if order:
+        order['start'] = True 
+        orders(order)
+        return jsonify({'message': 'change'}), 200
+    
+    return jsonify({'error': 'something went wrong'}), 404
 
 
 @app.get("/")

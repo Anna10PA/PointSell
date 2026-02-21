@@ -7,7 +7,7 @@ function Order() {
     let [orders, setOrders] = useState([])
     let [curentOrd, setCurentOrd] = useState(null)
     let [chosenOrd, setChosenOrd] = useState(null)
-    let { allProduct, curentUser } = useContext(Info)
+    let { allProduct, curentUser, cooking, startCooking } = useContext(Info)
     let [time, setTime] = useState(0)
 
 
@@ -47,14 +47,20 @@ function Order() {
 
     // თაიმერის ფუნქცია
     useEffect(() => {
-        if (time <= 0) return
-
         let timer = setInterval(() => {
-            setTime((prevTime) => prevTime - 1)
+            setTime((prevTime) => {
+                if (prevTime <= 1) {
+                    clearInterval(timer)
+                    return 0
+                }
+                return prevTime - 1
+            })
         }, 1000)
 
+        cooking(chosenOrd?.order, timer)
         return () => clearInterval(timer)
-    }, [time])
+    }, [])
+
 
     return (
         <>
@@ -103,7 +109,7 @@ function Order() {
                     <div className={`w-full py-5 ${!curentOrd ? 'flex items-center justify-center' : ''}`}>
                         {
                             curentOrd ?
-                                <div className="h-full flex flex-col items-start w-full gap-4 mt-2">
+                                <div className="h-full min-h-[78vh] flex flex-col items-start w-full gap-4 mt-2">
                                     <h1 className="font-bold text-xl">Details</h1>
                                     <div className="flex flex-wrap justify-between items-start w-full gap-5 mt-3 max-md:mt-0">
                                         <div className="flex items-center flex-col gap-1 min-w-max">
@@ -120,7 +126,7 @@ function Order() {
                                         </div>
                                         <div className="flex items-center flex-col gap-1 min-w-max">
                                             <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Time</h1>
-                                            <h2 className="font-bold">{chosenOrd?.ready_time}m</h2>
+                                            <h2 className="font-bold">{chosenOrd?.ready_time} (+5) m</h2>
                                         </div>
                                     </div>
                                     <h1 className="font-bold text-xl mt-5">Orders</h1>
@@ -140,8 +146,13 @@ function Order() {
                                             })
                                         }
                                     </div>
-                                    <div>
-                                        <button>click</button>
+                                    <div className={`${curentUser?.position === 'Customer' ? 'hidden' : 'flex items-center justify-between w-full min-h-[10vh]'}`}>
+                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold `} onClick={() => {
+                                            if (!chosenOrd?.start) {
+                                                startCooking()
+                                            }
+                                        }}>Start</button>
+                                        <h1 className="font-semibold text-xl text-gray-600">Time: {Number(chosenOrd?.ready_time || time) + 5}</h1>
                                     </div>
                                 </div>
                                 : <h1 className="text-center text-gray-400 font-semibold text-lg">No Order Details</h1>

@@ -412,6 +412,37 @@ function Main() {
     }
 
 
+    // საჭმლის მომზადება
+    let cooking = async (order, time) => {
+        let res = await fetch('https://pointsell-4.onrender.com/cooking', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                orderId: order,
+                time: time
+            })
+        })
+    }
+
+
+    // საჭმლის მომხადების დაწყება
+    let startCooking = async (order, time) => {
+        let res = await fetch('https://pointsell-4.onrender.com/start_cooking', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                orderId: order,
+            })
+        })
+    }
+
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -449,7 +480,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer, fired }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer, fired, cooking, startCooking }}>
                 <Navigation />
                 {
                     incomingCall && (
