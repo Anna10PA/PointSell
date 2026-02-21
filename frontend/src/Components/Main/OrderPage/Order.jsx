@@ -59,7 +59,7 @@ function Order() {
 
         cooking(chosenOrd?.order, timer)
         return () => clearInterval(timer)
-    }, [])
+    }, [chosenOrd?.start, chosenOrd?.order])
 
 
     return (
@@ -149,7 +149,7 @@ function Order() {
                                     <div className={`${curentUser?.position === 'Customer' ? 'hidden' : 'flex items-center justify-between w-full min-h-[10vh]'}`}>
                                         <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold `} onClick={() => {
                                             if (!chosenOrd?.start) {
-                                                startCooking()
+                                                startCooking(chosenOrd?.order)
                                             }
                                         }}>Start</button>
                                         <h1 className="font-semibold text-xl text-gray-600">Time: {Number(chosenOrd?.ready_time || time) + 5}</h1>
