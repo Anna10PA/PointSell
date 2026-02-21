@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { Info } from "../Main"
 
 function Card({ user, text, time }) {
-  let { answer } = useContext(Info)
+  let { answer, curentUser } = useContext(Info)
 
   return (
     <div className='bg-gray-100 px-7 py-5 rounded-2xl w-full flex flex-col items-start gap-5 border border-gray-200'>
@@ -12,7 +12,7 @@ function Card({ user, text, time }) {
       </div>
       <p className='text-gray-400 font-semibold'>{text}</p>
       <div className='w-full flex items-center justify-between'>
-        <div className='flex items-center gap-5'>
+        <div className={`flex items-center gap-5 ${curentUser?.position == 'Manager' ? ' ': 'hidden'}`}>
           <button className='px-5 py-2 rounded bg-[#f67f20] flex items-center gap-3 justify-center text-white font-bold tracking-wide duration-100 hover:bg-orange-400 cursor-pointer' onClick={()=> {
             answer(true, user)
           }}>

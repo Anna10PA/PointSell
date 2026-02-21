@@ -6,7 +6,7 @@ function User({ name, email, image, sender = [], myEmail = '', position}) {
     let location = useLocation()
     let locationName = location.pathname
     let [friendList, setFriendList] = useState([])
-    let { getAllUser, curentUser } = useContext(Info)
+    let { getAllUser, curentUser, fired } = useContext(Info)
 
 
     // მეგობრობის გაგზავნა / წაშლა
@@ -27,6 +27,7 @@ function User({ name, email, image, sender = [], myEmail = '', position}) {
 
     }
 
+
     // რექვესთებიდან წაშლა / დამატება
     let confirmOrDelete = async (type) => {
         let res = await fetch('https://pointsell-4.onrender.com/delete_or_confirm', {
@@ -42,11 +43,13 @@ function User({ name, email, image, sender = [], myEmail = '', position}) {
         })
     }
 
+
     useEffect(() => {
         if (locationName === '/main/search_friend') {
             setFriendList(sender)
         }
     }, [sender, locationName])
+
 
     return (
         <tr className="flex w-full justify-between">
@@ -95,7 +98,9 @@ function User({ name, email, image, sender = [], myEmail = '', position}) {
                 </button>
             </td>
             <td className={`${locationName === '/main/setting/employers_information' ? 'flex items-center gap-3 border-b border-gray-300  p-2 w-1/5 pr-2  font-semibold max-[500px]:gap-1' : 'hidden'}`}>
-                <button className={`text-white bg-red-600 px-5 py-2 rounded duration-100 hover:bg-red-700 cursor-pointer disabled:bg-gray-300`} disabled={position === 'Manager' || curentUser?.position === 'Worker'}>Fired</button>
+                <button className={`text-white bg-red-600 px-5 py-2 rounded duration-100 hover:bg-red-700 cursor-pointer disabled:bg-gray-300`} disabled={position === 'Manager' || curentUser?.position === 'Worker'} onClick={()=> {
+                    fired(email)
+                }}>Fired</button>
             </td>
         </tr >
     )

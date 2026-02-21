@@ -1564,6 +1564,35 @@ def answer():
         return jsonify({'error': 'user not found'}), 404
 
 
+# სამსახურიდან გაგდება
+@app.post('/fired')
+def fired():
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
+
+    if 'email' not in session:
+        return jsonify({'error' : 'user not found'}), 401
+    
+    data = request.get_json()
+    email = data['email']
+
+    all_user = check_users()
+    user = next((u for u in all_user if u['email'] == email), None)
+
+    if user:
+        user['position'] = 'Customer'
+        user['notification'].insert(0, {
+                "date": current_time.split()[0],
+                "time": current_time.split()[1],
+                "message": f"You have been fired. Good luck!",
+                "read": False
+            })
+        save_users(all_user)
+        return jsonify({"message": 'change'}), 200
+    
+    else:
+        return jsonify({'error': 'user not found'}), 404
+
+
 # კანდიდატების წაკითხვა
 @app.get('/candidats')
 def candidats():

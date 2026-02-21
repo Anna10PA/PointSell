@@ -397,6 +397,21 @@ function Main() {
     }
 
 
+    // სამსახურიდან გაგდება
+    let fired = async (email) => {
+        let res = await fetch('https://pointsell-4.onrender.com/fired', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+            })
+        })
+    }
+
+
     // ჩატვირთვა
     useEffect(() => {
         async function loadAllFunc() {
@@ -434,7 +449,7 @@ function Main() {
 
     return (
         <div className="w-full flex items-start h-screen">
-            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer }}>
+            <Info.Provider value={{ curentUser, getCurentUser, allProduct, getAllProduct, allPost, allUser, managerInfo, postReadNotification, blockUser, resetPassword, friend, getAllUser, sendStar, allAnswers, question, Game, getVerification, cands, candidats, answer, fired }}>
                 <Navigation />
                 {
                     incomingCall && (
