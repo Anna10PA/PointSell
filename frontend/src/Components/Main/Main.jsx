@@ -429,7 +429,7 @@ function Main() {
 
 
     // საჭმლის მომხადების დაწყება
-    let startCooking = async (order, time) => {
+    let startCooking = async (order) => {
         let res = await fetch('https://pointsell-4.onrender.com/start_cooking', {
             method: 'POST',
             credentials: 'include',
