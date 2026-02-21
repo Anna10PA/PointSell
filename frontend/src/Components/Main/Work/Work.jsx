@@ -12,6 +12,11 @@ function Work() {
 
     useEffect(() => {
         candidats()
+        let interval = setInterval(() => {
+            candidats()
+        }, 3000)
+
+        return () => clearInterval(interval)
     }, [])
 
 

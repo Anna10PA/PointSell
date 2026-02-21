@@ -246,6 +246,7 @@ function Main() {
         }
     }
 
+    
     // თამაში პაროლის აღსადგენად
     let Game = useCallback(async () => {
 

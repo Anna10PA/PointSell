@@ -108,6 +108,14 @@ def check_users():
         return json.load(file)
 
 
+# კანდიდატების წაკითხვის ფუნქცია
+def read_cands():
+    if not os.path.exists(All_candidats):
+        return []
+    with open(All_candidats, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
 # შეკვეთების წამოღება
 @app.get('/orders')
 def get_orders():
@@ -127,6 +135,12 @@ def get_all_user():
 def save_users(users):
     with open(All_user, "w", encoding="utf-8") as file:
         json.dump(users, file, indent=4, ensure_ascii=False)
+
+
+# კანდიდატების შენახვა
+def save_cands(lst):
+    with open(All_candidats, "w", encoding="utf-8") as file:
+        json.dump(lst, file, indent=4, ensure_ascii=False)
 
 
 # მესიჯები
@@ -1520,7 +1534,10 @@ def answer():
     all_user = check_users()
     user = next((u for u in all_user if u['email'] == email), None)
 
-    if user:
+    all_cands = read_cands()
+    application = [a for a in all_cands if a['user'] == email]
+
+    if user and len(application) > 0:
         if answer:
             user['position'] = 'Worker'
             user['notification'].insert(0, {
@@ -1537,6 +1554,9 @@ def answer():
                 "read": False
             })
             
+        save = list(filter(lambda a: a['user'] != email, all_cands))
+        save_cands(save)
+
         save_users(all_user)
         return jsonify({'message': 'save '}), 200
     
@@ -1560,7 +1580,7 @@ def home():
     all_users = check_users()
     all_product = check_products()
 
-    return jsonify([all_users, all_product])
+    return jsonify([all_users, all_product, All_orders, All_candidats])
 
 
 if __name__ == '__main__':
