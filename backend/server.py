@@ -1636,7 +1636,7 @@ def cooking():
 
 # საჭმლის მომზადების დაწყება
 @app.post('/start_cooking')
-def cooking():
+def start_cooking():
     if 'email' not in session:
         return jsonify({"error": 'user not found'}), 401
     
