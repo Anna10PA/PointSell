@@ -444,6 +444,9 @@ function Main() {
                 time: time
             })
         })
+        if (res.ok) {
+            await getOrders()
+        }
     }
 
 

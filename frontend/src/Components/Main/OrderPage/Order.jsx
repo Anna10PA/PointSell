@@ -46,21 +46,32 @@ function Order() {
 
 
     // თაიმერის ფუნქცია
+
     useEffect(() => {
+        if (chosenOrd) {
+            setTime(Number(chosenOrd.ready_time) * 1000 || 0)
+        }
+    }, [chosenOrd?.order])
+
+    useEffect(() => {
+        if (time <= 0 || !chosenOrd?.start) return
+
         let timer = setInterval(() => {
-            setTime((prevTime) => {
-                if (prevTime <= 1) {
-                    clearInterval(timer)
-                    return 0
-                }
-                return prevTime - 1
-            })
+            setTime((prev) => (prev > 0 ? prev - 1000 : 0))
         }, 1000)
 
-        cooking(chosenOrd?.order, timer)
         return () => clearInterval(timer)
-    }, [chosenOrd?.start, chosenOrd?.order])
+    }, [chosenOrd?.start, time])
 
+
+    // დაწყება
+    let start = async () => {
+        if (!chosenOrd) return
+
+        await startCooking(chosenOrd.order)
+        await cooking(chosenOrd.order, chosenOrd.ready_time)
+        setTime(chosenOrd.ready_time * 1000)
+    }
 
     return (
         <>
@@ -126,7 +137,7 @@ function Order() {
                                         </div>
                                         <div className="flex items-center flex-col gap-1 min-w-max">
                                             <h1 className="font-semibold text-gray-400 text-lg max-md:text-[15px]">Time</h1>
-                                            <h2 className="font-bold">{chosenOrd?.ready_time} (+5) m</h2>
+                                            <h2 className="font-bold">{chosenOrd?.ready_time} m</h2>
                                         </div>
                                     </div>
                                     <h1 className="font-bold text-xl mt-5">Orders</h1>
@@ -150,9 +161,10 @@ function Order() {
                                         <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold `} onClick={() => {
                                             if (!chosenOrd?.start) {
                                                 startCooking(chosenOrd?.order)
+                                                start()
                                             }
                                         }}>Start</button>
-                                        <h1 className="font-semibold text-xl text-gray-600">Time: {Number(chosenOrd?.ready_time || time) + 5}</h1>
+                                        <h1 className="font-semibold text-xl text-gray-600">Time: {chosenOrd?.start ? Math.floor(time / 1000) : chosenOrd?.ready_time}</h1>
                                     </div>
                                 </div>
                                 : <h1 className="text-center text-gray-400 font-semibold text-lg">No Order Details</h1>
