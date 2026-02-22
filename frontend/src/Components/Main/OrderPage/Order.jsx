@@ -36,6 +36,16 @@ function Order() {
     }
 
 
+    // დასრულება
+    let finish = async () => {
+        if (!chosenOrd) return
+        await finishCooking(chosenOrd.order)
+        setOrders(prevOrders => prevOrders.filter(ord => ord.order !== chosenOrd.order))
+        setCurentOrd(null)
+        setChosenOrd(null)
+    }
+
+
     // არჩეული შეკვეთის ინფორმაცია
     useEffect(() => {
         if (!curentOrd || orders.length === 0) return
@@ -182,12 +192,12 @@ function Order() {
                                         }
                                     </div>
                                     <div className={`${curentUser?.position === 'Customer' ? 'hidden' : 'flex items-center justify-between w-full min-h-[10vh]'}`}>
-                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold `} onClick={() => {
+                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold disabled:bg-gray-400`} disabled={time > 0} onClick={() => {
                                             if (!chosenOrd?.start) {
                                                 startCooking(chosenOrd?.order)
                                                 start()
-                                            }else if (chosenOrd?.isReady) {
-                                                finishCooking(chosenOrd?.order)
+                                            } else {
+                                                finish()
                                             }
 
                                         }}> {!chosenOrd?.start ? 'Start' : 'Finish'}</button>
