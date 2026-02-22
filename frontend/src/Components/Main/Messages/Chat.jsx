@@ -19,7 +19,7 @@ function Chat({ user, set2UserInfo }) {
     let input = useRef(null)
     let Navigate = useNavigate()
     let { curentUser } = useContext(Info)
-
+    let [current, setCurrent] = useState(false)
 
     // მესიჯების წამოღება
     useEffect(() => {
@@ -132,7 +132,7 @@ function Chat({ user, set2UserInfo }) {
                         <div className={`${user?.active ? 'bg-[#007400]' : 'bg-gray-400'} w-5 h-5 rounded-[50%] absolute bottom-0 right-0 border-2 max-sm:w-4 max-sm:h-4 border-white`}></div>
                     </div>
                     <div className="leading-5 max-sm:leading-1 min-w-0">
-                        <h1 className="font-bold text-xl max-sm:text-lg truncate max-[430px]:max-w-[130px]! max-[430px]:text-sm">{user?.name}</h1>
+                        <h1 className="font-bold text-xl max-sm:text-lg truncate max-[430px]:max-w-[130px]! max-[430px]:text-sm">{user?.name || user?.email}</h1>
                         <p className="text-md text-gray-400 font-semibold max-sm:text-sm">{user?.position}</p>
                     </div>
                 </div>
@@ -174,6 +174,8 @@ function Chat({ user, set2UserInfo }) {
                         image={user?.profileUrl}
                         active={user?.active}
                         sended_image={item?.image}
+                        current={current}
+                        setCurrent={setCurrent}
                         delete_message={delete_message}
                     />
                 }) :
@@ -184,7 +186,7 @@ function Chat({ user, set2UserInfo }) {
                     </div>}
             </section>
             <form className="w-full relative flex items-center gap-3" onSubmit={handleSubmit(sendNewMessage)}>
-                <div className="w-10 h-10 hover:text-[#f67f20] rounded-[50%] text-gray-400 cursor-pointer duration-200 flex items-center justify-center absolute top-1 left-5">
+                <div className="w-10 h-10 hover:text-[#f67f20] rounded-[50%] text-gray-400 cursor-pointer duration-200 flex items-center justify-center absolute top-1 left-2">
                     <div className="relative w-full h-full flex items-center justify-center cursor-pointer">
                         <input type="file" accept="image/*" className="w-full h-full opacity-0 absolute cursor-pointer" ref={input} onChange={(e) => { sendImage(e.target.files[0]) }} />
                         <i className="fa-solid fa-image cursor-pointer"></i>
