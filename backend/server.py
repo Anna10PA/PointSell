@@ -1646,7 +1646,7 @@ def start_cooking():
     orderId = data['orderId']
 
     all_orders = check_orders()
-    order = next((o for o in all_orders if o['order'] == orderId), None)
+    order = next((o for o in all_orders if str(o.get('order')) == str(orderId)), None)
 
     if order:
         order['start'] = True 

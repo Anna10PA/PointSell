@@ -144,7 +144,6 @@ function Main() {
             console.error(e)
         }
     }
-    getOrders()
 
 
     // ჩემი / მენეჯერის ინფორმაცია
@@ -284,7 +283,6 @@ function Main() {
         try {
             let res = await fetch('https://the-trivia-api.com/v2/questions')
             let data = await res.json()
-            console.log(data)
             if (data && data.length > 0) {
                 quest = data[0]
             } else {
@@ -468,7 +466,7 @@ function Main() {
                 await getOrders()
             } else {
                 let errorData = await res.json()
-                console.log(errorData)
+                console.error(errorData)
             }
 
         } catch (e) {
@@ -488,6 +486,7 @@ function Main() {
                 getAllPost(),
                 getAllUser(),
                 getManagerInfo(),
+                getOrders()
             ])
             setIsLoading(false)
             if (curentUser?.position !== "Costomer") {

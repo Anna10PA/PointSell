@@ -10,7 +10,6 @@ function Order() {
     let { allProduct, curentUser, cooking, startCooking } = useContext(Info)
     let [time, setTime] = useState(0)
 
-
     // შეკვეთების წამოღება
     useEffect(() => {
         let getOrders = async () => {
@@ -163,7 +162,7 @@ function Order() {
                                                 startCooking(chosenOrd?.order)
                                                 start()
                                             }
-                                        }}>Start</button>
+                                        }}> {!chosenOrd?.start ? 'Start' : 'Finish'}</button>
                                         <h1 className="font-semibold text-xl text-gray-600">Time: {chosenOrd?.start ? Math.floor(time / 1000) : chosenOrd?.ready_time}</h1>
                                     </div>
                                 </div>
