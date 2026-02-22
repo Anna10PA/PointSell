@@ -1701,7 +1701,6 @@ def home():
     all_users = check_users()
     all_product = check_products()
     all_orders = check_orders()
-
     return jsonify([all_users, all_product, all_orders])
 
 
