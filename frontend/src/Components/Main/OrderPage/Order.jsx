@@ -195,7 +195,7 @@ function Order() {
                                         }
                                     </div>
                                     <div className={`${curentUser?.position === 'Customer' ? 'hidden' : 'flex items-center justify-between w-full min-h-[10vh]'}`}>
-                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold disabled:bg-gray-400`} disabled={!start_tm} onClick={() => {
+                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold disabled:bg-gray-400`} disabled={start_tm} onClick={() => {
                                             if (!chosenOrd?.start) {
                                                 startCooking(chosenOrd?.order)
                                                 start()
