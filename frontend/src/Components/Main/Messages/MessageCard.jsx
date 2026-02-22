@@ -19,7 +19,7 @@ function MessageCard({ sender, time, message, delete_message, sended_image }) {
                     }}></i>
                 </div>
                 <div className={`flex flex-col gap-1 ${curentUser?.email == sender ? 'items-end' : 'items-start'}`}>
-                    <div className={` max-w-80 font-semibold relative h-max flex flex-col px-5 py-3 ${curentUser?.email == sender ? 'bg-[#f67f20] items-end rounded-[15px_15px_5px_15px] text-white ' : 'bg-gray-200 rounded-[15px_15px_15px_5px] items-start'} ${sended_image ? 'p-0' : ""} `}>
+                    {/* <div className={` max-w-80 font-semibold relative h-max flex flex-col px-5 py-3 ${curentUser?.email == sender ? 'bg-[#f67f20] items-end rounded-[15px_15px_5px_15px] text-white ' : 'bg-gray-200 rounded-[15px_15px_15px_5px] items-start'} ${sended_image ? 'p-0' : ""} `}>
                         {
                             message ?
                                 <p className="wrap-break-word leading-tight max-w-80">{message}</p>
@@ -27,7 +27,7 @@ function MessageCard({ sender, time, message, delete_message, sended_image }) {
                                 <img src={`${sended_image}`} alt="image" className="rounded max-w-100 w-full max-sm:max-w-40 "/>
                                 : null
                         }
-                    </div>
+                    </div> */}
                     <div className="flex items-center gap-5">
                         <p className=" text-gray-900 text-[15px] tracking-[1px]">{isToday ? String(msgDate).split(' ')[4].split(':')[0] + ':' + String(msgDate).split(' ')[4].split(':')[1] : String(msgDate).split(' ').slice(1, 3).join(' ')}</p>
                     </div>
