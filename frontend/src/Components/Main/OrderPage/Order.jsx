@@ -9,6 +9,7 @@ function Order() {
     let [chosenOrd, setChosenOrd] = useState(null)
     let { allProduct, curentUser, cooking, startCooking, finishCooking } = useContext(Info)
     let [time, setTime] = useState(0)
+    let [start_tm, setStart] = useState(false)
 
     // შეკვეთების წამოღება
     useEffect(() => {
@@ -76,8 +77,10 @@ function Order() {
                 if (remaining <= 0) {
                     setTime(0)
                     clearInterval(interval)
+                    setStart(false)
                 } else {
                     setTime(Math.max(0, remaining))
+                    setStart(true)
                 }
             }
 
@@ -192,7 +195,7 @@ function Order() {
                                         }
                                     </div>
                                     <div className={`${curentUser?.position === 'Customer' ? 'hidden' : 'flex items-center justify-between w-full min-h-[10vh]'}`}>
-                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold disabled:bg-gray-400`} disabled={time > 0} onClick={() => {
+                                        <button className={`${!chosenOrd?.start ? 'bg-green-500 hover:bg-green-700' : 'bg-red-500 hover:bg-red-700'} px-5 py-2 rounded text-white cursor-pointer duration-100 font-semibold disabled:bg-gray-400`} disabled={!start_tm} onClick={() => {
                                             if (!chosenOrd?.start) {
                                                 startCooking(chosenOrd?.order)
                                                 start()
