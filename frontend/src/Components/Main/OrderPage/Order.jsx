@@ -7,7 +7,7 @@ function Order() {
     let [orders, setOrders] = useState([])
     let [curentOrd, setCurentOrd] = useState(null)
     let [chosenOrd, setChosenOrd] = useState(null)
-    let { allProduct, curentUser, cooking, startCooking } = useContext(Info)
+    let { allProduct, curentUser, cooking, startCooking, finishCooking } = useContext(Info)
     let [time, setTime] = useState(0)
 
     // შეკვეთების წამოღება
@@ -186,7 +186,10 @@ function Order() {
                                             if (!chosenOrd?.start) {
                                                 startCooking(chosenOrd?.order)
                                                 start()
+                                            }else if (chosenOrd?.isReady) {
+                                                finishCooking(chosenOrd?.order)
                                             }
+
                                         }}> {!chosenOrd?.start ? 'Start' : 'Finish'}</button>
                                         <h1 className="font-semibold text-xl text-gray-600">Time: {chosenOrd?.start ? formatTime(time) : chosenOrd?.ready_time}</h1>
                                     </div>

@@ -501,7 +501,8 @@ def pay():
                 "address": address,
                 "table": table,
                 "ready_time": sum_time,
-                "start": False
+                "start": False,
+                "email": user['email']
             }
             orders(new_order)
 
@@ -1657,6 +1658,40 @@ def start_cooking():
             json.dump(all_orders, file, indent=4, ensure_ascii=False)
 
         return jsonify({'message': 'order status updated'}), 200
+    
+    return jsonify({'error': 'something went wrong'}), 404
+
+
+# საჭმლის მომზადების დამთავრება
+@app.post('/finish_cooking')
+def finish_coking():
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
+
+    if 'email' not in session:
+        return jsonify({'error': 'user not found'}), 401
+    
+    data = request.get_json()
+    orderId = data['orderId']
+    
+    all_orders = check_orders()
+    all_user = check_users()
+
+    order = next((o for o in all_orders if o['order'] == orderId), None)
+    user = next((u for u in all_user if u['email'] == order['email']), None)
+
+    if order:
+        order['isReady'] = True
+        user['notification'].insert(0, {
+            "date": current_time.split()[0],
+            "time": current_time.split()[1],
+            "message": f"Your order {orderId} is ready",
+            "read": False
+        })
+
+        with open(All_orders, 'w', encoding='utf-8') as file:
+            json.dump(all_orders, file, indent=4, ensure_ascii=False)
+            
+        return jsonify({'message': 'change'}), 200
     
     return jsonify({'error': 'something went wrong'}), 404
 
