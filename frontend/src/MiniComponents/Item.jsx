@@ -70,10 +70,10 @@ function Item({ image, name, info2, info3, info4, price, func, hasBlock, mode })
                                                         </>
                                                         :
                                                         <>
-                                                            <i className="fa-solid fa-pen"></i>
+                                                            {/* <i className="fa-solid fa-pen"></i>
                                                             <span className='font-bold'>
                                                                 Edit
-                                                            </span>
+                                                            </span> */}
                                                         </>
                                                 }
                                             </div>
