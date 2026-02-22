@@ -44,23 +44,41 @@ function Order() {
     }, [curentOrd, orders])
 
 
-    // თაიმერის ფუნქცია
+    // დროის ფორმატირება
+    let formatTime = (totalSeconds) => {
+        if (totalSeconds <= 0) return "00:00"
+        let mins = Math.floor(totalSeconds / 60)
+        let secs = Math.floor(totalSeconds % 60)
+        return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`
+    }
 
+
+    // ლოკალური განახლება
     useEffect(() => {
-        if (chosenOrd) {
-            setTime(Number(chosenOrd.ready_time) * 1000 || 0)
+        let interval
+
+        if (chosenOrd?.start && chosenOrd?.start_at) {
+            let runTimer = () => {
+                let now = Date.now() / 1000
+                let secondsPassed = now - chosenOrd.start_at
+                let remaining = chosenOrd.ready_time - secondsPassed
+
+                if (remaining <= 0) {
+                    setTime(0)
+                    clearInterval(interval)
+                } else {
+                    setTime(Math.max(0, remaining))
+                }
+            }
+
+            runTimer()
+            interval = setInterval(runTimer, 1000)
+        } else if (chosenOrd) {
+            setTime(chosenOrd.ready_time)
         }
-    }, [chosenOrd?.order])
 
-    useEffect(() => {
-        if (time <= 0 || !chosenOrd?.start) return
-
-        let timer = setInterval(() => {
-            setTime((prev) => (prev > 0 ? prev - 1000 : 0))
-        }, 1000)
-
-        return () => clearInterval(timer)
-    }, [chosenOrd?.start, time])
+        return () => clearInterval(interval)
+    }, [chosenOrd?.order, chosenOrd?.start])
 
 
     // დაწყება
@@ -69,7 +87,14 @@ function Order() {
 
         await startCooking(chosenOrd.order)
         await cooking(chosenOrd.order, chosenOrd.ready_time)
-        setTime(chosenOrd.ready_time * 1000)
+
+        setOrders(prevOrders =>
+            prevOrders.map(ord =>
+                ord.order === chosenOrd.order
+                    ? { ...ord, start: true, start_at: Date.now() / 1000 }
+                    : ord
+            )
+        )
     }
 
     return (
@@ -163,7 +188,7 @@ function Order() {
                                                 start()
                                             }
                                         }}> {!chosenOrd?.start ? 'Start' : 'Finish'}</button>
-                                        <h1 className="font-semibold text-xl text-gray-600">Time: {chosenOrd?.start ? Math.floor(time / 1000) : chosenOrd?.ready_time}</h1>
+                                        <h1 className="font-semibold text-xl text-gray-600">Time: {chosenOrd?.start ? formatTime(time) : chosenOrd?.ready_time}</h1>
                                     </div>
                                 </div>
                                 : <h1 className="text-center text-gray-400 font-semibold text-lg">No Order Details</h1>

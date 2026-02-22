@@ -1639,6 +1639,8 @@ def cooking():
 # საჭმლის მომზადების დაწყება
 @app.post('/start_cooking')
 def start_cooking():
+    current_time = str(datetime.utcnow() + timedelta(hours=4))
+
     if 'email' not in session:
         return jsonify({"error": 'user not found'}), 401
     
@@ -1650,6 +1652,7 @@ def start_cooking():
 
     if order:
         order['start'] = True 
+        order['start_at'] = current_time.time()
         with open(All_orders, 'w', encoding='utf-8') as file:
             json.dump(all_orders, file, indent=4, ensure_ascii=False)
 
