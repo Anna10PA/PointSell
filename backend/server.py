@@ -1628,7 +1628,9 @@ def cooking():
 
     if order:
         order['ready_time'] = orderTime
-        orders(order)
+        with open(All_orders, 'w', encoding='utf-8') as file:
+            json.dump(all_orders, file, indent=4, ensure_ascii=False)
+            
         return jsonify({'message': 'change'}), 200
     
     return jsonify({'error': 'something went wrong'}), 404
@@ -1650,7 +1652,7 @@ def start_cooking():
         order['start'] = True 
         with open(All_orders, 'w', encoding='utf-8') as file:
             json.dump(all_orders, file, indent=4, ensure_ascii=False)
-            
+
         return jsonify({'message': 'order status updated'}), 200
     
     return jsonify({'error': 'something went wrong'}), 404
