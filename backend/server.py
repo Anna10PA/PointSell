@@ -1675,7 +1675,7 @@ def finish_coking():
     all_orders = check_orders()
     all_user = check_users()
 
-    order = next((o for o in all_orders if o['order'] == orderId), None)
+    order = next((o for o in all_orders if str(o['order']) == str(orderId)), None)
     user = next((u for u in all_user if u['email'] == order['email']), None)
 
     if order:
