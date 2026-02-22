@@ -485,7 +485,7 @@ function Main() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    orderId: order,
+                    orderId: order
                 })
 
             })

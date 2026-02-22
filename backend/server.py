@@ -1689,7 +1689,8 @@ def finish_coking():
 
         with open(All_orders, 'w', encoding='utf-8') as file:
             json.dump(all_orders, file, indent=4, ensure_ascii=False)
-            
+        
+        save_users(all_user)
         return jsonify({'message': 'change'}), 200
     
     return jsonify({'error': 'something went wrong'}), 404
